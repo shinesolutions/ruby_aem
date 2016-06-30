@@ -27,6 +27,20 @@ bundle:
           status: success
           handler: simple
           message: 'Bundle %{name} stopped'
+path:
+  actions:
+    activate:
+      api: sling
+      operation: post_tree_activation
+      params:
+        ignoredeactivated: '%{ignoredeactivated}'
+        onlymodified: '%{onlymodified}'
+        path: '%{name}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Path %{name} activated'
 repository:
   actions:
     block_writes:

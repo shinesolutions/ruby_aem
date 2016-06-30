@@ -1,5 +1,6 @@
 require 'bundle'
 require 'client'
+require 'path'
 require 'repository'
 require 'swagger_aem'
 require 'yaml'
@@ -37,6 +38,10 @@ class Aem
 
   def bundle(name)
     Bundle.new(@client, name)
+  end
+
+  def path(name)
+    Path.new(@client, name)
   end
 
   def repository

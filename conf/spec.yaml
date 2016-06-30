@@ -1,0 +1,29 @@
+bundle:
+  responses:
+    404:
+      status: failure
+      handler: simple
+      message: 'Bundle %{name} cannot be found'
+  actions:
+    start:
+      api: console
+      operation: post_bundle
+      params:
+        name: '%{name}'
+        action: start
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Bundle %{name} started'
+    stop:
+      api: console
+      operation: post_bundle
+      params:
+        name: '%{name}'
+        action: stop
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Bundle %{name} stopped'

@@ -16,7 +16,7 @@ class Client
     operation = action_spec['operation']
 
     params = []
-    action_spec['params'].each { |key, value|
+    action_spec['params']['required'].each { |key, value|
       params.push(value % info)
     }
 

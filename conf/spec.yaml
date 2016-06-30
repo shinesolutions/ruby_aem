@@ -9,8 +9,9 @@ bundle:
       api: console
       operation: post_bundle
       params:
-        name: '%{name}'
-        action: start
+        required:
+          name: '%{name}'
+          action: start
       responses:
         200:
           status: success
@@ -20,8 +21,9 @@ bundle:
       api: console
       operation: post_bundle
       params:
-        name: '%{name}'
-        action: stop
+        required:
+          name: '%{name}'
+          action: stop
       responses:
         200:
           status: success
@@ -33,9 +35,10 @@ path:
       api: sling
       operation: post_tree_activation
       params:
-        ignoredeactivated: '%{ignoredeactivated}'
-        onlymodified: '%{onlymodified}'
-        path: '%{name}'
+        required:
+          ignoredeactivated: '%{ignoredeactivated}'
+          onlymodified: '%{onlymodified}'
+          path: '%{name}'
       responses:
         200:
           status: success
@@ -47,7 +50,8 @@ repository:
       api: console
       operation: post_jmx_repository
       params:
-        action: blockRepositoryWrites
+        required:
+          action: blockRepositoryWrites
       responses:
         200:
           status: success
@@ -57,7 +61,8 @@ repository:
       api: console
       operation: post_jmx_repository
       params:
-        action: unblockRepositoryWrites
+        required:
+          action: unblockRepositoryWrites
       responses:
         200:
           status: success

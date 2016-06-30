@@ -3,7 +3,7 @@ bundle:
     404:
       status: failure
       handler: simple
-      message: 'Bundle %{name} cannot be found'
+      message: 'Bundle %{name} not found'
   actions:
     start:
       api: console
@@ -27,3 +27,25 @@ bundle:
           status: success
           handler: simple
           message: 'Bundle %{name} stopped'
+repository:
+  actions:
+    block_writes:
+      api: console
+      operation: jmx_repository
+      params:
+        action: blockRepositoryWrites
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Repository writes blocked'
+    unblock_writes:
+      api: console
+      operation: jmx_repository
+      params:
+        action: unblockRepositoryWrites
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Repository writes unblocked'

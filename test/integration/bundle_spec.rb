@@ -14,12 +14,14 @@ describe 'Bundle' do
       bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
       result = bundle.stop()
       expect(result.is_success?).to be(true)
+      expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum stopped')
     end
 
     it 'should fail when bundle does not exist' do
       bundle = @aem.bundle('someinexistingbundle')
       result = bundle.stop()
       expect(result.is_failure?).to be(true)
+      expect(result.message).to eq('Bundle someinexistingbundle not found')
     end
 
   end
@@ -30,12 +32,14 @@ describe 'Bundle' do
       bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
       result = bundle.start()
       expect(result.is_success?).to be(true)
+      expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum started')
     end
 
     it 'should fail when bundle does not exist' do
       bundle = @aem.bundle('someinexistingbundle')
       result = bundle.start()
       expect(result.is_failure?).to be(true)
+      expect(result.message).to eq('Bundle someinexistingbundle not found')
     end
 
   end

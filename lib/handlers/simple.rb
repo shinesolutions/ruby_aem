@@ -7,7 +7,7 @@ module Handlers
     status = response_spec['status']
     message = response_spec['message'] % info
 
-    return Result.new(status, message)
+    Result.new(status, message)
   end
 
 end

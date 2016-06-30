@@ -44,6 +44,7 @@ class Client
       result = Handlers.send(handler, err.response_body, err.code, err.response_headers, response_spec, info)
     end
 
+    result
   end
 
 end

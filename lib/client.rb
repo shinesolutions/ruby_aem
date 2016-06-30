@@ -20,8 +20,8 @@ class Client
       params.push(value % info)
     }
 
-    base_responses = @spec[component]['responses']
-    action_responses = action_spec['responses']
+    base_responses = @spec[component]['responses'] || {}
+    action_responses = action_spec['responses'] || {}
     responses = base_responses.merge(action_responses)
 
     result = nil

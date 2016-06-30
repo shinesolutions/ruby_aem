@@ -31,7 +31,7 @@ repository:
   actions:
     block_writes:
       api: console
-      operation: jmx_repository
+      operation: post_jmx_repository
       params:
         action: blockRepositoryWrites
       responses:
@@ -41,7 +41,7 @@ repository:
           message: 'Repository writes blocked'
     unblock_writes:
       api: console
-      operation: jmx_repository
+      operation: post_jmx_repository
       params:
         action: unblockRepositoryWrites
       responses:

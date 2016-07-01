@@ -151,3 +151,25 @@ repository:
           status: success
           handler: simple
           message: 'Repository writes unblocked'
+user:
+  responses:
+    404:
+      status: failure
+      handler: simple
+      message: 'User %{name} not found'
+  actions:
+    create:
+      api: sling
+      operation: post_authorizables
+      params:
+        required:
+          authorizable_id: '%{name}'
+          intermediate_path: '%{path}'
+        optional:
+          create_user: ''
+          reppassword: '%{password}'
+      responses:
+        201:
+          status: success
+          handler: html_authorizable_id
+          message: 'User %{name} created at %{path}/%{authorizable_id}'

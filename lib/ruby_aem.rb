@@ -5,6 +5,7 @@ require 'node'
 require 'path'
 require 'repository'
 require 'swagger_aem'
+require 'user'
 require 'yaml'
 
 class Aem
@@ -56,6 +57,10 @@ class Aem
 
   def repository
     Repository.new(@client)
+  end
+
+  def user(path, name)
+    User.new(@client, path, name)
   end
 
 end

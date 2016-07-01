@@ -1,3 +1,4 @@
+require 'handlers/html'
 require 'handlers/simple'
 
 class Client
@@ -22,9 +23,17 @@ class Client
     }
     params.push({})
     optional_params = action_spec['params']['optional'] || {}
-    optional_params.each { |name|
-      if info.key? name.to_sym
-        params[-1][name.to_sym] = info[name.to_sym]
+    optional_params.each { |key, value|
+      # if there is no value in optional param spec,
+      # then only add optional param that is set in info
+      if !value
+        if info.key? key.to_sym
+          params[-1][key.to_sym] = info[key.to_sym]
+        end
+      # if value is provided in optional param spec,
+      # then apply variable interpolation the same way as required param
+      else
+        params[-1][key.to_sym] = value % info
       end
     }
 

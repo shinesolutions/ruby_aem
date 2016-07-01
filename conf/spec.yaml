@@ -34,7 +34,7 @@ node:
     404:
       status: failure
       handler: simple
-      message: 'Node %{name} not found'
+      message: 'Node %{path}/%{name} not found'
   actions:
     create:
       api: sling
@@ -61,6 +61,18 @@ node:
           status: success
           handler: simple
           message: 'Node %{path}/%{name} deleted'
+    exists:
+      api: sling
+      operation: get_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{name}'
+      responses:
+        302:
+          status: success
+          handler: simple
+          message: 'Node %{path}/%{name} exists'
 path:
   actions:
     activate:

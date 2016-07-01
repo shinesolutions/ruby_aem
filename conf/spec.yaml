@@ -44,6 +44,45 @@ path:
           status: success
           handler: simple
           message: 'Path %{name} activated'
+configproperty:
+  actions:
+    create:
+      api: sling
+      operation: post_path
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+        optional:
+          - org_apache_felix_https_nio
+          - org_apache_felix_https_nio_type_hint
+          - org_apache_felix_https_keystore
+          - org_apache_felix_https_keystore_type_hint
+          - org_apache_felix_https_keystore_password
+          - org_apache_felix_https_keystore_password_type_hint
+          - org_apache_felix_https_keystore_key
+          - org_apache_felix_https_keystore_key_type_hint
+          - org_apache_felix_https_keystore_key_password
+          - org_apache_felix_https_keystore_key_password_type_hint
+          - org_apache_felix_https_truststore
+          - org_apache_felix_https_truststore_key_type_hint
+          - org_apache_felix_https_truststore_password
+          - org_apache_felix_https_truststore_password_type_hint
+          - org_apache_felix_https_clientcertificate
+          - org_apache_felix_https_clientcertificate_type_hint
+          - org_apache_felix_https_enable
+          - org_apache_felix_https_enable_type_hint
+          - org_osgi_service_http_port_secure
+          - org_osgi_service_http_port_secure_type_hint
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
+        201:
+          status: success
+          handler: simple
+          message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
 repository:
   actions:
     block_writes:

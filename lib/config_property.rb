@@ -17,7 +17,8 @@ class ConfigProperty
     @info[:run_mode] = run_mode
     @info["#{name}".to_sym] = @info[:value]
     @info["#{name}_type_hint".to_sym] = @info[:type]
-    @client.call(self.class, 'create', @info)
+
+    @client.call(self.class, __callee__.to_s, @info)
   end
 
 end

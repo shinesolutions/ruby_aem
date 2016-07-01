@@ -8,11 +8,11 @@ class Bundle
   end
 
   def start
-    @client.call(self.class, 'start', @info)
+    @client.call(self.class, __callee__.to_s, @info)
   end
 
   def stop
-    @client.call(self.class, 'stop', @info)
+    @client.call(self.class, __callee__.to_s, @info)
   end
 
 end

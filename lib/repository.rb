@@ -6,11 +6,11 @@ class Repository
   end
 
   def block_writes
-    @client.call(self.class, 'block_writes', @info)
+    @client.call(self.class, __callee__.to_s, @info)
   end
 
   def unblock_writes
-    @client.call(self.class, 'unblock_writes', @info)
+    @client.call(self.class, __callee__.to_s, @info)
   end
 
 end

@@ -29,6 +29,38 @@ bundle:
           status: success
           handler: simple
           message: 'Bundle %{name} stopped'
+node:
+  responses:
+    404:
+      status: failure
+      handler: simple
+      message: 'Node %{name} not found'
+  actions:
+    create:
+      api: sling
+      operation: post_path
+      params:
+        required:
+          path: '%{path}'
+          jcrprimary_type: '%{type}'
+          name: '%{name}'
+      responses:
+        201:
+          status: success
+          handler: simple
+          message: 'Node %{path}/%{name} created'
+    delete:
+      api: sling
+      operation: delete_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{name}'
+      responses:
+        204:
+          status: success
+          handler: simple
+          message: 'Node %{path}/%{name} deleted'
 path:
   actions:
     activate:

@@ -1,6 +1,7 @@
 require 'bundle'
 require 'client'
 require 'config_property'
+require 'node'
 require 'path'
 require 'repository'
 require 'swagger_aem'
@@ -47,6 +48,10 @@ class Aem
 
   def config_property(name, type, value)
     ConfigProperty.new(@client, name, type, value)
+  end
+
+  def node(path, name)
+    Node.new(@client, path, name)
   end
 
   def repository

@@ -3,9 +3,10 @@ require 'result'
 
 module Handlers
 
+  # parse authorizable ID from response body data
+  # this is used to get the authorizable ID of a newly created user/group
   def Handlers.html_authorizable_id(data, status_code, headers, response_spec, info)
 
-    # parse authorizable ID from response body data because the node didn't exist when the handler was created
     html = Nokogiri::HTML(data)
     authorizable_id = html.xpath('//title/text()').to_s
     authorizable_id.slice! "Content created #{info[:path]}"

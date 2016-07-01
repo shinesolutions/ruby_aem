@@ -1,4 +1,5 @@
 require 'handlers/html'
+require 'handlers/json'
 require 'handlers/simple'
 
 class Client

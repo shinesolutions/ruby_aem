@@ -1,6 +1,7 @@
 class Result
 
   attr_reader :message
+  attr_accessor :data
 
   def initialize(status, message)
     @status = status

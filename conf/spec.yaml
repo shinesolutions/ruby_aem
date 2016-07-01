@@ -154,7 +154,7 @@ repository:
 user:
   responses:
     404:
-      status: failure
+      status: success
       handler: simple
       message: 'User %{name} not found'
   actions:
@@ -173,3 +173,41 @@ user:
           status: success
           handler: html_authorizable_id
           message: 'User %{name} created at %{path}/%{authorizable_id}'
+    find_authorizable_id:
+      api: sling
+      operation: post_query
+      params:
+        required:
+          path: '%{path}'
+          p_limit: '-1'
+          _1_property: rep:authorizableId
+          _1_property_value: '%{name}'
+      responses:
+        200:
+          status: success
+          handler: json_authorizable_id
+          message: 'Found user %{name} authorizable ID %{authorizable_id}'
+    delete:
+      api: sling
+      operation: delete_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{authorizable_id}'
+      responses:
+        204:
+          status: success
+          handler: simple
+          message: 'User %{name} deleted at /%{path}/%{authorizable_id}'
+    exists:
+      api: sling
+      operation: get_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{authorizable_id}'
+      responses:
+        302:
+          status: success
+          handler: simple
+          message: 'User %{name} exists at /%{path}/%{authorizable_id}'

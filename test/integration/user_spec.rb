@@ -4,8 +4,10 @@ describe 'User' do
   before do
     @aem = init_client
 
-    # ensure node doesn't exist prior to testing
+    # ensure user doesn't exist prior to testing
     @user = @aem.user('/home/users/s/', 'someuser')
+    result = @user.delete()
+    expect(result.is_success?).to be(true)
 
     # create user
     result = @user.create('somepassword')
@@ -19,7 +21,9 @@ describe 'User' do
   describe 'test user create' do
 
     it 'should succeed existence check' do
-
+      result = @user.exists()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to match(/^User someuser exists at \/home\/users\/s\/.+/)
     end
 
   end

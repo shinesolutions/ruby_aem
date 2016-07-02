@@ -1,11 +1,11 @@
-require 'bundle'
-require 'client'
-require 'config_property'
-require 'node'
-require 'path'
-require 'repository'
+require 'ruby_aem/bundle'
+require 'ruby_aem/client'
+require 'ruby_aem/config_property'
+require 'ruby_aem/node'
+require 'ruby_aem/path'
+require 'ruby_aem/repository'
+require 'ruby_aem/user'
 require 'swagger_aem'
-require 'user'
 require 'yaml'
 
 class Aem
@@ -36,31 +36,31 @@ class Aem
 
     spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
 
-    @client = Client.new(apis, spec)
+    @client = RubyAem::Client.new(apis, spec)
   end
 
   def bundle(name)
-    Bundle.new(@client, name)
+    RubyAem::Bundle.new(@client, name)
   end
 
   def path(name)
-    Path.new(@client, name)
+    RubyAem::Path.new(@client, name)
   end
 
   def config_property(name, type, value)
-    ConfigProperty.new(@client, name, type, value)
+    RubyAem::ConfigProperty.new(@client, name, type, value)
   end
 
   def node(path, name)
-    Node.new(@client, path, name)
+    RubyAem::Node.new(@client, path, name)
   end
 
   def repository
-    Repository.new(@client)
+    RubyAem::Repository.new(@client)
   end
 
   def user(path, name)
-    User.new(@client, path, name)
+    RubyAem::User.new(@client, path, name)
   end
 
 end

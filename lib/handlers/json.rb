@@ -12,7 +12,7 @@ module Handlers
       info[:authorizable_id] = authorizable_id
       message = response_spec['message'] % info
     else
-      message = "User #{info[:name]} authorizable ID not found"
+      message = "User/Group #{info[:name]} authorizable ID not found"
     end
 
     status = response_spec['status']

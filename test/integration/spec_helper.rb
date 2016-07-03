@@ -1,7 +1,7 @@
 require 'ruby_aem'
 
 def init_client
-  return Aem.new({
+  return RubyAem::Aem.new({
     :username => 'admin',
     :password => 'admin',
     :protocol => 'http',

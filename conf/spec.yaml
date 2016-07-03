@@ -211,3 +211,42 @@ user:
           status: success
           handler: simple
           message: 'User %{name} exists at /%{path}/%{authorizable_id}'
+    set_permission:
+      api: cq
+      operation: post_cq_actions
+      params:
+        required:
+          authorizable_id: '%{name}'
+          changelog: 'path:%{permission_path},%{permission_csv}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Permission %{permission_csv} on path %{permission_path} set for user %{name}'
+    add_to_group:
+      api: sling
+      operation: post_node
+      params:
+        required:
+          path: '%{group_path}'
+          name: '%{group_authorizable_id}'
+        optional:
+          add_members: '%{name}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'User %{name} added to group %{group_name}'
+    change_password:
+      api: crx
+      operation: post_set_password
+      params:
+        required:
+          old: '%{old_password}'
+          plain: '%{new_password}'
+          verify: '%{new_password}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Logged in user password changed'

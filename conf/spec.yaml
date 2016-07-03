@@ -29,6 +29,92 @@ bundle:
           status: success
           handler: simple
           message: 'Bundle %{name} stopped'
+group:
+  responses:
+    404:
+      status: success
+      handler: simple
+      message: 'Group %{name} not found'
+  actions:
+    create:
+      api: sling
+      operation: post_authorizables
+      params:
+        required:
+          authorizable_id: '%{name}'
+          intermediate_path: '%{path}'
+        optional:
+          create_group: ''
+          profilegiven_name: '%{name}'
+      responses:
+        201:
+          status: success
+          handler: html_authorizable_id
+          message: 'Group %{name} created at %{path}/%{authorizable_id}'
+    find_authorizable_id:
+      api: sling
+      operation: post_query
+      params:
+        required:
+          path: '%{path}'
+          p_limit: '-1'
+          _1_property: rep:authorizableId
+          _1_property_value: '%{name}'
+      responses:
+        200:
+          status: success
+          handler: json_authorizable_id
+          message: 'Found group %{name} authorizable ID %{authorizable_id}'
+    delete:
+      api: sling
+      operation: delete_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{authorizable_id}'
+      responses:
+        204:
+          status: success
+          handler: simple
+          message: 'Group %{name} deleted at /%{path}/%{authorizable_id}'
+    exists:
+      api: sling
+      operation: get_node
+      params:
+        required:
+          path: '%{path}'
+          name: '%{authorizable_id}'
+      responses:
+        302:
+          status: success
+          handler: simple
+          message: 'Group %{name} exists at /%{path}/%{authorizable_id}'
+    set_permission:
+      api: cq
+      operation: post_cq_actions
+      params:
+        required:
+          authorizable_id: '%{name}'
+          changelog: 'path:%{permission_path},%{permission_csv}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Permission %{permission_csv} on path %{permission_path} set for group %{name}'
+    add_member:
+      api: sling
+      operation: post_node
+      params:
+        required:
+          path: '%{group_path}'
+          name: '%{group_authorizable_id}'
+        optional:
+          add_members: '%{name}'
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'User %{name} added to group %{group_name}'
 node:
   responses:
     404:

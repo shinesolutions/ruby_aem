@@ -1,6 +1,7 @@
 require 'ruby_aem/bundle'
 require 'ruby_aem/client'
 require 'ruby_aem/config_property'
+require 'ruby_aem/group'
 require 'ruby_aem/node'
 require 'ruby_aem/path'
 require 'ruby_aem/repository'
@@ -50,6 +51,10 @@ module RubyAem
 
     def config_property(name, type, value)
       RubyAem::ConfigProperty.new(@client, name, type, value)
+    end
+
+    def group(path, name)
+      RubyAem::Group.new(@client, path, name)
     end
 
     def node(path, name)

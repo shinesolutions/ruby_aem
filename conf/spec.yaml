@@ -273,6 +273,39 @@ package:
         200:
           status: success
           handler: json_package_service
+    build:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+          cmd: build
+      responses:
+        200:
+          status: success
+          handler: json_package_service
+    install:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+          cmd: install
+      responses:
+        200:
+          status: success
+          handler: json_package_service
+    replicate:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+          cmd: replicate
+      responses:
+        200:
+          status: success
+          handler: json_package_service
 path:
   actions:
     activate:

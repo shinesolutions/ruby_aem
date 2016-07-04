@@ -20,7 +20,20 @@ describe 'Package' do
   describe 'test package build install replicate download' do
 
     it 'should succeed' do
+      # build package
+      result = @package.build()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to eq('Package built')
 
+      # install package
+      result = @package.install()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to eq('Package installed')
+
+      # replicate package
+      result = @package.replicate()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to eq('Package is replicated asynchronously')
     end
 
   end

@@ -23,5 +23,17 @@ module RubyAem
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    def build()
+      @client.call(self.class, __callee__.to_s, @info)
+    end
+
+    def install()
+      @client.call(self.class, __callee__.to_s, @info)
+    end
+
+    def replicate()
+      @client.call(self.class, __callee__.to_s, @info)
+    end
+
   end
 end

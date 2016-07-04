@@ -246,6 +246,22 @@ package:
         200:
           status: success
           handler: json_package_service
+    update:
+      api: crx
+      operation: post_package_update
+      params:
+        required:
+          groupName: '%{group_name}'
+          packageName: '%{package_name}'
+          version: '%{package_version}'
+          path: '/etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+        optional:
+          filter: '%{filter}'
+          charset: utf-8
+      responses:
+        200:
+          status: success
+          handler: json_package_service
     delete:
       api: crx
       operation: post_package_service_json

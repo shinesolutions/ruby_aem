@@ -14,6 +14,11 @@ module RubyAem
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    def update(filter)
+      @info[:filter] = filter
+      @client.call(self.class, __callee__.to_s, @info)
+    end
+
     def delete()
       @client.call(self.class, __callee__.to_s, @info)
     end

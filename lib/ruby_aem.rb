@@ -1,9 +1,12 @@
 require 'ruby_aem/bundle'
 require 'ruby_aem/client'
 require 'ruby_aem/config_property'
+require 'ruby_aem/flush_agent'
 require 'ruby_aem/group'
 require 'ruby_aem/node'
+require 'ruby_aem/package'
 require 'ruby_aem/path'
+require 'ruby_aem/replication_agent'
 require 'ruby_aem/repository'
 require 'ruby_aem/user'
 require 'swagger_aem'
@@ -53,12 +56,24 @@ module RubyAem
       RubyAem::ConfigProperty.new(@client, name, type, value)
     end
 
+    def flush_agent(name, run_mode)
+      RubyAem::FlushAgent.new(@client, name, run_mode)
+    end
+
     def group(path, name)
       RubyAem::Group.new(@client, path, name)
     end
 
     def node(path, name)
       RubyAem::Node.new(@client, path, name)
+    end
+
+    def package(group_name, package_name, package_version)
+      RubyAem::Package.new(@client, group_name, package_name, package_version)
+    end
+
+    def replication_agent(name, run_mode)
+      RubyAem::ReplicationAgent.new(@client, name, run_mode)
     end
 
     def repository

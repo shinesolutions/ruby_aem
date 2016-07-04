@@ -228,6 +228,35 @@ node:
           status: success
           handler: simple
           message: 'Node %{path}/%{name} exists'
+package:
+  actions:
+    create:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: 'etc/packages/%{group_name}'
+          cmd: create
+        optional:
+          group_name: '%{group_name}'
+          package_name: '%{package_name}'
+          package_version: '%{package_version}'
+          charset: utf-8
+      responses:
+        200:
+          status: success
+          handler: json_package_service
+    delete:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+          cmd: delete
+      responses:
+        200:
+          status: success
+          handler: json_package_service
 path:
   actions:
     activate:

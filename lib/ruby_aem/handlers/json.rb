@@ -22,5 +22,15 @@ module RubyAem
       result
     end
 
+    def Handlers.json_package_service(data, status_code, headers, response_spec, info)
+
+      json = JSON.parse(data)
+
+      status = json['success'] == true ? 'success' : 'failure'
+      message = json['msg']
+
+      RubyAem::Result.new(status, message)
+    end
+
   end
 end

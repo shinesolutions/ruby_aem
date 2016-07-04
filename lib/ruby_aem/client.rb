@@ -35,7 +35,11 @@ module RubyAem
         # if value is provided in optional param spec,
         # then apply variable interpolation the same way as required param
         else
-          params[-1][key.to_sym] = value % info
+          if value.class == String
+            params[-1][key.to_sym] = value % info
+          else
+            params[-1][key.to_sym] = value
+          end
         end
       }
 

@@ -282,6 +282,65 @@ configproperty:
           status: success
           handler: simple
           message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
+replicationagent:
+  responses:
+    404:
+      status: success
+      handler: simple
+      message: 'Replication agent %{name} not found on %{run_mode}'
+  actions:
+    create_update:
+      api: sling
+      operation: post_agent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+        optional:
+        jcrprimary_type: cq:Page
+        jcrcontentcqname: '%{name}'
+        jcrcontentjcrtitle: '%{title}'
+        jcrcontentjcrdescription: '%{description}'
+        jcrcontentslingresource_type: /libs/cq/replication/components/agent
+        jcrcontentserialization_type: durbo
+        jcrcontenttransport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+        jcrcontentlog_level: error
+        jcrcontentretry_delay: 30000
+        jcrcontentcqtemplate: /libs/cq/replication/templates/agent
+        jcrcontentenabled: true
+      responses:
+        200:
+          status: success
+          handler: simple
+          message: 'Replication agent %{name} updated on %{run_mode}'
+        201:
+          status: success
+          handler: simple
+          message: 'Replication agent %{name} created on %{run_mode}'
+    delete:
+      api: sling
+      operation: delete_agent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+      responses:
+        204:
+          status: success
+          handler: simple
+          message: 'Replication agent %{name} deleted on %{run_mode}'
+    exists:
+      api: sling
+      operation: get_agent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+      responses:
+        302:
+          status: success
+          handler: simple
+          message: 'Replication agent %{name} exists on %{run_mode}'
 repository:
   actions:
     block_writes:

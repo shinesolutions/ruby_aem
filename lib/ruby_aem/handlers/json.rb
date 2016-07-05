@@ -32,5 +32,24 @@ module RubyAem
       RubyAem::Result.new(status, message)
     end
 
+    def Handlers.json_package_filter(data, status_code, headers, response_spec, info)
+
+      json = JSON.parse(data)
+
+      filter = []
+      json.each do |key, value|
+        if json[key]['root'] != nil
+          filter.push(json[key]['root'])
+        end
+      end
+
+      message = response_spec['message'] % info
+
+      result = RubyAem::Result.new('success', message)
+      result.data = filter
+      result
+
+    end
+
   end
 end

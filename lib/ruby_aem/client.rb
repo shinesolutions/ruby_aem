@@ -1,6 +1,8 @@
+require 'ruby_aem/handlers/file'
 require 'ruby_aem/handlers/html'
 require 'ruby_aem/handlers/json'
 require 'ruby_aem/handlers/simple'
+require 'ruby_aem/handlers/xml'
 
 module RubyAem
   class Client
@@ -36,7 +38,13 @@ module RubyAem
         # then apply variable interpolation the same way as required param
         else
           if value.class == String
-            params[-1][key.to_sym] = value % info
+            if value == '__FILE__'
+              File.open("#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip", 'r') { |file|
+                params[-1][key.to_sym] = file
+              }
+            else
+              params[-1][key.to_sym] = value % info
+            end
           else
             params[-1][key.to_sym] = value
           end

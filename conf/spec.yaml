@@ -172,18 +172,18 @@ group:
           message: 'Permission %{permission_csv} on path %{permission_path} set for group %{name}'
     add_member:
       api: sling
-      operation: post_node
+      operation: post_node_rw
       params:
         required:
-          path: '%{group_path}'
-          name: '%{group_authorizable_id}'
+          path: '%{path}'
+          name: '%{authorizable_id}'
         optional:
-          add_members: '%{name}'
+          add_members: '%{member}'
       responses:
         200:
           status: success
           handler: simple
-          message: 'User %{name} added to group %{group_name}'
+          message: 'User/group %{member} added to group %{name}'
 node:
   responses:
     404:
@@ -306,6 +306,57 @@ package:
         200:
           status: success
           handler: json_package_service
+    download:
+      api: sling
+      operation: get_package
+      params:
+        required:
+          group: '%{group_name}'
+          name: '%{package_name}'
+          version: '%{package_version}'
+      responses:
+        200:
+          status: success
+          handler: file_download
+          message: 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip'
+    upload:
+      api: crx
+      operation: post_package_service_json
+      params:
+        required:
+          path: ''
+          cmd: upload
+        optional:
+          force: '%{force}'
+          package: __FILE__
+      responses:
+        200:
+          status: success
+          handler: json_package_service
+    get_filter:
+      api: sling
+      operation: get_package_filter
+      params:
+        required:
+          group: '%{group_name}'
+          name: '%{package_name}'
+          version: '%{package_version}'
+      responses:
+        200:
+          status: success
+          handler: json_package_filter
+          message: 'Filter retrieved successfully'
+    list_all:
+      api: crx
+      operation: post_package_service
+      params:
+        required:
+          cmd: ls
+      responses:
+        200:
+          status: success
+          handler: xml_package_list
+          message: 'Package list retrieved successfully'
 path:
   actions:
     activate:

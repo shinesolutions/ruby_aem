@@ -566,20 +566,6 @@ user:
           status: success
           handler: simple
           message: 'Permission %{permission_csv} on path %{permission_path} set for user %{name}'
-    add_to_group:
-      api: sling
-      operation: post_node
-      params:
-        required:
-          path: '%{group_path}'
-          name: '%{group_authorizable_id}'
-        optional:
-          add_members: '%{name}'
-      responses:
-        200:
-          status: success
-          handler: simple
-          message: 'User %{name} added to group %{group_name}'
     change_password:
       api: crx
       operation: post_set_password

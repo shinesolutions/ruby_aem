@@ -54,38 +54,20 @@ describe 'User' do
 
       it 'should succeed being added to a group' do
 
-        # TODO: implement after group implementation is done
-        # # ensure group doesn't exist prior to testing
-        # group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
-        # if group_authorizable_id
-        #   data, status_code, headers = @sling.delete_node_with_http_info(
-        #     path = 'home/groups/s',
-        #     name = group_authorizable_id
-        #   )
-        #   expect(status_code).to eq(204)
-        # end
-        #
-        # # create group
-        # data, status_code, headers = @sling.post_authorizables_with_http_info(
-        #   authorizable_id = 'somegroup',
-        #   intermediate_path = '/home/groups/s',
-        #   {
-        #     :create_group => '',
-        #     :profilegiven_name => 'somegroup'
-        #   }
-        # )
-        # expect(status_code).to eq(201)
-        # group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
-        #
-        # # add user as member to the group
-        # data, status_code, headers = @sling.post_node_rw_with_http_info(
-        #   path = 'home/groups/s',
-        #   name = group_authorizable_id,
-        #   {
-        #     :add_members => 'someuser'
-        #   }
-        # )
-        # expect(status_code).to eq(200)
+        # ensure group doesn't exist prior to testing
+        group = @aem.group('/home/groups/s/', 'somegroup')
+        result = group.delete()
+        expect(result.is_success?).to be(true)
+
+        # create group
+        result = group.create()
+        expect(result.is_success?).to be(true)
+        expect(result.message).to match(/^Group somegroup created at \/home\/groups\/s\/.+/)
+
+        # create group
+        result = @user.add_to_group('/home/groups/s/', 'somegroup')
+        expect(result.is_success?).to be(true)
+        expect(result.message).to eq('User/group someuser added to group somegroup')
 
       end
 

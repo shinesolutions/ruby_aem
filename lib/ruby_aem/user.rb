@@ -39,17 +39,8 @@ module RubyAem
     end
 
     def add_to_group(group_path, group_name)
-      group_info = @info.dup
-      group_info[:name] = group_name
-      group_info[:path] = group_path
-      result = @client.call(self.class, 'find_authorizable_id', group_info)
-      if result.data
-        @info[:group_path] = group_path
-        @info[:group_authorizable_id] = result.data
-        @client.call(self.class, __callee__.to_s, @info)
-      else
-        result
-      end
+      group = RubyAem::Group.new(@client, group_path, group_name)
+      group.add_member(@info[:name])
     end
 
     def change_password(old_password, new_password)

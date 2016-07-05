@@ -32,6 +32,24 @@ describe 'Group' do
       expect(result.message).to eq('Permission read:true,modify:true on path /etc/replication set for group somegroup')
     end
 
+    it 'should succeed being added to another group' do
+
+      # ensure member group doesn't exist prior to testing
+      member_group = @aem.group('/home/groups/s/', 'somemembergroup')
+      result = member_group.delete()
+      expect(result.is_success?).to be(true)
+
+      # create member group
+      result = member_group.create()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to match(/^Group somemembergroup created at \/home\/groups\/s\/.+/)
+
+      # add user as member to the group
+      result = @group.add_member('somemembergroup')
+      expect(result.is_success?).to be(true)
+      expect(result.message).to eq('User/group somemembergroup added to group somegroup')
+    end
+
   end
 
 end

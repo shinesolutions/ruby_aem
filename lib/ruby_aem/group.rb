@@ -37,18 +37,14 @@ module RubyAem
       @client.call(self.class, __callee__.to_s, @info)
     end
 
-    def add_member(group_path, group_name)
-      # group_info = @info.dup
-      # group_info[:name] = group_name
-      # group_info[:path] = group_path
-      # result = @client.call(self.class, 'find_authorizable_id', group_info)
-      # if result.data
-      #   @info[:group_path] = group_path
-      #   @info[:group_authorizable_id] = result.data
-      #   @client.call(self.class, __callee__.to_s, @info)
-      # else
-      #   result
-      # end
+    def add_member(member)
+      result = find_authorizable_id
+      if result.data
+        @info[:member] = member
+        @client.call(self.class, __callee__.to_s, @info)
+      else
+        result
+      end
     end
 
     def find_authorizable_id()

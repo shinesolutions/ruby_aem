@@ -1,5 +1,5 @@
-all: deps build install test test-integration
-ci: deps build install test
+all: deps build install test test-integration doc
+ci: deps build install test doc
 
 deps:
 	gem install bundler
@@ -16,5 +16,8 @@ test:
 
 test-integration: install
 	rspec test/integration
+
+doc:
+	yard doc
 
 .PHONY: deps test test-integration

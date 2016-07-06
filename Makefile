@@ -1,3 +1,6 @@
+all: deps build install test test-integration
+ci: deps build install test
+
 deps:
 	gem install bundler
 	bundle install

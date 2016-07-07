@@ -7,7 +7,7 @@ bundle:
   actions:
     start:
       api: console
-      operation: post_bundle
+      operation: postBundle
       params:
         required:
           name: '%{name}'
@@ -19,7 +19,7 @@ bundle:
           message: 'Bundle %{name} started'
     stop:
       api: console
-      operation: post_bundle
+      operation: postBundle
       params:
         required:
           name: '%{name}'
@@ -38,7 +38,7 @@ flushagent:
   actions:
     create_update:
       api: sling
-      operation: post_agent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -76,7 +76,7 @@ flushagent:
           message: 'Flush agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: delete_agent
+      operation: deleteAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -88,7 +88,7 @@ flushagent:
           message: 'Flush agent %{name} deleted on %{run_mode}'
     exists:
       api: sling
-      operation: get_agent
+      operation: getAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -107,7 +107,7 @@ group:
   actions:
     create:
       api: sling
-      operation: post_authorizables
+      operation: postAuthorizables
       params:
         required:
           authorizable_id: '%{name}'
@@ -122,7 +122,7 @@ group:
           message: 'Group %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
       api: sling
-      operation: post_query
+      operation: postQuery
       params:
         required:
           path: '%{path}'
@@ -136,7 +136,7 @@ group:
           message: 'Found group %{name} authorizable ID %{authorizable_id}'
     delete:
       api: sling
-      operation: delete_node
+      operation: deleteNode
       params:
         required:
           path: '%{path}'
@@ -148,7 +148,7 @@ group:
           message: 'Group %{name} deleted at /%{path}/%{authorizable_id}'
     exists:
       api: sling
-      operation: get_node
+      operation: getNode
       params:
         required:
           path: '%{path}'
@@ -160,7 +160,7 @@ group:
           message: 'Group %{name} exists at /%{path}/%{authorizable_id}'
     set_permission:
       api: cq
-      operation: post_cq_actions
+      operation: postCqActions
       params:
         required:
           authorizable_id: '%{name}'
@@ -172,7 +172,7 @@ group:
           message: 'Permission %{permission_csv} on path %{permission_path} set for group %{name}'
     add_member:
       api: sling
-      operation: post_node_rw
+      operation: postNodeRw
       params:
         required:
           path: '%{path}'
@@ -193,7 +193,7 @@ node:
   actions:
     create:
       api: sling
-      operation: post_path
+      operation: postPath
       params:
         required:
           path: '%{path}'
@@ -206,7 +206,7 @@ node:
           message: 'Node %{path}/%{name} created'
     delete:
       api: sling
-      operation: delete_node
+      operation: deleteNode
       params:
         required:
           path: '%{path}'
@@ -218,7 +218,7 @@ node:
           message: 'Node %{path}/%{name} deleted'
     exists:
       api: sling
-      operation: get_node
+      operation: getNode
       params:
         required:
           path: '%{path}'
@@ -232,7 +232,7 @@ package:
   actions:
     create:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: 'etc/packages/%{group_name}'
@@ -248,7 +248,7 @@ package:
           handler: json_package_service
     update:
       api: crx
-      operation: post_package_update
+      operation: postPackageUpdate
       params:
         required:
           groupName: '%{group_name}'
@@ -264,7 +264,7 @@ package:
           handler: json_package_service
     delete:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
@@ -275,7 +275,7 @@ package:
           handler: json_package_service
     build:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
@@ -286,7 +286,7 @@ package:
           handler: json_package_service
     install:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
@@ -297,7 +297,7 @@ package:
           handler: json_package_service
     replicate:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
@@ -308,7 +308,7 @@ package:
           handler: json_package_service
     download:
       api: sling
-      operation: get_package
+      operation: getPackage
       params:
         required:
           group: '%{group_name}'
@@ -321,7 +321,7 @@ package:
           message: 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip'
     upload:
       api: crx
-      operation: post_package_service_json
+      operation: postPackageServiceJson
       params:
         required:
           path: ''
@@ -335,7 +335,7 @@ package:
           handler: json_package_service
     get_filter:
       api: sling
-      operation: get_package_filter
+      operation: getPackageFilter
       params:
         required:
           group: '%{group_name}'
@@ -348,7 +348,7 @@ package:
           message: 'Filter retrieved successfully'
     list_all:
       api: crx
-      operation: post_package_service
+      operation: postPackageService
       params:
         required:
           cmd: ls
@@ -361,7 +361,7 @@ path:
   actions:
     activate:
       api: sling
-      operation: post_tree_activation
+      operation: postTreeActivation
       params:
         required:
           ignoredeactivated: '%{ignoredeactivated}'
@@ -376,7 +376,7 @@ configproperty:
   actions:
     create:
       api: sling
-      operation: post_path
+      operation: postPath
       params:
         required:
           runmode: '%{run_mode}'
@@ -420,7 +420,7 @@ replicationagent:
   actions:
     create_update:
       api: sling
-      operation: post_agent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -448,7 +448,7 @@ replicationagent:
           message: 'Replication agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: delete_agent
+      operation: deleteAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -460,7 +460,7 @@ replicationagent:
           message: 'Replication agent %{name} deleted on %{run_mode}'
     exists:
       api: sling
-      operation: get_agent
+      operation: getAgent
       params:
         required:
           runmode: '%{run_mode}'
@@ -474,7 +474,7 @@ repository:
   actions:
     block_writes:
       api: console
-      operation: post_jmx_repository
+      operation: postJmxRepository
       params:
         required:
           action: blockRepositoryWrites
@@ -485,7 +485,7 @@ repository:
           message: 'Repository writes blocked'
     unblock_writes:
       api: console
-      operation: post_jmx_repository
+      operation: postJmxRepository
       params:
         required:
           action: unblockRepositoryWrites
@@ -503,7 +503,7 @@ user:
   actions:
     create:
       api: sling
-      operation: post_authorizables
+      operation: postAuthorizables
       params:
         required:
           authorizable_id: '%{name}'
@@ -518,7 +518,7 @@ user:
           message: 'User %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
       api: sling
-      operation: post_query
+      operation: postQuery
       params:
         required:
           path: '%{path}'
@@ -532,7 +532,7 @@ user:
           message: 'Found user %{name} authorizable ID %{authorizable_id}'
     delete:
       api: sling
-      operation: delete_node
+      operation: deleteNode
       params:
         required:
           path: '%{path}'
@@ -544,7 +544,7 @@ user:
           message: 'User %{name} deleted at /%{path}/%{authorizable_id}'
     exists:
       api: sling
-      operation: get_node
+      operation: getNode
       params:
         required:
           path: '%{path}'
@@ -556,7 +556,7 @@ user:
           message: 'User %{name} exists at /%{path}/%{authorizable_id}'
     set_permission:
       api: cq
-      operation: post_cq_actions
+      operation: postCqActions
       params:
         required:
           authorizable_id: '%{name}'
@@ -568,7 +568,7 @@ user:
           message: 'Permission %{permission_csv} on path %{permission_path} set for user %{name}'
     change_password:
       api: crx
-      operation: post_set_password
+      operation: postSetPassword
       params:
         required:
           old: '%{old_password}'

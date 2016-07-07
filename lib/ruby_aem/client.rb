@@ -19,6 +19,7 @@ require 'ruby_aem/handlers/html'
 require 'ruby_aem/handlers/json'
 require 'ruby_aem/handlers/simple'
 require 'ruby_aem/handlers/xml'
+require 'ruby_aem/swagger'
 
 module RubyAem
   class Client
@@ -72,7 +73,8 @@ module RubyAem
       responses = base_responses.merge(action_responses)
 
       begin
-        data, status_code, headers = api.send("#{operation}_with_http_info", *params)
+        method = RubyAem::Swagger.operation_to_method(operation)
+        data, status_code, headers = api.send("#{method}_with_http_info", *params)
         handle(data, status_code, headers, responses, info)
       rescue SwaggerAemClient::ApiError => err
         handle(err.response_body, err.code, err.response_headers, responses, info)

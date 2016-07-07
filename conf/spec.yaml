@@ -32,7 +32,7 @@ bundle:
 flushagent:
   responses:
     404:
-      status: success
+      status: failure
       handler: simple
       message: 'Flush agent %{name} not found on %{run_mode}'
   actions:
@@ -101,7 +101,7 @@ flushagent:
 group:
   responses:
     404:
-      status: success
+      status: failure
       handler: simple
       message: 'Group %{name} not found'
   actions:
@@ -414,7 +414,7 @@ configproperty:
 replicationagent:
   responses:
     404:
-      status: success
+      status: failure
       handler: simple
       message: 'Replication agent %{name} not found on %{run_mode}'
   actions:
@@ -497,7 +497,7 @@ repository:
 user:
   responses:
     404:
-      status: success
+      status: failure
       handler: simple
       message: 'User %{name} not found'
   actions:

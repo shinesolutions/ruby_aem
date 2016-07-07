@@ -7,7 +7,6 @@ describe 'FlushAgent' do
     # ensure agent doesn't exist prior to testing
     @flush_agent = @aem.flush_agent('author', 'some-flush-agent')
     result = @flush_agent.delete()
-    expect(result.is_success?).to be(true)
 
     # create agent
     result = @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
@@ -42,7 +41,7 @@ describe 'FlushAgent' do
       expect(result.message).to eq('Flush agent some-flush-agent deleted on author')
 
       result = @flush_agent.exists()
-      expect(result.is_success?).to be(true)
+      expect(result.is_failure?).to be(true)
       expect(result.message).to eq('Flush agent some-flush-agent not found on author')
     end
 

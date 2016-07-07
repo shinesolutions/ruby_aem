@@ -7,7 +7,6 @@ describe 'ReplicationAgent' do
     # ensure agent doesn't exist prior to testing
     @replication_agent = @aem.replication_agent('author', 'some-replication-agent')
     result = @replication_agent.delete()
-    expect(result.is_success?).to be(true)
 
     # create agent
     result = @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
@@ -42,7 +41,7 @@ describe 'ReplicationAgent' do
       expect(result.message).to eq('Replication agent some-replication-agent deleted on author')
 
       result = @replication_agent.exists()
-      expect(result.is_success?).to be(true)
+      expect(result.is_failure?).to be(true)
       expect(result.message).to eq('Replication agent some-replication-agent not found on author')
     end
 

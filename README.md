@@ -20,6 +20,8 @@ Usage
 
 Initialise client:
 
+    require 'ruby_aem'
+
     aem = RubyAem::Aem.new({
       :username => 'admin',
       :password => 'admin',
@@ -27,3 +29,23 @@ Initialise client:
       :host => 'localhost',
       :port => 4502,
       :debug => false
+
+Bundle:
+
+    # stop bundle
+    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+    result = bundle.stop()
+
+    # start bundle
+    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+    result = bundle.start()
+
+Result
+------
+
+Each of the above method calls returns a [RubyAem::Result](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/result.rb), which contains a status and a message. For example:
+
+    if result.is_failure?
+      puts result.message
+      exit
+    end

@@ -24,7 +24,7 @@ doc:
 	yard doc
 
 doc-publish:
-	gh-pages --dist doc/
+	gh-pages --dist doc/latest/
 
 tools:
 	npm install -g gh-pages

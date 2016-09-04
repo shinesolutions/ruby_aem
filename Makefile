@@ -23,4 +23,10 @@ test-integration: install
 doc:
 	yard doc
 
-.PHONY: all ci deps clean build install test test-integration doc
+doc-publish:
+	gh-pages --dist doc/
+
+tools:
+	npm install -g gh-pages
+
+.PHONY: all ci deps clean build install test test-integration doc doc-publish tools

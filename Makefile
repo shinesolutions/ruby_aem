@@ -2,7 +2,7 @@ all: deps clean build install test test-integration doc
 ci: deps clean build install test doc
 
 deps:
-        gem install bundler
+	gem install bundler
 	rm -f .bundle
 	bundle install
 

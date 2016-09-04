@@ -3,7 +3,7 @@ ci: deps clean build install test doc
 
 deps:
 	gem install bundler
-	rm -f .bundle
+	rm -rf .bundle
 	bundle install
 
 clean:

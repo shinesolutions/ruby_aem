@@ -3,7 +3,7 @@ ci: deps clean build install test doc
 
 deps:
 	gem install bundler
-	bundle install
+	BUNDLE_GEMFILE=Gemfile bundle install
 
 clean:
 	rm -f ruby_aem-*.gem

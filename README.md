@@ -40,6 +40,71 @@ Bundle:
     bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
     result = bundle.start()
 
+Configuration property:
+
+Flush agent:
+
+Group:
+
+Node:
+
+Package:
+
+Path:
+
+    # check path's existence
+    path = aem.path('/etc/designs/cloudservices')
+    result = path.activate(true, false)
+
+    # tree activate the path
+    path = aem.path('/etc/designs')
+    result = path.activate(true, false)
+
+Replication agent:
+
+    replication_agent = aem.replication_agent('author', 'some-replication-agent')
+
+    # create replication agent
+    result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
+
+    # check replication agent's existence
+    result = replication_agent.exists()
+
+    # delete replication agent
+    result = replication_agent.delete()
+
+Repository:
+
+    repository = aem.repository()
+
+    # block repository writes
+    result = repository.block_writes
+
+    # unblock repository writes
+    result = repository.unblock_writes
+
+User:
+
+    user = aem.user('/home/users/s/', 'someuser')
+
+    # create user
+    result = user.create('somepassword')
+
+    # check user's existence
+    result = user.exists()
+
+    # set user permission
+    result = user.set_permission('/etc/replication', 'read:true,modify:true')
+
+    # change user password
+    result = user.change_password('somepassword', 'somenewpassword')
+
+    # add user to group
+    result = user.add_to_group('/home/groups/s/', 'somegroup')
+
+    # delete user
+    result = user.delete()
+
 Result
 ------
 

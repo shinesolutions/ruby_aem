@@ -1,4 +1,5 @@
 [![Build Status](https://img.shields.io/travis/shinesolutions/ruby_aem.svg)](http://travis-ci.org/shinesolutions/ruby_aem)
+[![Published Version](https://badge.fury.io/rb/ruby_aem.svg)](https://rubygems.org/gems/ruby_aem)
 
 ruby_aem
 --------
@@ -42,13 +43,95 @@ Bundle:
 
 Configuration property:
 
+    config_property = aem.config_property('someinexistingnode', 'Boolean', true)
+
+    # set config property
+    result = config_property.create('author')
+
 Flush agent:
+
+    flush_agent = aem.flush_agent('author', 'some-flush-agent')
+
+    # create or update flush agent
+    result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
+
+    # check flush agent's existence
+    result = flush_agent.exists()
+
+    # delete flush agent
+    result = flush_agent.delete()
 
 Group:
 
+    # create group
+    group = aem.group('/home/groups/s/', 'somegroup')
+
+    # check group's existence
+    result = group.exists()
+
+    # set group permission
+    result = group.set_permission('/etc/replication', 'read:true,modify:true')
+
+    # add another group as a member
+    member_group = aem.group('/home/groups/s/', 'somemembergroup')
+    result = member_group.create()
+    result = group.add_member('somemembergroup')
+
+    # delete group
+    result = group.delete()
+
 Node:
 
+    node = aem.node('/apps/system/', 'somefolder')
+
+    # create node
+    result = node.create('sling:Folder')
+
+    # check node's existence
+    result = node.exists()
+
+    # delete node
+    result = node.delete()
+
 Package:
+
+    package = aem.package('somepackagegroup', 'somepackage', '1.2.3')
+
+    # upload package
+    result = package.upload('/tmp', true)
+
+    # check whether package is uploaded
+    result = package.is_uploaded()
+
+    # install package
+    result = package.install()
+
+    # check whether package is installed
+    result = package.is_installed()
+
+    # replicate package
+    result = package.replicate()
+
+    # download package to /tmp directory
+    result = package.download('/tmp')
+
+    # create package
+    result = package.create()
+
+    # build package
+    result = package.build()
+
+    # update package filter
+    result = package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
+
+    # get package filter
+    result = package.get_filter()
+
+    # activate filter
+    results = package.activate_filter(true, false)
+
+    # list all packages
+    result = package.list_all()
 
 Path:
 
@@ -64,7 +147,7 @@ Replication agent:
 
     replication_agent = aem.replication_agent('author', 'some-replication-agent')
 
-    # create replication agent
+    # create or update replication agent
     result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
 
     # check replication agent's existence

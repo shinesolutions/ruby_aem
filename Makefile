@@ -22,10 +22,10 @@ test-integration: install
 	rspec test/integration
 
 doc:
-	yard doc
+	yard doc --output-dir doc/latest/
 
 doc-publish:
-	gh-pages --dist doc/latest/
+	gh-pages --dist doc/
 
 tools:
 	npm install -g gh-pages

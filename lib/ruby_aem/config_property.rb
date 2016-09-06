@@ -28,8 +28,7 @@ module RubyAem
 
     def create(run_mode)
 
-      # map AEM property name to swagger_aem's sanitised name
-      name = @info[:name].gsub(/\./, '_')
+      name = RubyAem::Swagger.property_to_parameter(@info[:name])
 
       @info[:run_mode] = run_mode
       @info["#{name}".to_sym] = @info[:value]

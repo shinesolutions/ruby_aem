@@ -24,7 +24,7 @@ module RubyAem
         name: name
       }
 
-      @info[:path] = @info[:path].gsub(/^\//, '').gsub(/\/$/, '')
+      @info[:path] = RubyAem::Swagger.path(@info[:path])
     end
 
     def create(type)

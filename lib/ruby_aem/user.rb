@@ -36,7 +36,7 @@ module RubyAem
     def delete()
       result = find_authorizable_id
       if result.data
-        @info[:path] = @info[:path].gsub(/^\//, '').gsub(/\/$/, '')
+        @info[:path] = RubyAem::Swagger.path(@info[:path])
         @client.call(self.class, __callee__.to_s, @info)
       else
         result
@@ -44,7 +44,7 @@ module RubyAem
     end
 
     def exists()
-      @info[:path] = @info[:path].gsub(/^\//, '').gsub(/\/$/, '')
+      @info[:path] = RubyAem::Swagger.path(@info[:path])
       @client.call(self.class, __callee__.to_s, @info)
     end
 

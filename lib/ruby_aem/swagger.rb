@@ -15,12 +15,27 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Swagger module contains logic related to swagger_aem.
   module Swagger
 
+    # Convert ruby_aem spec's operation (consistent with Swagger spec's operationId)
+    # into swagger_aem's generated method name.
     def Swagger.operation_to_method(operation)
       operation.gsub(/[A-Z]/) { |char|
         '_' + char.downcase
       }
+    end
+
+    # Convert ruby_aem spec's property name (by replacing dots with underscores)
+    # into swagger_aem's generated parameter name.
+    def Swagger.property_to_parameter(property)
+      property.gsub(/\./, '_')
+    end
+
+    # Sanitise path value by removing leading and trailing slashes
+    # swagger_aem accepts paths without those slashes.
+    def Swagger.path(path)
+      path.gsub(/^\//, '').gsub(/\/$/, '')
     end
 
   end

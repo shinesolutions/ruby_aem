@@ -17,6 +17,9 @@ limitations under the License.
 module RubyAem
   class Repository
 
+    # Initialise repository
+    #
+    # @param client RubyAem::Client
     def initialize(client)
       @client = client
       @info = {}

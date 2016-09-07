@@ -17,6 +17,12 @@ limitations under the License.
 module RubyAem
   class Package
 
+    # Initialise a package
+    #
+    # @param client RubyAem::Client
+    # @param group_name the group name of the package, e.g. somepackagegroup
+    # @param package_name the name of the package, e.g. somepackage
+    # @param package_version the version of the package, e.g. 1.2.3
     def initialize(client, group_name, package_name, package_version)
       @client = client
       @info = {

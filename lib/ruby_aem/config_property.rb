@@ -17,6 +17,12 @@ limitations under the License.
 module RubyAem
   class ConfigProperty
 
+    # Initialise a config property
+    #
+    # @param client RubyAem::Client
+    # @param name the property's name
+    # @param type the property's type, e.g. Boolean
+    # @param value the property's value, e.g. true
     def initialize(client, name, type, value)
       @client = client
       @info = {

@@ -17,6 +17,11 @@ limitations under the License.
 module RubyAem
   class Group
 
+    # Initialise a group
+    #
+    # @param client RubyAem::Client
+    # @param path the path to group node, e.g. /home/groups/s/
+    # @param name the name of the AEM group, e.g. somegroup
     def initialize(client, path, name)
       @client = client
       @info = {

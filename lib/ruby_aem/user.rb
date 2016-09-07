@@ -17,6 +17,11 @@ limitations under the License.
 module RubyAem
   class User
 
+    # Initialise a user
+    #
+    # @param client RubyAem::Client
+    # @param path the path to user node, e.g. /home/users/s/
+    # @param name the username of the AEM user, e.g. someuser, admin, johncitizen
     def initialize(client, path, name)
       @client = client
       @info = {

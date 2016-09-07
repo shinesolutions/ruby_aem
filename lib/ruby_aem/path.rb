@@ -17,6 +17,10 @@ limitations under the License.
 module RubyAem
   class Path
 
+    # Initialise a path
+    #
+    # @param client RubyAem::Client
+    # @param name the name of the path, e.g. /etc/designs
     def initialize(client, name)
       @client = client
       @info = {

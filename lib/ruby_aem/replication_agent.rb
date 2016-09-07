@@ -17,6 +17,11 @@ limitations under the License.
 module RubyAem
   class ReplicationAgent
 
+    # Initialise a replication agent
+    #
+    # @param client RubyAem::Client
+    # @param run_mode AEM run mode: author or publish
+    # @param name the replication agent's name, e.g. some-replication-agent
     def initialize(client, run_mode, name)
       @client = client
       @info = {

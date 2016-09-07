@@ -17,6 +17,11 @@ limitations under the License.
 module RubyAem
   class Node
 
+    # Initialise a node
+    #
+    # @param client RubyAem::Client
+    # @param path the path to the node, e.g. /apps/system/
+    # @param name the node name, e.g. somenode
     def initialize(client, path, name)
       @client = client
       @info = {

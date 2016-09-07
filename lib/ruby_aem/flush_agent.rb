@@ -17,6 +17,11 @@ limitations under the License.
 module RubyAem
   class FlushAgent
 
+    # Initialise a flush agent
+    #
+    # @param client RubyAem::Client
+    # @param run_mode AEM run mode: author or publish
+    # @param name the flush agent's name, e.g. some-flush-agent
     def initialize(client, run_mode, name)
       @client = client
       @info = {

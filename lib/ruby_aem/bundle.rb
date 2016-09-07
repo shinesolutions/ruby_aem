@@ -17,6 +17,10 @@ limitations under the License.
 module RubyAem
   class Bundle
 
+    # Initialise a bundle
+    #
+    # @param client RubyAem::Client
+    # @param name the bundle's name, e.g. com.adobe.cq.social.cq-social-forum
     def initialize(client, name)
       @client = client
       @info = {

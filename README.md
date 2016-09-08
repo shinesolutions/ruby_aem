@@ -9,7 +9,6 @@ It is written on top of [swagger_aem](https://github.com/shinesolutions/swagger-
 
 | ruby_aem | Supported AEM          | Supported Ruby          | Documentation                                                                                                                                    |
 |----------|------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| master   | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/master/index.html) [Coverage](https://shinesolutions.github.io/ruby_aem/coverage/index.html) |
 | 0.9.0    | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/0.9.0/index.html)                                                                            |
 
 Install
@@ -198,3 +197,9 @@ Each of the above method calls returns a [RubyAem::Result](https://github.com/sh
       puts result.message
       exit
     end
+
+Reports
+-------
+
+* [API - master](https://shinesolutions.github.io/ruby_aem/api/master/index.html)
+* [Coverage report](https://shinesolutions.github.io/ruby_aem/coverage/index.html) |

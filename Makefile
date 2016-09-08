@@ -22,7 +22,7 @@ test-integration: install
 	rspec test/integration
 
 doc:
-	yard doc --output-dir doc/latest/
+	yard doc --output-dir doc/api/latest/
 
 doc-publish:
 	gh-pages --dist doc/

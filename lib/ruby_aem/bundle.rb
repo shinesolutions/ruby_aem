@@ -28,10 +28,12 @@ module RubyAem
       }
     end
 
+    # Start a bundle
     def start
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Stop a bundle
     def stop
       @client.call(self.class, __callee__.to_s, @info)
     end

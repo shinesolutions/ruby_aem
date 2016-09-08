@@ -30,6 +30,9 @@ module RubyAem
       }
     end
 
+    # Create a new user
+    #
+    # @param password the password of the AEM user, e.g. ^@#YRHFA*(AS&Da
     def create(password)
       @info[:password] = password
       if !@info[:path].match(/^\//)

@@ -50,26 +50,28 @@ describe 'User' do
       user = aem.user('/home/users/s/', 'someuser')
       result = user.change_password('somepassword', 'somenewpassword')
       expect(result.is_success?).to be(true)
-      expect(result.message).to eq('Logged in user password changed')    end
+      expect(result.message).to eq('Logged in user password changed')
 
-      it 'should succeed being added to a group' do
+    end
 
-        # ensure group doesn't exist prior to testing
-        group = @aem.group('/home/groups/s/', 'somegroup')
-        result = group.delete()
-        expect(result.is_success?).to be(true)
+    it 'should succeed being added to a group' do
 
-        # create group
-        result = group.create()
-        expect(result.is_success?).to be(true)
-        expect(result.message).to match(/^Group somegroup created at \/home\/groups\/s\/.+/)
+      # ensure group doesn't exist prior to testing
+      group = @aem.group('/home/groups/s/', 'somegroup')
+      result = group.delete()
+      expect(result.is_success?).to be(true)
 
-        # create group
-        result = @user.add_to_group('/home/groups/s/', 'somegroup')
-        expect(result.is_success?).to be(true)
-        expect(result.message).to eq('User/group someuser added to group somegroup')
+      # create group
+      result = group.create()
+      expect(result.is_success?).to be(true)
+      expect(result.message).to match(/^Group somegroup created at \/home\/groups\/s\/.+/)
 
-      end
+      # create group
+      result = @user.add_to_group('/home/groups/s/', 'somegroup')
+      expect(result.is_success?).to be(true)
+      expect(result.message).to eq('User/group someuser added to group somegroup')
+
+    end
 
   end
 

@@ -17,8 +17,17 @@ limitations under the License.
 require 'json'
 
 module RubyAem
+  # Response handlers for JSON payload.
   module Handlers
 
+    # Handle JSON response payload containing authorizable ID.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.json_authorizable_id(data, status_code, headers, response_spec, info)
 
       json = JSON.parse(data)
@@ -38,6 +47,14 @@ module RubyAem
       result
     end
 
+    # Handle package JSON payload. Result status is determined directly by success field.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.json_package_service(data, status_code, headers, response_spec, info)
 
       json = JSON.parse(data)
@@ -48,6 +65,14 @@ module RubyAem
       RubyAem::Result.new(status, message)
     end
 
+    # Handle package filter JSON payload.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.json_package_filter(data, status_code, headers, response_spec, info)
 
       json = JSON.parse(data)

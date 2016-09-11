@@ -15,13 +15,15 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Group class contains API calls related to managing an AEM group.
   class Group
 
-    # Initialise a group
+    # Initialise a group.
     #
     # @param client RubyAem::Client
     # @param path the path to group node, e.g. /home/groups/s/
     # @param name the name of the AEM group, e.g. somegroup
+    # @return new RubyAem::Group instance
     def initialize(client, path, name)
       @client = client
       @info = {
@@ -30,6 +32,9 @@ module RubyAem
       }
     end
 
+    # Create a new group.
+    #
+    # @return RubyAem::Result
     def create()
       if !@info[:path].match(/^\//)
         @info[:path] = "/#{@info[:path]}"
@@ -37,6 +42,9 @@ module RubyAem
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Delete the group.
+    #
+    # @return RubyAem::Result
     def delete()
       result = find_authorizable_id
       if result.data
@@ -47,17 +55,31 @@ module RubyAem
       end
     end
 
+    # Check whether the group exists or not.
+    # If the group exists, this method returns a success result.
+    # Otherwise it returns a failure result.
+    #
+    # @return RubyAem::Result
     def exists()
       @info[:path] = RubyAem::Swagger.path(@info[:path])
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Set the group's permission.
+    #
+    # @param permission_path the path that the group's permission is to be set against, e.g. /etc/replication
+    # @param permission_csv comma-separated-values of the group's permission, e.g. read:true,modify:true
+    # @return RubyAem::Result
     def set_permission(permission_path, permission_csv)
       @info[:permission_path] = permission_path
       @info[:permission_csv] = permission_csv
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Add another group as a member of this group.
+    #
+    # @param member the member group to be added
+    # @return RubyAem::Result
     def add_member(member)
       result = find_authorizable_id
       if result.data
@@ -68,6 +90,9 @@ module RubyAem
       end
     end
 
+    # Find the group's authorizable ID.
+    #
+    # @return RubyAem::Result
     def find_authorizable_id()
       @client.call(self.class, __callee__.to_s, @info)
     end

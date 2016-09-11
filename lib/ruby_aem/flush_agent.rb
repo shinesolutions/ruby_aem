@@ -15,13 +15,15 @@ limitations under the License.
 =end
 
 module RubyAem
+  # FlushAgent class contains API calls related to managing an AEM flush agent.
   class FlushAgent
 
-    # Initialise a flush agent
+    # Initialise a flush agent.
     #
     # @param client RubyAem::Client
     # @param run_mode AEM run mode: author or publish
     # @param name the flush agent's name, e.g. some-flush-agent
+    # @return new RubyAem::FlushAgent instance
     def initialize(client, run_mode, name)
       @client = client
       @info = {
@@ -30,6 +32,12 @@ module RubyAem
       }
     end
 
+    # Create or update a flush agent.
+    #
+    # @param title flush agent title
+    # @param description flush agent description
+    # @param dest_base_url base URL of the agent target destination, e.g. http://somedispatcher:8080
+    # @return RubyAem::Result
     def create_update(title, description, dest_base_url)
       @info[:title] = title
       @info[:description] = description
@@ -37,10 +45,18 @@ module RubyAem
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Delete the flush agent.
+    #
+    # @return RubyAem::Result
     def delete()
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Check whether the flush agent exists or not.
+    # If the flush agent  exists, this method returns a success result.
+    # Otherwise it returns a failure result.
+    #
+    # @return RubyAem::Result
     def exists()
       @client.call(self.class, __callee__.to_s, @info)
     end

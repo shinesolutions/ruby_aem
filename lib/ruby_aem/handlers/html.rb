@@ -17,10 +17,18 @@ limitations under the License.
 require 'nokogiri'
 
 module RubyAem
+  # Response handlers for HTML payload.
   module Handlers
 
-    # parse authorizable ID from response body data
-    # this is used to get the authorizable ID of a newly created user/group
+    # Parse authorizable ID from response body data.
+    # This is used to get the authorizable ID of a newly created user/group.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.html_authorizable_id(data, status_code, headers, response_spec, info)
 
       html = Nokogiri::HTML(data)

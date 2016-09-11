@@ -15,12 +15,14 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Bundle class contains API calls related to managing an AEM bundle.
   class Bundle
 
-    # Initialise a bundle
+    # Initialise a bundle.
     #
     # @param client RubyAem::Client
     # @param name the bundle's name, e.g. com.adobe.cq.social.cq-social-forum
+    # @return new RubyAem::Bundle instance
     def initialize(client, name)
       @client = client
       @info = {
@@ -28,12 +30,16 @@ module RubyAem
       }
     end
 
-    # Start a bundle
+    # Start a bundle.
+    #
+    # @return RubyAem::Result
     def start
       @client.call(self.class, __callee__.to_s, @info)
     end
 
-    # Stop a bundle
+    # Stop a bundle.
+    #
+    # @return RubyAem::Result
     def stop
       @client.call(self.class, __callee__.to_s, @info)
     end

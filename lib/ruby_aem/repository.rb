@@ -15,20 +15,28 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Repository class contains API calls related to managing an AEM repository.
   class Repository
 
-    # Initialise repository
+    # Initialise repository.
     #
     # @param client RubyAem::Client
+    # @return new RubyAem::Repository instance
     def initialize(client)
       @client = client
       @info = {}
     end
 
+    # Block repository writes.
+    #
+    # @return RubyAem::Result
     def block_writes
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Unblock repository writes.
+    #
+    # @return RubyAem::Result
     def unblock_writes
       @client.call(self.class, __callee__.to_s, @info)
     end

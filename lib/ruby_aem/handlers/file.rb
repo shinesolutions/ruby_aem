@@ -15,8 +15,19 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Response handlers for file payload.
   module Handlers
 
+    # Handle downloaded file by copying from temporary location to file_path info.
+    # The downloaded file in temporary location will then be deleted.
+    # data, status_code, and headers are all returned from RubyAem::Client call.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.file_download(data, status_code, headers, response_spec, info)
 
       FileUtils.cp(data.path, "#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip")

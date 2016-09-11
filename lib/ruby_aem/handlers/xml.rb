@@ -17,8 +17,17 @@ limitations under the License.
 require 'nokogiri'
 
 module RubyAem
+  # Response handlers for XML payload.
   module Handlers
 
+    # Handle package list XML by removing non-packages data.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def Handlers.xml_package_list(data, status_code, headers, response_spec, info)
 
       xml = Nokogiri::XML(data)

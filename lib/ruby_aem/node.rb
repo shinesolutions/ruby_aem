@@ -15,13 +15,15 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Node class contains API calls related to managing an AEM node.
   class Node
 
-    # Initialise a node
+    # Initialise a node.
     #
     # @param client RubyAem::Client
     # @param path the path to the node, e.g. /apps/system/
     # @param name the node name, e.g. somenode
+    # @return new RubyAem::Node instance
     def initialize(client, path, name)
       @client = client
       @info = {
@@ -32,15 +34,27 @@ module RubyAem
       @info[:path] = RubyAem::Swagger.path(@info[:path])
     end
 
+    # Create a new node.
+    #
+    # @param type the node type, e.g. sling:Folder
+    # @return RubyAem::Result
     def create(type)
       @info[:type] = type
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Delete the node.
+    #
+    # @return RubyAem::Result
     def delete()
       @client.call(self.class, __callee__.to_s, @info)
     end
 
+    # Check whether the node exists or not.
+    # If the node exists, this method returns a success result.
+    # Otherwise it returns a failure result.
+    #
+    # @return RubyAem::Result
     def exists()
       @client.call(self.class, __callee__.to_s, @info)
     end

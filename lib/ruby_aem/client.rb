@@ -22,13 +22,28 @@ require 'ruby_aem/handlers/xml'
 require 'ruby_aem/swagger'
 
 module RubyAem
+  # Client class makes Swagger AEM API calls and handles the response as
+  # configured in conf/spec.yaml .
   class Client
 
+    # Initialise a client.
+    #
+    # @param apis a hash of Swagger AEM client's API instances
+    # @param spec ruby_aem specification
+    # @return new RubyAem::Client instance
     def initialize(apis, spec)
       @apis = apis
       @spec = spec
     end
 
+    # Make an API call using the relevant Swagger AEM API client.
+    # Clazz and action parameters are used to identify the action, API, and params
+    # from ruby_aem specification, alongside the response handlers.
+    #
+    # @param clazz the class name of the caller resource
+    # @param action the action of the API call
+    # @param info additional information of the API call
+    # @return RubyAem::Result
     def call(clazz, action, info)
 
       component = clazz.name.downcase.sub('rubyaem::', '')
@@ -81,6 +96,16 @@ module RubyAem
       end
     end
 
+    # Handle a response based on status code and a given list of response specifications.
+    # If none of the response specifications contains the status code, a failure result
+    # will then be returned.
+    #
+    # @param data data payload
+    # @param status_code response HTTP status code
+    # @param headers response HTTP headers
+    # @param responses a list of response specifications as configured in conf/spec.yaml
+    # @param info additional information
+    # @return RubyAem::Result
     def handle(data, status_code, headers, responses, info)
       if responses.key?(status_code)
         response_spec = responses[status_code]

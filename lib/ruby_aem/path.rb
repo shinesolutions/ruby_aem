@@ -15,12 +15,14 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Path class contains API calls related to managing an AEM path.
   class Path
 
-    # Initialise a path
+    # Initialise a path.
     #
     # @param client RubyAem::Client
     # @param name the name of the path, e.g. /etc/designs
+    # @return new RubyAem::Path instance
     def initialize(client, name)
       @client = client
       @info = {
@@ -28,6 +30,11 @@ module RubyAem
       }
     end
 
+    # Activate a path.
+    #
+    # @param ignore_deactivated if true, then deactivated items in the path will not be activated
+    # @param only_modified if true, then only modified items in the path will be activated
+    # @return RubyAem::Result
     def activate(ignore_deactivated, only_modified)
       @info[:ignoredeactivated] = ignore_deactivated
       @info[:onlymodified] = only_modified

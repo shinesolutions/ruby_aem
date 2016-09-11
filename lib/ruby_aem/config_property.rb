@@ -15,6 +15,7 @@ limitations under the License.
 =end
 
 module RubyAem
+  # ConfigProperty class contains API calls related to managing an AEM config property.
   class ConfigProperty
 
     # Initialise a config property
@@ -23,6 +24,7 @@ module RubyAem
     # @param name the property's name
     # @param type the property's type, e.g. Boolean
     # @param value the property's value, e.g. true
+    # @return new RubyAem::ConfigProperty instance
     def initialize(client, name, type, value)
       @client = client
       @info = {
@@ -32,6 +34,10 @@ module RubyAem
       }
     end
 
+    # Create a new config property.
+    #
+    # @param run_mode AEM run mode: author or publish
+    # @return RubyAem::Result
     def create(run_mode)
 
       name = RubyAem::Swagger.property_to_parameter(@info[:name])

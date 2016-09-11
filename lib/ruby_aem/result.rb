@@ -15,24 +15,49 @@ limitations under the License.
 =end
 
 module RubyAem
+  # Result represents the result of a client call.
+  #
+  # It has 3 statuses: success, warning, and failure.
+  # A success indicates that the client call was completed successfully.
+  # A failure indicates that the client call was completed but it failed with error.
+  # A warning indicates that the client call was completed but with warnings.
+  #
+  # Result message is stored in message attribute.
+  #
+  # Some client calls respond with data payload, which is stored in data attribute.
   class Result
 
     attr_reader :message
     attr_accessor :data
 
+    # Initialise a result.
+    #
+    # @param status the result status: success, warning, or failure
+    # @param message the result message
+    # @return new RubyAem::Result instance
     def initialize(status, message)
       @status = status
       @message = message
     end
 
+    # Check whether the client call was successful.
+    #
+    # @return true when the status is success
     def is_success?
       return @status == 'success'
     end
 
+    # Check whether the client call was completed
+    # with warnings.
+    #
+    # @return true when the status is warning
     def is_warning?
       return @status == 'warning'
     end
 
+    # Check whether the client call failed.
+    #
+    # @return true when the status is failure
     def is_failure?
       return @status == 'failure'
     end

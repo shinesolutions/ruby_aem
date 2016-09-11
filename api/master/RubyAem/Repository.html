@@ -101,7 +101,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Repository class contains API calls related to managing an AEM repository.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -133,7 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Block repository writes.</p>
+</div></span>
   
 </li>
 
@@ -141,7 +154,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client)  &#x21d2; Repository </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client)  &#x21d2; Object </a>
     
 
     
@@ -181,7 +194,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Unblock repository writes.</p>
+</div></span>
   
 </li>
 
@@ -195,7 +210,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(client)  &#x21d2; <tt><span class='object_link'><a href="" title="RubyAem::Repository (class)">Repository</a></span></tt> 
+    #<strong>initialize</strong>(client)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -204,7 +219,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Initialise repository</p>
+<p>Initialise repository.</p>
 
 
   </div>
@@ -238,13 +253,13 @@
       <pre class="lines">
 
 
-23
-24
 25
-26</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span>
@@ -271,18 +286,47 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Block repository writes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-28
-29
-30</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_block_writes'>block_writes</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@info</span><span class='rparen'>)</span>
@@ -301,18 +345,47 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Unblock repository writes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-32
-33
-34</pre>
+40
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/repository.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unblock_writes'>unblock_writes</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@info</span><span class='rparen'>)</span>
@@ -327,7 +400,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep  8 23:45:07 2016 by
+  Generated on Sun Sep 11 23:35:46 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.1.3).
 </div>

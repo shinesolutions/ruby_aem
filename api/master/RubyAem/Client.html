@@ -101,7 +101,19 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Client class makes Swagger AEM API calls and handles the response as
+configured in conf/spec.yaml .</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -133,7 +145,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Make an API call using the relevant Swagger AEM API client.</p>
+</div></span>
   
 </li>
 
@@ -155,7 +169,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Handle a response based on status code and a given list of response
+specifications.</p>
+</div></span>
   
 </li>
 
@@ -163,7 +180,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(apis, spec)  &#x21d2; Client </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(apis, spec)  &#x21d2; Object </a>
     
 
     
@@ -180,7 +197,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of Client.</p>
+<p>Initialise a client.</p>
 </div></span>
   
 </li>
@@ -195,7 +212,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(apis, spec)  &#x21d2; <tt><span class='object_link'><a href="" title="RubyAem::Client (class)">Client</a></span></tt> 
+    #<strong>initialize</strong>(apis, spec)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -204,13 +221,49 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new instance of Client</p>
+<p>Initialise a client.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>apis</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a hash of Swagger AEM client&#39;s API instances</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spec</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>ruby_aem specification</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -218,13 +271,13 @@
       <pre class="lines">
 
 
-27
-28
-29
-30</pre>
+34
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_apis'>apis</span><span class='comma'>,</span> <span class='id identifier rubyid_spec'>spec</span><span class='rparen'>)</span>
   <span class='ivar'>@apis</span> <span class='op'>=</span> <span class='id identifier rubyid_apis'>apis</span>
@@ -251,27 +304,95 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Make an API call using the relevant Swagger AEM API client. Clazz and
+action parameters are used to identify the action, API, and params from
+ruby_aem specification, alongside the response handlers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>clazz</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the class name of the caller resource</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>action</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the action of the API call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>additional information of the API call</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
 47
 48
 49
@@ -307,10 +428,25 @@
 79
 80
 81
-82</pre>
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_clazz'>clazz</span><span class='comma'>,</span> <span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span><span class='rparen'>)</span>
 
@@ -377,24 +513,139 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Handle a response based on status code and a given list of response
+specifications. If none of the response specifications contains the status
+code, a failure result will then be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>data payload</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>status_code</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response HTTP status code</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>headers</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response HTTP headers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>responses</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a list of response specifications as configured in conf/spec.yaml</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>additional information</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92</pre>
+109
+110
+111
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/client.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_handle'>handle</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_status_code'>status_code</span><span class='comma'>,</span> <span class='id identifier rubyid_headers'>headers</span><span class='comma'>,</span> <span class='id identifier rubyid_responses'>responses</span><span class='comma'>,</span> <span class='id identifier rubyid_info'>info</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_responses'>responses</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='id identifier rubyid_status_code'>status_code</span><span class='rparen'>)</span>
@@ -415,7 +666,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep  8 23:45:07 2016 by
+  Generated on Sun Sep 11 23:35:45 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.1.3).
 </div>

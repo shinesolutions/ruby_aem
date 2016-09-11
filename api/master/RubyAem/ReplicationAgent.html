@@ -101,7 +101,19 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>ReplicationAgent class contains API calls related to managing an AEM
+replication agent.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -133,7 +145,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Create or update a replication agent.</p>
+</div></span>
   
 </li>
 
@@ -155,7 +169,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Delete the replication agent.</p>
+</div></span>
   
 </li>
 
@@ -177,7 +193,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Check whether the replication agent exists or not.</p>
+</div></span>
   
 </li>
 
@@ -185,7 +203,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client, run_mode, name)  &#x21d2; ReplicationAgent </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client, run_mode, name)  &#x21d2; Object </a>
     
 
     
@@ -217,7 +235,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(client, run_mode, name)  &#x21d2; <tt><span class='object_link'><a href="" title="RubyAem::ReplicationAgent (class)">ReplicationAgent</a></span></tt> 
+    #<strong>initialize</strong>(client, run_mode, name)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -226,7 +244,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Initialise a replication agent</p>
+<p>Initialise a replication agent.</p>
 
 
   </div>
@@ -292,16 +310,16 @@
       <pre class="lines">
 
 
-25
-26
 27
 28
 29
 30
-31</pre>
+31
+32
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='comma'>,</span> <span class='id identifier rubyid_run_mode'>run_mode</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span>
@@ -331,21 +349,103 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create or update a replication agent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>title</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>replication agent title</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>description</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>replication agent description</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dest_base_url</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>base URL of the agent target destination, e.g. <a
+href="https://somepublisher:4503">somepublisher:4503</a></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38</pre>
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_update'>create_update</span><span class='lparen'>(</span><span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='id identifier rubyid_description'>description</span><span class='comma'>,</span> <span class='id identifier rubyid_dest_base_url'>dest_base_url</span><span class='rparen'>)</span>
   <span class='ivar'>@info</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_title'>title</span>
@@ -367,18 +467,47 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Delete the replication agent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-40
-41
-42</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@info</span><span class='rparen'>)</span>
@@ -397,18 +526,49 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Check whether the replication agent exists or not. If the replication agent
+exists, this method returns a success result. Otherwise it returns a
+failure result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>RubyAem::Result</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-44
-45
-46</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/replication_agent.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists'>exists</span><span class='lparen'>(</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@info</span><span class='rparen'>)</span>
@@ -423,7 +583,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Sep  8 23:45:07 2016 by
+  Generated on Sun Sep 11 23:35:46 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.1.3).
 </div>

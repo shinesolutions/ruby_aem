@@ -32,7 +32,7 @@ describe 'Group' do
       expect(result.message).to eq('Permission read:true,modify:true on path /etc/replication set for group somegroup')
     end
 
-    it 'should succeed being added to another group' do
+    it 'should succeed adding another group as a member' do
 
       # ensure member group doesn't exist prior to testing
       member_group = @aem.group('/home/groups/s/', 'somemembergroup')

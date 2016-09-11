@@ -24,4 +24,30 @@ describe 'Node' do
 
   end
 
+  describe 'test delete' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Node,
+        'delete',
+        { :path => 'apps/system',
+          :name => 'somefolder' })
+      @node.delete()
+    end
+
+  end
+
+  describe 'test exists' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Node,
+        'exists',
+        { :path => 'apps/system',
+          :name => 'somefolder' })
+      @node.exists()
+    end
+
+  end
+
 end

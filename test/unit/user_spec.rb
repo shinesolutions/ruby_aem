@@ -23,5 +23,18 @@ describe 'User' do
     end
 
   end
+  
+  describe 'test find_authorizable_id' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::User,
+        'find_authorizable_id',
+        { :path => '/home/users/s/',
+          :name => 'someuser' })
+      @user.find_authorizable_id
+    end
+
+  end
 
 end

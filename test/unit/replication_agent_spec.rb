@@ -26,4 +26,30 @@ describe 'ReplicationAgent' do
 
   end
 
+  describe 'test delete' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::ReplicationAgent,
+        'delete',
+        { :run_mode => 'author',
+          :name => 'some-replication-agent' })
+      @replication_agent.delete
+    end
+
+  end
+
+  describe 'test exists' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::ReplicationAgent,
+        'exists',
+        { :run_mode => 'author',
+          :name => 'some-replication-agent' })
+      @replication_agent.exists
+    end
+
+  end
+
 end

@@ -202,4 +202,4 @@ Reports
 -------
 
 * [API - master](https://shinesolutions.github.io/ruby_aem/api/master/index.html)
-* [Coverage report](https://shinesolutions.github.io/ruby_aem/coverage/index.html) |
+* [Coverage report](https://shinesolutions.github.io/ruby_aem/coverage/index.html)

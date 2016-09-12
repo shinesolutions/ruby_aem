@@ -27,6 +27,9 @@ doc:
 doc-publish:
 	gh-pages --dist doc/
 
+publish:
+	gem push `ls ruby_aem-*.gem`
+
 tools:
 	npm install -g gh-pages
 

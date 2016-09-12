@@ -61,27 +61,7 @@ module RubyAem
       params.push({})
       optional_params = action_spec['params']['optional'] || {}
       optional_params.each { |key, value|
-        # if there is no value in optional param spec,
-        # then only add optional param that is set in info
-        if !value
-          if info.key? key.to_sym
-            params[-1][key.to_sym] = info[key.to_sym]
-          end
-        # if value is provided in optional param spec,
-        # then apply variable interpolation the same way as required param
-        else
-          if value.class == String
-            if value == '__FILE__'
-              File.open("#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip", 'r') { |file|
-                params[-1][key.to_sym] = file
-              }
-            else
-              params[-1][key.to_sym] = value % info
-            end
-          else
-            params[-1][key.to_sym] = value
-          end
-        end
+        add_optional_param(key, value, params, info)
       }
 
       base_responses = @spec[component]['responses'] || {}
@@ -94,6 +74,36 @@ module RubyAem
         handle(data, status_code, headers, responses, info)
       rescue SwaggerAemClient::ApiError => err
         handle(err.response_body, err.code, err.response_headers, responses, info)
+      end
+    end
+
+    # Add optional param into params list.
+    #
+    # @param key optional param key
+    # @param value optional param value
+    # @param params combined list of required and optional parameters
+    # @param info additional information
+    def add_optional_param(key, value, params, info)
+      # if there is no value in optional param spec,
+      # then only add optional param that is set in info
+      if !value
+        if info.key? key.to_sym
+          params[-1][key.to_sym] = info[key.to_sym]
+        end
+      # if value is provided in optional param spec,
+      # then apply variable interpolation the same way as required param
+      else
+        if value.class == String
+          if value == '__FILE__'
+            File.open("#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip", 'r') { |file|
+              params[-1][key.to_sym] = file
+            }
+          else
+            params[-1][key.to_sym] = value % info
+          end
+        else
+          params[-1][key.to_sym] = value
+        end
       end
     end
 

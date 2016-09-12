@@ -78,7 +78,7 @@ module RubyAem
 
     # Add another group as a member of this group.
     #
-    # @param member the member group to be added
+    # @param member the name of the member group to be added
     # @return RubyAem::Result
     def add_member(member)
       result = find_authorizable_id

@@ -20,6 +20,7 @@ require 'ruby_aem/handlers/json'
 require 'ruby_aem/handlers/simple'
 require 'ruby_aem/handlers/xml'
 require 'ruby_aem/swagger'
+require 'swagger_aem'
 
 module RubyAem
   # Client class makes Swagger AEM API calls and handles the response as

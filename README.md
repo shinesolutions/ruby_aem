@@ -30,6 +30,7 @@ Initialise client:
       :host => 'localhost',
       :port => 4502,
       :debug => false
+    })
 
 Bundle:
 

@@ -1,10 +1,10 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/flush_agent'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/flush_agent'
 
 describe 'FlushAgent' do
   before do
     @mock_client = double('mock_client')
-    @flush_agent = RubyAem::FlushAgent.new(@mock_client, 'author', 'some-flush-agent')
+    @flush_agent = RubyAem::Resources::FlushAgent.new(@mock_client, 'author', 'some-flush-agent')
   end
 
   after do
@@ -14,7 +14,7 @@ describe 'FlushAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::FlushAgent,
+        RubyAem::Resources::FlushAgent,
         'create_update',
         { :run_mode => 'author',
           :name => 'some-flush-agent',
@@ -30,7 +30,7 @@ describe 'FlushAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::FlushAgent,
+        RubyAem::Resources::FlushAgent,
         'delete',
         { :run_mode => 'author',
           :name => 'some-flush-agent' })
@@ -43,7 +43,7 @@ describe 'FlushAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::FlushAgent,
+        RubyAem::Resources::FlushAgent,
         'exists',
         { :run_mode => 'author',
           :name => 'some-flush-agent' })

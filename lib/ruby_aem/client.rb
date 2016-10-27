@@ -47,8 +47,9 @@ module RubyAem
     # @return RubyAem::Result
     def call(clazz, action, info)
 
-      component = clazz.name.downcase.sub('rubyaem::', '')
-      action_spec = @spec[component]['actions'][action]
+      resource_name = clazz.name.downcase.sub('rubyaem::resources::', '')
+      resource = @spec[resource_name]
+      action_spec = resource['actions'][action]
 
       api = @apis[action_spec['api'].to_sym]
       operation = action_spec['operation']
@@ -64,7 +65,7 @@ module RubyAem
         add_optional_param(key, value, params, info)
       }
 
-      base_responses = @spec[component]['responses'] || {}
+      base_responses = resource['responses'] || {}
       action_responses = action_spec['responses'] || {}
       responses = base_responses.merge(action_responses)
 

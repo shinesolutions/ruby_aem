@@ -14,17 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 =end
 
-require 'ruby_aem/bundle'
 require 'ruby_aem/client'
-require 'ruby_aem/config_property'
-require 'ruby_aem/flush_agent'
-require 'ruby_aem/group'
-require 'ruby_aem/node'
-require 'ruby_aem/package'
-require 'ruby_aem/path'
-require 'ruby_aem/replication_agent'
-require 'ruby_aem/repository'
-require 'ruby_aem/user'
+require 'ruby_aem/resources/bundle'
+require 'ruby_aem/resources/config_property'
+require 'ruby_aem/resources/flush_agent'
+require 'ruby_aem/resources/group'
+require 'ruby_aem/resources/node'
+require 'ruby_aem/resources/package'
+require 'ruby_aem/resources/path'
+require 'ruby_aem/resources/replication_agent'
+require 'ruby_aem/resources/repository'
+require 'ruby_aem/resources/user'
 require 'swagger_aem'
 require 'yaml'
 
@@ -74,17 +74,17 @@ module RubyAem
     # Create a bundle instance.
     #
     # @param name the bundle's name, e.g. com.adobe.cq.social.cq-social-forum
-    # @return new RubyAem::Bundle instance
+    # @return new RubyAem::Resources::Bundle instance
     def bundle(name)
-      RubyAem::Bundle.new(@client, name)
+      RubyAem::Resources::Bundle.new(@client, name)
     end
 
     # Create a path instance.
     #
     # @param name the name of the path, e.g. /etc/designs
-    # @return new RubyAem::Path instance
+    # @return new RubyAem::Resources::Path instance
     def path(name)
-      RubyAem::Path.new(@client, name)
+      RubyAem::Resources::Path.new(@client, name)
     end
 
     # Create a config property instance.
@@ -92,36 +92,36 @@ module RubyAem
     # @param name the property's name
     # @param type the property's type, e.g. Boolean
     # @param value the property's value, e.g. true
-    # @return new RubyAem::ConfigProperty instance
+    # @return new RubyAem::Resources::ConfigProperty instance
     def config_property(name, type, value)
-      RubyAem::ConfigProperty.new(@client, name, type, value)
+      RubyAem::Resources::ConfigProperty.new(@client, name, type, value)
     end
 
     # Create a flush agent instance.
     #
     # @param run_mode AEM run mode: author or publish
     # @param name the flush agent's name, e.g. some-flush-agent
-    # @return new RubyAem::FlushAgent instance
+    # @return new RubyAem::Resources::FlushAgent instance
     def flush_agent(name, run_mode)
-      RubyAem::FlushAgent.new(@client, name, run_mode)
+      RubyAem::Resources::FlushAgent.new(@client, name, run_mode)
     end
 
     # Create a group instance.
     #
     # @param path the path to group node, e.g. /home/groups/s/
     # @param name the name of the AEM group, e.g. somegroup
-    # @return new RubyAem::Group instance
+    # @return new RubyAem::Resources::Group instance
     def group(path, name)
-      RubyAem::Group.new(@client, path, name)
+      RubyAem::Resources::Group.new(@client, path, name)
     end
 
     # Create a node instance.
     #
     # @param path the path to the node, e.g. /apps/system/
     # @param name the node name, e.g. somenode
-    # @return new RubyAem::Node instance
+    # @return new RubyAem::Resources::Node instance
     def node(path, name)
-      RubyAem::Node.new(@client, path, name)
+      RubyAem::Resources::Node.new(@client, path, name)
     end
 
     # Create a package instance.
@@ -129,34 +129,34 @@ module RubyAem
     # @param group_name the group name of the package, e.g. somepackagegroup
     # @param package_name the name of the package, e.g. somepackage
     # @param package_version the version of the package, e.g. 1.2.3
-    # @return new RubyAem::Package instance
+    # @return new RubyAem::Resources::Package instance
     def package(group_name, package_name, package_version)
-      RubyAem::Package.new(@client, group_name, package_name, package_version)
+      RubyAem::Resources::Package.new(@client, group_name, package_name, package_version)
     end
 
     # Create a replication agent instance.
     #
     # @param run_mode AEM run mode: author or publish
     # @param name the replication agent's name, e.g. some-replication-agent
-    # @return new RubyAem::ReplicationAgent instance
+    # @return new RubyAem::Resources::ReplicationAgent instance
     def replication_agent(name, run_mode)
-      RubyAem::ReplicationAgent.new(@client, name, run_mode)
+      RubyAem::Resources::ReplicationAgent.new(@client, name, run_mode)
     end
 
     # Create a repository instance.
     #
-    # @return new RubyAem::Repository instance
+    # @return new RubyAem::Resources::Repository instance
     def repository
-      RubyAem::Repository.new(@client)
+      RubyAem::Resources::Repository.new(@client)
     end
 
     # Create a user instance.
     #
     # @param path the path to user node, e.g. /home/users/s/
     # @param name the username of the AEM user, e.g. someuser, admin, johncitizen
-    # @return new RubyAem::User instance
+    # @return new RubyAem::Resources::User instance
     def user(path, name)
-      RubyAem::User.new(@client, path, name)
+      RubyAem::Resources::User.new(@client, path, name)
     end
 
   end

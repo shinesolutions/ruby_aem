@@ -1,11 +1,11 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/group'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/group'
 
 describe 'Group' do
   before do
     @mock_client = double('mock_client')
     @mock_result = double('mock_result')
-    @group = RubyAem::Group.new(@mock_client, '/home/groups/s/', 'somegroup')
+    @group = RubyAem::Resources::Group.new(@mock_client, '/home/groups/s/', 'somegroup')
   end
 
   after do
@@ -15,7 +15,7 @@ describe 'Group' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'create',
         { :path => '/home/groups/s/', :name => 'somegroup' })
       @group.create
@@ -23,10 +23,10 @@ describe 'Group' do
 
     it 'should ensure that path has a leading slash' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'create',
         { :path => '/home/groups/s/', :name => 'somegroup' })
-      group = RubyAem::Group.new(@mock_client, 'home/groups/s/', 'somegroup')
+      group = RubyAem::Resources::Group.new(@mock_client, 'home/groups/s/', 'somegroup')
       group.create
     end
 
@@ -37,12 +37,12 @@ describe 'Group' do
     it 'should call client with expected parameters' do
       expect(@mock_result).to receive(:data).and_return('someauthorizableid')
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'delete',
         { :path => 'home/groups/s', :name => 'somegroup' })
       @group.delete
@@ -51,7 +51,7 @@ describe 'Group' do
     it 'should return result when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
@@ -64,7 +64,7 @@ describe 'Group' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'exists',
         { :path => 'home/groups/s', :name => 'somegroup' })
       @group.exists
@@ -76,7 +76,7 @@ describe 'Group' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'set_permission',
         { :path => '/home/groups/s/',
           :name => 'somegroup',
@@ -92,12 +92,12 @@ describe 'Group' do
     it 'should call client with expected parameters' do
       expect(@mock_result).to receive(:data).and_return('someauthorizableid')
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'add_member',
         { :path => '/home/groups/s/', :name => 'somegroup', :member => 'somemembergroup' })
       @group.add_member('somemembergroup')
@@ -106,7 +106,7 @@ describe 'Group' do
     it 'should return result when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
@@ -119,7 +119,7 @@ describe 'Group' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' })

@@ -1,11 +1,11 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/user'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/user'
 
 describe 'User' do
   before do
     @mock_client = double('mock_client')
     @mock_result = double('mock_result')
-    @user = RubyAem::User.new(@mock_client, '/home/users/s/', 'someuser')
+    @user = RubyAem::Resources::User.new(@mock_client, '/home/users/s/', 'someuser')
   end
 
   after do
@@ -15,7 +15,7 @@ describe 'User' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'create',
         { :path => '/home/users/s/',
           :name => 'someuser',
@@ -25,12 +25,12 @@ describe 'User' do
 
     it 'should ensure that path has a leading slash' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'create',
         { :path => '/home/users/s/',
           :name => 'someuser',
           :password => 'somepassword' })
-      user = RubyAem::User.new(@mock_client, 'home/users/s/', 'someuser')
+      user = RubyAem::Resources::User.new(@mock_client, 'home/users/s/', 'someuser')
       user.create('somepassword')
     end
 
@@ -41,12 +41,12 @@ describe 'User' do
     it 'should call client with expected parameters' do
       expect(@mock_result).to receive(:data).and_return('someauthorizableid')
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'find_authorizable_id',
         { :path => '/home/users/s/',
           :name => 'someuser' }).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'delete',
         { :path => 'home/users/s', :name => 'someuser' })
       @user.delete
@@ -55,7 +55,7 @@ describe 'User' do
     it 'should return result when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'find_authorizable_id',
         { :path => '/home/users/s/',
           :name => 'someuser' }).and_return(@mock_result)
@@ -68,7 +68,7 @@ describe 'User' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'exists',
         { :path => 'home/users/s', :name => 'someuser' })
       @user.exists
@@ -80,7 +80,7 @@ describe 'User' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'set_permission',
         { :path => '/home/users/s/',
           :name => 'someuser',
@@ -96,12 +96,12 @@ describe 'User' do
     it 'should call client with expected parameters' do
       expect(@mock_result).to receive(:data).and_return('someauthorizableid')
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Group,
+        RubyAem::Resources::Group,
         'add_member',
         { :path => '/home/groups/s/', :name => 'somegroup', :member => 'someuser' })
       @user.add_to_group('/home/groups/s/', 'somegroup')
@@ -113,7 +113,7 @@ describe 'User' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'change_password',
         { :path => '/home/users/s/',
           :name => 'someuser',
@@ -128,7 +128,7 @@ describe 'User' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::User,
+        RubyAem::Resources::User,
         'find_authorizable_id',
         { :path => '/home/users/s/',
           :name => 'someuser' })

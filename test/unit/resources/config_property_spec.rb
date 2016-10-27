@@ -1,5 +1,5 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/config_property'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/config_property'
 
 describe 'ConfigProperty' do
   before do
@@ -13,7 +13,7 @@ describe 'ConfigProperty' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::ConfigProperty,
+        RubyAem::Resources::ConfigProperty,
         'create',
         { :name => 'someproperty',
           :type => 'Boolean',
@@ -21,7 +21,7 @@ describe 'ConfigProperty' do
           :run_mode => 'author',
           :someproperty => 'true',
           :someproperty_type_hint => 'Boolean' })
-      config_property = RubyAem::ConfigProperty.new(@mock_client, 'someproperty', 'Boolean', 'true')
+      config_property = RubyAem::Resources::ConfigProperty.new(@mock_client, 'someproperty', 'Boolean', 'true')
       config_property.create('author')
     end
 

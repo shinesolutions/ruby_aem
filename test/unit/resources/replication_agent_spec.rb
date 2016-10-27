@@ -1,10 +1,10 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/replication_agent'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/replication_agent'
 
 describe 'ReplicationAgent' do
   before do
     @mock_client = double('mock_client')
-    @replication_agent = RubyAem::ReplicationAgent.new(@mock_client, 'author', 'some-replication-agent')
+    @replication_agent = RubyAem::Resources::ReplicationAgent.new(@mock_client, 'author', 'some-replication-agent')
   end
 
   after do
@@ -14,7 +14,7 @@ describe 'ReplicationAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::ReplicationAgent,
+        RubyAem::Resources::ReplicationAgent,
         'create_update',
         { :run_mode => 'author',
           :name => 'some-replication-agent',
@@ -30,7 +30,7 @@ describe 'ReplicationAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::ReplicationAgent,
+        RubyAem::Resources::ReplicationAgent,
         'delete',
         { :run_mode => 'author',
           :name => 'some-replication-agent' })
@@ -43,7 +43,7 @@ describe 'ReplicationAgent' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::ReplicationAgent,
+        RubyAem::Resources::ReplicationAgent,
         'exists',
         { :run_mode => 'author',
           :name => 'some-replication-agent' })

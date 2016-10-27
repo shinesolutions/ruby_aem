@@ -35,7 +35,7 @@ describe 'Client' do
 
     it 'should call api send and handle the response' do
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with('somebundle', 'start', {})
@@ -49,7 +49,7 @@ describe 'Client' do
       mock_error = SwaggerAemClient::ApiError.new()
 
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with('somebundle', 'start', {}).and_raise(mock_error)
@@ -82,7 +82,7 @@ describe 'Client' do
       }
 
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' })
@@ -118,7 +118,7 @@ describe 'Client' do
       }
 
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => true, :optional2 => false })
@@ -154,7 +154,7 @@ describe 'Client' do
       }
 
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' })
@@ -192,7 +192,7 @@ describe 'Client' do
       expect(File).to receive(:open).once().with('/tmp/somepackage-1.2.3.zip', 'r').and_yield(mock_file)
 
       mock_class = double('mock_class')
-      expect(mock_class).to receive(:name).once().and_return('RubyAem::Bundle')
+      expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => mock_file })

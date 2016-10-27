@@ -1,10 +1,10 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/path'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/path'
 
 describe 'Path' do
   before do
     @mock_client = double('mock_client')
-    @path = RubyAem::Path.new(@mock_client, '/etc/designs/cloudservices')
+    @path = RubyAem::Resources::Path.new(@mock_client, '/etc/designs/cloudservices')
   end
 
   after do
@@ -14,7 +14,7 @@ describe 'Path' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Path,
+        RubyAem::Resources::Path,
         'activate',
         { :name => '/etc/designs/cloudservices',
           :ignoredeactivated => true,

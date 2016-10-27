@@ -1,11 +1,11 @@
-require_relative 'spec_helper'
-require_relative '../../lib/ruby_aem/package'
+require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/resources/package'
 require 'nokogiri'
 
 describe 'Package' do
   before do
     @mock_client = double('mock_client')
-    @package = RubyAem::Package.new(@mock_client, 'somepackagegroup', 'somepackage', '1.2.3')
+    @package = RubyAem::Resources::Package.new(@mock_client, 'somepackagegroup', 'somepackage', '1.2.3')
   end
 
   after do
@@ -15,7 +15,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'create',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -29,7 +29,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'update',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -44,7 +44,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'delete',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -58,7 +58,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'install',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -72,7 +72,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'replicate',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -86,7 +86,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'build',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -100,7 +100,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'download',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -115,7 +115,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'upload',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -131,7 +131,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'get_filter',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -151,19 +151,19 @@ describe 'Package' do
 
       expect(mock_result_get_filter).to receive(:data).and_return(['/some/path/1', '/some/path/2'])
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'get_filter',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
           :package_version => '1.2.3' }).and_return(mock_result_get_filter)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Path,
+        RubyAem::Resources::Path,
         'activate',
         { :name => '/some/path/1',
           :ignoredeactivated => true,
           :onlymodified => false }).and_return(mock_result_activate_1)
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Path,
+        RubyAem::Resources::Path,
         'activate',
         { :name => '/some/path/2',
           :ignoredeactivated => true,
@@ -178,7 +178,7 @@ describe 'Package' do
 
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -205,7 +205,7 @@ describe 'Package' do
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -224,7 +224,7 @@ describe 'Package' do
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -255,7 +255,7 @@ describe 'Package' do
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
@@ -282,7 +282,7 @@ describe 'Package' do
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
-        RubyAem::Package,
+        RubyAem::Resources::Package,
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',

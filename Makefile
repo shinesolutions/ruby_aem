@@ -33,4 +33,4 @@ publish:
 tools:
 	npm install -g gh-pages
 
-.PHONY: all ci deps clean build install test test-integration doc doc-publish tools
+.PHONY: all ci deps clean build install test test-integration doc doc-publish publish tools

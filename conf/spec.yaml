@@ -426,17 +426,17 @@ replicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-        jcrprimary_type: cq:Page
-        jcrcontentcqname: '%{name}'
-        jcrcontentjcrtitle: '%{title}'
-        jcrcontentjcrdescription: '%{description}'
-        jcrcontentslingresource_type: /libs/cq/replication/components/agent
-        jcrcontentserialization_type: durbo
-        jcrcontenttransport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
-        jcrcontentlog_level: error
-        jcrcontentretry_delay: 30000
-        jcrcontentcqtemplate: /libs/cq/replication/templates/agent
-        jcrcontentenabled: true
+          jcrprimary_type: cq:Page
+          jcrcontentcqname: '%{name}'
+          jcrcontentjcrtitle: '%{title}'
+          jcrcontentjcrdescription: '%{description}'
+          jcrcontentslingresource_type: /libs/cq/replication/components/agent
+          jcrcontentserialization_type: durbo
+          jcrcontenttransport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+          jcrcontentlog_level: error
+          jcrcontentretry_delay: 30000
+          jcrcontentcqtemplate: /libs/cq/replication/templates/agent
+          jcrcontentenabled: true
       responses:
         200:
           status: success

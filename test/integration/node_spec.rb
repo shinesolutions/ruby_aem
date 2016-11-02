@@ -23,16 +23,18 @@ describe 'Node' do
       expect(result.message).to eq('Node apps/system/somefolder created')
     end
 
-    it 'should fail when node already exists' do
+    it 'should raise error when node already exists' do
 
       result = @node.create('sling:Folder')
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Node apps/system/somefolder created')
 
       # create the same node the second time
-      result = @node.create('sling:Folder')
-      expect(result.is_failure?).to be(true)
-      expect(result.message).to match(/^Unexpected response/)
+      begin
+        @node.create('sling:Folder')
+      rescue RubyAem::Error => err
+        expect(err.message).to match(/^Unexpected response/)
+      end
     end
 
     it 'should succeed existence check when node already exists' do

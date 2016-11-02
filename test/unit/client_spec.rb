@@ -1,5 +1,6 @@
 require_relative 'spec_helper'
 require_relative '../../lib/ruby_aem/client'
+require_relative '../../lib/ruby_aem/error'
 
 describe 'Client' do
   before do
@@ -16,7 +17,7 @@ describe 'Client' do
               }
             },
             'responses' => {
-              '200' => {
+              200 => {
                 'status' => 'success',
                 'handler' => 'simple',
                 'message' => 'Bundle %{name} started'
@@ -38,7 +39,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once().with('somebundle', 'start', {})
+      expect(mock_api).to receive(:post_bundle_with_http_info).once().with('somebundle', 'start', {}).and_return(['some data', 200, {}])
       apis = { :console => mock_api }
 
       client = RubyAem::Client.new(apis, @spec)
@@ -46,7 +47,7 @@ describe 'Client' do
     end
 
     it 'should handle api error' do
-      mock_error = SwaggerAemClient::ApiError.new()
+      mock_error = SwaggerAemClient::ApiError.new(:code => 200, :response_headers => {}, :response_body => 'some data')
 
       mock_class = double('mock_class')
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
@@ -70,7 +71,7 @@ describe 'Client' do
                 'optional' => ['optional1', 'optional2']
               },
               'responses' => {
-                '200' => {
+                200 => {
                   'status' => 'success',
                   'handler' => 'simple',
                   'message' => 'Bundle %{name} started'
@@ -85,7 +86,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' })
+      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' }).and_return(['some data', 200, {}])
       apis = { :console => mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -106,7 +107,7 @@ describe 'Client' do
                 }
               },
               'responses' => {
-                '200' => {
+                200 => {
                   'status' => 'success',
                   'handler' => 'simple',
                   'message' => 'Bundle %{name} started'
@@ -121,7 +122,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => true, :optional2 => false })
+      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => true, :optional2 => false }).and_return(['some data', 200, {}])
       apis = { :console => mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -142,7 +143,7 @@ describe 'Client' do
                 }
               },
               'responses' => {
-                '200' => {
+                200 => {
                   'status' => 'success',
                   'handler' => 'simple',
                   'message' => 'Bundle %{name} started'
@@ -157,7 +158,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' })
+      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => 'value1', :optional2 => 'value2' }).and_return(['some data', 200, {}])
       apis = { :console => mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -177,7 +178,7 @@ describe 'Client' do
                 }
               },
               'responses' => {
-                '200' => {
+                200 => {
                   'status' => 'success',
                   'handler' => 'simple',
                   'message' => 'Bundle %{name} started'
@@ -195,7 +196,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once().and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => mock_file })
+      expect(mock_api).to receive(:post_bundle_with_http_info).once().with({ :optional1 => mock_file }).and_return(['some data', 200, {}])
       apis = { :console => mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -206,7 +207,7 @@ describe 'Client' do
 
   describe 'test handle' do
 
-    it 'should return failure result when responses does not contain status code' do
+    it 'should raise error when responses does not contain status code' do
       data = 'somepayload'
       status_code = 404
       headers = nil
@@ -214,9 +215,12 @@ describe 'Client' do
       info = { :name => 'somebundle' }
 
       client = RubyAem::Client.new(nil, nil)
-      result = client.handle(data, status_code, headers, responses, info)
-      expect(result.is_failure?).to be(true)
-      expect(result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \ndata: somepayload")
+      begin
+        client.handle(data, status_code, headers, responses, info)
+      rescue RubyAem::Error => err
+        expect(err.result.is_failure?).to be(true)
+        expect(err.result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \ndata: somepayload")
+      end
     end
 
     it 'should call handler when responses contain status code' do

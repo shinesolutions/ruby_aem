@@ -16,7 +16,7 @@ limitations under the License.
 
 module RubyAem
 
-  class Exception < StandardError
+  class Error < StandardError
     attr_accessor :result
 
     def initialize(message, result)

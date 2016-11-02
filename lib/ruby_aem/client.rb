@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 =end
 
+require 'ruby_aem/error'
 require 'ruby_aem/handlers/file'
 require 'ruby_aem/handlers/html'
 require 'ruby_aem/handlers/json'
@@ -118,13 +119,16 @@ module RubyAem
     # @param responses a list of response specifications as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
+    # @raise RubyAem::Exception when the response status code is unexpected
     def handle(data, status_code, headers, responses, info)
       if responses.key?(status_code)
         response_spec = responses[status_code]
         handler = response_spec['handler']
         result = Handlers.send(handler, data, status_code, headers, response_spec, info)
       else
-        result = Result.new('failure', "Unexpected response\nstatus code: #{status_code}\nheaders: #{headers}\ndata: #{data}")
+        message = "Unexpected response\nstatus code: #{status_code}\nheaders: #{headers}\ndata: #{data}"
+        result = Result.new('failure', message)
+        raise RubyAem::Error.new(message, result)
       end
     end
 

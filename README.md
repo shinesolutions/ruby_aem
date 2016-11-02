@@ -199,6 +199,19 @@ Each of the above method calls returns a [RubyAem::Result](https://github.com/sh
       exit
     end
 
+Error handling
+--------------
+
+Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html) .
+
+    begin
+      bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+      result = bundle.stop()
+    rescue RubyAem::Error => err
+      puts err.message
+      puts err.result
+    end
+
 Reports
 -------
 

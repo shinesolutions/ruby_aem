@@ -12,9 +12,11 @@ describe 'ConfigProperty' do
 
     it 'should fail when path node does not exist' do
       config_property = @aem.config_property('someinexistingnode', 'Boolean', true)
-      result = config_property.create('author')
-      expect(result.is_failure?).to be(true)
-      expect(result.message).to match(/^Unexpected response/)
+      begin
+        config_property.create('author')
+      rescue RubyAem::Error => err
+        expect(err.message).to match(/^Unexpected response/)
+      end
     end
 
   end

@@ -23,13 +23,11 @@ module RubyAem
     # Simple handler by returning result that contains status and message as
     # configured in conf/spec.yaml AS-IS.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.simple(data, status_code, headers, response_spec, info)
+    def Handlers.simple(response, response_spec, info)
 
       status = response_spec['status']
       message = response_spec['message'] % info

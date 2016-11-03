@@ -24,7 +24,8 @@ describe 'HTML Handler' do
       response_spec = { 'status' => 'success', 'message' => 'Group %{name} created at %{path}/%{authorizable_id}' }
       info = { :name => 'somegroup', :path => '/home/groups/s' }
 
-      result = RubyAem::Handlers.html_authorizable_id(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.html_authorizable_id(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Group somegroup created at /home/groups/s/GDKHvEk6jG4lRaPUsAty')
     end

@@ -23,15 +23,13 @@ module RubyAem
     # Parse authorizable ID from response body data.
     # This is used to get the authorizable ID of a newly created user/group.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.html_authorizable_id(data, status_code, headers, response_spec, info)
+    def Handlers.html_authorizable_id(response, response_spec, info)
 
-      html = Nokogiri::HTML(data)
+      html = Nokogiri::HTML(response.body)
       authorizable_id = html.xpath('//title/text()').to_s
       authorizable_id.slice! "Content created #{info[:path]}"
       info[:authorizable_id] = authorizable_id.sub(/^\//, '')

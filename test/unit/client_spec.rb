@@ -211,15 +211,16 @@ describe 'Client' do
       data = 'somepayload'
       status_code = 404
       headers = nil
-      responses = { 200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }}
+      response = RubyAem::Response.new(status_code, data, headers)
+      responses_spec = { 200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }}
       info = { :name => 'somebundle' }
 
       client = RubyAem::Client.new(nil, nil)
       begin
-        client.handle(data, status_code, headers, responses, info)
+        client.handle(response, responses_spec, info)
       rescue RubyAem::Error => err
         expect(err.result.is_failure?).to be(true)
-        expect(err.result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \ndata: somepayload")
+        expect(err.result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \nbody: somepayload")
       end
     end
 
@@ -227,13 +228,14 @@ describe 'Client' do
       data = 'somepayload'
       status_code = 200
       headers = nil
-      responses = { 200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }}
+      response = RubyAem::Response.new(status_code, data, headers)
+      responses_spec = { 200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }}
       info = { :name => 'somebundle' }
 
-      expect(RubyAem::Handlers).to receive(:send).once().with(nil, 'somepayload', 200, nil, { 'status' => 'success', 'message' => 'Bundle %{name} started' }, { :name => 'somebundle' })
+      expect(RubyAem::Handlers).to receive(:send).once().with(nil, response, { 'status' => 'success', 'message' => 'Bundle %{name} started' }, { :name => 'somebundle' })
 
       client = RubyAem::Client.new(nil, nil)
-      client.handle(data, status_code, headers, responses, info)
+      client.handle(response, responses_spec, info)
     end
 
   end

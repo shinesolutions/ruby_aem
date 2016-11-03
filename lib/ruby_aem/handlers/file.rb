@@ -22,16 +22,14 @@ module RubyAem
     # The downloaded file in temporary location will then be deleted.
     # data, status_code, and headers are all returned from RubyAem::Client call.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.file_download(data, status_code, headers, response_spec, info)
+    def Handlers.file_download(response, response_spec, info)
 
-      FileUtils.cp(data.path, "#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip")
-      data.delete
+      FileUtils.cp(response.body.path, "#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip")
+      response.body.delete
 
       message = response_spec['message'] % info
 

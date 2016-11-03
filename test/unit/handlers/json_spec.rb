@@ -17,7 +17,8 @@ describe 'JSON Handler' do
       response_spec = { 'status' => 'success', 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
       info = { :name => 'someuser' }
 
-      result = RubyAem::Handlers.json_authorizable_id(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_authorizable_id(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Found user someuser authorizable ID cnf6J9EF5WtGm9X6CZT4')
       expect(result.data).to eq('cnf6J9EF5WtGm9X6CZT4')
@@ -30,7 +31,8 @@ describe 'JSON Handler' do
       response_spec = { 'status' => 'success', 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
       info = { :name => 'someuser' }
 
-      result = RubyAem::Handlers.json_authorizable_id(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_authorizable_id(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('User/Group someuser authorizable ID not found')
       expect(result.data).to eq(nil)
@@ -47,7 +49,8 @@ describe 'JSON Handler' do
       response_spec = nil
       info = {}
 
-      result = RubyAem::Handlers.json_package_service(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_package_service(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package built')
     end
@@ -78,7 +81,8 @@ describe 'JSON Handler' do
       response_spec = { 'status' => 'success', 'message' => 'Filter retrieved successfully' }
       info = {}
 
-      result = RubyAem::Handlers.json_package_filter(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_package_filter(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Filter retrieved successfully')
       expect(result.data.length).to eq(2)

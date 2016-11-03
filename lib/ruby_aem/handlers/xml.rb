@@ -22,15 +22,13 @@ module RubyAem
 
     # Handle package list XML by removing non-packages data.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.xml_package_list(data, status_code, headers, response_spec, info)
+    def Handlers.xml_package_list(response, response_spec, info)
 
-      xml = Nokogiri::XML(data)
+      xml = Nokogiri::XML(response.body)
 
       status_code = xml.xpath('//crx/response/status/@code').to_s
       status_text = xml.xpath('//crx/response/status/text()').to_s

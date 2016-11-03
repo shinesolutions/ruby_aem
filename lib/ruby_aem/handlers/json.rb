@@ -22,15 +22,13 @@ module RubyAem
 
     # Handle JSON response payload containing authorizable ID.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.json_authorizable_id(data, status_code, headers, response_spec, info)
+    def Handlers.json_authorizable_id(response, response_spec, info)
 
-      json = JSON.parse(data)
+      json = JSON.parse(response.body)
       authorizable_id = nil
       if json['success'] == true && json['hits'].length == 1
         authorizable_id = json['hits'][0]['name']
@@ -49,15 +47,13 @@ module RubyAem
 
     # Handle package JSON payload. Result status is determined directly by success field.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.json_package_service(data, status_code, headers, response_spec, info)
+    def Handlers.json_package_service(response, response_spec, info)
 
-      json = JSON.parse(data)
+      json = JSON.parse(response.body)
 
       status = json['success'] == true ? 'success' : 'failure'
       message = json['msg']
@@ -67,15 +63,13 @@ module RubyAem
 
     # Handle package filter JSON payload.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
+    # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    def Handlers.json_package_filter(data, status_code, headers, response_spec, info)
+    def Handlers.json_package_filter(response, response_spec, info)
 
-      json = JSON.parse(data)
+      json = JSON.parse(response.body)
 
       filter = []
       json.each do |key, value|

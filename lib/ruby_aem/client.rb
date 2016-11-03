@@ -20,6 +20,7 @@ require 'ruby_aem/handlers/html'
 require 'ruby_aem/handlers/json'
 require 'ruby_aem/handlers/simple'
 require 'ruby_aem/handlers/xml'
+require 'ruby_aem/response'
 require 'ruby_aem/swagger'
 require 'swagger_aem'
 
@@ -66,17 +67,18 @@ module RubyAem
         add_optional_param(key, value, params, info)
       }
 
-      base_responses = resource['responses'] || {}
-      action_responses = action_spec['responses'] || {}
-      responses = base_responses.merge(action_responses)
+      base_responses_spec = resource['responses'] || {}
+      action_responses_spec = action_spec['responses'] || {}
+      responses_spec = base_responses_spec.merge(action_responses_spec)
 
       begin
         method = RubyAem::Swagger.operation_to_method(operation)
         data, status_code, headers = api.send("#{method}_with_http_info", *params)
-        handle(data, status_code, headers, responses, info)
+        response = RubyAem::Response.new(status_code, data, headers)
       rescue SwaggerAemClient::ApiError => err
-        handle(err.response_body, err.code, err.response_headers, responses, info)
+        response = RubyAem::Response.new(err.code, err.response_body, err.response_headers)
       end
+      handle(response, responses_spec, info)
     end
 
     # Add optional param into params list.
@@ -113,20 +115,18 @@ module RubyAem
     # If none of the response specifications contains the status code, a failure result
     # will then be returned.
     #
-    # @param data data payload
-    # @param status_code response HTTP status code
-    # @param headers response HTTP headers
-    # @param responses a list of response specifications as configured in conf/spec.yaml
+    # @param RubyAem::Response response containing HTTP status code, body, and headers
+    # @param responses_spec a list of response specifications as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result
-    # @raise RubyAem::Exception when the response status code is unexpected
-    def handle(data, status_code, headers, responses, info)
-      if responses.key?(status_code)
-        response_spec = responses[status_code]
+    # @raise RubyAem::Error when the response status code is unexpected
+    def handle(response, responses_spec, info)
+      if responses_spec.key?(response.status_code)
+        response_spec = responses_spec[response.status_code]
         handler = response_spec['handler']
-        result = Handlers.send(handler, data, status_code, headers, response_spec, info)
+        result = Handlers.send(handler, response, response_spec, info)
       else
-        message = "Unexpected response\nstatus code: #{status_code}\nheaders: #{headers}\ndata: #{data}"
+        message = "Unexpected response\nstatus code: #{response.status_code}\nheaders: #{response.headers}\nbody: #{response.body}"
         result = Result.new('failure', message)
         raise RubyAem::Error.new(message, result)
       end

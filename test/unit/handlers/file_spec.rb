@@ -28,7 +28,8 @@ describe 'File Handler' do
         :file_path => '/tmp'
       }
 
-      result = RubyAem::Handlers.file_download(data, status_code, headers, response_spec, info)
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.file_download(response, response_spec, info)
       expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package downloaded to /tmp/somepackage-1.2.3.zip')
     end

@@ -44,8 +44,8 @@ describe 'XML Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.xml_package_list(response, response_spec, info)
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package list retrieved successfully')
+      expect(result.response).to eq(response)
     end
 
     it 'should return success result when data payload does not contain 200 ok element' do
@@ -65,8 +65,8 @@ describe 'XML Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.xml_package_list(response, response_spec, info)
-      expect(result.is_failure?).to be(true)
       expect(result.message).to eq('Unable to retrieve package list, getting status code 500 and status text error')
+      expect(result.response).to be(response)
     end
 
   end

@@ -35,10 +35,10 @@ module RubyAem
 
       if status_code == '200' && status_text == 'ok'
         message = response_spec['message'] % info
-        result = RubyAem::Result.new('success', message)
+        result = RubyAem::Result.new(message, response)
         result.data = xml.xpath('//crx/response/data/packages')
       else
-        result = RubyAem::Result.new('failure', "Unable to retrieve package list, getting status code #{status_code} and status text #{status_text}")
+        result = RubyAem::Result.new("Unable to retrieve package list, getting status code #{status_code} and status text #{status_text}", response)
       end
 
       result

@@ -13,7 +13,6 @@ describe 'Repository' do
     it 'should succeed' do
       repository = @aem.repository()
       result = repository.block_writes
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Repository writes blocked')
     end
 
@@ -24,7 +23,6 @@ describe 'Repository' do
     it 'should succeed' do
       repository = @aem.repository()
       result = repository.unblock_writes
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Repository writes unblocked')
     end
 

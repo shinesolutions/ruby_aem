@@ -33,7 +33,7 @@ module RubyAem
 
       message = response_spec['message'] % info
 
-      RubyAem::Result.new('success', message)
+      RubyAem::Result.new(message, response)
     end
 
   end

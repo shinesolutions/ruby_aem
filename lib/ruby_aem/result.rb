@@ -28,38 +28,17 @@ module RubyAem
   class Result
 
     attr_reader :message
+    attr_reader :response
     attr_accessor :data
 
     # Initialise a result.
     #
-    # @param status the result status: success, warning, or failure
-    # @param message the result message
+    # @param message result message
+    # @param response HTTP response
     # @return new RubyAem::Result instance
-    def initialize(status, message)
-      @status = status
+    def initialize(message, response)
       @message = message
-    end
-
-    # Check whether the client call was successful.
-    #
-    # @return true when the status is success
-    def is_success?
-      return @status == 'success'
-    end
-
-    # Check whether the client call was completed
-    # with warnings.
-    #
-    # @return true when the status is warning
-    def is_warning?
-      return @status == 'warning'
-    end
-
-    # Check whether the client call failed.
-    #
-    # @return true when the status is failure
-    def is_failure?
-      return @status == 'failure'
+      @response = response
     end
 
   end

@@ -19,8 +19,8 @@ describe 'JSON Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_authorizable_id(response, response_spec, info)
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Found user someuser authorizable ID cnf6J9EF5WtGm9X6CZT4')
+      expect(result.response).to be(response)
       expect(result.data).to eq('cnf6J9EF5WtGm9X6CZT4')
     end
 
@@ -33,8 +33,8 @@ describe 'JSON Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_authorizable_id(response, response_spec, info)
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('User/Group someuser authorizable ID not found')
+      expect(result.response).to be(response)
       expect(result.data).to eq(nil)
     end
 
@@ -51,8 +51,8 @@ describe 'JSON Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_package_service(response, response_spec, info)
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package built')
+      expect(result.response).to eq(response)
     end
 
   end
@@ -83,8 +83,8 @@ describe 'JSON Handler' do
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_package_filter(response, response_spec, info)
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Filter retrieved successfully')
+      expect(result.response).to eq(response)
       expect(result.data.length).to eq(2)
       expect(result.data[0]).to eq('/apps/geometrixx')
       expect(result.data[1]).to eq('/apps/geometrixx-common')

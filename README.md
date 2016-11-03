@@ -192,12 +192,15 @@ User:
 Result
 ------
 
-Each of the above method calls returns a [RubyAem::Result](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/result.rb), which contains a status and a message. For example:
+Each of the above method calls returns a [RubyAem::Result](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/result.rb), which contains message, [RubyAem::Response](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/response.rb), and data payload. For example:
 
-    if result.is_failure?
-      puts result.message
-      exit
-    end
+    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+    result = bundle.stop()
+    puts result.message
+    puts result.response.status_code
+    puts result.response.body
+    puts result.response.headers
+    puts result.data
 
 Error handling
 --------------

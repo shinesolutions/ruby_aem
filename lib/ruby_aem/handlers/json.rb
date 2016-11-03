@@ -40,7 +40,7 @@ module RubyAem
 
       status = response_spec['status']
 
-      result = RubyAem::Result.new(status, message)
+      result = RubyAem::Result.new(message, response)
       result.data = authorizable_id
       result
     end
@@ -58,7 +58,7 @@ module RubyAem
       status = json['success'] == true ? 'success' : 'failure'
       message = json['msg']
 
-      RubyAem::Result.new(status, message)
+      RubyAem::Result.new(message, response)
     end
 
     # Handle package filter JSON payload.
@@ -80,7 +80,7 @@ module RubyAem
 
       message = response_spec['message'] % info
 
-      result = RubyAem::Result.new('success', message)
+      result = RubyAem::Result.new(message, response)
       result.data = filter
       result
 

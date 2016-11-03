@@ -141,19 +141,18 @@ module RubyAem
       def is_uploaded()
         result = list_all()
 
-        if result.is_success?
+        begin
           packages = result.data
           package = packages.xpath("//packages/package[group=\"#{@info[:group_name]}\" and name=\"#{@info[:package_name]}\" and version=\"#{@info[:package_version]}\"]")
 
           if package.to_s != ''
-            status = 'success'
             message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is uploaded"
           else
-            status = 'failure'
             message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is not uploaded"
           end
-          result = RubyAem::Result.new(status, message)
+          result = RubyAem::Result.new(message, nil)
           result.data = package
+        rescue RubyAem::Error => err
         end
 
         result
@@ -167,18 +166,17 @@ module RubyAem
       def is_installed()
         result = is_uploaded()
 
-        if result.is_success?
+        begin
           package = result.data
           last_unpacked_by = package.xpath('lastUnpackedBy')
 
           if not ['<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
-            status = 'success'
             message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is installed"
           else
-            status = 'failure'
             message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is not installed"
           end
-          result = RubyAem::Result.new(status, message)
+          result = RubyAem::Result.new(message, nil)
+        rescue RubyAem::Error => err
         end
 
         result

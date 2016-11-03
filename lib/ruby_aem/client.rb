@@ -127,7 +127,7 @@ module RubyAem
         result = Handlers.send(handler, response, response_spec, info)
       else
         message = "Unexpected response\nstatus code: #{response.status_code}\nheaders: #{response.headers}\nbody: #{response.body}"
-        result = Result.new('failure', message)
+        result = Result.new(message, response)
         raise RubyAem::Error.new(message, result)
       end
     end

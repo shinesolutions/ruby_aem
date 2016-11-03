@@ -201,7 +201,6 @@ describe 'Package' do
         '  </package>' \
         '</packages>')
       mock_result_list_all = double('mock_result_list_all')
-      expect(mock_result_list_all).to receive(:is_success?).and_return(true)
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
@@ -211,8 +210,8 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3' }).and_return(mock_result_list_all)
       result = @package.is_uploaded
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is uploaded')
+      expect(result.response).to be(nil)
 
     end
 
@@ -220,7 +219,6 @@ describe 'Package' do
 
       mock_data_list_all = Nokogiri::XML('')
       mock_result_list_all = double('mock_result_list_all')
-      expect(mock_result_list_all).to receive(:is_success?).and_return(true)
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
@@ -230,8 +228,8 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3' }).and_return(mock_result_list_all)
       result = @package.is_uploaded
-      expect(result.is_failure?).to be(true)
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+      expect(result.response).to be(nil)
 
     end
 
@@ -251,7 +249,6 @@ describe 'Package' do
         '  </package>' \
         '</packages>')
       mock_result_list_all = double('mock_result_list_all')
-      expect(mock_result_list_all).to receive(:is_success?).and_return(true)
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
@@ -261,8 +258,8 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3' }).and_return(mock_result_list_all)
       result = @package.is_installed
-      expect(result.is_success?).to be(true)
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is installed')
+      expect(result.response).to be(nil)
 
     end
 
@@ -278,7 +275,6 @@ describe 'Package' do
         '  </package>' \
         '</packages>')
       mock_result_list_all = double('mock_result_list_all')
-      expect(mock_result_list_all).to receive(:is_success?).and_return(true)
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
       expect(@mock_client).to receive(:call).once().with(
@@ -288,8 +284,8 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3' }).and_return(mock_result_list_all)
       result = @package.is_installed
-      expect(result.is_failure?).to be(true)
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect(result.response).to be(nil)
 
     end
 

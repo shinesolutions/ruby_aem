@@ -115,7 +115,7 @@ module RubyAem
     # If none of the response specifications contains the status code, a failure result
     # will then be returned.
     #
-    # @param RubyAem::Response response containing HTTP status code, body, and headers
+    # @param response response containing HTTP status code, body, and headers
     # @param responses_spec a list of response specifications as configured in conf/spec.yaml
     # @param info additional information
     # @return RubyAem::Result

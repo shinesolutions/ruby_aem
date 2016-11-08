@@ -12,7 +12,7 @@ describe 'ReplicationAgent' do
 
   describe 'test create_update' do
 
-    it 'should call client with expected parameters' do
+    it 'should call client with expected parameters having default optional parameters' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::ReplicationAgent,
         'create_update',
@@ -20,8 +20,24 @@ describe 'ReplicationAgent' do
           :name => 'some-replication-agent',
           :title => 'Some replication Agent Title',
           :description => 'Some replication agent description',
-          :dest_base_url => 'http://somehost:8080' })
+          :dest_base_url => 'http://somehost:8080',
+          :log_level => 'error',
+          :retry_delay => 30000 })
       @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
+    end
+
+    it 'should call client with expected parameters having custom optional parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::ReplicationAgent,
+        'create_update',
+        { :run_mode => 'author',
+          :name => 'some-replication-agent',
+          :title => 'Some replication Agent Title',
+          :description => 'Some replication agent description',
+          :dest_base_url => 'http://somehost:8080',
+          :log_level => 'info',
+          :retry_delay => 60000 })
+      @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', { log_level: 'info', retry_delay: 60000 })
     end
 
   end

@@ -38,11 +38,19 @@ module RubyAem
       # @param title replication agent title
       # @param description replication agent description
       # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503
+      # @param opts optional parameters:
+      # - log_level: error, info, debug
+      # - retry_delay: in milliseconds
       # @return RubyAem::Result
-      def create_update(title, description, dest_base_url)
+      def create_update(title, description, dest_base_url,
+        opts = {
+          log_level: 'error',
+          retry_delay: 30000
+        })
         @call_params[:title] = title
         @call_params[:description] = description
         @call_params[:dest_base_url] = dest_base_url
+        @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 

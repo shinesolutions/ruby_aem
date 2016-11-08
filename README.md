@@ -54,7 +54,8 @@ Flush agent:
     flush_agent = aem.flush_agent('author', 'some-flush-agent')
 
     # create or update flush agent
-    result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
+    opts = { log_level: 'info', retry_delay: 60000 }
+    result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', opts)
 
     # check flush agent's existence
     result = flush_agent.exists()
@@ -149,7 +150,8 @@ Replication agent:
     replication_agent = aem.replication_agent('author', 'some-replication-agent')
 
     # create or update replication agent
-    result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
+    opts = { log_level: 'info', retry_delay: 60000 }
+    result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
     # check replication agent's existence
     result = replication_agent.exists()

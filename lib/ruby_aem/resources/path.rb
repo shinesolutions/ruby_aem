@@ -26,7 +26,7 @@ module RubyAem
       # @return new RubyAem::Resources::Path instance
       def initialize(client, name)
         @client = client
-        @info = {
+        @call_params = {
           name: name
         }
       end
@@ -37,10 +37,10 @@ module RubyAem
       # @param only_modified if true, then only modified items in the path will be activated
       # @return RubyAem::Result
       def activate(ignore_deactivated, only_modified)
-        @info[:ignoredeactivated] = ignore_deactivated
-        @info[:onlymodified] = only_modified
+        @call_params[:ignoredeactivated] = ignore_deactivated
+        @call_params[:onlymodified] = only_modified
 
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

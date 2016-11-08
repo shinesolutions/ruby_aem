@@ -42,12 +42,14 @@ module RubyAem
     # Make an API call using the relevant Swagger AEM API client.
     # Clazz and action parameters are used to identify the action, API, and params
     # from ruby_aem specification, alongside the response handlers.
+    # Call parameters are used to construct HTTP request parameters based on the
+    # specification.
     #
     # @param clazz the class name of the caller resource
     # @param action the action of the API call
-    # @param info additional information of the API call
+    # @param call_params API call parameters
     # @return RubyAem::Result
-    def call(clazz, action, info)
+    def call(clazz, action, call_params)
 
       resource_name = clazz.name.downcase.sub('rubyaem::resources::', '')
       resource = @spec[resource_name]
@@ -59,12 +61,12 @@ module RubyAem
       params = []
       required_params = action_spec['params']['required'] || {}
       required_params.each { |key, value|
-        params.push(value % info)
+        params.push(value % call_params)
       }
       params.push({})
       optional_params = action_spec['params']['optional'] || {}
       optional_params.each { |key, value|
-        add_optional_param(key, value, params, info)
+        add_optional_param(key, value, params, call_params)
       }
 
       base_responses_spec = resource['responses'] || {}
@@ -78,7 +80,7 @@ module RubyAem
       rescue SwaggerAemClient::ApiError => err
         response = RubyAem::Response.new(err.code, err.response_body, err.response_headers)
       end
-      handle(response, responses_spec, info)
+      handle(response, responses_spec, call_params)
     end
 
     # Add optional param into params list.
@@ -86,24 +88,24 @@ module RubyAem
     # @param key optional param key
     # @param value optional param value
     # @param params combined list of required and optional parameters
-    # @param info additional information
-    def add_optional_param(key, value, params, info)
+    # @param call_params API call parameters
+    def add_optional_param(key, value, params, call_params)
       # if there is no value in optional param spec,
-      # then only add optional param that is set in info
+      # then only add optional param that is set in call parameters
       if !value
-        if info.key? key.to_sym
-          params[-1][key.to_sym] = info[key.to_sym]
+        if call_params.key? key.to_sym
+          params[-1][key.to_sym] = call_params[key.to_sym]
         end
       # if value is provided in optional param spec,
       # then apply variable interpolation the same way as required param
       else
         if value.class == String
           if value == '__FILE__'
-            File.open("#{info[:file_path]}/#{info[:package_name]}-#{info[:package_version]}.zip", 'r') { |file|
+            File.open("#{call_params[:file_path]}/#{call_params[:package_name]}-#{call_params[:package_version]}.zip", 'r') { |file|
               params[-1][key.to_sym] = file
             }
           else
-            params[-1][key.to_sym] = value % info
+            params[-1][key.to_sym] = value % call_params
           end
         else
           params[-1][key.to_sym] = value
@@ -117,14 +119,14 @@ module RubyAem
     #
     # @param response response containing HTTP status code, body, and headers
     # @param responses_spec a list of response specifications as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params API call parameters
     # @return RubyAem::Result
     # @raise RubyAem::Error when the response status code is unexpected
-    def handle(response, responses_spec, info)
+    def handle(response, responses_spec, call_params)
       if responses_spec.key?(response.status_code)
         response_spec = responses_spec[response.status_code]
         handler = response_spec['handler']
-        result = Handlers.send(handler, response, response_spec, info)
+        result = Handlers.send(handler, response, response_spec, call_params)
       else
         message = "Unexpected response\nstatus code: #{response.status_code}\nheaders: #{response.headers}\nbody: #{response.body}"
         result = Result.new(message, response)

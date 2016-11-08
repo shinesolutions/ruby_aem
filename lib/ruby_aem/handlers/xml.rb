@@ -24,9 +24,9 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.xml_package_list(response, response_spec, info)
+    def Handlers.xml_package_list(response, response_spec, call_params)
 
       xml = Nokogiri::XML(response.body)
 
@@ -34,7 +34,7 @@ module RubyAem
       status_text = xml.xpath('//crx/response/status/text()').to_s
 
       if status_code == '200' && status_text == 'ok'
-        message = response_spec['message'] % info
+        message = response_spec['message'] % call_params
         result = RubyAem::Result.new(message, response)
         result.data = xml.xpath('//crx/response/data/packages')
       else

@@ -40,10 +40,10 @@ describe 'XML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'status' => 'success', 'message' => 'Package list retrieved successfully' }
-      info = {}
+      call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.xml_package_list(response, response_spec, info)
+      result = RubyAem::Handlers.xml_package_list(response, response_spec, call_params)
       expect(result.message).to eq('Package list retrieved successfully')
       expect(result.response).to eq(response)
     end
@@ -61,10 +61,10 @@ describe 'XML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'status' => 'success', 'message' => 'Package list retrieved successfully' }
-      info = {}
+      call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.xml_package_list(response, response_spec, info)
+      result = RubyAem::Handlers.xml_package_list(response, response_spec, call_params)
       expect(result.message).to eq('Unable to retrieve package list, getting status code 500 and status text error')
       expect(result.response).to be(response)
     end

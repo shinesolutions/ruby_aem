@@ -10,15 +10,15 @@ describe 'Simple Handler' do
 
   describe 'test simple' do
 
-    it 'should construct result message based on spec message format and info parameters' do
+    it 'should construct result message based on spec message format and call_params parameters' do
       data = nil
       status_code = nil
       headers = nil
       response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
-      info = { :name => 'somebundle' }
+      call_params = { :name => 'somebundle' }
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.simple(response, response_spec, info)
+      result = RubyAem::Handlers.simple(response, response_spec, call_params)
       expect(result.message).to eq('Bundle somebundle started')
       expect(result.response).to be(response)
     end

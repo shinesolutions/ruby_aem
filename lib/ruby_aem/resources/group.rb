@@ -27,7 +27,7 @@ module RubyAem
       # @return new RubyAem::Resources::Group instance
       def initialize(client, path, name)
         @client = client
-        @info = {
+        @call_params = {
           path: path,
           name: name
         }
@@ -37,10 +37,10 @@ module RubyAem
       #
       # @return RubyAem::Result
       def create()
-        if !@info[:path].match(/^\//)
-          @info[:path] = "/#{@info[:path]}"
+        if !@call_params[:path].match(/^\//)
+          @call_params[:path] = "/#{@call_params[:path]}"
         end
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the group.
@@ -49,8 +49,8 @@ module RubyAem
       def delete()
         result = find_authorizable_id
         if result.data
-          @info[:path] = RubyAem::Swagger.path(@info[:path])
-          @client.call(self.class, __callee__.to_s, @info)
+          @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
+          @client.call(self.class, __callee__.to_s, @call_params)
         else
           result
         end
@@ -62,8 +62,8 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists()
-        @info[:path] = RubyAem::Swagger.path(@info[:path])
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Set the group's permission.
@@ -72,9 +72,9 @@ module RubyAem
       # @param permission_csv comma-separated-values of the group's permission, e.g. read:true,modify:true
       # @return RubyAem::Result
       def set_permission(permission_path, permission_csv)
-        @info[:permission_path] = permission_path
-        @info[:permission_csv] = permission_csv
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:permission_path] = permission_path
+        @call_params[:permission_csv] = permission_csv
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Add another group as a member of this group.
@@ -84,8 +84,8 @@ module RubyAem
       def add_member(member)
         result = find_authorizable_id
         if result.data
-          @info[:member] = member
-          @client.call(self.class, __callee__.to_s, @info)
+          @call_params[:member] = member
+          @client.call(self.class, __callee__.to_s, @call_params)
         else
           result
         end
@@ -95,7 +95,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def find_authorizable_id()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

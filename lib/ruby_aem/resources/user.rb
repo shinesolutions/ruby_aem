@@ -27,7 +27,7 @@ module RubyAem
       # @return new RubyAem::Resources::User instance
       def initialize(client, path, name)
         @client = client
-        @info = {
+        @call_params = {
           path: path,
           name: name
         }
@@ -38,11 +38,11 @@ module RubyAem
       # @param password the password of the AEM user
       # @return RubyAem::Result
       def create(password)
-        @info[:password] = password
-        if !@info[:path].match(/^\//)
-          @info[:path] = "/#{@info[:path]}"
+        @call_params[:password] = password
+        if !@call_params[:path].match(/^\//)
+          @call_params[:path] = "/#{@call_params[:path]}"
         end
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the user.
@@ -51,8 +51,8 @@ module RubyAem
       def delete()
         result = find_authorizable_id
         if result.data
-          @info[:path] = RubyAem::Swagger.path(@info[:path])
-          @client.call(self.class, __callee__.to_s, @info)
+          @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
+          @client.call(self.class, __callee__.to_s, @call_params)
         else
           result
         end
@@ -64,8 +64,8 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists()
-        @info[:path] = RubyAem::Swagger.path(@info[:path])
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Set the user's permission.
@@ -74,9 +74,9 @@ module RubyAem
       # @param permission_csv comma-separated-values of the user's permission, e.g. read:true,modify:true
       # @return RubyAem::Result
       def set_permission(permission_path, permission_csv)
-        @info[:permission_path] = permission_path
-        @info[:permission_csv] = permission_csv
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:permission_path] = permission_path
+        @call_params[:permission_csv] = permission_csv
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Add user to a group.
@@ -86,7 +86,7 @@ module RubyAem
       # @return RubyAem::Result
       def add_to_group(group_path, group_name)
         group = RubyAem::Resources::Group.new(@client, group_path, group_name)
-        group.add_member(@info[:name])
+        group.add_member(@call_params[:name])
       end
 
       # Change the user's password.
@@ -95,16 +95,16 @@ module RubyAem
       # @param new_password the user's new password to be changed to
       # @return RubyAem::Result
       def change_password(old_password, new_password)
-        @info[:old_password] = old_password
-        @info[:new_password] = new_password
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:old_password] = old_password
+        @call_params[:new_password] = new_password
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Find the user's authorizable ID.
       #
       # @return RubyAem::Result
       def find_authorizable_id()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

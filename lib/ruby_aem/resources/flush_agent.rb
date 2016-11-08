@@ -27,7 +27,7 @@ module RubyAem
       # @return new RubyAem::Resources::FlushAgent instance
       def initialize(client, run_mode, name)
         @client = client
-        @info = {
+        @call_params = {
           run_mode: run_mode,
           name: name
         }
@@ -40,17 +40,17 @@ module RubyAem
       # @param dest_base_url base URL of the agent target destination, e.g. http://somedispatcher:8080
       # @return RubyAem::Result
       def create_update(title, description, dest_base_url)
-        @info[:title] = title
-        @info[:description] = description
-        @info[:dest_base_url] = dest_base_url
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:title] = title
+        @call_params[:description] = description
+        @call_params[:dest_base_url] = dest_base_url
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the flush agent.
       #
       # @return RubyAem::Result
       def delete()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Check whether the flush agent exists or not.
@@ -59,7 +59,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

@@ -26,7 +26,7 @@ module RubyAem
       # @return new RubyAem::Resources::Bundle instance
       def initialize(client, name)
         @client = client
-        @info = {
+        @call_params = {
           name: name
         }
       end
@@ -35,14 +35,14 @@ module RubyAem
       #
       # @return RubyAem::Result
       def start
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Stop a bundle.
       #
       # @return RubyAem::Result
       def stop
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

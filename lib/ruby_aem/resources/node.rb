@@ -27,12 +27,12 @@ module RubyAem
       # @return new RubyAem::Resources::Node instance
       def initialize(client, path, name)
         @client = client
-        @info = {
+        @call_params = {
           path: path,
           name: name
         }
 
-        @info[:path] = RubyAem::Swagger.path(@info[:path])
+        @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
       end
 
       # Create a new node.
@@ -40,15 +40,15 @@ module RubyAem
       # @param type the node type, e.g. sling:Folder
       # @return RubyAem::Result
       def create(type)
-        @info[:type] = type
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:type] = type
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the node.
       #
       # @return RubyAem::Result
       def delete()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Check whether the node exists or not.
@@ -57,7 +57,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

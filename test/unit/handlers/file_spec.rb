@@ -21,7 +21,7 @@ describe 'File Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'status' => 'success', 'message' => 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip' }
-      info = {
+      call_params = {
         :group_name => 'somepackagegroup',
         :package_name => 'somepackage',
         :package_version => '1.2.3',
@@ -29,7 +29,7 @@ describe 'File Handler' do
       }
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.file_download(response, response_spec, info)
+      result = RubyAem::Handlers.file_download(response, response_spec, call_params)
       expect(result.message).to eq('Package downloaded to /tmp/somepackage-1.2.3.zip')
       expect(result.response).to be(response)
     end

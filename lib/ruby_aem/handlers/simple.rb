@@ -25,12 +25,12 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.simple(response, response_spec, info)
+    def Handlers.simple(response, response_spec, call_params)
 
       status = response_spec['status']
-      message = response_spec['message'] % info
+      message = response_spec['message'] % call_params
 
       RubyAem::Result.new(message, response)
     end

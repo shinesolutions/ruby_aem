@@ -30,7 +30,7 @@ module RubyAem
       # @return new RubyAem::Resources::Package instance
       def initialize(client, group_name, package_name, package_version)
         @client = client
-        @info = {
+        @call_params = {
           group_name: group_name,
           package_name: package_name,
           package_version: package_version
@@ -41,7 +41,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def create()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Update the package with specific filter.
@@ -49,29 +49,29 @@ module RubyAem
       # @param filter package filter JSON string
       # @return RubyAem::Result
       def update(filter)
-        @info[:filter] = filter
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:filter] = filter
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the package.
       #
       # @return RubyAem::Result
       def delete()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Build the package.
       #
       # @return RubyAem::Result
       def build()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Install the package.
       #
       # @return RubyAem::Result
       def install()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Replicate the package.
@@ -79,7 +79,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def replicate()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Download the package to a specified directory.
@@ -87,8 +87,8 @@ module RubyAem
       # @param file_path the directory where the package will be downloaded to
       # @return RubyAem::Result
       def download(file_path)
-        @info[:file_path] = file_path
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:file_path] = file_path
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Upload the package.
@@ -97,9 +97,9 @@ module RubyAem
       # @param force if true, then overwrite if the package already exists
       # @return RubyAem::Result
       def upload(file_path, force)
-        @info[:file_path] = file_path
-        @info[:force] = force
-        @client.call(self.class, __callee__.to_s, @info)
+        @call_params[:file_path] = file_path
+        @call_params[:force] = force
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Get the package filter value.
@@ -107,7 +107,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def get_filter()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Activate all paths within a package filter.
@@ -130,7 +130,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def list_all()
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Check if this package is uploaded.
@@ -143,12 +143,12 @@ module RubyAem
 
         begin
           packages = result.data
-          package = packages.xpath("//packages/package[group=\"#{@info[:group_name]}\" and name=\"#{@info[:package_name]}\" and version=\"#{@info[:package_version]}\"]")
+          package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
 
           if package.to_s != ''
-            message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is uploaded"
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
           else
-            message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is not uploaded"
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
           end
           result = RubyAem::Result.new(message, nil)
           result.data = package
@@ -171,9 +171,9 @@ module RubyAem
           last_unpacked_by = package.xpath('lastUnpackedBy')
 
           if not ['<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
-            message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is installed"
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
           else
-            message = "Package #{@info[:group_name]}/#{@info[:package_name]}-#{@info[:package_version]} is not installed"
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed"
           end
           result = RubyAem::Result.new(message, nil)
         rescue RubyAem::Error => err

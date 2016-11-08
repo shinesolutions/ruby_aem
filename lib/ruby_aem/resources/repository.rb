@@ -25,21 +25,21 @@ module RubyAem
       # @return new RubyAem::Resources::Repository instance
       def initialize(client)
         @client = client
-        @info = {}
+        @call_params = {}
       end
 
       # Block repository writes.
       #
       # @return RubyAem::Result
       def block_writes
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Unblock repository writes.
       #
       # @return RubyAem::Result
       def unblock_writes
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

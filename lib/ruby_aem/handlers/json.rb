@@ -24,18 +24,18 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.json_authorizable_id(response, response_spec, info)
+    def Handlers.json_authorizable_id(response, response_spec, call_params)
 
       json = JSON.parse(response.body)
       authorizable_id = nil
       if json['success'] == true && json['hits'].length == 1
         authorizable_id = json['hits'][0]['name']
-        info[:authorizable_id] = authorizable_id
-        message = response_spec['message'] % info
+        call_params[:authorizable_id] = authorizable_id
+        message = response_spec['message'] % call_params
       else
-        message = "User/Group #{info[:name]} authorizable ID not found"
+        message = "User/Group #{call_params[:name]} authorizable ID not found"
       end
 
       status = response_spec['status']
@@ -49,9 +49,9 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params additional call_paramsrmation
     # @return RubyAem::Result
-    def Handlers.json_package_service(response, response_spec, info)
+    def Handlers.json_package_service(response, response_spec, call_params)
 
       json = JSON.parse(response.body)
 
@@ -65,9 +65,9 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params additional call_paramsrmation
     # @return RubyAem::Result
-    def Handlers.json_package_filter(response, response_spec, info)
+    def Handlers.json_package_filter(response, response_spec, call_params)
 
       json = JSON.parse(response.body)
 
@@ -78,7 +78,7 @@ module RubyAem
         end
       end
 
-      message = response_spec['message'] % info
+      message = response_spec['message'] % call_params
 
       result = RubyAem::Result.new(message, response)
       result.data = filter

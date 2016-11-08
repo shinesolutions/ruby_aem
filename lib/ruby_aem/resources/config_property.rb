@@ -28,7 +28,7 @@ module RubyAem
       # @return new RubyAem::Resources::ConfigProperty instance
       def initialize(client, name, type, value)
         @client = client
-        @info = {
+        @call_params = {
           name: name,
           type: type,
           value: value
@@ -41,13 +41,13 @@ module RubyAem
       # @return RubyAem::Result
       def create(run_mode)
 
-        name = RubyAem::Swagger.property_to_parameter(@info[:name])
+        name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
 
-        @info[:run_mode] = run_mode
-        @info["#{name}".to_sym] = @info[:value]
-        @info["#{name}_type_hint".to_sym] = @info[:type]
+        @call_params[:run_mode] = run_mode
+        @call_params["#{name}".to_sym] = @call_params[:value]
+        @call_params["#{name}_type_hint".to_sym] = @call_params[:type]
 
-        @client.call(self.class, __callee__.to_s, @info)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
     end

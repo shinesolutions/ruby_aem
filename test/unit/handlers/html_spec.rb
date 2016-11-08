@@ -22,10 +22,10 @@ describe 'HTML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'status' => 'success', 'message' => 'Group %{name} created at %{path}/%{authorizable_id}' }
-      info = { :name => 'somegroup', :path => '/home/groups/s' }
+      call_params = { :name => 'somegroup', :path => '/home/groups/s' }
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.html_authorizable_id(response, response_spec, info)
+      result = RubyAem::Handlers.html_authorizable_id(response, response_spec, call_params)
       expect(result.message).to eq('Group somegroup created at /home/groups/s/GDKHvEk6jG4lRaPUsAty')
       expect(result.response).to be(response)
     end

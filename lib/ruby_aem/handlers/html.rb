@@ -25,17 +25,17 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param info additional information
+    # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.html_authorizable_id(response, response_spec, info)
+    def Handlers.html_authorizable_id(response, response_spec, call_params)
 
       html = Nokogiri::HTML(response.body)
       authorizable_id = html.xpath('//title/text()').to_s
-      authorizable_id.slice! "Content created #{info[:path]}"
-      info[:authorizable_id] = authorizable_id.sub(/^\//, '')
+      authorizable_id.slice! "Content created #{call_params[:path]}"
+      call_params[:authorizable_id] = authorizable_id.sub(/^\//, '')
 
       status = response_spec['status']
-      message = response_spec['message'] % info
+      message = response_spec['message'] % call_params
 
       RubyAem::Result.new(message, response)
     end

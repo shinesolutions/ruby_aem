@@ -433,6 +433,8 @@ replicationagent:
           jcrcontentslingresource_type: /libs/cq/replication/components/agent
           jcrcontentserialization_type: durbo
           jcrcontenttransport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+          jcrcontenttransport_user: '%{transport_user}'
+          jcrcontenttransport_password: '%{transport_password}'
           jcrcontentlog_level: '%{log_level}'
           jcrcontentretry_delay: '%{retry_delay}'
           jcrcontentcqtemplate: /libs/cq/replication/templates/agent

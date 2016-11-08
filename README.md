@@ -150,7 +150,12 @@ Replication agent:
     replication_agent = aem.replication_agent('author', 'some-replication-agent')
 
     # create or update replication agent
-    opts = { log_level: 'info', retry_delay: 60000 }
+    opts = {
+      transport_user: 'admin',
+      transport_password: 'admin',
+      log_level: 'info',
+      retry_delay: 60000
+    }
     result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
     # check replication agent's existence

@@ -39,11 +39,15 @@ module RubyAem
       # @param description replication agent description
       # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503
       # @param opts optional parameters:
+      # - transport_user: username for transport user, default is admin
+      # - transport_password: username for transport user, default is admin
       # - log_level: error, info, debug, default is error
       # - retry_delay: in milliseconds, default is 30000
       # @return RubyAem::Result
       def create_update(title, description, dest_base_url,
         opts = {
+          transport_user: 'admin',
+          transport_password: 'admin',
           log_level: 'error',
           retry_delay: 30000
         })

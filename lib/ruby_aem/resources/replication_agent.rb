@@ -39,8 +39,8 @@ module RubyAem
       # @param description replication agent description
       # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503
       # @param opts optional parameters:
-      # - log_level: error, info, debug
-      # - retry_delay: in milliseconds
+      # - log_level: error, info, debug, default is error
+      # - retry_delay: in milliseconds, default is 30000
       # @return RubyAem::Result
       def create_update(title, description, dest_base_url,
         opts = {

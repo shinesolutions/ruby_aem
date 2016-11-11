@@ -99,8 +99,9 @@ Package:
 
     package = aem.package('somepackagegroup', 'somepackage', '1.2.3')
 
-    # upload package
-    result = package.upload('/tmp', true)
+    # upload package located at /tmp/somepackage-1.2.3.zip
+    opts = { force: true }
+    result = package.upload('/tmp', opts)
 
     # check whether package is uploaded
     result = package.is_uploaded()

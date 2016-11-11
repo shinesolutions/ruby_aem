@@ -1,6 +1,7 @@
 ### 1.0.0
 * Fix replication agent creation failure #1
 * Add optional params support for flush agent and replication agent create_update #2
+* Package upload force parameter is now optional, defaults to true
 * Unsuccessful action should now raise RubyAem::Error, replacing failure result
 * Remove status attribute from RubyAem::Result
 * Add response attribute to RubyAem::Result

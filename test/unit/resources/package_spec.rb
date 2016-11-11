@@ -122,7 +122,7 @@ describe 'Package' do
           :package_version => '1.2.3',
           :file_path => '/tmp',
           :force => true })
-      @package.upload('/tmp', true)
+      @package.upload('/tmp', { force: true })
     end
 
   end

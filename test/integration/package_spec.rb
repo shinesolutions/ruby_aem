@@ -54,7 +54,7 @@ describe 'Package' do
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not uploaded')
 
       # upload package
-      result = @package.upload('/tmp', true)
+      result = @package.upload('/tmp', { force: true })
       expect(result.message).to eq('Package uploaded')
 
       # package is uploaded

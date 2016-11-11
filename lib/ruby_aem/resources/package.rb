@@ -47,6 +47,7 @@ module RubyAem
       # Update the package with specific filter.
       #
       # @param filter package filter JSON string
+      # example: [{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]
       # @return RubyAem::Result
       def update(filter)
         @call_params[:filter] = filter

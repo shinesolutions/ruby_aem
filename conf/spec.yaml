@@ -1,7 +1,6 @@
 bundle:
   responses:
     404:
-      status: failure
       handler: simple
       message: 'Bundle %{name} not found'
   actions:
@@ -14,7 +13,6 @@ bundle:
           action: start
       responses:
         200:
-          status: success
           handler: simple
           message: 'Bundle %{name} started'
     stop:
@@ -26,13 +24,11 @@ bundle:
           action: stop
       responses:
         200:
-          status: success
           handler: simple
           message: 'Bundle %{name} stopped'
 flushagent:
   responses:
     404:
-      status: failure
       handler: simple_false
       message: 'Flush agent %{name} not found on %{run_mode}'
   actions:
@@ -67,11 +63,9 @@ flushagent:
           jcrcontentenabled: true
       responses:
         200:
-          status: success
           handler: simple
           message: 'Flush agent %{name} updated on %{run_mode}'
         201:
-          status: success
           handler: simple
           message: 'Flush agent %{name} created on %{run_mode}'
     delete:
@@ -83,7 +77,6 @@ flushagent:
           name: '%{name}'
       responses:
         204:
-          status: success
           handler: simple
           message: 'Flush agent %{name} deleted on %{run_mode}'
     exists:
@@ -95,13 +88,11 @@ flushagent:
           name: '%{name}'
       responses:
         302:
-          status: success
           handler: simple_true
           message: 'Flush agent %{name} exists on %{run_mode}'
 group:
   responses:
     404:
-      status: failure
       handler: simple
       message: 'Group %{name} not found'
   actions:
@@ -117,7 +108,6 @@ group:
           profilegiven_name: '%{name}'
       responses:
         201:
-          status: success
           handler: html_authorizable_id
           message: 'Group %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
@@ -131,7 +121,6 @@ group:
           _1_property_value: '%{name}'
       responses:
         200:
-          status: success
           handler: json_authorizable_id
           message: 'Found group %{name} authorizable ID %{authorizable_id}'
     delete:
@@ -143,7 +132,6 @@ group:
           name: '%{authorizable_id}'
       responses:
         204:
-          status: success
           handler: simple
           message: 'Group %{name} deleted at /%{path}/%{authorizable_id}'
     exists:
@@ -155,7 +143,6 @@ group:
           name: '%{authorizable_id}'
       responses:
         302:
-          status: success
           handler: simple
           message: 'Group %{name} exists at /%{path}/%{authorizable_id}'
     set_permission:
@@ -167,7 +154,6 @@ group:
           changelog: 'path:%{permission_path},%{permission_csv}'
       responses:
         200:
-          status: success
           handler: simple
           message: 'Permission %{permission_csv} on path %{permission_path} set for group %{name}'
     add_member:
@@ -181,13 +167,11 @@ group:
           add_members: '%{member}'
       responses:
         200:
-          status: success
           handler: simple
           message: 'User/group %{member} added to group %{name}'
 node:
   responses:
     404:
-      status: failure
       handler: simple
       message: 'Node %{path}/%{name} not found'
   actions:
@@ -201,7 +185,6 @@ node:
           name: '%{name}'
       responses:
         201:
-          status: success
           handler: simple
           message: 'Node %{path}/%{name} created'
     delete:
@@ -213,7 +196,6 @@ node:
           name: '%{name}'
       responses:
         204:
-          status: success
           handler: simple
           message: 'Node %{path}/%{name} deleted'
     exists:
@@ -225,7 +207,6 @@ node:
           name: '%{name}'
       responses:
         302:
-          status: success
           handler: simple
           message: 'Node %{path}/%{name} exists'
 package:
@@ -244,7 +225,6 @@ package:
           charset: utf-8
       responses:
         200:
-          status: success
           handler: json_package_service
     update:
       api: crx
@@ -260,7 +240,6 @@ package:
           charset: utf-8
       responses:
         200:
-          status: success
           handler: json_package_service
     delete:
       api: crx
@@ -271,7 +250,6 @@ package:
           cmd: delete
       responses:
         200:
-          status: success
           handler: json_package_service
     build:
       api: crx
@@ -282,7 +260,6 @@ package:
           cmd: build
       responses:
         200:
-          status: success
           handler: json_package_service
     install:
       api: crx
@@ -293,7 +270,6 @@ package:
           cmd: install
       responses:
         200:
-          status: success
           handler: json_package_service
     replicate:
       api: crx
@@ -304,7 +280,6 @@ package:
           cmd: replicate
       responses:
         200:
-          status: success
           handler: json_package_service
     download:
       api: sling
@@ -316,7 +291,6 @@ package:
           version: '%{package_version}'
       responses:
         200:
-          status: success
           handler: file_download
           message: 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip'
     upload:
@@ -331,7 +305,6 @@ package:
           package: __FILE__
       responses:
         200:
-          status: success
           handler: json_package_service
     get_filter:
       api: sling
@@ -343,7 +316,6 @@ package:
           version: '%{package_version}'
       responses:
         200:
-          status: success
           handler: json_package_filter
           message: 'Filter retrieved successfully'
     list_all:
@@ -354,7 +326,6 @@ package:
           cmd: ls
       responses:
         200:
-          status: success
           handler: xml_package_list
           message: 'Package list retrieved successfully'
 path:
@@ -369,7 +340,6 @@ path:
           path: '%{name}'
       responses:
         200:
-          status: success
           handler: simple
           message: 'Path %{name} activated'
 configproperty:
@@ -404,17 +374,14 @@ configproperty:
           - org_osgi_service_http_port_secure_type_hint
       responses:
         200:
-          status: success
           handler: simple
           message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
         201:
-          status: success
           handler: simple
           message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
 replicationagent:
   responses:
     404:
-      status: failure
       handler: simple
       message: 'Replication agent %{name} not found on %{run_mode}'
   actions:
@@ -441,11 +408,9 @@ replicationagent:
           jcrcontentenabled: true
       responses:
         200:
-          status: success
           handler: simple
           message: 'Replication agent %{name} updated on %{run_mode}'
         201:
-          status: success
           handler: simple
           message: 'Replication agent %{name} created on %{run_mode}'
     delete:
@@ -457,7 +422,6 @@ replicationagent:
           name: '%{name}'
       responses:
         204:
-          status: success
           handler: simple
           message: 'Replication agent %{name} deleted on %{run_mode}'
     exists:
@@ -469,7 +433,6 @@ replicationagent:
           name: '%{name}'
       responses:
         302:
-          status: success
           handler: simple
           message: 'Replication agent %{name} exists on %{run_mode}'
 repository:
@@ -482,7 +445,6 @@ repository:
           action: blockRepositoryWrites
       responses:
         200:
-          status: success
           handler: simple
           message: 'Repository writes blocked'
     unblock_writes:
@@ -493,13 +455,11 @@ repository:
           action: unblockRepositoryWrites
       responses:
         200:
-          status: success
           handler: simple
           message: 'Repository writes unblocked'
 user:
   responses:
     404:
-      status: failure
       handler: simple
       message: 'User %{name} not found'
   actions:
@@ -515,7 +475,6 @@ user:
           reppassword: '%{password}'
       responses:
         201:
-          status: success
           handler: html_authorizable_id
           message: 'User %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
@@ -529,7 +488,6 @@ user:
           _1_property_value: '%{name}'
       responses:
         200:
-          status: success
           handler: json_authorizable_id
           message: 'Found user %{name} authorizable ID %{authorizable_id}'
     delete:
@@ -541,7 +499,6 @@ user:
           name: '%{authorizable_id}'
       responses:
         204:
-          status: success
           handler: simple
           message: 'User %{name} deleted at /%{path}/%{authorizable_id}'
     exists:
@@ -553,7 +510,6 @@ user:
           name: '%{authorizable_id}'
       responses:
         302:
-          status: success
           handler: simple
           message: 'User %{name} exists at /%{path}/%{authorizable_id}'
     set_permission:
@@ -565,7 +521,6 @@ user:
           changelog: 'path:%{permission_path},%{permission_csv}'
       responses:
         200:
-          status: success
           handler: simple
           message: 'Permission %{permission_csv} on path %{permission_path} set for user %{name}'
     change_password:
@@ -578,6 +533,5 @@ user:
           verify: '%{new_password}'
       responses:
         200:
-          status: success
           handler: simple
           message: 'Logged in user password changed'

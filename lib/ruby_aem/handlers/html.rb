@@ -34,7 +34,6 @@ module RubyAem
       authorizable_id.slice! "Content created #{call_params[:path]}"
       call_params[:authorizable_id] = authorizable_id.sub(/^\//, '')
 
-      status = response_spec['status']
       message = response_spec['message'] % call_params
 
       RubyAem::Result.new(message, response)

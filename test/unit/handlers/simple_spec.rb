@@ -14,7 +14,7 @@ describe 'Simple Handler' do
       data = nil
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+      response_spec = { 'message' => 'Bundle %{name} started' }
       call_params = { :name => 'somebundle' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -31,7 +31,7 @@ describe 'Simple Handler' do
       data = nil
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+      response_spec = { 'message' => 'Bundle %{name} started' }
       call_params = { :name => 'somebundle' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -49,7 +49,7 @@ describe 'Simple Handler' do
       data = nil
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+      response_spec = { 'message' => 'Bundle %{name} started' }
       call_params = { :name => 'somebundle' }
 
       response = RubyAem::Response.new(status_code, data, headers)

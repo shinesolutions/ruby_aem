@@ -28,10 +28,7 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def Handlers.simple(response, response_spec, call_params)
-
-      status = response_spec['status']
       message = response_spec['message'] % call_params
-
       RubyAem::Result.new(message, response)
     end
 
@@ -42,7 +39,6 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def Handlers.simple_true(response, response_spec, call_params)
-
       result = Handlers.simple(response, response_spec, call_params)
       result.data = true
       result
@@ -55,7 +51,6 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def Handlers.simple_false(response, response_spec, call_params)
-
       result = Handlers.simple(response, response_spec, call_params)
       result.data = false
       result

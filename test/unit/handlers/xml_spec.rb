@@ -39,7 +39,7 @@ describe 'XML Handler' do
         '</crx>'
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Package list retrieved successfully' }
+      response_spec = { 'message' => 'Package list retrieved successfully' }
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -60,7 +60,7 @@ describe 'XML Handler' do
         '</crx>'
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Package list retrieved successfully' }
+      response_spec = { 'message' => 'Package list retrieved successfully' }
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)

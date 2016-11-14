@@ -14,7 +14,7 @@ describe 'JSON Handler' do
       data = '{"success":true,"results":1,"total":1,"more":false,"offset":0,"hits":[{"path":"/home/groups/s/cnf6J9EF5WtGm9X6CZT4","excerpt":"","name":"cnf6J9EF5WtGm9X6CZT4","title":"cnf6J9EF5WtGm9X6CZT4","lastModified":"2016-09-12 21:13:07","created":"2016-09-12 21:13:07"}]}'
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
+      response_spec = { 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
       call_params = { :name => 'someuser' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -28,7 +28,7 @@ describe 'JSON Handler' do
       data = '{"success":false,"results":0,"total":0,"more":false,"offset":0,"hits":[]}'
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
+      response_spec = { 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
       call_params = { :name => 'someuser' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -78,7 +78,7 @@ describe 'JSON Handler' do
         '}'
       status_code = nil
       headers = nil
-      response_spec = { 'status' => 'success', 'message' => 'Filter retrieved successfully' }
+      response_spec = { 'message' => 'Filter retrieved successfully' }
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)

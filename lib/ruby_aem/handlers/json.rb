@@ -38,8 +38,6 @@ module RubyAem
         message = "User/Group #{call_params[:name]} authorizable ID not found"
       end
 
-      status = response_spec['status']
-
       result = RubyAem::Result.new(message, response)
       result.data = authorizable_id
       result
@@ -56,6 +54,7 @@ module RubyAem
       json = JSON.parse(response.body)
 
       status = json['success'] == true ? 'success' : 'failure'
+      # TODO: raise error when JSON payload is not a success
       message = json['msg']
 
       RubyAem::Result.new(message, response)

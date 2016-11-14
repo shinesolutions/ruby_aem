@@ -15,16 +15,13 @@ limitations under the License.
 =end
 
 module RubyAem
-  # Result represents the result of a client call.
-  #
-  # It has 3 statuses: success, warning, and failure.
-  # A success indicates that the client call was completed successfully.
-  # A failure indicates that the client call was completed but it failed with error.
-  # A warning indicates that the client call was completed but with warnings.
-  #
-  # Result message is stored in message attribute.
-  #
-  # Some client calls respond with data payload, which is stored in data attribute.
+  # Result class represents the result of a client call.
+  # It contains the following attributes:
+  # - message: a message string containing the description of the result
+  # - response: a RubyAem::Response response from AEM
+  # - data: the data payload, which can be of any type depending on the API call
+  # e.g. is_* method provides a boolean data
+  # Some API calls result doesn't contain any data.
   class Result
 
     attr_reader :message

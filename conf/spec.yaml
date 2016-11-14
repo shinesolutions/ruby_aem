@@ -33,7 +33,7 @@ flushagent:
   responses:
     404:
       status: failure
-      handler: simple
+      handler: simple_false
       message: 'Flush agent %{name} not found on %{run_mode}'
   actions:
     create_update:
@@ -98,10 +98,6 @@ flushagent:
           status: success
           handler: simple_true
           message: 'Flush agent %{name} exists on %{run_mode}'
-        404:
-          status: success
-          handler: simple_false
-          message: 'Flush agent %{name} not found on %{run_mode}'
 group:
   responses:
     404:

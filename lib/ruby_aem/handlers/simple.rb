@@ -35,5 +35,31 @@ module RubyAem
       RubyAem::Result.new(message, response)
     end
 
+    # Simple handler with boolean true result data.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.simple_true(response, response_spec, call_params)
+
+      result = Handlers.simple(response, response_spec, call_params)
+      result.data = true
+      result
+    end
+
+    # Simple handler with boolean false result data.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.simple_false(response, response_spec, call_params)
+
+      result = Handlers.simple(response, response_spec, call_params)
+      result.data = false
+      result
+    end
+
   end
 end

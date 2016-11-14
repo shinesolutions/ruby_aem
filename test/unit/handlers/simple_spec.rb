@@ -25,4 +25,40 @@ describe 'Simple Handler' do
 
   end
 
+  describe 'test simple_true' do
+
+    it 'should construct result message with true data' do
+      data = nil
+      status_code = nil
+      headers = nil
+      response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+      call_params = { :name => 'somebundle' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.simple_true(response, response_spec, call_params)
+      expect(result.message).to eq('Bundle somebundle started')
+      expect(result.response).to be(response)
+      expect(result.data).to be(true)
+    end
+
+  end
+
+  describe 'test simple_false' do
+
+    it 'should construct result message with false data' do
+      data = nil
+      status_code = nil
+      headers = nil
+      response_spec = { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+      call_params = { :name => 'somebundle' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.simple_false(response, response_spec, call_params)
+      expect(result.message).to eq('Bundle somebundle started')
+      expect(result.response).to be(response)
+      expect(result.data).to be(false)
+    end
+
+  end
+
 end

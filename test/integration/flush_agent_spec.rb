@@ -21,6 +21,7 @@ describe 'FlushAgent' do
     it 'should succeed existence check' do
       result = @flush_agent.exists()
       expect(result.message).to eq('Flush agent some-flush-agent exists on author')
+      expect(result.data).to eq(true)
     end
 
     it 'should succeed update' do
@@ -38,6 +39,7 @@ describe 'FlushAgent' do
 
       result = @flush_agent.exists()
       expect(result.message).to eq('Flush agent some-flush-agent not found on author')
+      expect(result.data).to eq(false)
     end
 
   end

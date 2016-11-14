@@ -96,8 +96,12 @@ flushagent:
       responses:
         302:
           status: success
-          handler: simple
+          handler: simple_true
           message: 'Flush agent %{name} exists on %{run_mode}'
+        404:
+          status: success
+          handler: simple_false
+          message: 'Flush agent %{name} not found on %{run_mode}'
 group:
   responses:
     404:

@@ -20,7 +20,7 @@ module RubyAem
   # - message: a message string containing the description of the result
   # - response: a RubyAem::Response response from AEM
   # - data: the data payload, which can be of any type depending on the API call
-  # e.g. is_* method provides a boolean data
+  # e.g. is_* and exists method provide result with boolean data.
   # Some API calls result doesn't contain any data.
   class Result
 

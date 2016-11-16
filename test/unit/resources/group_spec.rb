@@ -44,17 +44,21 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'delete',
-        { :path => 'home/groups/s', :name => 'somegroup' })
+        { :path => 'home/groups/s', :name => 'somegroup', :authorizable_id => 'someauthorizableid' })
       @group.delete
     end
 
-    it 'should return result when authorizable ID cannot be found' do
+    it 'should call client with nil authorizable ID when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
+          expect(@mock_client).to receive(:call).once().with(
+            RubyAem::Resources::Group,
+            'delete',
+            { :path => 'home/groups/s', :name => 'somegroup', :authorizable_id => nil })
       @group.delete
     end
 
@@ -63,10 +67,16 @@ describe 'Group' do
   describe 'test exists' do
 
     it 'should call client with expected parameters' do
+      mock_result = double('mock_result', :data => 'someauthorizableid')
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Group,
+        'find_authorizable_id',
+        { :path => '/home/groups/s/',
+          :name => 'somegroup' }).and_return(mock_result)
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'exists',
-        { :path => 'home/groups/s', :name => 'somegroup' })
+        { :path => 'home/groups/s', :name => 'somegroup', :authorizable_id => 'someauthorizableid' })
       @group.exists
     end
 
@@ -99,17 +109,21 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'add_member',
-        { :path => '/home/groups/s/', :name => 'somegroup', :member => 'somemembergroup' })
+        { :path => 'home/groups/s', :name => 'somegroup', :member => 'somemembergroup', :authorizable_id => 'someauthorizableid' })
       @group.add_member('somemembergroup')
     end
 
-    it 'should return result when authorizable ID cannot be found' do
+    it 'should call client with nil authorizable ID when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Group,
+        'add_member',
+        { :path => 'home/groups/s', :name => 'somegroup', :member => 'somemembergroup', :authorizable_id => nil })
       @group.add_member('somemembergroup')
     end
 

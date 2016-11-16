@@ -6,7 +6,11 @@ describe 'FlushAgent' do
 
     # ensure agent doesn't exist prior to testing
     @flush_agent = @aem.flush_agent('author', 'some-flush-agent')
-    result = @flush_agent.delete()
+    if @flush_agent.exists().data == true
+      @flush_agent.delete()
+    end
+    result = @flush_agent.exists()
+    expect(result.data).to eq(false)
 
     # create agent
     result = @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')

@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require_relative '../../../lib/ruby_aem/error'
 require_relative '../../../lib/ruby_aem/handlers/simple'
 
 describe 'Simple Handler' do
@@ -57,6 +58,44 @@ describe 'Simple Handler' do
       expect(result.message).to eq('Bundle somebundle started')
       expect(result.response).to be(response)
       expect(result.data).to be(false)
+    end
+
+  end
+
+  describe 'test simple_nil' do
+
+    it 'should construct result message with false data' do
+      data = nil
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Bundle %{name} started' }
+      call_params = { :name => 'somebundle' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.simple_nil(response, response_spec, call_params)
+      expect(result.message).to eq('Bundle somebundle started')
+      expect(result.response).to be(response)
+      expect(result.data).to be(nil)
+    end
+
+  end
+
+  describe 'test simple_error' do
+
+    it 'should raise error' do
+      data = nil
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Bundle %{name} started' }
+      call_params = { :name => 'somebundle' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      begin
+        RubyAem::Handlers.simple_error(response, response_spec, call_params)
+      rescue RubyAem::Error => err
+        expect(err.result.message).to eq('Bundle somebundle started')
+        expect(err.result.response).to be(response)
+      end
     end
 
   end

@@ -6,6 +6,7 @@
 * Remove status attribute from RubyAem::Result
 * Add response attribute to RubyAem::Result
 * Move resource classes to RubyAem::Resources module
+* Resource methods is_* and exists should now return result with boolean data payload
 
 ### 0.9.0
 * Initial version

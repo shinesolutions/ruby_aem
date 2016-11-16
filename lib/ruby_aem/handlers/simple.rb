@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 =end
 
+require 'ruby_aem/error'
 require 'ruby_aem/result'
 
 module RubyAem
@@ -54,6 +55,29 @@ module RubyAem
       result = Handlers.simple(response, response_spec, call_params)
       result.data = false
       result
+    end
+
+    # Simple handler with nil result data.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.simple_nil(response, response_spec, call_params)
+      result = Handlers.simple(response, response_spec, call_params)
+      result.data = nil
+      result
+    end
+
+    # Simple handler with raised error.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.simple_error(response, response_spec, call_params)
+      result = Handlers.simple(response, response_spec, call_params)
+      raise RubyAem::Error.new(result.message, result)
     end
 
   end

@@ -1,7 +1,7 @@
 bundle:
   responses:
     404:
-      handler: simple
+      handler: simple_error
       message: 'Bundle %{name} not found'
   actions:
     start:
@@ -29,7 +29,7 @@ bundle:
 flushagent:
   responses:
     404:
-      handler: simple_false
+      handler: simple_error
       message: 'Flush agent %{name} not found on %{run_mode}'
   actions:
     create_update:
@@ -90,10 +90,13 @@ flushagent:
         302:
           handler: simple_true
           message: 'Flush agent %{name} exists on %{run_mode}'
+        404:
+          handler: simple_false
+          message: 'Flush agent %{name} not found on %{run_mode}'
 group:
   responses:
     404:
-      handler: simple
+      handler: simple_error
       message: 'Group %{name} not found'
   actions:
     create:
@@ -123,6 +126,9 @@ group:
         200:
           handler: json_authorizable_id
           message: 'Found group %{name} authorizable ID %{authorizable_id}'
+        404:
+          handler: simple_nil
+          message: 'Group %{name} not found'
     delete:
       api: sling
       operation: deleteNode
@@ -143,8 +149,11 @@ group:
           name: '%{authorizable_id}'
       responses:
         302:
-          handler: simple
+          handler: simple_true
           message: 'Group %{name} exists at /%{path}/%{authorizable_id}'
+        404:
+          handler: simple_false
+          message: 'Group %{name} not found'
     set_permission:
       api: cq
       operation: postCqActions
@@ -172,7 +181,7 @@ group:
 node:
   responses:
     404:
-      handler: simple
+      handler: simple_error
       message: 'Node %{path}/%{name} not found'
   actions:
     create:
@@ -207,8 +216,11 @@ node:
           name: '%{name}'
       responses:
         302:
-          handler: simple
+          handler: simple_true
           message: 'Node %{path}/%{name} exists'
+        404:
+          handler: simple_false
+          message: 'Node %{path}/%{name} not found'
 package:
   actions:
     create:

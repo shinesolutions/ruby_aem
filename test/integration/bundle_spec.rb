@@ -16,10 +16,13 @@ describe 'Bundle' do
       expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum stopped')
     end
 
-    it 'should fail when bundle does not exist' do
+    it 'should raise error when bundle does not exist' do
       bundle = @aem.bundle('someinexistingbundle')
-      result = bundle.stop()
-      expect(result.message).to eq('Bundle someinexistingbundle not found')
+      begin
+        bundle.stop()
+      rescue RubyAem::Error => err
+        expect(err.result.message).to eq('Bundle someinexistingbundle not found')
+      end
     end
 
   end
@@ -32,10 +35,13 @@ describe 'Bundle' do
       expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum started')
     end
 
-    it 'should fail when bundle does not exist' do
+    it 'should raise error when bundle does not exist' do
       bundle = @aem.bundle('someinexistingbundle')
-      result = bundle.start()
-      expect(result.message).to eq('Bundle someinexistingbundle not found')
+      begin
+        bundle.start()
+      rescue RubyAem::Error => err
+        expect(err.result.message).to eq('Bundle someinexistingbundle not found')
+      end
     end
 
   end

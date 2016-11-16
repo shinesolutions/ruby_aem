@@ -103,7 +103,7 @@ describe 'User' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::Group,
         'add_member',
-        { :path => '/home/groups/s/', :name => 'somegroup', :member => 'someuser' })
+        { :path => 'home/groups/s', :name => 'somegroup', :member => 'someuser', :authorizable_id => 'someauthorizableid' })
       @user.add_to_group('/home/groups/s/', 'somegroup')
     end
 

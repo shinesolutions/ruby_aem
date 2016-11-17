@@ -14,6 +14,7 @@ describe 'ConfigProperty' do
       config_property = @aem.config_property('someinexistingnode', 'Boolean', true)
       begin
         config_property.create('author')
+        fail
       rescue RubyAem::Error => err
         expect(err.message).to match(/^Unexpected response/)
       end

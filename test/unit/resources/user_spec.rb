@@ -48,17 +48,21 @@ describe 'User' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::User,
         'delete',
-        { :path => 'home/users/s', :name => 'someuser' })
+        { :path => 'home/users/s', :name => 'someuser', :authorizable_id => 'someauthorizableid' })
       @user.delete
     end
 
-    it 'should return result when authorizable ID cannot be found' do
+    it 'should call client with nil authorizable ID when authorizable ID cannot be found' do
       expect(@mock_result).to receive(:data).and_return(nil)
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::User,
         'find_authorizable_id',
         { :path => '/home/users/s/',
           :name => 'someuser' }).and_return(@mock_result)
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::User,
+        'delete',
+        { :path => 'home/users/s', :name => 'someuser', :authorizable_id => nil })
       @user.delete
     end
 
@@ -67,10 +71,16 @@ describe 'User' do
   describe 'test exists' do
 
     it 'should call client with expected parameters' do
+      expect(@mock_result).to receive(:data).and_return('someauthorizableid')
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::User,
+        'find_authorizable_id',
+        { :path => '/home/users/s/',
+          :name => 'someuser' }).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::User,
         'exists',
-        { :path => 'home/users/s', :name => 'someuser' })
+        { :path => 'home/users/s', :name => 'someuser', :authorizable_id => 'someauthorizableid' })
       @user.exists
     end
 

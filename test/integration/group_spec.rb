@@ -60,4 +60,14 @@ describe 'Group' do
 
   end
 
+  it 'should raise error when deleting inexisting group' do
+    group = @aem.group('/home/groups/s/', 'someinexistinggroup')
+    begin
+      group.set_permission('/etc/replication', 'read:true,modify:true')
+      fail
+    rescue RubyAem::Error => err
+      expect(err.message).to match(/^Unexpected response/)
+    end
+  end
+
 end

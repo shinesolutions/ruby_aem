@@ -20,6 +20,7 @@ describe 'Bundle' do
       bundle = @aem.bundle('someinexistingbundle')
       begin
         bundle.stop()
+        fail
       rescue RubyAem::Error => err
         expect(err.result.message).to eq('Bundle someinexistingbundle not found')
       end

@@ -55,10 +55,10 @@ describe 'Group' do
         'find_authorizable_id',
         { :path => '/home/groups/s/',
           :name => 'somegroup' }).and_return(@mock_result)
-          expect(@mock_client).to receive(:call).once().with(
-            RubyAem::Resources::Group,
-            'delete',
-            { :path => 'home/groups/s', :name => 'somegroup', :authorizable_id => nil })
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Group,
+        'delete',
+        { :path => 'home/groups/s', :name => 'somegroup', :authorizable_id => nil })
       @group.delete
     end
 

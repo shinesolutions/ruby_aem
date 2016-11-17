@@ -22,7 +22,7 @@ describe 'FlushAgent' do
 
   describe 'test flush agent create update' do
 
-    it 'should succeed existence check' do
+    it 'should return true on existence check' do
       result = @flush_agent.exists()
       expect(result.message).to eq('Flush agent some-flush-agent exists on author')
       expect(result.data).to eq(true)
@@ -37,13 +37,23 @@ describe 'FlushAgent' do
 
   describe 'test flush agent delete' do
 
-    it 'should succeed existence check' do
+    it 'should succeed when flush agent exists' do
       result = @flush_agent.delete()
       expect(result.message).to eq('Flush agent some-flush-agent deleted on author')
 
       result = @flush_agent.exists()
       expect(result.message).to eq('Flush agent some-flush-agent not found on author')
       expect(result.data).to eq(false)
+    end
+
+    it 'should raise error when flush agent does not exist' do
+      flush_agent = @aem.flush_agent('author', 'some-inexisting-flush-agent')
+      begin
+        flush_agent.delete()
+        fail
+      rescue RubyAem::Error => err
+        expect(err.result.message).to eq('Flush agent some-inexisting-flush-agent not found on author')
+      end
     end
 
   end

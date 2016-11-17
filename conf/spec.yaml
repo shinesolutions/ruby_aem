@@ -394,7 +394,7 @@ configproperty:
 replicationagent:
   responses:
     404:
-      handler: simple
+      handler: simple_error
       message: 'Replication agent %{name} not found on %{run_mode}'
   actions:
     create_update:
@@ -445,8 +445,11 @@ replicationagent:
           name: '%{name}'
       responses:
         302:
-          handler: simple
+          handler: simple_true
           message: 'Replication agent %{name} exists on %{run_mode}'
+        404:
+          handler: simple_false
+          message: 'Replication agent %{name} not found on %{run_mode}'
 repository:
   actions:
     block_writes:
@@ -472,7 +475,7 @@ repository:
 user:
   responses:
     404:
-      handler: simple
+      handler: simple_error
       message: 'User %{name} not found'
   actions:
     create:
@@ -502,6 +505,9 @@ user:
         200:
           handler: json_authorizable_id
           message: 'Found user %{name} authorizable ID %{authorizable_id}'
+        404:
+          handler: simple_nil
+          message: 'User %{name} not found'
     delete:
       api: sling
       operation: deleteNode
@@ -522,8 +528,11 @@ user:
           name: '%{authorizable_id}'
       responses:
         302:
-          handler: simple
+          handler: simple_true
           message: 'User %{name} exists at /%{path}/%{authorizable_id}'
+        404:
+          handler: simple_false
+          message: 'User %{name} not found'
     set_permission:
       api: cq
       operation: postCqActions

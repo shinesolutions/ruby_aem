@@ -50,12 +50,9 @@ module RubyAem
       # @return RubyAem::Result
       def delete()
         result = find_authorizable_id
-        if result.data
-          @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
-          @client.call(self.class, __callee__.to_s, @call_params)
-        else
-          result
-        end
+        @call_params[:authorizable_id] = result.data
+        @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Check whether the user exists or not.
@@ -64,6 +61,8 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists()
+        result = find_authorizable_id
+        @call_params[:authorizable_id] = result.data
         @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
         @client.call(self.class, __callee__.to_s, @call_params)
       end

@@ -54,8 +54,8 @@ module RubyAem
       end
 
       # Check whether the group exists or not.
-      # If the group exists, this method returns a success result.
-      # Otherwise it returns a failure result.
+      # If the group exists, this method returns a true result data,
+      # false otherwise.
       #
       # @return RubyAem::Result
       def exists()
@@ -89,6 +89,8 @@ module RubyAem
       end
 
       # Find the group's authorizable ID.
+      # Return authorizable ID as result data, or nil if authorizable ID
+      # cannot be found.
       #
       # @return RubyAem::Result
       def find_authorizable_id()

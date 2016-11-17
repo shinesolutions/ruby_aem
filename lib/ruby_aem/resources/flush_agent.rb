@@ -62,8 +62,8 @@ module RubyAem
       end
 
       # Check whether the flush agent exists or not.
-      # If the flush agent  exists, this method returns a success result.
-      # Otherwise it returns a failure result.
+      # If the flush agent  exists, this method returns a true result data,
+      # false otherwise.
       #
       # @return RubyAem::Result
       def exists()

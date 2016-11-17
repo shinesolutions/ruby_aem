@@ -220,7 +220,10 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
       result = bundle.stop()
     rescue RubyAem::Error => err
       puts err.message
-      puts err.result
+      puts err.result.response.status_code
+      puts err.result.response.body
+      puts err.result.response.headers
+      puts err.result.data
     end
 
 Reports

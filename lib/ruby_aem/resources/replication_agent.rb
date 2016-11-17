@@ -66,8 +66,8 @@ module RubyAem
       end
 
       # Check whether the replication agent exists or not.
-      # If the replication agent  exists, this method returns a success result.
-      # Otherwise it returns a failure result.
+      # If the replication agent  exists, this method returns a true result data,
+      # false otherwise.
       #
       # @return RubyAem::Result
       def exists()

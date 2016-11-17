@@ -56,8 +56,8 @@ module RubyAem
       end
 
       # Check whether the user exists or not.
-      # If the user exists, this method returns a success result.
-      # Otherwise it returns a failure result.
+      # If the user exists, this method returns a true result data, false
+      # otherwise.
       #
       # @return RubyAem::Result
       def exists()
@@ -100,6 +100,8 @@ module RubyAem
       end
 
       # Find the user's authorizable ID.
+      # Return authorizable ID as result data, or nil if authorizable ID
+      # cannot be found.
       #
       # @return RubyAem::Result
       def find_authorizable_id()

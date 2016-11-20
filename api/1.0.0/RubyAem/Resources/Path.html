@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: RubyAem::Resources::ConfigProperty
+  Class: RubyAem::Resources::Path
   
     &mdash; Documentation by YARD 0.9.5
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "RubyAem::Resources::ConfigProperty";
+  pathId = "RubyAem::Resources::Path";
   relpath = '../../';
 </script>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../../_index.html">Index (C)</a> &raquo;
+    <a href="../../_index.html">Index (P)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Resources.html" title="RubyAem::Resources (module)">Resources</a></span></span>
      &raquo; 
-    <span class="title">ConfigProperty</span>
+    <span class="title">Path</span>
   
 </div>
 
@@ -61,7 +61,7 @@
 
       <iframe id="search_frame" src="../../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: RubyAem::Resources::ConfigProperty
+      <div id="content"><h1>Class: RubyAem::Resources::Path
   
   
   
@@ -76,7 +76,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">RubyAem::Resources::ConfigProperty</li>
+            <li class="next">RubyAem::Resources::Path</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/ruby_aem/resources/config_property.rb</dd>
+    <dd>lib/ruby_aem/resources/path.rb</dd>
   </dl>
   
 </div>
@@ -104,8 +104,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>ConfigProperty class contains API calls related to managing an AEM config
-property.</p>
+<p>Path class contains API calls related to managing an AEM path.</p>
 
 
   </div>
@@ -131,7 +130,7 @@ property.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create-instance_method" title="#create (instance method)">#<strong>create</strong>(run_mode)  &#x21d2; Object </a>
+      <a href="#activate-instance_method" title="#activate (instance method)">#<strong>activate</strong>(ignore_deactivated, only_modified)  &#x21d2; Object </a>
     
 
     
@@ -146,7 +145,7 @@ property.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Create a new config property.</p>
+<p>Activate a path.</p>
 </div></span>
   
 </li>
@@ -155,7 +154,7 @@ property.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client, name, type, value)  &#x21d2; Object </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(client, name)  &#x21d2; Object </a>
     
 
     
@@ -172,7 +171,7 @@ property.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Initialise a config property.</p>
+<p>Initialise a path.</p>
 </div></span>
   
 </li>
@@ -187,7 +186,7 @@ property.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(client, name, type, value)  &#x21d2; <tt>Object</tt> 
+    #<strong>initialize</strong>(client, name)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -196,7 +195,7 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Initialise a config property</p>
+<p>Initialise a path.</p>
 
 
   </div>
@@ -232,39 +231,7 @@ property.</p>
       
         &mdash;
         <div class='inline'>
-<p>the property&#39;s name</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>type</span>
-      
-      
-        <span class='type'></span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>the property&#39;s type, e.g. Boolean</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>value</span>
-      
-      
-        <span class='type'></span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>the property&#39;s value, e.g. true</p>
+<p>the name of the path, e.g. /etc/designs</p>
 </div>
       
     </li>
@@ -278,24 +245,20 @@ property.</p>
       <pre class="lines">
 
 
+27
+28
 29
 30
 31
-32
-33
-34
-35
-36</pre>
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/config_property.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/path.rb', line 27</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span> <span class='op'>=</span> <span class='id identifier rubyid_client'>client</span>
   <span class='ivar'>@call_params</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-    <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
-    <span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
   <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -311,9 +274,9 @@ property.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="create-instance_method">
+  <h3 class="signature first" id="activate-instance_method">
   
-    #<strong>create</strong>(run_mode)  &#x21d2; <tt>Object</tt> 
+    #<strong>activate</strong>(ignore_deactivated, only_modified)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -322,7 +285,7 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Create a new config property.</p>
+<p>Activate a path.</p>
 
 
   </div>
@@ -333,7 +296,7 @@ property.</p>
   
     <li>
       
-        <span class='name'>run_mode</span>
+        <span class='name'>ignore_deactivated</span>
       
       
         <span class='type'></span>
@@ -342,7 +305,23 @@ property.</p>
       
         &mdash;
         <div class='inline'>
-<p>AEM run mode: author or publish</p>
+<p>if true, then deactivated items in the path will not be activated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>only_modified</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if true, then only modified items in the path will be activated</p>
 </div>
       
     </li>
@@ -374,27 +353,19 @@ property.</p>
       <pre class="lines">
 
 
+39
+40
+41
 42
 43
-44
-45
-46
-47
-48
-49
-50
-51</pre>
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/config_property.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/path.rb', line 39</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='id identifier rubyid_run_mode'>run_mode</span><span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Swagger</span><span class='period'>.</span><span class='id identifier rubyid_property_to_parameter'>property_to_parameter</span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-
-  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:run_mode</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_run_mode'>run_mode</span>
-  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:value</span><span class='rbracket'>]</span>
-  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>_type_hint</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_activate'>activate</span><span class='lparen'>(</span><span class='id identifier rubyid_ignore_deactivated'>ignore_deactivated</span><span class='comma'>,</span> <span class='id identifier rubyid_only_modified'>only_modified</span><span class='rparen'>)</span>
+  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:ignoredeactivated</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_ignore_deactivated'>ignore_deactivated</span>
+  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:onlymodified</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_only_modified'>only_modified</span>
 
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@call_params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -408,7 +379,7 @@ property.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Nov 20 23:13:17 2016 by
+  Generated on Sun Nov 20 23:12:54 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.1.10).
 </div>

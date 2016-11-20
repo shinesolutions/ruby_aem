@@ -1,3 +1,6 @@
+### 1.0.1
+*
+
 ### 1.0.0
 * Fix replication agent creation failure #1
 * Add optional params support for flush agent and replication agent create_update #2

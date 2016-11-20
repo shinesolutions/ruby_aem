@@ -7,10 +7,10 @@ ruby_aem
 ruby_aem is a Ruby client for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 It is written on top of [swagger_aem](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) and provides resource-oriented API and convenient response handling.
 
-| ruby_aem | Supported AEM          | Supported Ruby          | Documentation                                                         |
-|----------|------------------------|-------------------------|-----------------------------------------------------------------------|
-| 1.0.0    | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/1.0.0/index.html) |
-| 0.9.0    | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/0.9.0/index.html) |
+| ruby_aem | Supported AEM          | Supported Ruby          | Documentation                                                                                                                                            |
+|----------|------------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.0.0    | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/1.0.0/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#100) |
+| 0.9.0    | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/0.9.0/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#090) |
 
 Install
 -------

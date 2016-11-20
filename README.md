@@ -200,7 +200,7 @@ User:
 Result
 ------
 
-Each of the above method calls returns a [RubyAem::Result](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/result.rb), which contains message, [RubyAem::Response](https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/response.rb), and data payload. For example:
+Each of the above method calls returns a [RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html), which contains message, [RubyAem::Response](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Response.html), and data payload. For example:
 
     bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
     result = bundle.stop()

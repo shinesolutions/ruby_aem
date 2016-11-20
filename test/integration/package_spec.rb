@@ -6,8 +6,10 @@ describe 'Package' do
 
     # ensure package does not exist
     @package = @aem.package('somepackagegroup', 'somepackage', '1.2.3')
-    if @package.is_uploaded().data == true || @package.is_installed().data == true
+    begin
       @package.delete()
+    rescue RubyAem::Error => err
+      # package doesn't exist and can't be deleted
     end
   end
 

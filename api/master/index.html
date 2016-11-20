@@ -87,15 +87,16 @@ href="https://shinesolutions.github.io/ruby_aem/api/0.9.0/index.html">API</a>
 
 <p>Initialise client:</p>
 
-<pre class="code ruby"><code class="ruby">require &#39;ruby_aem&#39;
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ruby_aem</span><span class='tstring_end'>&#39;</span></span>
 
-aem = RubyAem::Aem.new({
-  :username =&gt; &#39;admin&#39;,
-  :password =&gt; &#39;admin&#39;,
-  :protocol =&gt; &#39;http&#39;,
-  :host =&gt; &#39;localhost&#39;,
-  :port =&gt; 4502,
-  :debug =&gt; false
+<span class='id identifier rubyid_aem'>aem</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Aem</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+  <span class='symbol'>:username</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='symbol'>:password</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='symbol'>:protocol</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='symbol'>:host</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>localhost</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='symbol'>:port</span> <span class='op'>=&gt;</span> <span class='int'>4502</span><span class='comma'>,</span>
+  <span class='symbol'>:debug</span> <span class='op'>=&gt;</span> <span class='kw'>false</span>
+<span class='rbrace'>}</span><span class='rparen'>)</span>
 </code></pre>
 
 <p>Bundle:</p>
@@ -120,7 +121,8 @@ aem = RubyAem::Aem.new({
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_flush_agent'>flush_agent</span> <span class='op'>=</span> <span class='id identifier rubyid_aem'>aem</span><span class='period'>.</span><span class='id identifier rubyid_flush_agent'>flush_agent</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>author</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>some-flush-agent</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># create or update flush agent
-</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_flush_agent'>flush_agent</span><span class='period'>.</span><span class='id identifier rubyid_create_update'>create_update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some Flush Agent Title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some flush agent description</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://somehost:8080</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>log_level:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>info</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>retry_delay:</span> <span class='int'>60000</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_flush_agent'>flush_agent</span><span class='period'>.</span><span class='id identifier rubyid_create_update'>create_update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some Flush Agent Title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some flush agent description</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://somehost:8080</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
 
 <span class='comment'># check flush agent&#39;s existence
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_flush_agent'>flush_agent</span><span class='period'>.</span><span class='id identifier rubyid_exists'>exists</span><span class='lparen'>(</span><span class='rparen'>)</span>
@@ -164,8 +166,9 @@ aem = RubyAem::Aem.new({
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_package'>package</span> <span class='op'>=</span> <span class='id identifier rubyid_aem'>aem</span><span class='period'>.</span><span class='id identifier rubyid_package'>package</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>somepackagegroup</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>somepackage</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1.2.3</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># upload package
-</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/tmp</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='comment'># upload package located at /tmp/somepackage-1.2.3.zip
+</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>force:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/tmp</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
 
 <span class='comment'># check whether package is uploaded
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_is_uploaded'>is_uploaded</span><span class='lparen'>(</span><span class='rparen'>)</span>
@@ -215,7 +218,13 @@ aem = RubyAem::Aem.new({
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_replication_agent'>replication_agent</span> <span class='op'>=</span> <span class='id identifier rubyid_aem'>aem</span><span class='period'>.</span><span class='id identifier rubyid_replication_agent'>replication_agent</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>author</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>some-replication-agent</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># create or update replication agent
-</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_replication_agent'>replication_agent</span><span class='period'>.</span><span class='id identifier rubyid_create_update'>create_update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some replication Agent Title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some replication agent description</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://somehost:8080</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+  <span class='label'>transport_user:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>transport_password:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>log_level:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>info</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>retry_delay:</span> <span class='int'>60000</span>
+<span class='rbrace'>}</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_replication_agent'>replication_agent</span><span class='period'>.</span><span class='id identifier rubyid_create_update'>create_update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some replication Agent Title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Some replication agent description</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://somehost:8080</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span>
 
 <span class='comment'># check replication agent&#39;s existence
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_replication_agent'>replication_agent</span><span class='period'>.</span><span class='id identifier rubyid_exists'>exists</span><span class='lparen'>(</span><span class='rparen'>)</span>
@@ -259,12 +268,35 @@ aem = RubyAem::Aem.new({
 
 <p>Each of the above method calls returns a <a
 href="https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/result.rb">RubyAem::Result</a>,
-which contains a status and a message. For example:</p>
+which contains message, <a
+href="https://github.com/shinesolutions/ruby_aem/blob/master/lib/ruby_aem/response.rb">RubyAem::Response</a>,
+and data payload. For example:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_is_failure?'>is_failure?</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
-  <span class='id identifier rubyid_exit'>exit</span>
-<span class='kw'>end</span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='op'>=</span> <span class='id identifier rubyid_aem'>aem</span><span class='period'>.</span><span class='id identifier rubyid_bundle'>bundle</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>com.adobe.cq.social.cq-social-forum</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_bundle'>bundle</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status_code'>status_code</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_headers'>headers</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span></code></pre>
+
+<h2 id="label-Error+handling">Error handling</h2>
+
+<p>Any API error will be thrown as <a
+href="https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html">RubyAem::Error</a>
+.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>begin</span>
+  <span class='id identifier rubyid_bundle'>bundle</span> <span class='op'>=</span> <span class='id identifier rubyid_aem'>aem</span><span class='period'>.</span><span class='id identifier rubyid_bundle'>bundle</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>com.adobe.cq.social.cq-social-forum</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_bundle'>bundle</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>rescue</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Error</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status_code'>status_code</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_headers'>headers</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
+<span class='kw'>end</span>
+</code></pre>
 
 <h2 id="label-Reports">Reports</h2>
 <ul><li>
@@ -279,9 +311,9 @@ report</a></p>
 </div></div>
 
       <div id="footer">
-  Generated on Tue Sep 13 00:31:42 2016 by
+  Generated on Sun Nov 20 22:20:47 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.1.3).
+  0.9.5 (ruby-2.1.10).
 </div>
 
     </div>

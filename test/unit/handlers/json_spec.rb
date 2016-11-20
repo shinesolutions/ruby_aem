@@ -55,6 +55,23 @@ describe 'JSON Handler' do
       expect(result.response).to eq(response)
     end
 
+    it 'should raise error when payload is not a success' do
+      data = '{ "success": false, "msg": "Package built" }'
+      status_code = nil
+      headers = nil
+      response_spec = nil
+      call_params = {}
+
+      begin
+        response = RubyAem::Response.new(status_code, data, headers)
+        RubyAem::Handlers.json_package_service(response, response_spec, call_params)
+        fail
+      rescue RubyAem::Error => err
+        expect(err.message).to eq('Package built')
+        expect(err.result.response).to eq(response)
+      end
+    end
+
   end
 
   describe 'test json_package_filter' do

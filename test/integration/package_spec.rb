@@ -6,7 +6,9 @@ describe 'Package' do
 
     # ensure package does not exist
     @package = @aem.package('somepackagegroup', 'somepackage', '1.2.3')
-    result = @package.delete()
+    if @package.is_uploaded().data == true || @package.is_installed().data == true
+      @package.delete()
+    end
   end
 
   after do
@@ -26,6 +28,7 @@ describe 'Package' do
       # package is not installed yet
       result = @package.is_installed()
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect(result.data).to eq(false)
 
       # install package
       result = @package.install()
@@ -34,6 +37,7 @@ describe 'Package' do
       # package is installed
       result = @package.is_installed()
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is installed')
+      expect(result.data).to eq(true)
 
       # replicate package
       result = @package.replicate()
@@ -52,6 +56,7 @@ describe 'Package' do
       # package is not uploaded yet
       result = @package.is_uploaded()
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+      expect(result.data).to eq(false)
 
       # upload package
       result = @package.upload('/tmp', { force: true })
@@ -60,6 +65,7 @@ describe 'Package' do
       # package is uploaded
       result = @package.is_uploaded()
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is uploaded')
+      expect(result.data).to eq(true)
 
       # rebuild package
       result = @package.build()

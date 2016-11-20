@@ -15,6 +15,7 @@ limitations under the License.
 =end
 
 require 'json'
+require 'ruby_aem/error'
 
 module RubyAem
   # Response handlers for JSON payload.
@@ -53,11 +54,14 @@ module RubyAem
 
       json = JSON.parse(response.body)
 
-      status = json['success'] == true ? 'success' : 'failure'
-      # TODO: raise error when JSON payload is not a success
       message = json['msg']
+      result = RubyAem::Result.new(message, response)
 
-      RubyAem::Result.new(message, response)
+      if json['success'] == true
+        result
+      else
+        raise RubyAem::Error.new(message, result)
+      end
     end
 
     # Handle package filter JSON payload.

@@ -109,7 +109,7 @@ module RubyAem
       end
 
       # Get the package filter value.
-      # Filter value is stored in result's data.
+      # Filter value is stored as result data as an array of paths.
       #
       # @return RubyAem::Result
       def get_filter()
@@ -117,10 +117,13 @@ module RubyAem
       end
 
       # Activate all paths within a package filter.
+      # Returns an array of results:
+      # - the first result is the result from retrieving filter paths
+      # - the rest of the results are the results from activating the filter paths, one result for each activation
       #
       # @param ignore_deactivated if true, then deactivated items in the path will not be activated
       # @param modified_only if true, then only modified items in the path will be activated
-      # @return RubyAem::Result
+      # @return an array of RubyAem::Result
       def activate_filter(ignore_deactivated, modified_only)
         result = get_filter()
 
@@ -140,50 +143,44 @@ module RubyAem
       end
 
       # Check if this package is uploaded.
-      # Success result indicates that the package is uploaded.
-      # Otherwise a failure result indicates that package is not uploaded.
+      # True result data indicates that the package is uploaded, false otherwise.
       #
       # @return RubyAem::Result
       def is_uploaded()
-        result = list_all()
+        packages = list_all().data
+        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
 
-        begin
-          packages = result.data
-          package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
-
-          if package.to_s != ''
-            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
-          else
-            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
-          end
-          result = RubyAem::Result.new(message, nil)
-          result.data = package
-        rescue RubyAem::Error => err
+        if package.to_s != ''
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
+          is_uploaded = true
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
+          is_uploaded = false
         end
+        result = RubyAem::Result.new(message, nil)
+        result.data = is_uploaded
 
         result
       end
 
       # Check if this package is installed.
-      # Success result indicates that the package is installed.
-      # Otherwise a failure result indicates that package is not installed.
+      # True result data indicates that the package is installed, false otherwise.
       #
       # @return RubyAem::Result
       def is_installed()
-        result = is_uploaded()
+        packages = list_all().data
+        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        last_unpacked_by = package.xpath('lastUnpackedBy')
 
-        begin
-          package = result.data
-          last_unpacked_by = package.xpath('lastUnpackedBy')
-
-          if not ['<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
-            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
-          else
-            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed"
-          end
-          result = RubyAem::Result.new(message, nil)
-        rescue RubyAem::Error => err
+        if not ['<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
+          is_installed = true
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed"
+          is_installed = false
         end
+        result = RubyAem::Result.new(message, nil)
+        result.data = is_installed
 
         result
       end

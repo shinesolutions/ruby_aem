@@ -190,7 +190,7 @@ describe 'Package' do
 
   describe 'test is_uploaded' do
 
-    it 'should return success result when package exists on the list' do
+    it 'should return true result data when package exists on the list' do
 
       mock_data_list_all = Nokogiri::XML(
         '<packages>' \
@@ -212,10 +212,11 @@ describe 'Package' do
       result = @package.is_uploaded
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is uploaded')
       expect(result.response).to be(nil)
+      expect(result.data).to eq(true)
 
     end
 
-    it 'should return failure result when package does not exist on the list' do
+    it 'should return false result data when package does not exist on the list' do
 
       mock_data_list_all = Nokogiri::XML('')
       mock_result_list_all = double('mock_result_list_all')
@@ -230,6 +231,7 @@ describe 'Package' do
       result = @package.is_uploaded
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not uploaded')
       expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
 
     end
 
@@ -237,7 +239,7 @@ describe 'Package' do
 
   describe 'test is_installed' do
 
-    it 'should return success result when package has lastUnpackedBy attribute' do
+    it 'should return true result data when package has lastUnpackedBy attribute' do
 
       mock_data_list_all = Nokogiri::XML(
         '<packages>' \
@@ -260,10 +262,11 @@ describe 'Package' do
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is installed')
       expect(result.response).to be(nil)
+      expect(result.data).to eq(true)
 
     end
 
-    it 'should return failure result when package does not have lastUnpackedBy attribute' do
+    it 'should return false result  data when package does not have lastUnpackedBy attribute' do
 
       mock_data_list_all = Nokogiri::XML(
         '<packages>' \
@@ -286,6 +289,7 @@ describe 'Package' do
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
       expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
 
     end
 

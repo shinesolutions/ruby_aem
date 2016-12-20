@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 =end
 
+require 'retries'
+
 module RubyAem
   module Resources
     # Package class contains API calls related to managing an AEM package.
@@ -68,7 +70,7 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
-      # Install the package.
+      # Install the package without waiting until the package status states it is installed.
       #
       # @return RubyAem::Result
       def install()
@@ -92,7 +94,7 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
-      # Upload the package.
+      # Upload the package without waiting until the package status states it is uploaded.
       #
       # @param file_path the directory where the package file to be uploaded is
       # @param force if true, then overwrite if the package already exists
@@ -182,6 +184,43 @@ module RubyAem
         result = RubyAem::Result.new(message, nil)
         result.data = is_installed
 
+        result
+      end
+
+      # Upload the package and wait until the package status states it is uploaded.
+      #
+      # @param file_path the directory where the package file to be uploaded is
+      # @param force if true, then overwrite if the package already exists
+      # @param opts optional parameters:
+      # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
+      # @return RubyAem::Result
+      def upload_wait_until_ready(file_path,
+        opts = {
+          force: true
+        })
+        result = upload(file_path, opts)
+        with_retries(:max_tries => 30, :base_sleep_seconds => 2, :max_sleep_seconds => 2) { |retries_count|
+          check_result = is_uploaded()
+          puts 'Upload check #%d: %s - %s' % [retries_count, check_result.data, check_result.message]
+          if check_result.data == false
+            raise StandardError.new(check_result.message)
+          end
+        }
+        result
+      end
+
+      # Install the package and wait until the package status states it is installed.
+      #
+      # @return RubyAem::Result
+      def install_wait_until_ready()
+        result = install()
+        with_retries(:max_tries => 30, :base_sleep_seconds => 2, :max_sleep_seconds => 2) { |retries_count|
+          check_result = is_installed()
+          puts 'Install check #%d: %s - %s' % [retries_count, check_result.data, check_result.message]
+          if check_result.data == false
+            raise StandardError.new(check_result.message)
+          end
+        }
         result
       end
 

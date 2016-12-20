@@ -295,4 +295,113 @@ describe 'Package' do
 
   end
 
+  describe 'test upload_wait_until_ready' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'upload',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3',
+          :file_path => '/tmp',
+          :force => true })
+
+      mock_data_list_all_not_installed = Nokogiri::XML('')
+      mock_result_list_all_not_installed = double('mock_result_list_all_not_installed')
+      expect(mock_result_list_all_not_installed).to receive(:data).and_return(mock_data_list_all_not_installed)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3',
+          :file_path => '/tmp',
+          :force => true }).and_return(mock_result_list_all_not_installed)
+
+      mock_data_list_all_uploaded = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '  </package>' \
+        '</packages>')
+      mock_result_list_all_uploaded = double('mock_result_list_all_uploaded')
+      expect(mock_result_list_all_uploaded).to receive(:data).and_return(mock_data_list_all_uploaded)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3',
+          :file_path => '/tmp',
+          :force => true }).and_return(mock_result_list_all_uploaded)
+
+      expect(STDOUT).to receive(:puts).with('Upload check #1: false - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+      expect(STDOUT).to receive(:puts).with('Upload check #2: true - Package somepackagegroup/somepackage-1.2.3 is uploaded')
+
+      @package.upload_wait_until_ready('/tmp', { force: true })
+    end
+
+  end
+
+  describe 'test install_wait_until_ready' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'install',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3' })
+
+      mock_data_list_all_not_installed = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <lastUnpackedBy>null</lastUnpackedBy>' \
+        '  </package>' \
+        '</packages>')
+      mock_result_list_all_not_installed = double('mock_result_list_all_not_installed')
+      expect(mock_result_list_all_not_installed).to receive(:data).and_return(mock_data_list_all_not_installed)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3' }).and_return(mock_result_list_all_not_installed)
+
+      mock_data_list_all_installed = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <lastUnpackedBy>admin</lastUnpackedBy>' \
+        '  </package>' \
+        '</packages>')
+      mock_result_list_all_installed = double('mock_result_list_all')
+      expect(mock_result_list_all_installed).to receive(:data).and_return(mock_data_list_all_installed)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3' }).and_return(mock_result_list_all_installed)
+
+      expect(STDOUT).to receive(:puts).with('Install check #1: false - Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect(STDOUT).to receive(:puts).with('Install check #2: true - Package somepackagegroup/somepackage-1.2.3 is installed')
+
+      @package.install_wait_until_ready
+    end
+
+  end
+
 end

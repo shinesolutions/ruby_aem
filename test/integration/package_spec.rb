@@ -61,7 +61,7 @@ describe 'Package' do
       expect(result.data).to eq(false)
 
       # upload package
-      result = @package.upload('/tmp', { force: true })
+      result = @package.upload_wait_until_ready('/tmp', { force: true })
       expect(result.message).to eq('Package uploaded')
 
       # package is uploaded
@@ -74,7 +74,7 @@ describe 'Package' do
       expect(result.message).to eq('Package built')
 
       # install package
-      result = @package.install()
+      result = @package.install_wait_until_ready()
       expect(result.message).to eq('Package installed')
 
       # replicate package

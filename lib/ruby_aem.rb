@@ -79,14 +79,6 @@ module RubyAem
       RubyAem::Resources::Bundle.new(@client, name)
     end
 
-    # Create a path instance.
-    #
-    # @param name the name of the path, e.g. /etc/designs
-    # @return new RubyAem::Resources::Path instance
-    def path(name)
-      RubyAem::Resources::Path.new(@client, name)
-    end
-
     # Create a config property instance.
     #
     # @param name the property's name
@@ -132,6 +124,14 @@ module RubyAem
     # @return new RubyAem::Resources::Package instance
     def package(group_name, package_name, package_version)
       RubyAem::Resources::Package.new(@client, group_name, package_name, package_version)
+    end
+
+    # Create a path instance.
+    #
+    # @param name the name of the path, e.g. /etc/designs
+    # @return new RubyAem::Resources::Path instance
+    def path(name)
+      RubyAem::Resources::Path.new(@client, name)
     end
 
     # Create a replication agent instance.

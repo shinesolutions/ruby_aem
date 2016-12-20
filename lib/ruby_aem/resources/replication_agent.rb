@@ -40,7 +40,7 @@ module RubyAem
       # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503
       # @param opts optional parameters:
       # - transport_user: username for transport user, default is admin
-      # - transport_password: username for transport user, default is admin
+      # - transport_password: password for transport user, default is admin
       # - log_level: error, info, debug, default is error
       # - retry_delay: in milliseconds, default is 30000
       # @return RubyAem::Result

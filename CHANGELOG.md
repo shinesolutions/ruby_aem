@@ -1,5 +1,5 @@
 ### 1.0.1
-*
+* Fix flush agent and replication agent initialisation parameters mix up
 
 ### 1.0.0
 * Fix replication agent creation failure #1

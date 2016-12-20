@@ -102,8 +102,8 @@ module RubyAem
     # @param run_mode AEM run mode: author or publish
     # @param name the flush agent's name, e.g. some-flush-agent
     # @return new RubyAem::Resources::FlushAgent instance
-    def flush_agent(name, run_mode)
-      RubyAem::Resources::FlushAgent.new(@client, name, run_mode)
+    def flush_agent(run_mode, name)
+      RubyAem::Resources::FlushAgent.new(@client, run_mode, name)
     end
 
     # Create a group instance.
@@ -139,8 +139,8 @@ module RubyAem
     # @param run_mode AEM run mode: author or publish
     # @param name the replication agent's name, e.g. some-replication-agent
     # @return new RubyAem::Resources::ReplicationAgent instance
-    def replication_agent(name, run_mode)
-      RubyAem::Resources::ReplicationAgent.new(@client, name, run_mode)
+    def replication_agent(run_mode, name)
+      RubyAem::Resources::ReplicationAgent.new(@client, run_mode, name)
     end
 
     # Create a repository instance.

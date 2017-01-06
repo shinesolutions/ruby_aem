@@ -1,3 +1,6 @@
+### 1.0.3
+*
+
 ### 1.0.2
 * Fix flush agent and replication agent initialisation parameters mix up
 * Add package upload_wait_until_ready and install_wait_until_ready methods

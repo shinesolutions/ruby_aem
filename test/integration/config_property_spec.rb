@@ -10,14 +10,9 @@ describe 'ConfigProperty' do
 
   describe 'test properties create SSL config' do
 
-    it 'should fail when path node does not exist' do
+    it 'should create a sling folder by default when path node does not exist' do
       config_property = @aem.config_property('someinexistingnode', 'Boolean', true)
-      begin
-        config_property.create('author')
-        fail
-      rescue RubyAem::Error => err
-        expect(err.message).to match(/^Unexpected response/)
-      end
+      config_property.create('author')
     end
 
   end

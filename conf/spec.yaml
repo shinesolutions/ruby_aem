@@ -358,7 +358,7 @@ configproperty:
   actions:
     create:
       api: sling
-      operation: postPath
+      operation: postConfig
       params:
         required:
           runmode: '%{run_mode}'

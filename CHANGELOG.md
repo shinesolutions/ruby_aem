@@ -1,5 +1,5 @@
 ### 1.0.3
-*
+* Fix config property's operation in spec file
 
 ### 1.0.2
 * Fix flush agent and replication agent initialisation parameters mix up

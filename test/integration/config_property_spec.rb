@@ -11,8 +11,8 @@ describe 'ConfigProperty' do
   describe 'test properties create SSL config' do
 
     it 'should create a sling folder by default when path node does not exist' do
-      config_property = @aem.config_property('someinexistingnode', 'Boolean', true)
-      config_property.create('author')
+      config_property = @aem.config_property('someproperty', 'Boolean', true)
+      config_property.create('author', 'someinexistingnode')
     end
 
     it 'should create SSL property correctly when node exists' do
@@ -27,7 +27,7 @@ describe 'ConfigProperty' do
       result = node.create('sling:OsgiConfig')
 
       config_property = @aem.config_property('org.apache.felix.https.enable', 'Boolean', true)
-      config_property.create('author')
+      config_property.create('author', 'org.apache.felix.http')
     end
 
   end

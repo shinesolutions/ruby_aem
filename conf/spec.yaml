@@ -362,7 +362,7 @@ configproperty:
       params:
         required:
           runmode: '%{run_mode}'
-          name: '%{name}'
+          name: '%{node_name}'
         optional:
           - org_apache_felix_https_nio
           - org_apache_felix_https_nio_type_hint
@@ -387,10 +387,10 @@ configproperty:
       responses:
         200:
           handler: simple
-          message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
+          message: 'Set %{run_mode} %{node_name} config %{type} property %{name}=%{value}'
         201:
           handler: simple
-          message: 'Set %{run_mode} config %{type} property %{name}=%{value}'
+          message: 'Set %{run_mode} %{node_name} config %{type} property %{name}=%{value}'
 replicationagent:
   responses:
     404:

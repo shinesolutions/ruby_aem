@@ -46,10 +46,10 @@ Bundle:
 
 Configuration property:
 
-    config_property = aem.config_property('someinexistingnode', 'Boolean', true)
+    config_property = aem.config_property('someproperty', 'Boolean', true)
 
-    # set config property
-    result = config_property.create('author')
+    # set config property on /apps/system/config.author/somenode
+    result = config_property.create('author', 'somenode')
 
 Flush agent:
 

@@ -18,11 +18,12 @@ describe 'ConfigProperty' do
         { :name => 'someproperty',
           :type => 'Boolean',
           :value => 'true',
+          :node_name => 'somenode',
           :run_mode => 'author',
           :someproperty => 'true',
           :someproperty_type_hint => 'Boolean' })
       config_property = RubyAem::Resources::ConfigProperty.new(@mock_client, 'someproperty', 'Boolean', 'true')
-      config_property.create('author')
+      config_property.create('author', 'somenode')
     end
 
   end

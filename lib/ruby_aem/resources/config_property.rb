@@ -38,11 +38,13 @@ module RubyAem
       # Create a new config property.
       #
       # @param run_mode AEM run mode: author or publish
+      # @param node_name the node name under /apps/system/config.{run_mode}/ where the property will be part of
       # @return RubyAem::Result
-      def create(run_mode)
+      def create(run_mode, node_name)
 
         name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
 
+        @call_params[:node_name] = node_name
         @call_params[:run_mode] = run_mode
         @call_params["#{name}".to_sym] = @call_params[:value]
         @call_params["#{name}_type_hint".to_sym] = @call_params[:type]

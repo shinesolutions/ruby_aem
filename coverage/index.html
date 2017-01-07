@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-12-20T16:02:39+11:00">2016-12-20T16:02:39+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-07T11:24:10+11:00">2017-01-07T11:24:10+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -32,8 +32,8 @@
   <a name="AllFiles"></a>
   <div>
     <b>21</b> files in total.
-    <b>449</b> relevant lines. 
-    <span class="green"><b>449</b> lines covered</span> and
+    <b>450</b> relevant lines. 
+    <span class="green"><b>450</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -143,9 +143,9 @@
       <tr>
         <td class="strong"><a href="#b6fc372af67686c8b33996a39f337f6a13ea9889" class="src_link" title="lib/ruby_aem/resources/config_property.rb">lib/ruby_aem/resources/config_property.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>55</td>
-        <td>12</td>
-        <td>12</td>
+        <td>57</td>
+        <td>13</td>
+        <td>13</td>
         <td>0</td>
         <td>1.2</td>
       </tr>
@@ -4565,8 +4565,8 @@
     <h3>lib/ruby_aem/resources/config_property.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>12</b> relevant lines. 
-      <span class="green"><b>12</b> lines covered</span> and
+      <b>13</b> relevant lines. 
+      <span class="green"><b>13</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -4817,88 +4817,100 @@
         <li class="never" data-hits="" data-linenumber="41">
           
           
+          <code class="ruby">      # @param node_name the node name under /apps/system/config.{run_mode}/ where the property will be part of</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="42">
+        <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
-          <code class="ruby">      def create(run_mode)</code>
+          <code class="ruby">      def create(run_mode, node_name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="44">
+        <li class="covered" data-hits="1" data-linenumber="45">
           <span class="hits">1</span>
           
           <code class="ruby">        name = RubyAem::Swagger.property_to_parameter(@call_params[:name])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="46">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        @call_params[:run_mode] = run_mode</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
-          <code class="ruby">        @call_params[&quot;#{name}&quot;.to_sym] = @call_params[:value]</code>
+          <code class="ruby">        @call_params[:node_name] = node_name</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">        @call_params[&quot;#{name}_type_hint&quot;.to_sym] = @call_params[:type]</code>
+          <code class="ruby">        @call_params[:run_mode] = run_mode</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="covered" data-hits="1" data-linenumber="49">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">        @call_params[&quot;#{name}&quot;.to_sym] = @call_params[:value]</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
-          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+          <code class="ruby">        @call_params[&quot;#{name}_type_hint&quot;.to_sym] = @call_params[:type]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="53">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="56">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">end</code>
@@ -8381,7 +8393,7 @@
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby">      # - transport_password: username for transport user, default is admin</code>
+          <code class="ruby">      # - transport_password: password for transport user, default is admin</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">

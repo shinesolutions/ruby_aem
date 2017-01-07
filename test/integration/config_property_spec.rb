@@ -27,7 +27,8 @@ describe 'ConfigProperty' do
       result = node.create('sling:OsgiConfig')
 
       config_property = @aem.config_property('org.apache.felix.https.enable', 'Boolean', true)
-      config_property.create('author', 'org.apache.felix.http')
+      result = config_property.create('author', 'org.apache.felix.http')
+      expect(result.message).to eq('Set author org.apache.felix.http config Boolean property org.apache.felix.https.enable=true')
     end
 
   end

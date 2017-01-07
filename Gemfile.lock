@@ -40,12 +40,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri (>= 1.6.8)
-  retries (>= 0.0.5)
+  nokogiri (~> 1.6.8)
+  retries (~> 0.0.5)
   rspec
   simplecov
-  swagger_aem (>= 0.9.2)
+  swagger_aem (~> 0.9.2)
   yard
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

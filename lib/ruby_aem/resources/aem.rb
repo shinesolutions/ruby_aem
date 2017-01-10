@@ -15,6 +15,7 @@ limitations under the License.
 =end
 
 require 'retries'
+require 'ruby_aem/error'
 
 module RubyAem
   module Resources
@@ -48,14 +49,14 @@ module RubyAem
           begin
             result = get_login_page()
             if result.response.body !~ /QUICKSTART_HOMEPAGE/
-              puts 'Retrieve login page attempt #%d: Login page does not contain QUICKSTART_HOMEPAGE' % [retries_count]
+              puts 'Retrieve login page attempt #%d: %s but not ready yet' % [retries_count, result.message]
               raise StandardError.new(result.message)
             else
-              puts 'Retrieve login page attempt #%d: %s' % [retries_count, result.message]
+              puts 'Retrieve login page attempt #%d: %s and ready' % [retries_count, result.message]
             end
           rescue RubyAem::Error => err
             puts 'Retrieve login page attempt #%d: %s' % [retries_count, err.message]
-            raise StandardError.new(result.message)
+            raise StandardError.new(err.message)
           end
         }
         result

@@ -47,8 +47,14 @@ module RubyAem
         with_retries(:max_tries => 30, :base_sleep_seconds => 2, :max_sleep_seconds => 2) { |retries_count|
           begin
             result = get_login_page()
-            puts 'Retrieve login page attempt #%d: %s' % [retries_count, result.message]
+            if result.response.body !~ /QUICKSTART_HOMEPAGE/
+              puts 'Retrieve login page attempt #%d: Login page does not contain QUICKSTART_HOMEPAGE' % [retries_count]
+              raise StandardError.new(result.message)
+            else
+              puts 'Retrieve login page attempt #%d: %s' % [retries_count, result.message]
+            end
           rescue RubyAem::Error => err
+            puts 'Retrieve login page attempt #%d: %s' % [retries_count, err.message]
             raise StandardError.new(result.message)
           end
         }

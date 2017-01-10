@@ -1,5 +1,5 @@
-all: deps clean build install test test-integration doc
-ci: deps clean build install test doc
+all: deps clean build install test-unit test-integration doc
+ci: deps clean build install test-unit doc
 
 deps:
 	gem install bundler
@@ -15,7 +15,7 @@ build: clean
 install: build
 	gem install `ls ruby_aem-*.gem`
 
-test:
+test-unit:
 	rspec test/unit
 
 test-integration: install

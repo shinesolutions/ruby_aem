@@ -1,3 +1,6 @@
+### 1.0.5
+*
+
 ### 1.0.4
 * Fix config property's operation in spec file
 * Fix node handling in config property creation

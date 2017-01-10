@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Class: RubyAem::Result
+  Class: RubyAem::Response
   
     &mdash; Documentation by YARD 0.9.5
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "RubyAem::Result";
+  pathId = "RubyAem::Response";
   relpath = '../';
 </script>
 
@@ -39,7 +39,7 @@
     <a href="../_index.html">Index (R)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span>
      &raquo; 
-    <span class="title">Result</span>
+    <span class="title">Response</span>
   
 </div>
 
@@ -61,7 +61,7 @@
 
       <iframe id="search_frame" src="../class_list.html"></iframe>
 
-      <div id="content"><h1>Class: RubyAem::Result
+      <div id="content"><h1>Class: RubyAem::Response
   
   
   
@@ -76,7 +76,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">RubyAem::Result</li>
+            <li class="next">RubyAem::Response</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -96,7 +96,7 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/ruby_aem/result.rb</dd>
+    <dd>lib/ruby_aem/response.rb</dd>
   </dl>
   
 </div>
@@ -104,18 +104,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>Result class represents the result of a client call. It contains the
-following attributes:</p>
-<ul><li>
-<p>message: a message string containing the description of the result</p>
-</li><li>
-<p>response: a RubyAem::Response response from AEM</p>
-</li><li>
-<p>data: the data payload, which can be of any type depending on the API call</p>
-</li></ul>
-
-<p>e.g. is_* and exists method provide result with boolean data. Some API
-calls result doesn&#39;t contain any data.</p>
+<p>Response wraps HTTP response data returned by swagger_aem.</p>
 
 
   </div>
@@ -133,7 +122,7 @@ calls result doesn&#39;t contain any data.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#data-instance_method" title="#data (instance method)">#<strong>data</strong>  &#x21d2; Object </a>
+      <a href="#body-instance_method" title="#body (instance method)">#<strong>body</strong>  &#x21d2; Object </a>
     
 
     
@@ -151,7 +140,7 @@ calls result doesn&#39;t contain any data.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute data.</p>
+<p>Returns the value of attribute body.</p>
 </div></span>
   
 </li>
@@ -160,7 +149,7 @@ calls result doesn&#39;t contain any data.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#message-instance_method" title="#message (instance method)">#<strong>message</strong>  &#x21d2; Object </a>
+      <a href="#headers-instance_method" title="#headers (instance method)">#<strong>headers</strong>  &#x21d2; Object </a>
     
 
     
@@ -168,8 +157,6 @@ calls result doesn&#39;t contain any data.</p>
   
   
   
-    
-      <span class="note title readonly">readonly</span>
     
     
   
@@ -180,7 +167,7 @@ calls result doesn&#39;t contain any data.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute message.</p>
+<p>Returns the value of attribute headers.</p>
 </div></span>
   
 </li>
@@ -189,7 +176,7 @@ calls result doesn&#39;t contain any data.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#response-instance_method" title="#response (instance method)">#<strong>response</strong>  &#x21d2; Object </a>
+      <a href="#status_code-instance_method" title="#status_code (instance method)">#<strong>status_code</strong>  &#x21d2; Object </a>
     
 
     
@@ -197,8 +184,6 @@ calls result doesn&#39;t contain any data.</p>
   
   
   
-    
-      <span class="note title readonly">readonly</span>
     
     
   
@@ -209,7 +194,7 @@ calls result doesn&#39;t contain any data.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute response.</p>
+<p>Returns the value of attribute status_code.</p>
 </div></span>
   
 </li>
@@ -231,7 +216,7 @@ calls result doesn&#39;t contain any data.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(message, response)  &#x21d2; Object </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(status_code, body, headers)  &#x21d2; Object </a>
     
 
     
@@ -263,7 +248,7 @@ calls result doesn&#39;t contain any data.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(message, response)  &#x21d2; <tt>Object</tt> 
+    #<strong>initialize</strong>(status_code, body, headers)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -283,7 +268,7 @@ calls result doesn&#39;t contain any data.</p>
   
     <li>
       
-        <span class='name'>message</span>
+        <span class='name'>status_code</span>
       
       
         <span class='type'></span>
@@ -292,14 +277,14 @@ calls result doesn&#39;t contain any data.</p>
       
         &mdash;
         <div class='inline'>
-<p>result message</p>
+<p>HTTP status code</p>
 </div>
       
     </li>
   
     <li>
       
-        <span class='name'>response</span>
+        <span class='name'>body</span>
       
       
         <span class='type'></span>
@@ -308,7 +293,23 @@ calls result doesn&#39;t contain any data.</p>
       
         &mdash;
         <div class='inline'>
-<p>HTTP response</p>
+<p>HTTP response body</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>headers</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTTP headers</p>
 </div>
       
     </li>
@@ -322,17 +323,19 @@ calls result doesn&#39;t contain any data.</p>
       <pre class="lines">
 
 
-36
-37
-38
-39</pre>
+31
+32
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/result.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/response.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
-  <span class='ivar'>@message</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
-  <span class='ivar'>@response</span> <span class='op'>=</span> <span class='id identifier rubyid_response'>response</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_status_code'>status_code</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_headers'>headers</span><span class='rparen'>)</span>
+  <span class='ivar'>@status_code</span> <span class='op'>=</span> <span class='id identifier rubyid_status_code'>status_code</span>
+  <span class='ivar'>@body</span> <span class='op'>=</span> <span class='id identifier rubyid_body'>body</span>
+  <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='id identifier rubyid_headers'>headers</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -345,11 +348,11 @@ calls result doesn&#39;t contain any data.</p>
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="data=-instance_method"></span>
+      <span id="body=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="data-instance_method">
+  <h3 class="signature first" id="body-instance_method">
   
-    #<strong>data</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>body</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -358,7 +361,7 @@ calls result doesn&#39;t contain any data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute data</p>
+<p>Returns the value of attribute body</p>
 
 
   </div>
@@ -372,15 +375,15 @@ calls result doesn&#39;t contain any data.</p>
       <pre class="lines">
 
 
-29
-30
-31</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/result.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/response.rb', line 22</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span>
-  <span class='ivar'>@data</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_body'>body</span>
+  <span class='ivar'>@body</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -388,11 +391,11 @@ calls result doesn&#39;t contain any data.</p>
 </div>
     
       
-      <span id=""></span>
+      <span id="headers=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="message-instance_method">
+  <h3 class="signature " id="headers-instance_method">
   
-    #<strong>message</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+    #<strong>headers</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -401,7 +404,7 @@ calls result doesn&#39;t contain any data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute message</p>
+<p>Returns the value of attribute headers</p>
 
 
   </div>
@@ -415,15 +418,15 @@ calls result doesn&#39;t contain any data.</p>
       <pre class="lines">
 
 
-27
-28
-29</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/result.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/response.rb', line 23</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_message'>message</span>
-  <span class='ivar'>@message</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_headers'>headers</span>
+  <span class='ivar'>@headers</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -431,11 +434,11 @@ calls result doesn&#39;t contain any data.</p>
 </div>
     
       
-      <span id=""></span>
+      <span id="status_code=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="response-instance_method">
+  <h3 class="signature " id="status_code-instance_method">
   
-    #<strong>response</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+    #<strong>status_code</strong>  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -444,7 +447,7 @@ calls result doesn&#39;t contain any data.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute response</p>
+<p>Returns the value of attribute status_code</p>
 
 
   </div>
@@ -458,15 +461,15 @@ calls result doesn&#39;t contain any data.</p>
       <pre class="lines">
 
 
-28
-29
-30</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/result.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/response.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_response'>response</span>
-  <span class='ivar'>@response</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_status_code'>status_code</span>
+  <span class='ivar'>@status_code</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -479,7 +482,7 @@ calls result doesn&#39;t contain any data.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Jan  7 11:34:36 2017 by
+  Generated on Wed Jan 11 10:13:21 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.0.0).
 </div>

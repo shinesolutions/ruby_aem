@@ -130,6 +130,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#aem-instance_method" title="#aem (instance method)">#<strong>aem</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create an AEM instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#bundle-instance_method" title="#bundle (instance method)">#<strong>bundle</strong>(name)  &#x21d2; Object </a>
     
 
@@ -460,7 +484,6 @@
       <pre class="lines">
 
 
-45
 46
 47
 48
@@ -487,10 +510,11 @@
 69
 70
 71
-72</pre>
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_conf'>conf</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
@@ -533,7 +557,66 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="bundle-instance_method">
+  <h3 class="signature first" id="aem-instance_method">
+  
+    #<strong>aem</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an AEM instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'>
+<p>new RubyAem::Resources::Aem instance</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_aem'>aem</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Aem</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bundle-instance_method">
   
     #<strong>bundle</strong>(name)  &#x21d2; <tt>Object</tt> 
   
@@ -596,12 +679,12 @@
       <pre class="lines">
 
 
-78
-79
-80</pre>
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bundle'>bundle</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Bundle</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -707,12 +790,12 @@
       <pre class="lines">
 
 
-88
-89
-90</pre>
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config_property'>config_property</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>ConfigProperty</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -802,12 +885,12 @@
       <pre class="lines">
 
 
-97
-98
-99</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flush_agent'>flush_agent</span><span class='lparen'>(</span><span class='id identifier rubyid_run_mode'>run_mode</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>FlushAgent</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_run_mode'>run_mode</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -897,12 +980,12 @@
       <pre class="lines">
 
 
-106
-107
-108</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group'>group</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Group</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -992,12 +1075,12 @@
       <pre class="lines">
 
 
-115
-116
-117</pre>
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_node'>node</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Node</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -1103,12 +1186,12 @@
       <pre class="lines">
 
 
-125
-126
-127</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_package'>package</span><span class='lparen'>(</span><span class='id identifier rubyid_group_name'>group_name</span><span class='comma'>,</span> <span class='id identifier rubyid_package_name'>package_name</span><span class='comma'>,</span> <span class='id identifier rubyid_package_version'>package_version</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Package</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_group_name'>group_name</span><span class='comma'>,</span> <span class='id identifier rubyid_package_name'>package_name</span><span class='comma'>,</span> <span class='id identifier rubyid_package_version'>package_version</span><span class='rparen'>)</span>
@@ -1182,12 +1265,12 @@
       <pre class="lines">
 
 
-133
-134
-135</pre>
+141
+142
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_path'>path</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Path</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -1277,12 +1360,12 @@
       <pre class="lines">
 
 
-142
-143
-144</pre>
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replication_agent'>replication_agent</span><span class='lparen'>(</span><span class='id identifier rubyid_run_mode'>run_mode</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>ReplicationAgent</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_run_mode'>run_mode</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -1336,12 +1419,12 @@
       <pre class="lines">
 
 
-149
-150
-151</pre>
+157
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_repository'>repository</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Repository</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='rparen'>)</span>
@@ -1431,12 +1514,12 @@
       <pre class="lines">
 
 
-158
-159
-160</pre>
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user'>user</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
   <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
@@ -1451,7 +1534,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Jan  7 11:34:36 2017 by
+  Generated on Wed Jan 11 10:13:20 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.0.0).
 </div>

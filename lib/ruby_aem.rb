@@ -15,6 +15,7 @@ limitations under the License.
 =end
 
 require 'ruby_aem/client'
+require 'ruby_aem/resources/aem'
 require 'ruby_aem/resources/bundle'
 require 'ruby_aem/resources/config_property'
 require 'ruby_aem/resources/flush_agent'
@@ -69,6 +70,13 @@ module RubyAem
       spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
 
       @client = RubyAem::Client.new(apis, spec)
+    end
+
+    # Create an AEM instance.
+    #
+    # @return new RubyAem::Resources::Aem instance
+    def aem()
+      RubyAem::Resources::Aem.new(@client)
     end
 
     # Create a bundle instance.

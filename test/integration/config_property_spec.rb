@@ -29,6 +29,12 @@ describe 'ConfigProperty' do
       config_property = @aem.config_property('org.apache.felix.https.enable', 'Boolean', true)
       result = config_property.create('author', 'org.apache.felix.http')
       expect(result.message).to eq('Set author org.apache.felix.http config Boolean property org.apache.felix.https.enable=true')
+
+      # wait until Jetty finishes restart following org.apache.felix.http config change
+      aem = @aem.aem()
+      result = aem.get_login_page_wait_until_ready()
+      expect(result.message).to eq('Login page retrieved')
+      expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     end
 
   end

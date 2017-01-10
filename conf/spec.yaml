@@ -1,3 +1,14 @@
+aem:
+  actions:
+    get_login_page:
+      api: cq
+      operation: getLoginPage
+      params:
+        required:
+      responses:
+        200:
+          handler: simple
+          message: 'Login page retrieved'
 bundle:
   responses:
     404:

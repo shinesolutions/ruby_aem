@@ -1,6 +1,7 @@
 ### 1.0.4
 * Fix config property's operation in spec file
 * Fix node handling in config property creation
+* Add aem resource with get_login_page_until_ready method
 
 ### 1.0.2
 * Fix flush agent and replication agent initialisation parameters mix up

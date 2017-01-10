@@ -12,6 +12,7 @@ describe 'RubyAem' do
 
     it 'should return client with resource methods' do
       aem = RubyAem::Aem.new()
+      expect(aem).to respond_to(:aem)
       expect(aem).to respond_to(:bundle)
       expect(aem).to respond_to(:config_property)
       expect(aem).to respond_to(:flush_agent)
@@ -22,6 +23,15 @@ describe 'RubyAem' do
       expect(aem).to respond_to(:replication_agent)
       expect(aem).to respond_to(:repository)
       expect(aem).to respond_to(:user)
+    end
+
+  end
+
+  describe 'test aem' do
+
+    it 'should return aem instance' do
+      aem = RubyAem::Aem.new().aem()
+      expect(aem).to_not be(nil)
     end
 
   end

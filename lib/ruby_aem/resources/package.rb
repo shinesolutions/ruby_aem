@@ -174,7 +174,7 @@ module RubyAem
         package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
         last_unpacked_by = package.xpath('lastUnpackedBy')
 
-        if not ['<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
+        if not ['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
           is_installed = true
         else

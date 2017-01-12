@@ -239,7 +239,7 @@ describe 'Package' do
 
   describe 'test is_installed' do
 
-    it 'should return true result data when package has lastUnpackedBy attribute' do
+    it 'should return true result data when package has lastUnpackedBy attribute value' do
 
       mock_data_list_all = Nokogiri::XML(
         '<packages>' \
@@ -266,7 +266,7 @@ describe 'Package' do
 
     end
 
-    it 'should return false result  data when package does not have lastUnpackedBy attribute' do
+    it 'should return false result  data when package has null lastUnpackedBy attribute value' do
 
       mock_data_list_all = Nokogiri::XML(
         '<packages>' \
@@ -293,6 +293,59 @@ describe 'Package' do
 
     end
 
+    it 'should return false result  data when package has null lastUnpackedBy attribute value' do
+
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <lastUnpackedBy/>' \
+        '  </package>' \
+        '</packages>')
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3' }).and_return(mock_result_list_all)
+      result = @package.is_installed
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+
+    end
+
+    it 'should return false result  data when checked package segment does not exist at all' do
+
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>otherpackagegroup</group>' \
+        '    <name>otherpackage</name>' \
+        '    <version>4.5.6</version>' \
+        '    <lastUnpackedBy>admin</lastUnpackedBy>' \
+        '  </package>' \
+        '</packages>')
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'list_all',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3' }).and_return(mock_result_list_all)
+      result = @package.is_installed
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+
+    end
   end
 
   describe 'test upload_wait_until_ready' do

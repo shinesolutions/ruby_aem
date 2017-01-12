@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-11T10:11:26+11:00">2017-01-11T10:11:26+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-12T11:41:14+11:00">2017-01-12T11:41:14+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.56
+         2.62
        </span>
     </span> hits/line)
   </h2>
@@ -197,7 +197,7 @@
         <td>77</td>
         <td>77</td>
         <td>0</td>
-        <td>2.3</td>
+        <td>2.6</td>
       </tr>
       
       <tr>
@@ -257,7 +257,7 @@
         <td>8</td>
         <td>8</td>
         <td>0</td>
-        <td>8.3</td>
+        <td>8.8</td>
       </tr>
       
       <tr>
@@ -7116,14 +7116,14 @@
           <code class="ruby">      def initialize(client, group_name, package_name, package_version)</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="34">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="20" data-linenumber="34">
+          <span class="hits">20</span>
           
           <code class="ruby">        @client = client</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="35">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="20" data-linenumber="35">
+          <span class="hits">20</span>
           
           <code class="ruby">        @call_params = {</code>
         </li>
@@ -7776,8 +7776,8 @@
           <code class="ruby">      def list_all()</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="144">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="144">
+          <span class="hits">11</span>
           
           <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
         </li>
@@ -7950,20 +7950,20 @@
           <code class="ruby">      def is_installed()</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="173">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="173">
+          <span class="hits">6</span>
           
           <code class="ruby">        packages = list_all().data</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="174">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="174">
+          <span class="hits">6</span>
           
           <code class="ruby">        package = packages.xpath(&quot;//packages/package[group=\&quot;#{@call_params[:group_name]}\&quot; and name=\&quot;#{@call_params[:package_name]}\&quot; and version=\&quot;#{@call_params[:package_version]}\&quot;]&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="175">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="175">
+          <span class="hits">6</span>
           
           <code class="ruby">        last_unpacked_by = package.xpath(&#39;lastUnpackedBy&#39;)</code>
         </li>
@@ -7974,10 +7974,10 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="177">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="177">
+          <span class="hits">6</span>
           
-          <code class="ruby">        if not [&#39;&lt;lastUnpackedBy/&gt;&#39;, &#39;&lt;lastUnpackedBy&gt;null&lt;/lastUnpackedBy&gt;&#39;].include? last_unpacked_by.to_s</code>
+          <code class="ruby">        if not [&#39;&#39;, &#39;&lt;lastUnpackedBy/&gt;&#39;, &#39;&lt;lastUnpackedBy&gt;null&lt;/lastUnpackedBy&gt;&#39;].include? last_unpacked_by.to_s</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="178">
@@ -7998,14 +7998,14 @@
           <code class="ruby">        else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="181">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="181">
+          <span class="hits">4</span>
           
           <code class="ruby">          message = &quot;Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed&quot;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="182">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="182">
+          <span class="hits">4</span>
           
           <code class="ruby">          is_installed = false</code>
         </li>
@@ -8016,14 +8016,14 @@
           <code class="ruby">        end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="184">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="184">
+          <span class="hits">6</span>
           
           <code class="ruby">        result = RubyAem::Result.new(message, nil)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="185">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="185">
+          <span class="hits">6</span>
           
           <code class="ruby">        result.data = is_installed</code>
         </li>
@@ -8034,8 +8034,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="187">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="187">
+          <span class="hits">6</span>
           
           <code class="ruby">        result</code>
         </li>
@@ -10566,14 +10566,14 @@
           <code class="ruby">    def initialize(message, response)</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="37">
-          <span class="hits">30</span>
+        <li class="covered" data-hits="32" data-linenumber="37">
+          <span class="hits">32</span>
           
           <code class="ruby">      @message = message</code>
         </li>
       
-        <li class="covered" data-hits="30" data-linenumber="38">
-          <span class="hits">30</span>
+        <li class="covered" data-hits="32" data-linenumber="38">
+          <span class="hits">32</span>
           
           <code class="ruby">      @response = response</code>
         </li>

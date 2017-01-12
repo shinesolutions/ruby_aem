@@ -1,3 +1,6 @@
+### 1.0.6
+*
+
 ### 1.0.5
 * Fix package is_installed method to handle packages that haven't been uploaded
 

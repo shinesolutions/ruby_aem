@@ -40,7 +40,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri (~> 1.6.8)
+  nokogiri (~> 1.6)
   retries (~> 0.0.5)
   rspec
   simplecov

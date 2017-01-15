@@ -1,10 +1,6 @@
 ### 1.0.6
 * Preserve ruby 1.9 and 2.0 support by setting nokogiri dependency to 1.6.x
-
-### 1.0.5
 * Fix package is_installed method to handle packages that haven't been uploaded
-
-### 1.0.4
 * Fix config property's operation in spec file
 * Fix node handling in config property creation
 * Add aem resource with get_login_page_until_ready method

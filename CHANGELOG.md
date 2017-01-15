@@ -1,3 +1,6 @@
+### 1.0.7
+*
+
 ### 1.0.6
 * Preserve ruby 1.9 and 2.0 support by setting nokogiri dependency to 1.6.x
 * Fix package is_installed method to handle packages that haven't been uploaded

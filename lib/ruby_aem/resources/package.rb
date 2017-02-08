@@ -97,7 +97,6 @@ module RubyAem
       # Upload the package without waiting until the package status states it is uploaded.
       #
       # @param file_path the directory where the package file to be uploaded is
-      # @param force if true, then overwrite if the package already exists
       # @param opts optional parameters:
       # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
       # @return RubyAem::Result
@@ -190,7 +189,6 @@ module RubyAem
       # Upload the package and wait until the package status states it is uploaded.
       #
       # @param file_path the directory where the package file to be uploaded is
-      # @param force if true, then overwrite if the package already exists
       # @param opts optional parameters:
       # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
       # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds

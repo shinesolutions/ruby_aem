@@ -1,3 +1,6 @@
+### 1.0.8
+*
+
 ### 1.0.7
 * All retry settings are now configurable #3
 

@@ -202,6 +202,12 @@ module RubyAem
             max_sleep_seconds: 2
           }
         })
+        opts[:force] ||= true
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
         result = upload(file_path, opts)
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_uploaded()
@@ -226,6 +232,11 @@ module RubyAem
             max_sleep_seconds: 2
           }
         })
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
         result = install()
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_installed()

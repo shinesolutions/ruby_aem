@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-16T10:15:06+11:00">2017-01-16T10:15:06+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-02-09T00:39:58+11:00">2017-02-09T00:39:58+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.62
+         2.58
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>22</b> files in total.
-    <b>475</b> relevant lines. 
-    <span class="green"><b>475</b> lines covered</span> and
+    <b>488</b> relevant lines. 
+    <span class="green"><b>488</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -133,11 +133,11 @@
       <tr>
         <td class="strong"><a href="#e9a07479947618c0bae5c44721995ffed13e971c" class="src_link" title="lib/ruby_aem/resources/aem.rb">lib/ruby_aem/resources/aem.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>67</td>
-        <td>22</td>
-        <td>22</td>
+        <td>81</td>
+        <td>26</td>
+        <td>26</td>
         <td>0</td>
-        <td>1.4</td>
+        <td>1.3</td>
       </tr>
       
       <tr>
@@ -193,11 +193,11 @@
       <tr>
         <td class="strong"><a href="#26fda2a3a33632b988ccadaf26e4f509e16dbf41" class="src_link" title="lib/ruby_aem/resources/package.rb">lib/ruby_aem/resources/package.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>229</td>
-        <td>77</td>
-        <td>77</td>
+        <td>253</td>
+        <td>86</td>
+        <td>86</td>
         <td>0</td>
-        <td>2.6</td>
+        <td>2.5</td>
       </tr>
       
       <tr>
@@ -4305,8 +4305,8 @@
     <h3>lib/ruby_aem/resources/aem.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>22</b> relevant lines. 
-      <span class="green"><b>22</b> lines covered</span> and
+      <b>26</b> relevant lines. 
+      <span class="green"><b>26</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -4581,136 +4581,220 @@
         <li class="never" data-hits="" data-linenumber="45">
           
           
+          <code class="ruby">      # @param opts optional parameters:</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
           <code class="ruby">      # @return RubyAem::Result</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="46">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      def get_login_page_wait_until_ready()</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="47">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        result = nil</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">        with_retries(:max_tries =&gt; 30, :base_sleep_seconds =&gt; 2, :max_sleep_seconds =&gt; 2) { |retries_count|</code>
+          <code class="ruby">      def get_login_page_wait_until_ready(</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="49">
-          <span class="hits">3</span>
+        <li class="never" data-hits="" data-linenumber="49">
           
-          <code class="ruby">          begin</code>
+          
+          <code class="ruby">        opts = {</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="50">
-          <span class="hits">3</span>
+        <li class="never" data-hits="" data-linenumber="50">
           
-          <code class="ruby">            result = get_login_page()</code>
+          
+          <code class="ruby">          _retries: {</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="51">
-          <span class="hits">2</span>
+        <li class="never" data-hits="" data-linenumber="51">
           
-          <code class="ruby">            if result.response.body !~ /QUICKSTART_HOMEPAGE/</code>
+          
+          <code class="ruby">            max_tries: 30,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="52">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="52">
           
-          <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s but not ready yet&#39; % [retries_count, result.message]</code>
+          
+          <code class="ruby">            base_sleep_seconds: 2,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="53">
           
-          <code class="ruby">              raise StandardError.new(result.message)</code>
+          
+          <code class="ruby">            max_sleep_seconds: 2</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
           
           
-          <code class="ruby">            else</code>
+          <code class="ruby">          }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="55">
+          
+          
+          <code class="ruby">        })</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
-          <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s and ready&#39; % [retries_count, result.message]</code>
+          <code class="ruby">        opts[:_retries] ||= {}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">            end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
-          <code class="ruby">          rescue RubyAem::Error =&gt; err</code>
+          <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
-          <code class="ruby">            puts &#39;Retrieve login page attempt #%d: %s&#39; % [retries_count, err.message]</code>
+          <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
-          <code class="ruby">            raise StandardError.new(err.message)</code>
+          <code class="ruby">        opts[:_retries][:max_sleep_seconds] ||= 2</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
           
           
-          <code class="ruby">          end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="covered" data-hits="1" data-linenumber="61">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">        }</code>
+          <code class="ruby">        result = nil</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="62">
           <span class="hits">1</span>
           
+          <code class="ruby">        with_retries(:max_tries =&gt; opts[:_retries][:max_tries], :base_sleep_seconds =&gt; opts[:_retries][:base_sleep_seconds], :max_sleep_seconds =&gt; opts[:_retries][:max_sleep_seconds]) { |retries_count|</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="63">
+          <span class="hits">3</span>
+          
+          <code class="ruby">          begin</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="64">
+          <span class="hits">3</span>
+          
+          <code class="ruby">            result = get_login_page()</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="65">
+          <span class="hits">2</span>
+          
+          <code class="ruby">            if result.response.body !~ /QUICKSTART_HOMEPAGE/</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s but not ready yet&#39; % [retries_count, result.message]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">              raise StandardError.new(result.message)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">            else</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s and ready&#39; % [retries_count, result.message]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">            end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby">          rescue RubyAem::Error =&gt; err</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">            puts &#39;Retrieve login page attempt #%d: %s&#39; % [retries_count, err.message]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">            raise StandardError.new(err.message)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby">          end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby">        }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
           <code class="ruby">        result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="77">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="78">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="80">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="81">
           
           
           <code class="ruby">end</code>
@@ -6909,8 +6993,8 @@
     <h3>lib/ruby_aem/resources/package.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>77</b> relevant lines. 
-      <span class="green"><b>77</b> lines covered</span> and
+      <b>86</b> relevant lines. 
+      <span class="green"><b>86</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -7515,778 +7599,922 @@
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby">      # @param force if true, then overwrite if the package already exists</code>
+          <code class="ruby">      # @param opts optional parameters:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="101">
           
           
-          <code class="ruby">      # @param opts optional parameters:</code>
+          <code class="ruby">      # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
-          <code class="ruby">      # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="103">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="104">
+        <li class="covered" data-hits="1" data-linenumber="103">
           <span class="hits">1</span>
           
           <code class="ruby">      def upload(file_path,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="104">
           
           
           <code class="ruby">        opts = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
+          
+          
+          <code class="ruby">          force: true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby">          force: true</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="107">
-          
-          
           <code class="ruby">        })</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="108">
+        <li class="covered" data-hits="2" data-linenumber="107">
           <span class="hits">2</span>
           
           <code class="ruby">        @call_params[:file_path] = file_path</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="109">
+        <li class="covered" data-hits="2" data-linenumber="108">
           <span class="hits">2</span>
           
           <code class="ruby">        @call_params = @call_params.merge(opts)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="110">
+        <li class="covered" data-hits="2" data-linenumber="109">
           <span class="hits">2</span>
           
           <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="111">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="112">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # Get the package filter value.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="113">
           
           
-          <code class="ruby">      # Get the package filter value.</code>
+          <code class="ruby">      # Filter value is stored as result data as an array of paths.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="114">
           
           
-          <code class="ruby">      # Filter value is stored as result data as an array of paths.</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="115">
           
           
-          <code class="ruby">      #</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="116">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="117">
+        <li class="covered" data-hits="1" data-linenumber="116">
           <span class="hits">1</span>
           
           <code class="ruby">      def get_filter()</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="118">
+        <li class="covered" data-hits="2" data-linenumber="117">
           <span class="hits">2</span>
           
           <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="118">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="119">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="120">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # Activate all paths within a package filter.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="121">
           
           
-          <code class="ruby">      # Activate all paths within a package filter.</code>
+          <code class="ruby">      # Returns an array of results:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="122">
           
           
-          <code class="ruby">      # Returns an array of results:</code>
+          <code class="ruby">      # - the first result is the result from retrieving filter paths</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="123">
           
           
-          <code class="ruby">      # - the first result is the result from retrieving filter paths</code>
+          <code class="ruby">      # - the rest of the results are the results from activating the filter paths, one result for each activation</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="124">
           
           
-          <code class="ruby">      # - the rest of the results are the results from activating the filter paths, one result for each activation</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="125">
           
           
-          <code class="ruby">      #</code>
+          <code class="ruby">      # @param ignore_deactivated if true, then deactivated items in the path will not be activated</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="126">
           
           
-          <code class="ruby">      # @param ignore_deactivated if true, then deactivated items in the path will not be activated</code>
+          <code class="ruby">      # @param modified_only if true, then only modified items in the path will be activated</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="127">
           
           
-          <code class="ruby">      # @param modified_only if true, then only modified items in the path will be activated</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="128">
-          
-          
           <code class="ruby">      # @return an array of RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="129">
+        <li class="covered" data-hits="1" data-linenumber="128">
           <span class="hits">1</span>
           
           <code class="ruby">      def activate_filter(ignore_deactivated, modified_only)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="130">
+        <li class="covered" data-hits="1" data-linenumber="129">
           <span class="hits">1</span>
           
           <code class="ruby">        result = get_filter()</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="130">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="132">
+        <li class="covered" data-hits="1" data-linenumber="131">
           <span class="hits">1</span>
           
           <code class="ruby">        results = [result]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="133">
+        <li class="covered" data-hits="1" data-linenumber="132">
           <span class="hits">1</span>
           
           <code class="ruby">        result.data.each { |filter_path|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="134">
+        <li class="covered" data-hits="2" data-linenumber="133">
           <span class="hits">2</span>
           
           <code class="ruby">          path = RubyAem::Resources::Path.new(@client, filter_path)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="135">
+        <li class="covered" data-hits="2" data-linenumber="134">
           <span class="hits">2</span>
           
           <code class="ruby">          results.push(path.activate(ignore_deactivated, modified_only))</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="136">
+        <li class="never" data-hits="" data-linenumber="135">
           
           
           <code class="ruby">        }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="137">
+        <li class="covered" data-hits="1" data-linenumber="136">
           <span class="hits">1</span>
           
           <code class="ruby">        results</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="never" data-hits="" data-linenumber="137">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="138">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="139">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # List all packages available in AEM instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="140">
           
           
-          <code class="ruby">      # List all packages available in AEM instance.</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="141">
           
           
-          <code class="ruby">      #</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="142">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="143">
+        <li class="covered" data-hits="1" data-linenumber="142">
           <span class="hits">1</span>
           
           <code class="ruby">      def list_all()</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="144">
+        <li class="covered" data-hits="11" data-linenumber="143">
           <span class="hits">11</span>
           
           <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="145">
+        <li class="never" data-hits="" data-linenumber="144">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="145">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # Check if this package is uploaded.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="147">
           
           
-          <code class="ruby">      # Check if this package is uploaded.</code>
+          <code class="ruby">      # True result data indicates that the package is uploaded, false otherwise.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="148">
           
           
-          <code class="ruby">      # True result data indicates that the package is uploaded, false otherwise.</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="149">
           
           
-          <code class="ruby">      #</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="150">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="151">
+        <li class="covered" data-hits="1" data-linenumber="150">
           <span class="hits">1</span>
           
           <code class="ruby">      def is_uploaded()</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="152">
+        <li class="covered" data-hits="4" data-linenumber="151">
           <span class="hits">4</span>
           
           <code class="ruby">        packages = list_all().data</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="153">
+        <li class="covered" data-hits="4" data-linenumber="152">
           <span class="hits">4</span>
           
           <code class="ruby">        package = packages.xpath(&quot;//packages/package[group=\&quot;#{@call_params[:group_name]}\&quot; and name=\&quot;#{@call_params[:package_name]}\&quot; and version=\&quot;#{@call_params[:package_version]}\&quot;]&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="153">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="155">
+        <li class="covered" data-hits="4" data-linenumber="154">
           <span class="hits">4</span>
           
           <code class="ruby">        if package.to_s != &#39;&#39;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="156">
+        <li class="covered" data-hits="2" data-linenumber="155">
           <span class="hits">2</span>
           
           <code class="ruby">          message = &quot;Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded&quot;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="157">
+        <li class="covered" data-hits="2" data-linenumber="156">
           <span class="hits">2</span>
           
           <code class="ruby">          is_uploaded = true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="158">
+        <li class="never" data-hits="" data-linenumber="157">
           
           
           <code class="ruby">        else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="159">
+        <li class="covered" data-hits="2" data-linenumber="158">
           <span class="hits">2</span>
           
           <code class="ruby">          message = &quot;Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded&quot;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="160">
+        <li class="covered" data-hits="2" data-linenumber="159">
           <span class="hits">2</span>
           
           <code class="ruby">          is_uploaded = false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="161">
+        <li class="never" data-hits="" data-linenumber="160">
           
           
           <code class="ruby">        end</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="161">
+          <span class="hits">4</span>
+          
+          <code class="ruby">        result = RubyAem::Result.new(message, nil)</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="162">
           <span class="hits">4</span>
           
-          <code class="ruby">        result = RubyAem::Result.new(message, nil)</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="163">
-          <span class="hits">4</span>
-          
           <code class="ruby">        result.data = is_uploaded</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="164">
+        <li class="never" data-hits="" data-linenumber="163">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="165">
+        <li class="covered" data-hits="4" data-linenumber="164">
           <span class="hits">4</span>
           
           <code class="ruby">        result</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="165">
+          
+          
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="166">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="167">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # Check if this package is installed.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="168">
           
           
-          <code class="ruby">      # Check if this package is installed.</code>
+          <code class="ruby">      # True result data indicates that the package is installed, false otherwise.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="169">
           
           
-          <code class="ruby">      # True result data indicates that the package is installed, false otherwise.</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="170">
           
           
-          <code class="ruby">      #</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="171">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="172">
+        <li class="covered" data-hits="1" data-linenumber="171">
           <span class="hits">1</span>
           
           <code class="ruby">      def is_installed()</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="173">
+        <li class="covered" data-hits="6" data-linenumber="172">
           <span class="hits">6</span>
           
           <code class="ruby">        packages = list_all().data</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="174">
+        <li class="covered" data-hits="6" data-linenumber="173">
           <span class="hits">6</span>
           
           <code class="ruby">        package = packages.xpath(&quot;//packages/package[group=\&quot;#{@call_params[:group_name]}\&quot; and name=\&quot;#{@call_params[:package_name]}\&quot; and version=\&quot;#{@call_params[:package_version]}\&quot;]&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="175">
+        <li class="covered" data-hits="6" data-linenumber="174">
           <span class="hits">6</span>
           
           <code class="ruby">        last_unpacked_by = package.xpath(&#39;lastUnpackedBy&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="176">
+        <li class="never" data-hits="" data-linenumber="175">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="177">
+        <li class="covered" data-hits="6" data-linenumber="176">
           <span class="hits">6</span>
           
           <code class="ruby">        if not [&#39;&#39;, &#39;&lt;lastUnpackedBy/&gt;&#39;, &#39;&lt;lastUnpackedBy&gt;null&lt;/lastUnpackedBy&gt;&#39;].include? last_unpacked_by.to_s</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="178">
+        <li class="covered" data-hits="2" data-linenumber="177">
           <span class="hits">2</span>
           
           <code class="ruby">          message = &quot;Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed&quot;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="179">
+        <li class="covered" data-hits="2" data-linenumber="178">
           <span class="hits">2</span>
           
           <code class="ruby">          is_installed = true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="180">
+        <li class="never" data-hits="" data-linenumber="179">
           
           
           <code class="ruby">        else</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="181">
+        <li class="covered" data-hits="4" data-linenumber="180">
           <span class="hits">4</span>
           
           <code class="ruby">          message = &quot;Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed&quot;</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="182">
+        <li class="covered" data-hits="4" data-linenumber="181">
           <span class="hits">4</span>
           
           <code class="ruby">          is_installed = false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="183">
+        <li class="never" data-hits="" data-linenumber="182">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="184">
+        <li class="covered" data-hits="6" data-linenumber="183">
           <span class="hits">6</span>
           
           <code class="ruby">        result = RubyAem::Result.new(message, nil)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="185">
+        <li class="covered" data-hits="6" data-linenumber="184">
           <span class="hits">6</span>
           
           <code class="ruby">        result.data = is_installed</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="186">
+        <li class="never" data-hits="" data-linenumber="185">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="187">
+        <li class="covered" data-hits="6" data-linenumber="186">
           <span class="hits">6</span>
           
           <code class="ruby">        result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="188">
+        <li class="never" data-hits="" data-linenumber="187">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="188">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="189">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # Upload the package and wait until the package status states it is uploaded.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="190">
           
           
-          <code class="ruby">      # Upload the package and wait until the package status states it is uploaded.</code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="191">
           
           
-          <code class="ruby">      #</code>
+          <code class="ruby">      # @param file_path the directory where the package file to be uploaded is</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="192">
           
           
-          <code class="ruby">      # @param file_path the directory where the package file to be uploaded is</code>
+          <code class="ruby">      # @param opts optional parameters:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="193">
           
           
-          <code class="ruby">      # @param force if true, then overwrite if the package already exists</code>
+          <code class="ruby">      # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="194">
           
           
-          <code class="ruby">      # @param opts optional parameters:</code>
+          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="195">
           
           
-          <code class="ruby">      # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="196">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="197">
+        <li class="covered" data-hits="1" data-linenumber="196">
           <span class="hits">1</span>
           
           <code class="ruby">      def upload_wait_until_ready(file_path,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="198">
+        <li class="never" data-hits="" data-linenumber="197">
           
           
           <code class="ruby">        opts = {</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="198">
+          
+          
+          <code class="ruby">          force: true,</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="199">
           
           
-          <code class="ruby">          force: true</code>
+          <code class="ruby">          _retries: {</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="200">
           
           
+          <code class="ruby">            max_tries: 30,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="201">
+          
+          
+          <code class="ruby">            base_sleep_seconds: 2,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="202">
+          
+          
+          <code class="ruby">            max_sleep_seconds: 2</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="203">
+          
+          
+          <code class="ruby">          }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="204">
+          
+          
           <code class="ruby">        })</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="201">
+        <li class="covered" data-hits="1" data-linenumber="205">
           <span class="hits">1</span>
           
-          <code class="ruby">        result = upload(file_path, opts)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="202">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        with_retries(:max_tries =&gt; 30, :base_sleep_seconds =&gt; 2, :max_sleep_seconds =&gt; 2) { |retries_count|</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="203">
-          <span class="hits">2</span>
-          
-          <code class="ruby">          check_result = is_uploaded()</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="204">
-          <span class="hits">2</span>
-          
-          <code class="ruby">          puts &#39;Upload check #%d: %s - %s&#39; % [retries_count, check_result.data, check_result.message]</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="205">
-          <span class="hits">2</span>
-          
-          <code class="ruby">          if check_result.data == false</code>
+          <code class="ruby">        opts[:force] ||= true</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="206">
           <span class="hits">1</span>
           
-          <code class="ruby">            raise StandardError.new(check_result.message)</code>
+          <code class="ruby">        opts[:_retries] ||= {}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="207">
+        <li class="covered" data-hits="1" data-linenumber="207">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">          end</code>
+          <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="208">
+        <li class="covered" data-hits="1" data-linenumber="208">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">        }</code>
+          <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="209">
           <span class="hits">1</span>
           
-          <code class="ruby">        result</code>
+          <code class="ruby">        opts[:_retries][:max_sleep_seconds] ||= 2</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="210">
           
           
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="211">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="212">
-          
-          
-          <code class="ruby">      # Install the package and wait until the package status states it is installed.</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="213">
-          
-          
-          <code class="ruby">      #</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="214">
-          
-          
-          <code class="ruby">      # @return RubyAem::Result</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="215">
+        <li class="covered" data-hits="1" data-linenumber="211">
           <span class="hits">1</span>
           
-          <code class="ruby">      def install_wait_until_ready()</code>
+          <code class="ruby">        result = upload(file_path, opts)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="216">
+        <li class="covered" data-hits="1" data-linenumber="212">
           <span class="hits">1</span>
           
-          <code class="ruby">        result = install()</code>
+          <code class="ruby">        with_retries(:max_tries =&gt; opts[:_retries][:max_tries], :base_sleep_seconds =&gt; opts[:_retries][:base_sleep_seconds], :max_sleep_seconds =&gt; opts[:_retries][:max_sleep_seconds]) { |retries_count|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="217">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        with_retries(:max_tries =&gt; 30, :base_sleep_seconds =&gt; 2, :max_sleep_seconds =&gt; 2) { |retries_count|</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="218">
+        <li class="covered" data-hits="2" data-linenumber="213">
           <span class="hits">2</span>
           
-          <code class="ruby">          check_result = is_installed()</code>
+          <code class="ruby">          check_result = is_uploaded()</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="219">
+        <li class="covered" data-hits="2" data-linenumber="214">
           <span class="hits">2</span>
           
-          <code class="ruby">          puts &#39;Install check #%d: %s - %s&#39; % [retries_count, check_result.data, check_result.message]</code>
+          <code class="ruby">          puts &#39;Upload check #%d: %s - %s&#39; % [retries_count, check_result.data, check_result.message]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="220">
+        <li class="covered" data-hits="2" data-linenumber="215">
           <span class="hits">2</span>
           
           <code class="ruby">          if check_result.data == false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="221">
+        <li class="covered" data-hits="1" data-linenumber="216">
           <span class="hits">1</span>
           
           <code class="ruby">            raise StandardError.new(check_result.message)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="222">
+        <li class="never" data-hits="" data-linenumber="217">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="223">
+        <li class="never" data-hits="" data-linenumber="218">
           
           
           <code class="ruby">        }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="224">
+        <li class="covered" data-hits="1" data-linenumber="219">
           <span class="hits">1</span>
           
           <code class="ruby">        result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="225">
+        <li class="never" data-hits="" data-linenumber="220">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="226">
+        <li class="never" data-hits="" data-linenumber="221">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="227">
+        <li class="never" data-hits="" data-linenumber="222">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      # Install the package and wait until the package status states it is installed.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="223">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="224">
+          
+          
+          <code class="ruby">      # @param opts optional parameters:</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="225">
+          
+          
+          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="226">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="227">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def install_wait_until_ready(</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="228">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">        opts = {</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="229">
+          
+          
+          <code class="ruby">          _retries: {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="230">
+          
+          
+          <code class="ruby">            max_tries: 30,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="231">
+          
+          
+          <code class="ruby">            base_sleep_seconds: 2,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="232">
+          
+          
+          <code class="ruby">            max_sleep_seconds: 2</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="233">
+          
+          
+          <code class="ruby">          }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="234">
+          
+          
+          <code class="ruby">        })</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="235">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries] ||= {}</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="236">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="237">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="238">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:max_sleep_seconds] ||= 2</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="239">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="240">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        result = install()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="241">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        with_retries(:max_tries =&gt; opts[:_retries][:max_tries], :base_sleep_seconds =&gt; opts[:_retries][:base_sleep_seconds], :max_sleep_seconds =&gt; opts[:_retries][:max_sleep_seconds]) { |retries_count|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="242">
+          <span class="hits">2</span>
+          
+          <code class="ruby">          check_result = is_installed()</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="243">
+          <span class="hits">2</span>
+          
+          <code class="ruby">          puts &#39;Install check #%d: %s - %s&#39; % [retries_count, check_result.data, check_result.message]</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="244">
+          <span class="hits">2</span>
+          
+          <code class="ruby">          if check_result.data == false</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="245">
+          <span class="hits">1</span>
+          
+          <code class="ruby">            raise StandardError.new(check_result.message)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="246">
+          
+          
+          <code class="ruby">          end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="247">
+          
+          
+          <code class="ruby">        }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="248">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        result</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="249">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="250">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="251">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="252">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="253">
           
           
           <code class="ruby">end</code>

@@ -51,7 +51,12 @@ describe 'Aem' do
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #1: Login page has some error')
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #2: Login page retrieved but not ready yet')
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #3: Login page retrieved and ready')
-      aem.get_login_page_wait_until_ready
+      aem.get_login_page_wait_until_ready({
+        _retries: {
+          max_tries: 60,
+          base_sleep_seconds: 2,
+          max_sleep_seconds: 2
+        }})
     end
 
   end

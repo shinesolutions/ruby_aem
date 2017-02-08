@@ -358,7 +358,12 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3',
           :file_path => '/tmp',
-          :force => true })
+          :force => true,
+          :_retries => {
+            :max_tries => 60,
+            :base_sleep_seconds => 2,
+            :max_sleep_seconds => 2
+          }})
 
       mock_data_list_all_not_installed = Nokogiri::XML('')
       mock_result_list_all_not_installed = double('mock_result_list_all_not_installed')
@@ -371,7 +376,12 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3',
           :file_path => '/tmp',
-          :force => true }).and_return(mock_result_list_all_not_installed)
+          :force => true,
+          :_retries => {
+            :max_tries => 60,
+            :base_sleep_seconds => 2,
+            :max_sleep_seconds => 2
+          }}).and_return(mock_result_list_all_not_installed)
 
       mock_data_list_all_uploaded = Nokogiri::XML(
         '<packages>' \
@@ -391,12 +401,24 @@ describe 'Package' do
           :package_name => 'somepackage',
           :package_version => '1.2.3',
           :file_path => '/tmp',
-          :force => true }).and_return(mock_result_list_all_uploaded)
+          :force => true,
+          :_retries => {
+            :max_tries => 60,
+            :base_sleep_seconds => 2,
+            :max_sleep_seconds => 2
+          }}).and_return(mock_result_list_all_uploaded)
 
       expect(STDOUT).to receive(:puts).with('Upload check #1: false - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
       expect(STDOUT).to receive(:puts).with('Upload check #2: true - Package somepackagegroup/somepackage-1.2.3 is uploaded')
 
-      @package.upload_wait_until_ready('/tmp', { force: true })
+      @package.upload_wait_until_ready('/tmp', {
+        force: true,
+        _retries: {
+          max_tries: 60,
+          base_sleep_seconds: 2,
+          max_sleep_seconds: 2
+        }
+      })
     end
 
   end

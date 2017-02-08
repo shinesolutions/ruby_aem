@@ -42,10 +42,19 @@ module RubyAem
       # Retrieve AEM login page with retries until it is successful.
       # This is handy for waiting for AEM to start or restart Jetty.
       #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
-      def get_login_page_wait_until_ready()
+      def get_login_page_wait_until_ready(
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        })
         result = nil
-        with_retries(:max_tries => 30, :base_sleep_seconds => 2, :max_sleep_seconds => 2) { |retries_count|
+        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
             result = get_login_page()
             if result.response.body !~ /QUICKSTART_HOMEPAGE/

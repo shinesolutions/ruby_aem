@@ -1,5 +1,5 @@
 ### 1.0.7
-*
+* All retry settings are now configurable #3
 
 ### 1.0.6
 * Preserve ruby 1.9 and 2.0 support by setting nokogiri dependency to 1.6.x

@@ -248,6 +248,35 @@ module RubyAem
         result
       end
 
+      # Delete the package and wait until the package status states it is not uploaded.
+      #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # @return RubyAem::Result
+      def delete_wait_until_ready(
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        })
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
+        result = delete()
+        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          check_result = is_uploaded()
+          puts 'Delete check #%d: %s - %s' % [retries_count, !check_result.data, check_result.message]
+          if check_result.data == true
+            raise StandardError.new(check_result.message)
+          end
+        }
+        result
+      end
+
     end
   end
 end

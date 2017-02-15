@@ -477,6 +477,54 @@ describe 'Package' do
       @package.install_wait_until_ready
     end
 
+    describe 'test delete_wait_until_ready' do
+
+      it 'should call client with expected parameters' do
+        expect(@mock_client).to receive(:call).once().with(
+          RubyAem::Resources::Package,
+          'delete',
+          { :group_name => 'somepackagegroup',
+            :package_name => 'somepackage',
+            :package_version => '1.2.3' })
+
+        mock_data_list_all_uploaded = Nokogiri::XML(
+          '<packages>' \
+          '  <package>' \
+          '    <group>somepackagegroup</group>' \
+          '    <name>somepackage</name>' \
+          '    <version>1.2.3</version>' \
+          '  </package>' \
+          '</packages>')
+        mock_result_list_all_uploaded = double('mock_result_list_all_uploaded')
+        expect(mock_result_list_all_uploaded).to receive(:data).and_return(mock_data_list_all_uploaded)
+
+        expect(@mock_client).to receive(:call).once().with(
+          RubyAem::Resources::Package,
+          'list_all',
+          { :group_name => 'somepackagegroup',
+            :package_name => 'somepackage',
+            :package_version => '1.2.3' }).and_return(mock_result_list_all_uploaded)
+
+        mock_data_list_all_not_uploaded = Nokogiri::XML(
+          '<packages>' \
+          '</packages>')
+        mock_result_list_all_not_uploaded = double('mock_result_list_all_not_uploaded')
+        expect(mock_result_list_all_not_uploaded).to receive(:data).and_return(mock_data_list_all_not_uploaded)
+
+        expect(@mock_client).to receive(:call).once().with(
+          RubyAem::Resources::Package,
+          'list_all',
+          { :group_name => 'somepackagegroup',
+            :package_name => 'somepackage',
+            :package_version => '1.2.3' }).and_return(mock_result_list_all_not_uploaded)
+
+        expect(STDOUT).to receive(:puts).with('Delete check #1: false - Package somepackagegroup/somepackage-1.2.3 is uploaded')
+        expect(STDOUT).to receive(:puts).with('Delete check #2: true - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+
+        @package.delete_wait_until_ready
+      end
+    end
+
   end
 
 end

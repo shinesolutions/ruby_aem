@@ -7,7 +7,7 @@ describe 'Package' do
     # ensure package does not exist
     @package = @aem.package('somepackagegroup', 'somepackage', '1.2.3')
     begin
-      @package.delete()
+      @package.delete_wait_until_ready()
     rescue RubyAem::Error => err
       # package doesn't exist and can't be deleted
     end

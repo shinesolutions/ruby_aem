@@ -208,6 +208,11 @@ module RubyAem
         opts[:_retries][:base_sleep_seconds] ||= 2
         opts[:_retries][:max_sleep_seconds] ||= 2
 
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
         result = upload(file_path, opts)
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_uploaded()
@@ -237,6 +242,11 @@ module RubyAem
         opts[:_retries][:base_sleep_seconds] ||= 2
         opts[:_retries][:max_sleep_seconds] ||= 2
 
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
         result = install()
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_installed()
@@ -265,6 +275,11 @@ module RubyAem
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2
         opts[:_retries][:max_sleep_seconds] ||= 2
+
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
         result = delete()
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|

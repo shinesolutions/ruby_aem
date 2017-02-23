@@ -89,6 +89,8 @@ module RubyAem
       end
 
       # Change the user's password.
+      # This only works if the user whose password is to be changed, is also the
+      # same user that authenticates to AEM via SwaggerAemClient.
       #
       # @param old_password the user's old password to be changed from
       # @param new_password the user's new password to be changed to

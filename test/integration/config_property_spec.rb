@@ -37,6 +37,27 @@ describe 'ConfigProperty' do
       expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     end
 
+    it 'should create Apache Sling Get Servlet property correctly when node exists' do
+
+      # ensure node is created new
+      node = @aem.node('/apps/system/config.author', 'org.apache.sling.servlets.get.DefaultGetServlet')
+      if node.exists().data == true
+        node.delete()
+      end
+      result = node.exists()
+      expect(result.data).to eq(false)
+      result = node.create('sling:OsgiConfig')
+
+      config_property = @aem.config_property('enable.html', 'Boolean', false)
+      result = config_property.create('author', 'org.apache.sling.servlets.get.DefaultGetServlet')
+      expect(result.message).to eq('Set author org.apache.sling.servlets.get.DefaultGetServlet config Boolean property enable.html=false')
+
+      # wait until Jetty finishes restart following org.apache.sling.servlets.get.DefaultGetServlet config change
+      aem = @aem.aem()
+      result = aem.get_login_page_wait_until_ready()
+      expect(result.message).to eq('Login page retrieved')
+      expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
+    end
   end
 
 end

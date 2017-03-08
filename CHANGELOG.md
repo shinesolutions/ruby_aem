@@ -1,5 +1,5 @@
 ### 1.0.9
-*
+* Add Apache Sling GET Servlet OSGI config support  
 
 ### 1.0.8
 * Add package delete_wait_until_ready method

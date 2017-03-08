@@ -395,6 +395,14 @@ configproperty:
           - org_apache_felix_https_enable_type_hint
           - org_osgi_service_http_port_secure
           - org_osgi_service_http_port_secure_type_hint
+          - json_maximumresults
+          - json_maximumresults_type_hint
+          - enable_html
+          - enable_html_type_hint
+          - enable_text
+          - enable_text_type_hint
+          - enable_xml
+          - enable_xml_type_hint
       responses:
         200:
           handler: simple

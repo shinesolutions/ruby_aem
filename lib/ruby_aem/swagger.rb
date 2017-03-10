@@ -47,5 +47,25 @@ module RubyAem
       path.gsub(/^\//, '').gsub(/\/$/, '')
     end
 
+    # Given a config node name, return the corresponding OSGI config name.
+    # OSGI config name are available from AEM Web Console's Config Manager page.
+    #
+    # @param config_node_name the name of the node for a given config
+    # @return config name
+    def Swagger.config_node_name_to_config_name(config_node_name)
+      case config_node_name
+      when 'org.apache.felix.http'
+        'Apache Felix Jetty Based HTTP Service'
+      when 'org.apache.sling.servlets.get.DefaultGetServlet'
+        'Apache Sling GET Servlet'
+      when 'org.apache.sling.security.impl.ReferrerFilter'
+        'Apache Sling Referrer Filter'
+      when 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet'
+        'Apache Sling DavEx Servlet'
+      else
+        nil
+      end
+    end
+
   end
 end

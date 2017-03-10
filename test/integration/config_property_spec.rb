@@ -12,10 +12,10 @@ describe 'ConfigProperty' do
 
     it 'should create a sling folder by default when path node does not exist' do
       config_property = @aem.config_property('someproperty', 'Boolean', true)
-      config_property.create('author', 'someinexistingnode')
+      config_property.create('author', 'org.apache.felix.http')
     end
 
-    it 'should create SSL property correctly when node exists' do
+    it 'should create Apache Felix Jetty Based HTTP Service config property correctly when node exists' do
 
       # ensure node is created new
       node = @aem.node('/apps/system/config.author', 'org.apache.felix.http')
@@ -37,7 +37,7 @@ describe 'ConfigProperty' do
       expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     end
 
-    it 'should create Apache Sling Get Servlet property correctly when node exists' do
+    it 'should create Apache Sling Get Servlet config property correctly when node exists' do
 
       # ensure node is created new
       node = @aem.node('/apps/system/config.author', 'org.apache.sling.servlets.get.DefaultGetServlet')

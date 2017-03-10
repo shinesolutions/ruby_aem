@@ -13,6 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 =end
+require 'ruby_aem/swagger'
 
 module RubyAem
   module Resources
@@ -38,18 +39,19 @@ module RubyAem
       # Create a new config property.
       #
       # @param run_mode AEM run mode: author or publish
-      # @param node_name the node name under /apps/system/config.{run_mode}/ where the property will be part of
+      # @param @param config_node_name the node name of a given OSGI config
       # @return RubyAem::Result
-      def create(run_mode, node_name)
+      def create(run_mode, config_node_name)
 
         name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
 
-        @call_params[:node_name] = node_name
         @call_params[:run_mode] = run_mode
+        @call_params[:config_node_name] = config_node_name
         @call_params["#{name}".to_sym] = @call_params[:value]
         @call_params["#{name}_type_hint".to_sym] = @call_params[:type]
 
-        @client.call(self.class, __callee__.to_s, @call_params)
+        config_name = Swagger.config_node_name_to_config_name(config_node_name)
+        @client.call(self.class, __callee__.to_s.concat(config_name.downcase.gsub(/\s+/, '')), @call_params)
       end
 
     end

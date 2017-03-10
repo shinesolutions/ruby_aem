@@ -14,16 +14,16 @@ describe 'ConfigProperty' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(
         RubyAem::Resources::ConfigProperty,
-        'create',
+        'createapachefelixjettybasedhttpservice',
         { :name => 'someproperty',
+          :config_node_name => 'org.apache.felix.http',
           :type => 'Boolean',
           :value => 'true',
-          :node_name => 'somenode',
           :run_mode => 'author',
           :someproperty => 'true',
           :someproperty_type_hint => 'Boolean' })
       config_property = RubyAem::Resources::ConfigProperty.new(@mock_client, 'someproperty', 'Boolean', 'true')
-      config_property.create('author', 'somenode')
+      config_property.create('author', 'org.apache.felix.http')
     end
 
   end

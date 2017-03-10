@@ -50,4 +50,27 @@ describe 'Swagger' do
 
   end
 
+  describe 'test config_node_name_to_config_name' do
+
+    it 'should return config name when config node name exists' do
+      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.felix.http')
+      expect(method).to eq('Apache Felix Jetty Based HTTP Service')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.servlets.get.DefaultGetServlet')
+      expect(method).to eq('Apache Sling GET Servlet')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.security.impl.ReferrerFilter')
+      expect(method).to eq('Apache Sling Referrer Filter')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      expect(method).to eq('Apache Sling DavEx Servlet')
+    end
+
+    it 'should return null when config node name does not exist' do
+      method = RubyAem::Swagger.config_node_name_to_config_name('some.inexisting.node')
+      expect(method).to eq(nil)
+    end
+
+  end
+
 end

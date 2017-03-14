@@ -72,8 +72,13 @@ module RubyAem
 
       # Install the package without waiting until the package status states it is installed.
       #
+      # @param opts optional parameters:
+      # - recursive: if true then subpackages will also be installed, false otherwise
       # @return RubyAem::Result
-      def install()
+      def install(opts = {
+          recursive: true
+        })
+        @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 

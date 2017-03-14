@@ -1,8 +1,6 @@
 ### 1.0.10
-*
-
-### 1.0.9
-* Add Apache Felix Jetty Based HTTP Service, Apache Sling GET Servlet, Apache Sling Referrer Filter, Apache Sling DavEx Servlet OSGI config support  
+* Add Apache Felix Jetty Based HTTP Service, Apache Sling GET Servlet, Apache Sling Referrer Filter, Apache Sling DavEx Servlet OSGI config support
+* Add optional recursive parameter to package install
 
 ### 1.0.8
 * Add package delete_wait_until_ready method

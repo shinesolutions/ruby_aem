@@ -291,6 +291,8 @@ package:
         required:
           path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
           cmd: install
+        optional:
+          recursive: '%{recursive}'
       responses:
         200:
           handler: json_package_service

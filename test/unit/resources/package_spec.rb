@@ -62,8 +62,9 @@ describe 'Package' do
         'install',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
-          :package_version => '1.2.3' })
-      @package.install
+          :package_version => '1.2.3',
+          :recursive => false })
+      @package.install({ recursive: false })
     end
 
   end
@@ -431,7 +432,8 @@ describe 'Package' do
         'install',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
-          :package_version => '1.2.3' })
+          :package_version => '1.2.3',
+          :recursive => true })
 
       mock_data_list_all_not_installed = Nokogiri::XML(
         '<packages>' \
@@ -450,7 +452,8 @@ describe 'Package' do
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
-          :package_version => '1.2.3' }).and_return(mock_result_list_all_not_installed)
+          :package_version => '1.2.3',
+          :recursive => true }).and_return(mock_result_list_all_not_installed)
 
       mock_data_list_all_installed = Nokogiri::XML(
         '<packages>' \
@@ -469,7 +472,8 @@ describe 'Package' do
         'list_all',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
-          :package_version => '1.2.3' }).and_return(mock_result_list_all_installed)
+          :package_version => '1.2.3',
+          :recursive => true }).and_return(mock_result_list_all_installed)
 
       expect(STDOUT).to receive(:puts).with('Install check #1: false - Package somepackagegroup/somepackage-1.2.3 is not installed')
       expect(STDOUT).to receive(:puts).with('Install check #2: true - Package somepackagegroup/somepackage-1.2.3 is installed')

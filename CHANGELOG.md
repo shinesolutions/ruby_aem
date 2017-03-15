@@ -1,3 +1,6 @@
+### 1.0.12
+* Allow package installation error 500 due to hotfix, service pack, and feature pack's potential false negative error
+
 ### 1.0.11
 * Add optional recursive parameter to package install
 

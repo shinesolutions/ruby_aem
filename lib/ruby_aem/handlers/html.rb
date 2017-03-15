@@ -39,5 +39,30 @@ module RubyAem
       RubyAem::Result.new(message, response)
     end
 
+    # Parse error message from response body data.
+    # This is to handle AEM hotfix, service pack, and feature pack package
+    # installation which might cause AEM to respond with error 500 but it's
+    # still processing behind the scene.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.html_package_service_allow_error(response, response_spec, call_params)
+
+      html = Nokogiri::HTML(response.body)
+      title = html.xpath('//title/text()').to_s
+      desc = html.xpath('//p/text()').to_s
+      reason = html.xpath('//pre/text()').to_s
+
+      call_params[:title] = title
+      call_params[:desc] = desc
+      call_params[:reason] = reason
+
+      message = response_spec['message'] % call_params
+
+      RubyAem::Result.new(message, response)
+    end
+
   end
 end

@@ -296,6 +296,9 @@ package:
       responses:
         200:
           handler: json_package_service
+        500:
+          handler: html_package_service_allow_error
+          message: 'Allowed package installation error - %{title}: %{desc} %{reason}'
     replicate:
       api: crx
       operation: postPackageServiceJson

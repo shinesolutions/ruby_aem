@@ -1,5 +1,5 @@
 ### 1.0.13
-*
+* Response 403 is considered as resource not found on user, group, flush agent, and replication agent's exists action #9
 
 ### 1.0.12
 * Allow package installation error 500 due to hotfix, service pack, and feature pack's potential false negative error

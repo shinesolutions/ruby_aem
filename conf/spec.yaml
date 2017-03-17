@@ -101,6 +101,9 @@ flushagent:
         302:
           handler: simple_true
           message: 'Flush agent %{name} exists on %{run_mode}'
+        403:
+          handler: simple_false
+          message: 'Flush agent %{name} not found on %{run_mode}'
         404:
           handler: simple_false
           message: 'Flush agent %{name} not found on %{run_mode}'
@@ -162,6 +165,9 @@ group:
         302:
           handler: simple_true
           message: 'Group %{name} exists at /%{path}/%{authorizable_id}'
+        403:
+          handler: simple_false
+          message: 'Group %{name} not found'
         404:
           handler: simple_false
           message: 'Group %{name} not found'
@@ -524,6 +530,9 @@ replicationagent:
         302:
           handler: simple_true
           message: 'Replication agent %{name} exists on %{run_mode}'
+        403:
+          handler: simple_false
+          message: 'Replication agent %{name} not found on %{run_mode}'
         404:
           handler: simple_false
           message: 'Replication agent %{name} not found on %{run_mode}'
@@ -607,6 +616,9 @@ user:
         302:
           handler: simple_true
           message: 'User %{name} exists at /%{path}/%{authorizable_id}'
+        403:
+          handler: simple_false
+          message: 'User %{name} not found'
         404:
           handler: simple_false
           message: 'User %{name} not found'

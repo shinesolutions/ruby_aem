@@ -1,3 +1,6 @@
+### 1.0.13
+*
+
 ### 1.0.12
 * Allow package installation error 500 due to hotfix, service pack, and feature pack's potential false negative error
 

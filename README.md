@@ -163,13 +163,32 @@ Replication agent:
       log_level: 'info',
       retry_delay: 60000
     }
-    result = replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
+    result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
     # check replication agent's existence
     result = replication_agent.exists()
 
     # delete replication agent
     result = replication_agent.delete()
+
+Reverse replication agent:
+
+    reverse_replication_agent = aem.reverse_replication_agent('author', 'some-reverse-replication-agent')
+
+    # create or update reverse replication agent
+    opts = {
+      transport_user: 'admin',
+      transport_password: 'admin',
+      log_level: 'info',
+      retry_delay: 60000
+    }
+    result = reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080', opts)
+
+    # check reverse replication agent's existence
+    result = reverse_replication_agent.exists()
+
+    # delete reverse replication agent
+    result = reverse_replication_agent.delete()
 
 Repository:
 

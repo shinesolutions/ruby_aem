@@ -21,6 +21,7 @@ describe 'RubyAem' do
       expect(aem).to respond_to(:package)
       expect(aem).to respond_to(:path)
       expect(aem).to respond_to(:replication_agent)
+      expect(aem).to respond_to(:reverse_replication_agent)
       expect(aem).to respond_to(:repository)
       expect(aem).to respond_to(:user)
     end
@@ -104,6 +105,15 @@ describe 'RubyAem' do
     it 'should return replication agent instance' do
       replication_agent = RubyAem::Aem.new().replication_agent('author', 'some-replication-agent')
       expect(replication_agent).to_not be(nil)
+    end
+
+  end
+
+  describe 'test reverse replication agent' do
+
+    it 'should return reverse replication agent instance' do
+      reverse_replication_agent = RubyAem::Aem.new().reverse_replication_agent('author', 'some-reverse-replication-agent')
+      expect(reverse_replication_agent).to_not be(nil)
     end
 
   end

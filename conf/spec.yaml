@@ -536,6 +536,69 @@ replicationagent:
         404:
           handler: simple_false
           message: 'Replication agent %{name} not found on %{run_mode}'
+reversereplicationagent:
+  responses:
+    404:
+      handler: simple_error
+      message: 'Reverse replication agent %{name} not found on %{run_mode}'
+  actions:
+    create_update:
+      api: sling
+      operation: postAgent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+        optional:
+          jcrprimary_type: cq:Page
+          jcrcontentcqname: '%{name}'
+          jcrcontentjcrtitle: '%{title}'
+          jcrcontentjcrdescription: '%{description}'
+          jcrcontentslingresource_type: /libs/cq/replication/components/agent
+          jcrcontentserialization_type: durbo
+          jcrcontenttransport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+          jcrcontenttransport_user: '%{transport_user}'
+          jcrcontenttransport_password: '%{transport_password}'
+          jcrcontentlog_level: '%{log_level}'
+          jcrcontentretry_delay: '%{retry_delay}'
+          jcrcontentcqtemplate: /libs/cq/replication/templates/agent
+          jcrcontentenabled: true
+          jcrcontentreverse_replication: true
+      responses:
+        200:
+          handler: simple
+          message: 'Reverse replication agent %{name} updated on %{run_mode}'
+        201:
+          handler: simple
+          message: 'Reverse replication agent %{name} created on %{run_mode}'
+    delete:
+      api: sling
+      operation: deleteAgent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+      responses:
+        204:
+          handler: simple
+          message: 'Reverse replication agent %{name} deleted on %{run_mode}'
+    exists:
+      api: sling
+      operation: getAgent
+      params:
+        required:
+          runmode: '%{run_mode}'
+          name: '%{name}'
+      responses:
+        302:
+          handler: simple_true
+          message: 'Reverse replication agent %{name} exists on %{run_mode}'
+        403:
+          handler: simple_false
+          message: 'Reverse replication agent %{name} not found on %{run_mode}'
+        404:
+          handler: simple_false
+          message: 'Reverse replication agent %{name} not found on %{run_mode}'
 repository:
   actions:
     block_writes:

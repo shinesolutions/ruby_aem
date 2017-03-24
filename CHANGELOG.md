@@ -1,3 +1,6 @@
+### 1.0.14
+* Switch from deleteAgent to postAgent operation for all agents delete action
+
 ### 1.0.13
 * Response 403 is considered as resource not found on user, group, flush agent, and replication agent's exists action #9
 * Add reverse replication agent resource #6

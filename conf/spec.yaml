@@ -81,15 +81,23 @@ flushagent:
           message: 'Flush agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: deleteAgent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Flush agent %{name} deleted on %{run_mode}'
         204:
           handler: simple
           message: 'Flush agent %{name} deleted on %{run_mode}'
+        403:
+          handler: simple_error
+          message: 'Flush agent %{name} not found on %{run_mode}'
     exists:
       api: sling
       operation: getAgent
@@ -510,15 +518,23 @@ replicationagent:
           message: 'Replication agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: deleteAgent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Replication agent %{name} deleted on %{run_mode}'
         204:
           handler: simple
           message: 'Replication agent %{name} deleted on %{run_mode}'
+        403:
+          handler: simple_error
+          message: 'Replication agent %{name} not found on %{run_mode}'
     exists:
       api: sling
       operation: getAgent
@@ -573,15 +589,23 @@ outboxreplicationagent:
           message: 'Outbox replication agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: deleteAgent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Outbox replication agent %{name} deleted on %{run_mode}'
         204:
           handler: simple
           message: 'Outbox replication agent %{name} deleted on %{run_mode}'
+        403:
+          handler: simple_error
+          message: 'Outbox replication agent %{name} not found on %{run_mode}'
     exists:
       api: sling
       operation: getAgent
@@ -636,15 +660,23 @@ reversereplicationagent:
           message: 'Reverse replication agent %{name} created on %{run_mode}'
     delete:
       api: sling
-      operation: deleteAgent
+      operation: postAgent
       params:
         required:
           runmode: '%{run_mode}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Reverse replication agent %{name} deleted on %{run_mode}'
         204:
           handler: simple
           message: 'Reverse replication agent %{name} deleted on %{run_mode}'
+        403:
+          handler: simple_error
+          message: 'Reverse replication agent %{name} not found on %{run_mode}'
     exists:
       api: sling
       operation: getAgent

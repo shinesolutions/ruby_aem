@@ -171,6 +171,24 @@ Replication agent:
     # delete replication agent
     result = replication_agent.delete()
 
+Outbox replication agent:
+
+    outbox_replication_agent = aem.outbox_replication_agent('publish', 'some-outbox-replication-agent')
+
+    # create or update outbox replication agent
+    opts = {
+      user_id: 'admin',
+      log_level: 'info',
+      retry_delay: 60000
+    }
+    result = outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', opts)
+
+    # check outbox replication agent's existence
+    result = outbox_replication_agent.exists()
+
+    # delete outbox replication agent
+    result = outbox_replication_agent.delete()
+
 Reverse replication agent:
 
     reverse_replication_agent = aem.reverse_replication_agent('author', 'some-reverse-replication-agent')

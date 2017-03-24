@@ -24,6 +24,7 @@ require 'ruby_aem/resources/node'
 require 'ruby_aem/resources/package'
 require 'ruby_aem/resources/path'
 require 'ruby_aem/resources/replication_agent'
+require 'ruby_aem/resources/outbox_replication_agent'
 require 'ruby_aem/resources/reverse_replication_agent'
 require 'ruby_aem/resources/repository'
 require 'ruby_aem/resources/user'
@@ -150,6 +151,15 @@ module RubyAem
     # @return new RubyAem::Resources::ReplicationAgent instance
     def replication_agent(run_mode, name)
       RubyAem::Resources::ReplicationAgent.new(@client, run_mode, name)
+    end
+
+    # Create an outbox replication agent instance.
+    #
+    # @param run_mode AEM run mode: author or publish
+    # @param name the outbox replication agent's name, e.g. some-outbox-replication-agent
+    # @return new RubyAem::Resources::OutboxReplicationAgent instance
+    def outbox_replication_agent(run_mode, name)
+      RubyAem::Resources::OutboxReplicationAgent.new(@client, run_mode, name)
     end
 
     # Create a reverse replication agent instance.

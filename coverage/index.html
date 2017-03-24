@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-15T12:21:42+11:00">2017-03-15T12:21:42+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-03-24T11:35:31+11:00">2017-03-24T11:35:31+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -31,9 +31,9 @@
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>22</b> files in total.
-    <b>531</b> relevant lines. 
-    <span class="green"><b>531</b> lines covered</span> and
+    <b>24</b> files in total.
+    <b>569</b> relevant lines. 
+    <span class="green"><b>569</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -53,11 +53,11 @@
       <tr>
         <td class="strong"><a href="#c1563b0d6f3b65e295f922acab987a73a0c7f556" class="src_link" title="lib/ruby_aem.rb">lib/ruby_aem.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>171</td>
-        <td>50</td>
-        <td>50</td>
+        <td>191</td>
+        <td>56</td>
+        <td>56</td>
         <td>0</td>
-        <td>3.4</td>
+        <td>3.6</td>
       </tr>
       
       <tr>
@@ -67,7 +67,7 @@
         <td>55</td>
         <td>55</td>
         <td>0</td>
-        <td>4.3</td>
+        <td>4.4</td>
       </tr>
       
       <tr>
@@ -191,6 +191,16 @@
       </tr>
       
       <tr>
+        <td class="strong"><a href="#0b4524becbad739f7cc254d37d57bad7dd3daec6" class="src_link" title="lib/ruby_aem/resources/outbox_replication_agent.rb">lib/ruby_aem/resources/outbox_replication_agent.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>77</td>
+        <td>16</td>
+        <td>16</td>
+        <td>0</td>
+        <td>1.8</td>
+      </tr>
+      
+      <tr>
         <td class="strong"><a href="#26fda2a3a33632b988ccadaf26e4f509e16dbf41" class="src_link" title="lib/ruby_aem/resources/package.rb">lib/ruby_aem/resources/package.rb</a></td>
         <td class="green strong">100.0 %</td>
         <td>302</td>
@@ -228,6 +238,16 @@
         <td>10</td>
         <td>0</td>
         <td>1.4</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#4eb9363be8d5c76934264841c1b1a7d7cf58922b" class="src_link" title="lib/ruby_aem/resources/reverse_replication_agent.rb">lib/ruby_aem/resources/reverse_replication_agent.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>79</td>
+        <td>16</td>
+        <td>16</td>
+        <td>0</td>
+        <td>1.8</td>
       </tr>
       
       <tr>
@@ -291,8 +311,8 @@
     <h3>lib/ruby_aem.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>50</b> relevant lines. 
-      <span class="green"><b>50</b> lines covered</span> and
+      <b>56</b> relevant lines. 
+      <span class="green"><b>56</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -459,265 +479,265 @@
         <li class="covered" data-hits="1" data-linenumber="27">
           <span class="hits">1</span>
           
-          <code class="ruby">require &#39;ruby_aem/resources/repository&#39;</code>
+          <code class="ruby">require &#39;ruby_aem/resources/outbox_replication_agent&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
-          <code class="ruby">require &#39;ruby_aem/resources/user&#39;</code>
+          <code class="ruby">require &#39;ruby_aem/resources/reverse_replication_agent&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="29">
           <span class="hits">1</span>
           
-          <code class="ruby">require &#39;swagger_aem&#39;</code>
+          <code class="ruby">require &#39;ruby_aem/resources/repository&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="30">
           <span class="hits">1</span>
           
-          <code class="ruby">require &#39;yaml&#39;</code>
+          <code class="ruby">require &#39;ruby_aem/resources/user&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
+        <li class="covered" data-hits="1" data-linenumber="31">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">require &#39;swagger_aem&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
-          <code class="ruby">module RubyAem</code>
+          <code class="ruby">require &#39;yaml&#39;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="33">
           
           
-          <code class="ruby">  # Aem class represents an AEM client instance.</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="34">
           <span class="hits">1</span>
           
-          <code class="ruby">  class Aem</code>
+          <code class="ruby">module RubyAem</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # Aem class represents an AEM client instance.</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="36">
+        <li class="covered" data-hits="1" data-linenumber="36">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # Initialise a Ruby AEM instance.</code>
+          <code class="ruby">  class Aem</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="38">
           
           
-          <code class="ruby">    # @param conf configuration hash of the following configuration values:</code>
+          <code class="ruby">    # Initialise a Ruby AEM instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="39">
           
           
-          <code class="ruby">    # - username: username used to authenticate to AEM instance</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
           
           
-          <code class="ruby">    # - password: password used to authenticate to AEM instance</code>
+          <code class="ruby">    # @param conf configuration hash of the following configuration values:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="41">
           
           
-          <code class="ruby">    # - protocol: AEM instance protocol (http or https)</code>
+          <code class="ruby">    # - username: username used to authenticate to AEM instance</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="42">
           
           
-          <code class="ruby">    # - host: AEM instance host name</code>
+          <code class="ruby">    # - password: password used to authenticate to AEM instance</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby">    # - port: AEM instance port</code>
+          <code class="ruby">    # - protocol: AEM instance protocol (http or https)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">    # - debug: if true, then additional debug messages will be included</code>
+          <code class="ruby">    # - host: AEM instance host name</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby">    # @return new RubyAem::Aem instance</code>
+          <code class="ruby">    # - port: AEM instance port</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="46">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="46">
           
-          <code class="ruby">    def initialize(conf = {})</code>
+          
+          <code class="ruby">    # - debug: if true, then additional debug messages will be included</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
+          <code class="ruby">    # @return new RubyAem::Aem instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def initialize(conf = {})</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="48">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="50">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:username] ||= &#39;admin&#39;</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="49">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="51">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:password] ||= &#39;admin&#39;</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="50">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="52">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:protocol] ||= &#39;http&#39;</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="51">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="53">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:host] ||= &#39;localhost&#39;</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="52">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="54">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:port] ||= 4502</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="53">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="55">
+          <span class="hits">14</span>
           
           <code class="ruby">      conf[:debug] ||= false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="56">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="55">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="57">
+          <span class="hits">14</span>
           
           <code class="ruby">      SwaggerAemClient.configure { |swagger_conf| [</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="56">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="58">
+          <span class="hits">14</span>
           
           <code class="ruby">        swagger_conf.host = &quot;#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
-          <code class="ruby">        swagger_conf.username = conf[:username],</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby">        swagger_conf.password = conf[:password],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">        swagger_conf.debugging = conf[:debug],</code>
+          <code class="ruby">        swagger_conf.username = conf[:username],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
           
           
-          <code class="ruby">        swagger_conf.params_encoding = :multi</code>
+          <code class="ruby">        swagger_conf.password = conf[:password],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby">      ]}</code>
+          <code class="ruby">        swagger_conf.debugging = conf[:debug],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        swagger_conf.params_encoding = :multi</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="63">
-          <span class="hits">12</span>
+        <li class="never" data-hits="" data-linenumber="63">
           
-          <code class="ruby">      apis = {</code>
+          
+          <code class="ruby">      ]}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">        :console =&gt; SwaggerAemClient::ConsoleApi.new,</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="covered" data-hits="14" data-linenumber="65">
+          <span class="hits">14</span>
           
-          
-          <code class="ruby">        :cq =&gt; SwaggerAemClient::CqApi.new,</code>
+          <code class="ruby">      apis = {</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
           
           
-          <code class="ruby">        :crx =&gt; SwaggerAemClient::CrxApi.new,</code>
+          <code class="ruby">        :console =&gt; SwaggerAemClient::ConsoleApi.new,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
-          <code class="ruby">        :sling =&gt; SwaggerAemClient::SlingApi.new</code>
+          <code class="ruby">        :cq =&gt; SwaggerAemClient::CqApi.new,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
           
           
-          <code class="ruby">      }</code>
+          <code class="ruby">        :crx =&gt; SwaggerAemClient::CrxApi.new,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="69">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        :sling =&gt; SwaggerAemClient::SlingApi.new</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="70">
-          <span class="hits">12</span>
+        <li class="never" data-hits="" data-linenumber="70">
           
-          <code class="ruby">      spec = YAML.load_file(File.expand_path(&#39;../../conf/spec.yaml&#39;, __FILE__))</code>
+          
+          <code class="ruby">      }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
@@ -726,601 +746,721 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="72">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="72">
+          <span class="hits">14</span>
           
-          <code class="ruby">      @client = RubyAem::Client.new(apis, spec)</code>
+          <code class="ruby">      spec = YAML.load_file(File.expand_path(&#39;../../conf/spec.yaml&#39;, __FILE__))</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="covered" data-hits="14" data-linenumber="74">
+          <span class="hits">14</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">      @client = RubyAem::Client.new(apis, spec)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">    # Create an AEM instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
+          <code class="ruby">    # Create an AEM instance.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Aem instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="78">
+        <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
           <code class="ruby">    def aem()</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="79">
+        <li class="covered" data-hits="1" data-linenumber="81">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Aem.new(@client)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="81">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="82">
           
           
-          <code class="ruby">    # Create a bundle instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="83">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="84">
           
           
-          <code class="ruby">    # @param name the bundle&#39;s name, e.g. com.adobe.cq.social.cq-social-forum</code>
+          <code class="ruby">    # Create a bundle instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="85">
           
           
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">    # @param name the bundle&#39;s name, e.g. com.adobe.cq.social.cq-social-forum</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Bundle instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="86">
+        <li class="covered" data-hits="1" data-linenumber="88">
           <span class="hits">1</span>
           
           <code class="ruby">    def bundle(name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="87">
+        <li class="covered" data-hits="1" data-linenumber="89">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Bundle.new(@client, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="89">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="90">
           
           
-          <code class="ruby">    # Create a config property instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="91">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="92">
           
           
-          <code class="ruby">    # @param name the property&#39;s name</code>
+          <code class="ruby">    # Create a config property instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="93">
           
           
-          <code class="ruby">    # @param type the property&#39;s type, e.g. Boolean</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="94">
           
           
-          <code class="ruby">    # @param value the property&#39;s value, e.g. true</code>
+          <code class="ruby">    # @param name the property&#39;s name</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
           
           
+          <code class="ruby">    # @param type the property&#39;s type, e.g. Boolean</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby">    # @param value the property&#39;s value, e.g. true</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="97">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::ConfigProperty instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="96">
+        <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
           <code class="ruby">    def config_property(name, type, value)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="97">
+        <li class="covered" data-hits="1" data-linenumber="99">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::ConfigProperty.new(@client, name, type, value)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="99">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby">    # Create a flush agent instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="101">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
-          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+          <code class="ruby">    # Create a flush agent instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
           
           
-          <code class="ruby">    # @param name the flush agent&#39;s name, e.g. some-flush-agent</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="104">
           
           
+          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
+          
+          
+          <code class="ruby">    # @param name the flush agent&#39;s name, e.g. some-flush-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="106">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::FlushAgent instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="105">
+        <li class="covered" data-hits="1" data-linenumber="107">
           <span class="hits">1</span>
           
           <code class="ruby">    def flush_agent(run_mode, name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="106">
+        <li class="covered" data-hits="1" data-linenumber="108">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::FlushAgent.new(@client, run_mode, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="107">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="108">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="109">
           
           
-          <code class="ruby">    # Create a group instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="110">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="111">
           
           
-          <code class="ruby">    # @param path the path to group node, e.g. /home/groups/s/</code>
+          <code class="ruby">    # Create a group instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="112">
           
           
-          <code class="ruby">    # @param name the name of the AEM group, e.g. somegroup</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="113">
           
           
+          <code class="ruby">    # @param path the path to group node, e.g. /home/groups/s/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby">    # @param name the name of the AEM group, e.g. somegroup</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Group instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="114">
+        <li class="covered" data-hits="1" data-linenumber="116">
           <span class="hits">1</span>
           
           <code class="ruby">    def group(path, name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="115">
+        <li class="covered" data-hits="1" data-linenumber="117">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Group.new(@client, path, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="117">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="118">
           
           
-          <code class="ruby">    # Create a node instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="119">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="120">
           
           
-          <code class="ruby">    # @param path the path to the node, e.g. /apps/system/</code>
+          <code class="ruby">    # Create a node instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="121">
           
           
-          <code class="ruby">    # @param name the node name, e.g. somenode</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="122">
           
           
+          <code class="ruby">    # @param path the path to the node, e.g. /apps/system/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">    # @param name the node name, e.g. somenode</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="124">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Node instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="125">
           <span class="hits">1</span>
           
           <code class="ruby">    def node(path, name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="124">
+        <li class="covered" data-hits="1" data-linenumber="126">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Node.new(@client, path, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="125">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="126">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="127">
           
           
-          <code class="ruby">    # Create a package instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="128">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="129">
           
           
-          <code class="ruby">    # @param group_name the group name of the package, e.g. somepackagegroup</code>
+          <code class="ruby">    # Create a package instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="130">
           
           
-          <code class="ruby">    # @param package_name the name of the package, e.g. somepackage</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="131">
           
           
-          <code class="ruby">    # @param package_version the version of the package, e.g. 1.2.3</code>
+          <code class="ruby">    # @param group_name the group name of the package, e.g. somepackagegroup</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="132">
           
           
+          <code class="ruby">    # @param package_name the name of the package, e.g. somepackage</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="133">
+          
+          
+          <code class="ruby">    # @param package_version the version of the package, e.g. 1.2.3</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="134">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Package instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="133">
+        <li class="covered" data-hits="1" data-linenumber="135">
           <span class="hits">1</span>
           
           <code class="ruby">    def package(group_name, package_name, package_version)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="134">
+        <li class="covered" data-hits="1" data-linenumber="136">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Package.new(@client, group_name, package_name, package_version)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="135">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="136">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="137">
           
           
-          <code class="ruby">    # Create a path instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="138">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="139">
           
           
-          <code class="ruby">    # @param name the name of the path, e.g. /etc/designs</code>
+          <code class="ruby">    # Create a path instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="140">
           
           
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="141">
+          
+          
+          <code class="ruby">    # @param name the name of the path, e.g. /etc/designs</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="142">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::Path instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="141">
+        <li class="covered" data-hits="1" data-linenumber="143">
           <span class="hits">1</span>
           
           <code class="ruby">    def path(name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="142">
+        <li class="covered" data-hits="1" data-linenumber="144">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::Path.new(@client, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="143">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="144">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="145">
           
           
-          <code class="ruby">    # Create a replication agent instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="147">
           
           
-          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+          <code class="ruby">    # Create a replication agent instance.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="148">
           
           
-          <code class="ruby">    # @param name the replication agent&#39;s name, e.g. some-replication-agent</code>
+          <code class="ruby">    #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="149">
           
           
+          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="150">
+          
+          
+          <code class="ruby">    # @param name the replication agent&#39;s name, e.g. some-replication-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="151">
+          
+          
           <code class="ruby">    # @return new RubyAem::Resources::ReplicationAgent instance</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="150">
+        <li class="covered" data-hits="1" data-linenumber="152">
           <span class="hits">1</span>
           
           <code class="ruby">    def replication_agent(run_mode, name)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="151">
+        <li class="covered" data-hits="1" data-linenumber="153">
           <span class="hits">1</span>
           
           <code class="ruby">      RubyAem::Resources::ReplicationAgent.new(@client, run_mode, name)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="152">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="153">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="154">
           
           
-          <code class="ruby">    # Create a repository instance.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="155">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="156">
           
           
-          <code class="ruby">    # @return new RubyAem::Resources::Repository instance</code>
+          <code class="ruby">    # Create an outbox replication agent instance.</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="157">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    def repository</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="158">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      RubyAem::Resources::Repository.new(@client)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="159">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="160">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="161">
-          
-          
-          <code class="ruby">    # Create a user instance.</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="162">
+        <li class="never" data-hits="" data-linenumber="157">
           
           
           <code class="ruby">    #</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="158">
+          
+          
+          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="159">
+          
+          
+          <code class="ruby">    # @param name the outbox replication agent&#39;s name, e.g. some-outbox-replication-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="160">
+          
+          
+          <code class="ruby">    # @return new RubyAem::Resources::OutboxReplicationAgent instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="161">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def outbox_replication_agent(run_mode, name)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="162">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      RubyAem::Resources::OutboxReplicationAgent.new(@client, run_mode, name)</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="163">
-          
-          
-          <code class="ruby">    # @param path the path to user node, e.g. /home/users/s/</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="164">
-          
-          
-          <code class="ruby">    # @param name the username of the AEM user, e.g. someuser, admin, johncitizen</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="165">
-          
-          
-          <code class="ruby">    # @return new RubyAem::Resources::User instance</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="166">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    def user(path, name)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="167">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      RubyAem::Resources::User.new(@client, path, name)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="168">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="169">
+        <li class="never" data-hits="" data-linenumber="164">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="170">
+        <li class="never" data-hits="" data-linenumber="165">
+          
+          
+          <code class="ruby">    # Create a reverse replication agent instance.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="166">
+          
+          
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="167">
+          
+          
+          <code class="ruby">    # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="168">
+          
+          
+          <code class="ruby">    # @param name the reverse replication agent&#39;s name, e.g. some-reverse-replication-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="169">
+          
+          
+          <code class="ruby">    # @return new RubyAem::Resources::ReverseReplicationAgent instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="170">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def reverse_replication_agent(run_mode, name)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="171">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      RubyAem::Resources::ReverseReplicationAgent.new(@client, run_mode, name)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="172">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="173">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="174">
+          
+          
+          <code class="ruby">    # Create a repository instance.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="176">
+          
+          
+          <code class="ruby">    # @return new RubyAem::Resources::Repository instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="177">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def repository</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="178">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      RubyAem::Resources::Repository.new(@client)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="179">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="180">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="181">
+          
+          
+          <code class="ruby">    # Create a user instance.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="182">
+          
+          
+          <code class="ruby">    #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="183">
+          
+          
+          <code class="ruby">    # @param path the path to user node, e.g. /home/users/s/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="184">
+          
+          
+          <code class="ruby">    # @param name the username of the AEM user, e.g. someuser, admin, johncitizen</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="185">
+          
+          
+          <code class="ruby">    # @return new RubyAem::Resources::User instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="186">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def user(path, name)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="187">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      RubyAem::Resources::User.new(@client, path, name)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="188">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="189">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="190">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="171">
+        <li class="never" data-hits="" data-linenumber="191">
           
           
           <code class="ruby">end</code>
@@ -1566,14 +1706,14 @@
           <code class="ruby">    def initialize(apis, spec)</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="38">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="22" data-linenumber="38">
+          <span class="hits">22</span>
           
           <code class="ruby">      @apis = apis</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="39">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="22" data-linenumber="39">
+          <span class="hits">22</span>
           
           <code class="ruby">      @spec = spec</code>
         </li>
@@ -7180,6 +7320,486 @@
   </pre>
 </div>
       
+        <div class="source_table" id="0b4524becbad739f7cc254d37d57bad7dd3daec6">
+  <div class="header">
+    <h3>lib/ruby_aem/resources/outbox_replication_agent.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>16</b> relevant lines. 
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="never" data-hits="" data-linenumber="1">
+          
+          
+          <code class="ruby">=begin</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby">Copyright 2016 Shine Solutions</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">you may not use this file except in compliance with the License.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby">You may obtain a copy of the License at</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby">    http://www.apache.org/licenses/LICENSE-2.0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">Unless required by applicable law or agreed to in writing, software</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="13">
+          
+          
+          <code class="ruby">See the License for the specific language governing permissions and</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby">limitations under the License.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">=end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module RubyAem</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  module Resources</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
+          <code class="ruby">    # OutboxReplicationAgent class contains API calls related to managing an AEM outbox replication agent.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="20">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    class OutboxReplicationAgent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">      # Initialise a outbox replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">      # @param client RubyAem::Client</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">      # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">      # @param name the outbox replication agent&#39;s name, e.g. some-replication-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">      # @return new RubyAem::Resources::OutboxReplicationAgent instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def initialize(client, run_mode, name)</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="29">
+          <span class="hits">5</span>
+          
+          <code class="ruby">        @client = client</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="30">
+          <span class="hits">5</span>
+          
+          <code class="ruby">        @call_params = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">          run_mode: run_mode,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby">          name: name</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="33">
+          
+          
+          <code class="ruby">        }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="34">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="35">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">      # Create or update a outbox replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby">      # @param title outbox replication agent title</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
+          
+          
+          <code class="ruby">      # @param description outbox replication agent description</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">      # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">      # @param opts optional parameters:</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">      # - user_id: outbox agent&#39;s user ID, default is admin</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
+          <code class="ruby">      # - log_level: error, info, debug, default is error</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">      # - retry_delay: in milliseconds, default is 30000</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def create_update(title, description, dest_base_url,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby">        opts = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">          user_id: &#39;admin&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby">          log_level: &#39;error&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">          retry_delay: 30000</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">        })</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="52">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:title] = title</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="53">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:description] = description</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="54">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:dest_base_url] = dest_base_url</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="55">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params = @call_params.merge(opts)</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="56">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
+          <code class="ruby">      # Delete the outbox replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="62">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def delete()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby">      # Check whether the outbox replication agent exists or not.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby">      # If the outbox replication agent  exists, this method returns a true result data,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">      # false otherwise.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def exists()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="73">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
         <div class="source_table" id="26fda2a3a33632b988ccadaf26e4f509e16dbf41">
   <div class="header">
     <h3>lib/ruby_aem/resources/package.rb</h3>
@@ -10099,6 +10719,498 @@
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+      
+        <div class="source_table" id="4eb9363be8d5c76934264841c1b1a7d7cf58922b">
+  <div class="header">
+    <h3>lib/ruby_aem/resources/reverse_replication_agent.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>16</b> relevant lines. 
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="never" data-hits="" data-linenumber="1">
+          
+          
+          <code class="ruby">=begin</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby">Copyright 2016 Shine Solutions</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="4">
+          
+          
+          <code class="ruby">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby">you may not use this file except in compliance with the License.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby">You may obtain a copy of the License at</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby">    http://www.apache.org/licenses/LICENSE-2.0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">Unless required by applicable law or agreed to in writing, software</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="13">
+          
+          
+          <code class="ruby">See the License for the specific language governing permissions and</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby">limitations under the License.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">=end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">module RubyAem</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  module Resources</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="19">
+          
+          
+          <code class="ruby">    # ReverseReplicationAgent class contains API calls related to managing an AEM reverse replication agent.</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="20">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    class ReverseReplicationAgent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">      # Initialise a reverse replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">      # @param client RubyAem::Client</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">      # @param run_mode AEM run mode: author or publish</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
+          <code class="ruby">      # @param name the reverse replication agent&#39;s name, e.g. some-replication-agent</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">      # @return new RubyAem::Resources::ReverseReplicationAgent instance</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def initialize(client, run_mode, name)</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="29">
+          <span class="hits">5</span>
+          
+          <code class="ruby">        @client = client</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="30">
+          <span class="hits">5</span>
+          
+          <code class="ruby">        @call_params = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">          run_mode: run_mode,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby">          name: name</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="33">
+          
+          
+          <code class="ruby">        }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="34">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="35">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">      # Create or update a reverse replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby">      # @param title reverse replication agent title</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
+          
+          
+          <code class="ruby">      # @param description reverse replication agent description</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">      # @param dest_base_url base URL of the agent target destination, e.g. https://somepublisher:4503</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">      # @param opts optional parameters:</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">      # - transport_user: username for transport user, default is admin</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
+          <code class="ruby">      # - transport_password: password for transport user, default is admin</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">      # - log_level: error, info, debug, default is error</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby">      # - retry_delay: in milliseconds, default is 30000</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="47">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def create_update(title, description, dest_base_url,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">        opts = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby">          transport_user: &#39;admin&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">          transport_password: &#39;admin&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">          log_level: &#39;error&#39;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby">          retry_delay: 30000</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
+          <code class="ruby">        })</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="54">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:title] = title</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="55">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:description] = description</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="56">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params[:dest_base_url] = dest_base_url</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="57">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @call_params = @call_params.merge(opts)</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="58">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">      # Delete the reverse replication agent.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def delete()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">      # Check whether the reverse replication agent exists or not.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">      # If the reverse replication agent  exists, this method returns a true result data,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">      # false otherwise.</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby">      #</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby">      # @return RubyAem::Result</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      def exists()</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">end</code>

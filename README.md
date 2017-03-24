@@ -171,8 +171,7 @@ Outbox replication agent:
     # create or update outbox replication agent
     opts = {
       user_id: 'admin',
-      log_level: 'info',
-      retry_delay: 60000
+      log_level: 'info'
     }
     result = outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', opts)
 

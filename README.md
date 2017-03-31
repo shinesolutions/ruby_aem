@@ -7,7 +7,7 @@ ruby_aem
 ruby_aem is a Ruby client for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 It is written on top of [swagger_aem](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) and provides resource-oriented API and convenient response handling.
 
-[Versions table](docs/versions.md)
+[Versions History](docs/versions.md)
 
 Install
 -------

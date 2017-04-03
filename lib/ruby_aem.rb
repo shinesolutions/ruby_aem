@@ -38,12 +38,13 @@ module RubyAem
     # Initialise a Ruby AEM instance.
     #
     # @param conf configuration hash of the following configuration values:
-    # - username: username used to authenticate to AEM instance
-    # - password: password used to authenticate to AEM instance
-    # - protocol: AEM instance protocol (http or https)
-    # - host: AEM instance host name
-    # - port: AEM instance port
-    # - debug: if true, then additional debug messages will be included
+    # - username: username used to authenticate to AEM instance, default: 'admin'
+    # - password: password used to authenticate to AEM instance, default: 'admin'
+    # - protocol: AEM instance protocol (http or https), default: 'http'
+    # - host: AEM instance host name, default: 'localhost'
+    # - port: AEM instance port, default: 4502
+    # - timeout: connection timeout in seconds, default: 300 seconds
+    # - debug: if true, then additional debug messages will be included, default: false
     # @return new RubyAem::Aem instance
     def initialize(conf = {})
 
@@ -52,12 +53,14 @@ module RubyAem
       conf[:protocol] ||= 'http'
       conf[:host] ||= 'localhost'
       conf[:port] ||= 4502
+      conf[:timeout] ||= 300
       conf[:debug] ||= false
 
       SwaggerAemClient.configure { |swagger_conf| [
         swagger_conf.host = "#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}",
         swagger_conf.username = conf[:username],
         swagger_conf.password = conf[:password],
+        swagger_conf.timeout = conf[:timeout],
         swagger_conf.debugging = conf[:debug],
         swagger_conf.params_encoding = :multi
       ]}

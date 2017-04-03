@@ -27,6 +27,7 @@ Initialise client:
       :protocol => 'http',
       :host => 'localhost',
       :port => 4502,
+      :timeout => 300,
       :debug => false
     })
 

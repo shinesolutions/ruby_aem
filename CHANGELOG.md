@@ -1,3 +1,6 @@
+### 1.0.15
+*
+
 ### 1.0.14
 * Switch from deleteAgent to postAgent operation for all agents delete action
 

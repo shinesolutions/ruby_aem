@@ -37,10 +37,10 @@ describe 'ConfigProperty' do
       expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     end
 
-    it 'should create Apache Sling Get Servlet config property correctly when node exists' do
+    it 'should create AEM Password Reset Activator config property correctly when node exists' do
 
       # ensure node is created new
-      node = @aem.node('/apps/system/config.author', 'org.apache.sling.servlets.get.DefaultGetServlet')
+      node = @aem.node('/apps/system/config.author', 'com.shinesolutions.aem.passwordreset.Activator')
       if node.exists().data == true
         node.delete()
       end
@@ -48,15 +48,10 @@ describe 'ConfigProperty' do
       expect(result.data).to eq(false)
       result = node.create('sling:OsgiConfig')
 
-      config_property = @aem.config_property('enable.html', 'Boolean', false)
-      result = config_property.create('author', 'org.apache.sling.servlets.get.DefaultGetServlet')
-      expect(result.message).to eq('Set author org.apache.sling.servlets.get.DefaultGetServlet config Boolean property enable.html=false')
+      config_property = @aem.config_property('pwdreset.authorizables', 'String[]', ['admin', 'orchestrator', 'deployer'])
+      result = config_property.create('author', 'com.shinesolutions.aem.passwordreset.Activator')
+      expect(result.message).to eq('Set author com.shinesolutions.aem.passwordreset.Activator config String[] property pwdreset.authorizables=["admin", "orchestrator", "deployer"]')
 
-      # wait until Jetty finishes restart following org.apache.sling.servlets.get.DefaultGetServlet config change
-      aem = @aem.aem()
-      result = aem.get_login_page_wait_until_ready()
-      expect(result.message).to eq('Login page retrieved')
-      expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     end
   end
 

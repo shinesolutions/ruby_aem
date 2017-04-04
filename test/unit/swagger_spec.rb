@@ -64,6 +64,9 @@ describe 'Swagger' do
 
       method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
       expect(method).to eq('Apache Sling DavEx Servlet')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.aem.passwordreset.Activator')
+      expect(method).to eq('AEM Password Reset Activator')
     end
 
     it 'should return null when config node name does not exist' do

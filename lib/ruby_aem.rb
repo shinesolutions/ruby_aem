@@ -67,6 +67,7 @@ module RubyAem
 
       apis = {
         :console => SwaggerAemClient::ConsoleApi.new,
+        :custom => SwaggerAemClient::CustomApi.new,
         :cq => SwaggerAemClient::CqApi.new,
         :crx => SwaggerAemClient::CrxApi.new,
         :sling => SwaggerAemClient::SlingApi.new

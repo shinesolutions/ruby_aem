@@ -482,6 +482,22 @@ configproperty:
         201:
           handler: simple
           message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
+    createaempasswordresetactivator:
+      api: custom
+      operation: postConfigAemPasswordReset
+      params:
+        required:
+          runmode: '%{run_mode}'
+        optional:
+          - pwdreset_authorizables
+          - pwdreset_authorizables_type_hint
+      responses:
+        200:
+          handler: simple
+          message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
+        201:
+          handler: simple
+          message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
 replicationagent:
   responses:
     404:

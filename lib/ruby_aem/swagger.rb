@@ -62,6 +62,8 @@ module RubyAem
         'Apache Sling Referrer Filter'
       when 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet'
         'Apache Sling DavEx Servlet'
+      when 'com.shinesolutions.aem.passwordreset.Activator'
+        'AEM Password Reset Activator'
       else
         nil
       end

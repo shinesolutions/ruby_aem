@@ -498,6 +498,22 @@ configproperty:
         201:
           handler: simple
           message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
+    createaemhealthcheckservlet:
+      api: custom
+      operation: postConfigAemHealthCheckServlet
+      params:
+        required:
+          runmode: '%{run_mode}'
+        optional:
+          - bundles_ignored
+          - bundles_ignored_type_hint
+      responses:
+        200:
+          handler: simple
+          message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
+        201:
+          handler: simple
+          message: 'Set %{run_mode} %{config_node_name} config %{type} property %{name}=%{value}'
 replicationagent:
   responses:
     404:

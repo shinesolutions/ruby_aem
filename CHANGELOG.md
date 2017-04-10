@@ -1,9 +1,10 @@
 ### 1.0.16
 * Add SSL support for postAgent operation
+* Add AEM Health Check Servlet config support
 
 ### 1.0.15
 * Add timeout option
-* Add AEM Password Reset Activator support
+* Add AEM Password Reset Activator config support
 
 ### 1.0.14
 * Switch from deleteAgent to postAgent operation for all agents delete action

@@ -53,6 +53,23 @@ describe 'ConfigProperty' do
       expect(result.message).to eq('Set author com.shinesolutions.aem.passwordreset.Activator config String[] property pwdreset.authorizables=["admin", "orchestrator", "deployer"]')
 
     end
+
+    it 'should create AEM Health Check Servlet config property correctly when node exists' do
+
+      # ensure node is created new
+      node = @aem.node('/apps/system/config.author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
+      if node.exists().data == true
+        node.delete()
+      end
+      result = node.exists()
+      expect(result.data).to eq(false)
+      result = node.create('sling:OsgiConfig')
+
+      config_property = @aem.config_property('bundles.ignored', 'String[]', ['admin', 'orchestrator', 'deployer'])
+      result = config_property.create('author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
+      expect(result.message).to eq('Set author com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck config String[] property bundles.ignored=["com.day.cq.dam.dam-webdav-support"]')
+
+    end
   end
 
 end

@@ -64,6 +64,8 @@ module RubyAem
         'Apache Sling DavEx Servlet'
       when 'com.shinesolutions.aem.passwordreset.Activator'
         'AEM Password Reset Activator'
+      when 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck'
+        'AEM Health Check Servlet'
       else
         nil
       end

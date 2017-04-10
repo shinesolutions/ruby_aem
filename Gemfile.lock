@@ -29,7 +29,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    swagger_aem (0.9.11)
+    swagger_aem (0.9.12)
       json (~> 1.8, >= 1.8.3)
       typhoeus (~> 1.0, >= 1.0.1)
     typhoeus (1.1.2)
@@ -44,7 +44,7 @@ DEPENDENCIES
   retries (~> 0.0.5)
   rspec
   simplecov
-  swagger_aem (~> 0.9.11)
+  swagger_aem (~> 0.9.12)
   yard
 
 BUNDLED WITH

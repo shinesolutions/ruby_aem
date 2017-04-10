@@ -67,6 +67,9 @@ describe 'Swagger' do
 
       method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.aem.passwordreset.Activator')
       expect(method).to eq('AEM Password Reset Activator')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
+      expect(method).to eq('AEM Health Check Servlet')
     end
 
     it 'should return null when config node name does not exist' do

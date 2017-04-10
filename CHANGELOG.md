@@ -1,3 +1,6 @@
+### 1.0.16
+* Add SSL support for postAgent operation
+
 ### 1.0.15
 * Add timeout option
 * Add AEM Password Reset Activator support

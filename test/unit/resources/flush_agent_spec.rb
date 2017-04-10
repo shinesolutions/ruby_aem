@@ -34,10 +34,11 @@ describe 'FlushAgent' do
           :name => 'some-flush-agent',
           :title => 'Some Flush Agent Title',
           :description => 'Some flush agent description',
-          :dest_base_url => 'http://somehost:8080',
+          :dest_base_url => 'https://somehost:8080',
+          :ssl => 'relaxed',
           :log_level => 'info',
           :retry_delay => 60000 })
-      @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', { log_level: 'info', retry_delay: 60000 })
+      @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'https://somehost:8080', { log_level: 'info', retry_delay: 60000, ssl: 'relaxed' })
     end
 
   end

@@ -65,7 +65,7 @@ describe 'ConfigProperty' do
       expect(result.data).to eq(false)
       result = node.create('sling:OsgiConfig')
 
-      config_property = @aem.config_property('bundles.ignored', 'String[]', ['admin', 'orchestrator', 'deployer'])
+      config_property = @aem.config_property('bundles.ignored', 'String[]', ['com.day.cq.dam.dam-webdav-support'])
       result = config_property.create('author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
       expect(result.message).to eq('Set author com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck config String[] property bundles.ignored=["com.day.cq.dam.dam-webdav-support"]')
 

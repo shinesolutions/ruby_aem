@@ -9,15 +9,25 @@ describe 'Aem' do
   after do
   end
 
-  # describe 'test get_login_page' do
-  #
-  #   it 'should call client with expected parameters' do
-  #     expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_login_page', {})
-  #     aem = RubyAem::Resources::Aem.new(@mock_client)
-  #     aem.get_login_page
-  #   end
-  #
-  # end
+  describe 'test get_login_page' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_login_page', {})
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_login_page
+    end
+
+  end
+
+  describe 'test get_aem_health_check' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_aem_health_check', { :tags => 'shallow', :combine_tags_or => false })
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_aem_health_check('shallow', false)
+    end
+
+  end
 
   describe 'test get_login_page_wait_until_ready' do
 
@@ -52,6 +62,74 @@ describe 'Aem' do
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #2: Login page retrieved but not ready yet')
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #3: Login page retrieved and ready')
       aem.get_login_page_wait_until_ready({
+        _retries: {
+          max_tries: '60',
+          base_sleep_seconds: '2',
+          max_sleep_seconds: '2'
+        }})
+    end
+
+  end
+
+  describe 'test get_aem_health_check_wait_until_ok' do
+
+    it 'should call client with expected parameters' do
+
+      mock_message_error = 'AEM Health Check has some error'
+      mock_result_error = double('mock_result_error')
+      mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
+
+      mock_message_not_ok = 'AEM Health Check retrieved'
+      mock_body_not_ok =
+        '{' \
+        '  "results": [' \
+        '    {' \
+        '      "name": "name1",' \
+        '      "status": "OK",' \
+        '      "timeMs": 11' \
+        '    },' \
+        '    {' \
+        '      "name": "name2",' \
+        '      "status": "CRITICAL",' \
+        '      "timeMs": 22' \
+        '    }' \
+        '  ]' \
+        '}'
+      mock_response_not_ok = double('mock_response_not_ok')
+      mock_result_not_ok = double('mock_result_not_ok')
+      expect(mock_result_not_ok).to receive(:data).and_return(JSON.parse(mock_body_not_ok)['results'])
+      expect(mock_result_not_ok).to receive(:message).twice().and_return(mock_message_not_ok)
+
+      mock_message_ok = 'AEM Health Check retrieved'
+      mock_body_ok =
+        '{' \
+        '  "results": [' \
+        '    {' \
+        '      "name": "name1",' \
+        '      "status": "OK",' \
+        '      "timeMs": 11' \
+        '    },' \
+        '    {' \
+        '      "name": "name2",' \
+        '      "status": "OK",' \
+        '      "timeMs": 22' \
+        '    }' \
+        '  ]' \
+        '}'
+      mock_response_ok = double('mock_response_ok')
+      mock_result_ok = double('mock_result_ok')
+      expect(mock_result_ok).to receive(:data).and_return(JSON.parse(mock_body_ok)['results'])
+      expect(mock_result_ok).to receive(:message).and_return(mock_message_ok)
+
+      expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_aem_health_check', { :tags => 'shallow', :combine_tags_or => false }).and_raise(mock_error)
+      expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_aem_health_check', { :tags => 'shallow', :combine_tags_or => false }).and_return(mock_result_not_ok)
+      expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_aem_health_check', { :tags => 'shallow', :combine_tags_or => false }).and_return(mock_result_ok)
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #1: AEM Health Check has some error')
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #2: AEM Health Check retrieved but not ok yet')
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #3: AEM Health Check retrieved and ok')
+      aem.get_aem_health_check_wait_until_ok('shallow', false, {
         _retries: {
           max_tries: '60',
           base_sleep_seconds: '2',

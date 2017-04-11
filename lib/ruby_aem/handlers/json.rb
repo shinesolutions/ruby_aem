@@ -48,7 +48,7 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params additional call_paramsrmation
+    # @param call_params additional call_params information
     # @return RubyAem::Result
     def Handlers.json_package_service(response, response_spec, call_params)
 
@@ -68,7 +68,7 @@ module RubyAem
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params additional call_paramsrmation
+    # @param call_params additional call_params information
     # @return RubyAem::Result
     def Handlers.json_package_filter(response, response_spec, call_params)
 
@@ -85,6 +85,24 @@ module RubyAem
 
       result = RubyAem::Result.new(message, response)
       result.data = filter
+      result
+
+    end
+
+    # Handle AEM Health Check Servlet JSON payload.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params additional call_params information
+    # @return RubyAem::Result
+    def Handlers.json_aem_health_check(response, response_spec, call_params)
+
+      json = JSON.parse(response.body)
+
+      message = response_spec['message'] % call_params
+
+      result = RubyAem::Result.new(message, response)
+      result.data = json['results']
       result
 
     end

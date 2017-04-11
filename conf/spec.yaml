@@ -9,6 +9,18 @@ aem:
         200:
           handler: simple
           message: 'Login page retrieved'
+    get_aem_health_check:
+      api: custom
+      operation: getAemHealthCheck
+      params:
+        required:
+        optional:
+          tags: '%{tags}'
+          combinetagsor: '%{combine_tags_or}'
+      responses:
+        200:
+          handler: json_aem_health_check
+          message: 'AEM health check retrieved'
 bundle:
   responses:
     404:

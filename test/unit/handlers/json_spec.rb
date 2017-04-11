@@ -109,4 +109,40 @@ describe 'JSON Handler' do
 
   end
 
+  describe 'test json_aem_health_check' do
+
+    it 'should return success result with filter data payload' do
+      data =
+        '{' \
+        '  "results": [' \
+        '    {' \
+        '      "name": "name1",' \
+        '      "status": "OK",' \
+        '      "timeMs": 11' \
+        '    },' \
+        '    {' \
+        '      "name": "name2",' \
+        '      "status": "CRITICAL",' \
+        '      "timeMs": 22' \
+        '    }' \
+        '  ]' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'AEM Health Check retrieved successfully' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_aem_health_check(response, response_spec, call_params)
+      expect(result.message).to eq('AEM Health Check retrieved successfully')
+      expect(result.response).to eq(response)
+      expect(result.data.length).to eq(2)
+      expect(result.data[0]['name']).to eq('name1')
+      expect(result.data[0]['status']).to eq('OK')
+      expect(result.data[1]['name']).to eq('name2')
+      expect(result.data[1]['status']).to eq('CRITICAL')
+    end
+
+  end
+
 end

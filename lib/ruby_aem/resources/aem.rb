@@ -39,8 +39,23 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Retrieve AEM Health Check.
+      # This is a custom API and requires
+      # https://github.com/shinesolutions/aem-healthcheck
+      # to be installed.
+      #
+      # @param tags comma separated tags
+      # @param combine_tags_or
+      # @return RubyAem::Result
+      def get_aem_health_check(tags, combine_tags_or)
+
+        @call_params[:tags] = tags
+        @call_params[:combine_tags_or] = combine_tags_or
+
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
       # Retrieve AEM login page with retries until it is successful.
-      # This is handy for waiting for AEM to start or restart Jetty.
       #
       # @param opts optional parameters:
       # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
@@ -75,6 +90,54 @@ module RubyAem
             end
           rescue RubyAem::Error => err
             puts 'Retrieve login page attempt #%d: %s' % [retries_count, err.message]
+            raise StandardError.new(err.message)
+          end
+        }
+        result
+      end
+
+      # Retrieve AEM health check with retries until its status is OK.
+      #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # @return RubyAem::Result
+      def get_aem_health_check_wait_until_ok(tags, combine_tags_or,
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        })
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
+        result = nil
+        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          begin
+            result = get_aem_health_check(tags, combine_tags_or)
+            is_ok = true;
+            result.data.each { |check|
+              if check['status'] != 'OK'
+                is_ok = false
+                break
+              end
+            }
+            if is_ok == false
+              puts 'Retrieve AEM Health Check attempt #%d: %s but not ok yet' % [retries_count, result.message]
+              raise StandardError.new(result.message)
+            else
+              puts 'Retrieve AEM Health Check attempt #%d: %s and ok' % [retries_count, result.message]
+            end
+          rescue RubyAem::Error => err
+            puts 'Retrieve AEM Health Check attempt #%d: %s' % [retries_count, err.message]
             raise StandardError.new(err.message)
           end
         }

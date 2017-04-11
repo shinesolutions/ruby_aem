@@ -1,6 +1,7 @@
 ### 1.0.16
 * Add SSL support for postAgent operation
 * Add AEM Health Check Servlet config support
+* Add aem resource get_aem_health_check_wait_until_ok method
 
 ### 1.0.15
 * Add timeout option
@@ -36,7 +37,7 @@
 * Fix package is_installed method to handle packages that haven't been uploaded
 * Fix config property's operation in spec file
 * Fix node handling in config property creation
-* Add aem resource with get_login_page_until_ready method
+* Add aem resource with get_login_page_wait_until_ready method
 
 ### 1.0.2
 * Fix flush agent and replication agent initialisation parameters mix up

@@ -47,11 +47,9 @@ module RubyAem
       # @param tags comma separated tags
       # @param combine_tags_or
       # @return RubyAem::Result
-      def get_aem_health_check(tags, combine_tags_or)
+      def get_aem_health_check(opts = {})
 
-        @call_params[:tags] = tags
-        @call_params[:combine_tags_or] = combine_tags_or
-
+        @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -101,7 +99,7 @@ module RubyAem
       # @param opts optional parameters:
       # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
-      def get_aem_health_check_wait_until_ok(tags, combine_tags_or,
+      def get_aem_health_check_wait_until_ok(
         opts = {
           _retries: {
             max_tries: 30,
@@ -122,7 +120,7 @@ module RubyAem
         result = nil
         with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
-            result = get_aem_health_check(tags, combine_tags_or)
+            result = get_aem_health_check({ :tags => opts[:tags], :combine_tags_or => opts[:combine_tags_or] })
             is_ok = true;
             result.data.each { |check|
               if check['status'] != 'OK'

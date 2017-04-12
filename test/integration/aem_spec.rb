@@ -39,7 +39,9 @@ describe 'Aem' do
 
     it 'should try once and contain readyness indicator' do
       aem = @aem.aem()
-      result = aem.get_aem_health_check_wait_until_ok('shallow', false, {
+      result = aem.get_aem_health_check_wait_until_ok({
+        tags: 'shallow',
+        combine_tags_or: false,
         _retries: {
           max_tries: 60,
           base_sleep_seconds: 2,

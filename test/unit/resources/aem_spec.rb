@@ -24,7 +24,7 @@ describe 'Aem' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once().with(RubyAem::Resources::Aem, 'get_aem_health_check', { :tags => 'shallow', :combine_tags_or => false })
       aem = RubyAem::Resources::Aem.new(@mock_client)
-      aem.get_aem_health_check('shallow', false)
+      aem.get_aem_health_check({tags:'shallow', combine_tags_or:false})
     end
 
   end
@@ -129,7 +129,9 @@ describe 'Aem' do
       expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #1: AEM Health Check has some error')
       expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #2: AEM Health Check retrieved but not ok yet')
       expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #3: AEM Health Check retrieved and ok')
-      aem.get_aem_health_check_wait_until_ok('shallow', false, {
+      aem.get_aem_health_check_wait_until_ok({
+        tags: 'shallow',
+        combine_tags_or: false,
         _retries: {
           max_tries: '60',
           base_sleep_seconds: '2',

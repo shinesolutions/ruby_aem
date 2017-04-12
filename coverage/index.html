@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-11T23:25:09+10:00">2017-04-11T23:25:09+10:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-12T15:52:30+10:00">2017-04-12T15:52:30+10:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -32,8 +32,8 @@
   <a name="AllFiles"></a>
   <div>
     <b>24</b> files in total.
-    <b>606</b> relevant lines. 
-    <span class="green"><b>606</b> lines covered</span> and
+    <b>605</b> relevant lines. 
+    <span class="green"><b>605</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -133,9 +133,9 @@
       <tr>
         <td class="strong"><a href="#e9a07479947618c0bae5c44721995ffed13e971c" class="src_link" title="lib/ruby_aem/resources/aem.rb">lib/ruby_aem/resources/aem.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>149</td>
-        <td>57</td>
-        <td>57</td>
+        <td>147</td>
+        <td>56</td>
+        <td>56</td>
         <td>0</td>
         <td>1.6</td>
       </tr>
@@ -4727,8 +4727,8 @@
     <h3>lib/ruby_aem/resources/aem.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>57</b> relevant lines. 
-      <span class="green"><b>57</b> lines covered</span> and
+      <b>56</b> relevant lines. 
+      <span class="green"><b>56</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -5033,7 +5033,7 @@
         <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
-          <code class="ruby">      def get_aem_health_check(tags, combine_tags_or)</code>
+          <code class="ruby">      def get_aem_health_check(opts = {})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
@@ -5045,586 +5045,574 @@
         <li class="covered" data-hits="4" data-linenumber="52">
           <span class="hits">4</span>
           
-          <code class="ruby">        @call_params[:tags] = tags</code>
+          <code class="ruby">        @call_params = @call_params.merge(opts)</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="53">
           <span class="hits">4</span>
           
-          <code class="ruby">        @call_params[:combine_tags_or] = combine_tags_or</code>
+          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="55">
-          <span class="hits">4</span>
+        <li class="never" data-hits="" data-linenumber="55">
           
-          <code class="ruby">        @client.call(self.class, __callee__.to_s, @call_params)</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">      # Retrieve AEM login page with retries until it is successful.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="57">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
           
           
-          <code class="ruby">      # Retrieve AEM login page with retries until it is successful.</code>
+          <code class="ruby">      # @param opts optional parameters:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">      #</code>
+          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
           
           
-          <code class="ruby">      # @param opts optional parameters:</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="61">
-          
-          
-          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="62">
-          
-          
           <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
           <code class="ruby">      def get_login_page_wait_until_ready(</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">        opts = {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby">          _retries: {</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby">            max_tries: 30,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="65">
           
           
-          <code class="ruby">          _retries: {</code>
+          <code class="ruby">            base_sleep_seconds: 2,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
           
           
-          <code class="ruby">            max_tries: 30,</code>
+          <code class="ruby">            max_sleep_seconds: 2</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
-          <code class="ruby">            base_sleep_seconds: 2,</code>
+          <code class="ruby">          }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
           
           
-          <code class="ruby">            max_sleep_seconds: 2</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="69">
-          
-          
-          <code class="ruby">          }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="70">
-          
-          
           <code class="ruby">        })</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries] ||= {}</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="71">
           <span class="hits">1</span>
           
-          <code class="ruby">        opts[:_retries] ||= {}</code>
+          <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="72">
           <span class="hits">1</span>
           
-          <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="73">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="74">
-          <span class="hits">1</span>
-          
           <code class="ruby">        opts[:_retries][:max_sleep_seconds] ||= 2</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="never" data-hits="" data-linenumber="74">
           
           
           <code class="ruby">        # ensure integer retries setting (Puppet 3 passes numeric string)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="77">
           <span class="hits">1</span>
           
-          <code class="ruby">        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i</code>
+          <code class="ruby">        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="78">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="78">
           
-          <code class="ruby">        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="79">
           <span class="hits">1</span>
           
-          <code class="ruby">        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="80">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="81">
-          <span class="hits">1</span>
-          
           <code class="ruby">        result = nil</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="82">
+        <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
           <code class="ruby">        with_retries(:max_tries =&gt; opts[:_retries][:max_tries], :base_sleep_seconds =&gt; opts[:_retries][:base_sleep_seconds], :max_sleep_seconds =&gt; opts[:_retries][:max_sleep_seconds]) { |retries_count|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="83">
+        <li class="covered" data-hits="3" data-linenumber="81">
           <span class="hits">3</span>
           
           <code class="ruby">          begin</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="84">
+        <li class="covered" data-hits="3" data-linenumber="82">
           <span class="hits">3</span>
           
           <code class="ruby">            result = get_login_page()</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="85">
+        <li class="covered" data-hits="2" data-linenumber="83">
           <span class="hits">2</span>
           
           <code class="ruby">            if result.response.body !~ /QUICKSTART_HOMEPAGE/</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="86">
+        <li class="covered" data-hits="1" data-linenumber="84">
           <span class="hits">1</span>
           
           <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s but not ready yet&#39; % [retries_count, result.message]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="87">
+        <li class="covered" data-hits="1" data-linenumber="85">
           <span class="hits">1</span>
           
           <code class="ruby">              raise StandardError.new(result.message)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="never" data-hits="" data-linenumber="86">
           
           
           <code class="ruby">            else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="89">
+        <li class="covered" data-hits="1" data-linenumber="87">
           <span class="hits">1</span>
           
           <code class="ruby">              puts &#39;Retrieve login page attempt #%d: %s and ready&#39; % [retries_count, result.message]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby">            end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="never" data-hits="" data-linenumber="89">
           
           
           <code class="ruby">          rescue RubyAem::Error =&gt; err</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="92">
+        <li class="covered" data-hits="1" data-linenumber="90">
           <span class="hits">1</span>
           
           <code class="ruby">            puts &#39;Retrieve login page attempt #%d: %s&#39; % [retries_count, err.message]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="91">
           <span class="hits">1</span>
           
           <code class="ruby">            raise StandardError.new(err.message)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="94">
+        <li class="never" data-hits="" data-linenumber="92">
           
           
           <code class="ruby">          end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby">        }</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="94">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        result</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
           
           
-          <code class="ruby">        }</code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="96">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="96">
           
-          <code class="ruby">        result</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="97">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">      # Retrieve AEM health check with retries until its status is OK.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="98">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      #</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="99">
           
           
-          <code class="ruby">      # Retrieve AEM health check with retries until its status is OK.</code>
+          <code class="ruby">      # @param opts optional parameters:</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby">      #</code>
+          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="101">
           
           
-          <code class="ruby">      # @param opts optional parameters:</code>
+          <code class="ruby">      # @return RubyAem::Result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      # - _retries: retries library&#39;s options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds</code>
+          <code class="ruby">      def get_aem_health_check_wait_until_ok(</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
           
           
-          <code class="ruby">      # @return RubyAem::Result</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="104">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      def get_aem_health_check_wait_until_ok(tags, combine_tags_or,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="105">
-          
-          
           <code class="ruby">        opts = {</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="never" data-hits="" data-linenumber="104">
           
           
           <code class="ruby">          _retries: {</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="107">
+        <li class="never" data-hits="" data-linenumber="105">
           
           
           <code class="ruby">            max_tries: 30,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="108">
+        <li class="never" data-hits="" data-linenumber="106">
           
           
           <code class="ruby">            base_sleep_seconds: 2,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="109">
+        <li class="never" data-hits="" data-linenumber="107">
           
           
           <code class="ruby">            max_sleep_seconds: 2</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="never" data-hits="" data-linenumber="108">
           
           
           <code class="ruby">          }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="111">
+        <li class="never" data-hits="" data-linenumber="109">
           
           
           <code class="ruby">        })</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="112">
+        <li class="covered" data-hits="1" data-linenumber="110">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries] ||= {}</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="113">
+        <li class="covered" data-hits="1" data-linenumber="111">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:max_tries] ||= 30</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="114">
+        <li class="covered" data-hits="1" data-linenumber="112">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:base_sleep_seconds] ||= 2</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="115">
+        <li class="covered" data-hits="1" data-linenumber="113">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:max_sleep_seconds] ||= 2</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="never" data-hits="" data-linenumber="114">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="117">
+        <li class="never" data-hits="" data-linenumber="115">
           
           
           <code class="ruby">        # ensure integer retries setting (Puppet 3 passes numeric string)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="118">
+        <li class="covered" data-hits="1" data-linenumber="116">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="119">
+        <li class="covered" data-hits="1" data-linenumber="117">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="120">
+        <li class="covered" data-hits="1" data-linenumber="118">
           <span class="hits">1</span>
           
           <code class="ruby">        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="never" data-hits="" data-linenumber="119">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="122">
+        <li class="covered" data-hits="1" data-linenumber="120">
           <span class="hits">1</span>
           
           <code class="ruby">        result = nil</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="121">
           <span class="hits">1</span>
           
           <code class="ruby">        with_retries(:max_tries =&gt; opts[:_retries][:max_tries], :base_sleep_seconds =&gt; opts[:_retries][:base_sleep_seconds], :max_sleep_seconds =&gt; opts[:_retries][:max_sleep_seconds]) { |retries_count|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="124">
+        <li class="covered" data-hits="3" data-linenumber="122">
           <span class="hits">3</span>
           
           <code class="ruby">          begin</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="125">
+        <li class="covered" data-hits="3" data-linenumber="123">
           <span class="hits">3</span>
           
-          <code class="ruby">            result = get_aem_health_check(tags, combine_tags_or)</code>
+          <code class="ruby">            result = get_aem_health_check({ :tags =&gt; opts[:tags], :combine_tags_or =&gt; opts[:combine_tags_or] })</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="126">
+        <li class="covered" data-hits="2" data-linenumber="124">
           <span class="hits">2</span>
           
           <code class="ruby">            is_ok = true;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="127">
+        <li class="covered" data-hits="2" data-linenumber="125">
           <span class="hits">2</span>
           
           <code class="ruby">            result.data.each { |check|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="128">
+        <li class="covered" data-hits="4" data-linenumber="126">
           <span class="hits">4</span>
           
           <code class="ruby">              if check[&#39;status&#39;] != &#39;OK&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="129">
+        <li class="covered" data-hits="1" data-linenumber="127">
           <span class="hits">1</span>
           
           <code class="ruby">                is_ok = false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="130">
+        <li class="covered" data-hits="1" data-linenumber="128">
           <span class="hits">1</span>
           
           <code class="ruby">                break</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="129">
           
           
           <code class="ruby">              end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="132">
+        <li class="never" data-hits="" data-linenumber="130">
           
           
           <code class="ruby">            }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="133">
+        <li class="covered" data-hits="2" data-linenumber="131">
           <span class="hits">2</span>
           
           <code class="ruby">            if is_ok == false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="134">
+        <li class="covered" data-hits="1" data-linenumber="132">
           <span class="hits">1</span>
           
           <code class="ruby">              puts &#39;Retrieve AEM Health Check attempt #%d: %s but not ok yet&#39; % [retries_count, result.message]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="135">
+        <li class="covered" data-hits="1" data-linenumber="133">
           <span class="hits">1</span>
           
           <code class="ruby">              raise StandardError.new(result.message)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="136">
+        <li class="never" data-hits="" data-linenumber="134">
           
           
           <code class="ruby">            else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="137">
+        <li class="covered" data-hits="1" data-linenumber="135">
           <span class="hits">1</span>
           
           <code class="ruby">              puts &#39;Retrieve AEM Health Check attempt #%d: %s and ok&#39; % [retries_count, result.message]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="never" data-hits="" data-linenumber="136">
           
           
           <code class="ruby">            end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="139">
+        <li class="never" data-hits="" data-linenumber="137">
           
           
           <code class="ruby">          rescue RubyAem::Error =&gt; err</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="140">
+        <li class="covered" data-hits="1" data-linenumber="138">
           <span class="hits">1</span>
           
           <code class="ruby">            puts &#39;Retrieve AEM Health Check attempt #%d: %s&#39; % [retries_count, err.message]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="141">
+        <li class="covered" data-hits="1" data-linenumber="139">
           <span class="hits">1</span>
           
           <code class="ruby">            raise StandardError.new(err.message)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="142">
+        <li class="never" data-hits="" data-linenumber="140">
           
           
           <code class="ruby">          end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="143">
+        <li class="never" data-hits="" data-linenumber="141">
           
           
           <code class="ruby">        }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="144">
+        <li class="covered" data-hits="1" data-linenumber="142">
           <span class="hits">1</span>
           
           <code class="ruby">        result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="145">
+        <li class="never" data-hits="" data-linenumber="143">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="146">
+        <li class="never" data-hits="" data-linenumber="144">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="147">
+        <li class="never" data-hits="" data-linenumber="145">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="148">
+        <li class="never" data-hits="" data-linenumber="146">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="149">
+        <li class="never" data-hits="" data-linenumber="147">
           
           
           <code class="ruby">end</code>

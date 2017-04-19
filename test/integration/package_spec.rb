@@ -52,6 +52,28 @@ describe 'Package' do
 
   end
 
+  describe 'test package build install uninstall' do
+
+    it 'should succeed' do
+      # create package
+      result = @package.create()
+      expect(result.message).to eq('Package created')
+
+      # build package
+      result = @package.build()
+      expect(result.message).to eq('Package built')
+
+      # install package
+      result = @package.install()
+      expect(result.message).to eq('Package installed')
+
+      # uninstall package
+      result = @package.uninstall()
+      expect(result.message).to eq('Package uninstalled')
+    end
+
+  end
+
   describe 'test package upload rebuild install replicate' do
 
     it 'should succeed' do

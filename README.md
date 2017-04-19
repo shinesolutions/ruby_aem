@@ -109,6 +109,10 @@ Package:
     opts = { recursive: true }
     result = package.install(opts)
 
+    # uninstall package
+    opts = { recursive: true }
+    result = package.uninstall(opts)
+
     # check whether package is installed
     result = package.is_installed()
 

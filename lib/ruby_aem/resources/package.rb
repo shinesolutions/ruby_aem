@@ -84,13 +84,8 @@ module RubyAem
 
       # Uninstall the package.
       #
-      # @param opts optional parameters:
-      # - recursive: if true then subpackages will also be installed, false otherwise
       # @return RubyAem::Result
-      def uninstall(opts = {
-          recursive: true
-        })
-        @call_params = @call_params.merge(opts)
+      def uninstall()
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 

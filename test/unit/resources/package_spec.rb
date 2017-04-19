@@ -77,9 +77,8 @@ describe 'Package' do
         'uninstall',
         { :group_name => 'somepackagegroup',
           :package_name => 'somepackage',
-          :package_version => '1.2.3',
-          :recursive => false })
-      @package.uninstall({ recursive: false })
+          :package_version => '1.2.3' })
+      @package.uninstall()
     end
 
   end

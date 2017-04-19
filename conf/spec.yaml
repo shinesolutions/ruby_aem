@@ -325,6 +325,18 @@ package:
         500:
           handler: html_package_service_allow_error
           message: 'Allowed package installation error - %{title}: %{desc} %{reason}'
+    uninstall:
+      api: crx
+      operation: postPackageServiceJson
+      params:
+        required:
+          path: 'etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
+          cmd: uninstall
+        optional:
+          recursive: '%{recursive}'
+      responses:
+        200:
+          handler: json_package_service
     replicate:
       api: crx
       operation: postPackageServiceJson

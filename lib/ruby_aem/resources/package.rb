@@ -82,6 +82,18 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Uninstall the package.
+      #
+      # @param opts optional parameters:
+      # - recursive: if true then subpackages will also be installed, false otherwise
+      # @return RubyAem::Result
+      def uninstall(opts = {
+          recursive: true
+        })
+        @call_params = @call_params.merge(opts)
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
       # Replicate the package.
       # Package will then be added to replication agents.
       #

@@ -69,6 +69,21 @@ describe 'Package' do
 
   end
 
+  describe 'test uninstall' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Package,
+        'uninstall',
+        { :group_name => 'somepackagegroup',
+          :package_name => 'somepackage',
+          :package_version => '1.2.3',
+          :recursive => false })
+      @package.uninstall({ recursive: false })
+    end
+
+  end
+
   describe 'test replicate' do
 
     it 'should call client with expected parameters' do

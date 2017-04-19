@@ -1,3 +1,6 @@
+### 1.0.18
+* Add package uninstall
+
 ### 1.0.17
 * Allow get_aem_health_check method parameters tags and combine_tags_or  to be optional
 * Allow get_aem_health_check_wait_until_ok method parameters tags and combine_tags_or to be optional

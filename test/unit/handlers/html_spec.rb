@@ -60,4 +60,75 @@ describe 'HTML Handler' do
     end
 
   end
+
+  describe 'test html_change_password' do
+
+    it 'should identify success response body and display username in message' do
+      data =
+        '<html>' \
+        '<head>' \
+        '  <title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
+        '</head>' \
+        '<body style="background-color:white" frameborder="no">' \
+        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">' \
+        '  <table>' \
+        '    <tr>' \
+        '      <td>User Name:</td>' \
+        '      <td><b>someuser</b></td>' \
+        '    </tr>' \
+        '    <tr>' \
+        '      <td></td>' \
+        '      <td><font color="green">Password successfully changed.</font></td>' \
+        '    </tr>' \
+        '  </table>' \
+        '</body>' \
+        '</html>'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'User %{user}\'s password has been changed' }
+      call_params = { :old_password => 'someoldpassword', :new_password => 'somenewpassword' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.html_change_password(response, response_spec, call_params)
+      expect(result.message).to eq('User someuser\'s password has been changed')
+      expect(result.response).to be(response)
+    end
+
+    it 'should identify error response body and pass error message' do
+      data =
+        '<html>' \
+        '<head>' \
+        '  <title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
+        '</head>' \
+        '<body style="background-color:white" frameborder="no">' \
+        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">' \
+        '  <table>' \
+        '    <tr>' \
+        '      <td>User Name:</td>' \
+        '      <td><b>someuser</b></td>' \
+        '    </tr>' \
+        '    <tr>' \
+        '      <td></td>' \
+        '      <td><font color="red">Failed to change password for user \'someuser\': Failed to change password: Old password does not match.</font></td>' \
+        '    </tr>' \
+        '  </table>' \
+        '</body>' \
+        '</html>'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'User %{name}\'s password has been changed' }
+      call_params = { :old_password => 'someoldpassword', :new_password => 'somenewpassword' }
+
+      begin
+        response = RubyAem::Response.new(status_code, data, headers)
+        RubyAem::Handlers.html_change_password(response, response_spec, call_params)
+        fail
+      rescue RubyAem::Error => err
+        expect(err.message).to eq('Failed to change password for user \'someuser\': Failed to change password: Old password does not match.')
+        expect(err.result.response).to be(response)
+      end
+    end
+
+  end
+
 end

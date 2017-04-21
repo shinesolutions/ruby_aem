@@ -855,5 +855,5 @@ user:
           verify: '%{new_password}'
       responses:
         200:
-          handler: simple
-          message: 'Logged in user password changed'
+          handler: html_change_password
+          message: 'User %{user}''s password has been changed'

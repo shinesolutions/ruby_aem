@@ -1,5 +1,8 @@
+### 1.0.19
+* Add user#change_password error handling #5
+
 ### 1.0.18
-* Add package uninstall
+* Add package uninstall support
 
 ### 1.0.17
 * Allow get_aem_health_check method parameters tags and combine_tags_or  to be optional

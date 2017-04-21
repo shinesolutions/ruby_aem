@@ -64,5 +64,28 @@ module RubyAem
       RubyAem::Result.new(message, response)
     end
 
+    # Check response body for indicator of change password failure.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def Handlers.html_change_password(response, response_spec, call_params)
+
+      html = Nokogiri::HTML(response.body)
+      user = html.xpath('//body/div/table/tr/td/b/text()').to_s
+      desc = html.xpath('//body/div/table/tr/td/font/text()').to_s
+
+      if desc == 'Password successfully changed.'
+        call_params[:user] = user
+        message = response_spec['message'] % call_params
+        RubyAem::Result.new(message, response)
+      else
+        message = desc
+        result = RubyAem::Result.new(message, response)
+        raise RubyAem::Error.new(message, result)
+      end
+    end
+
   end
 end

@@ -35,7 +35,7 @@ describe 'User' do
 
     it 'should succeed admin password change' do
       result = @user.change_password('admin', 'admin')
-      expect(result.message).to eq('Logged in user password changed')
+      expect(result.message).to eq('User admin\'s password has been changed')
     end
 
     it 'should succeed created user password change' do
@@ -49,7 +49,7 @@ describe 'User' do
       })
       user = aem.user('/home/users/s/', 'someuser')
       result = user.change_password('somepassword', 'somenewpassword')
-      expect(result.message).to eq('Logged in user password changed')
+      expect(result.message).to eq('User someuser\'s password has been changed')
     end
 
     it 'should succeed being added to a group' do

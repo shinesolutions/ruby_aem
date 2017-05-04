@@ -35,7 +35,11 @@ module RubyAem
     # @param property property name
     # @return swagger_aem parameter name
     def Swagger.property_to_parameter(property)
-      property.gsub(/\./, '_')
+      if (['alias'].include? property)
+        "_#{property}"
+      else
+        property.gsub(/\./, '_').gsub(/-/, '_')
+      end
     end
 
     # Sanitise path value by removing leading and trailing slashes

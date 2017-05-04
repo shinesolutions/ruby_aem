@@ -493,7 +493,7 @@ configproperty:
         required:
           runmode: '%{run_mode}'
         optional:
-          - alias
+          - _alias
           - alias_type_hint
           - dav_create_absolute_uri
           - dav_create_absolute_uri_type_hint

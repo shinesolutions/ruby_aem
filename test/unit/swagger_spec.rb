@@ -34,6 +34,11 @@ describe 'Swagger' do
       expect(method).to eq('foobarfoo')
     end
 
+    it 'should prefix keyword property with underscores' do
+      method = RubyAem::Swagger.property_to_parameter('alias')
+      expect(method).to eq('_alias')
+    end
+
   end
 
   describe 'test path' do

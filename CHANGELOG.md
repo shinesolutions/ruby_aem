@@ -1,5 +1,7 @@
 ### 1.0.19
 * Add user#change_password error handling #5
+* Add DavEx Servlet config property alias keyword handling #4
+* Fix postConfigApacheSlingDavExServlet optional parameters #4
 
 ### 1.0.18
 * Add package uninstall support

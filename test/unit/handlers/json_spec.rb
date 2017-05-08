@@ -145,4 +145,30 @@ describe 'JSON Handler' do
 
   end
 
+  describe 'test json_agents' do
+
+    it 'should return agent names' do
+      data =
+        '{' \
+        '  "jcr:primaryType": "cq:Page",' \
+        '  "jcr:createdBy": "admin",' \
+        '  "agent1": {},' \
+        '  "agent2": {}' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Retrieved agents on %{run_mode}' }
+      call_params = { :run_mode => 'author' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_agents(response, response_spec, call_params)
+      expect(result.message).to eq('Retrieved agents on author')
+      expect(result.response).to eq(response)
+      expect(result.data.length).to eq(2)
+      expect(result.data[0]).to eq('agent1')
+      expect(result.data[1]).to eq('agent2')
+    end
+
+  end
+
 end

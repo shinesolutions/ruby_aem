@@ -107,5 +107,30 @@ module RubyAem
 
     end
 
+    # Extract a list of agent names from getAgents JSON payload.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params additional call_params information
+    # @return RubyAem::Result
+    def Handlers.json_agents(response, response_spec, call_params)
+
+      json = JSON.parse(response.body)
+
+      agent_names = []
+      json.each do |key, value|
+        if (!key.start_with? 'jcr:')
+          agent_names.push(key)
+        end
+      end
+
+      message = response_spec['message'] % call_params
+
+      result = RubyAem::Result.new(message, response)
+      result.data = agent_names
+      result
+
+    end
+
   end
 end

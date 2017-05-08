@@ -1,3 +1,6 @@
+### 1.1.0
+* Add aem get_agents method #8
+
 ### 1.0.19
 * Add user#change_password error handling #5
 * Add DavEx Servlet config property alias keyword handling #4

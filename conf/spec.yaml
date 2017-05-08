@@ -21,6 +21,16 @@ aem:
         200:
           handler: json_aem_health_check
           message: 'AEM health check retrieved'
+    get_agents:
+      api: sling
+      operation: getAgents
+      params:
+        required:
+          runmode: '%{run_mode}'
+      responses:
+        200:
+          handler: json_agents
+          message: 'Retrieved agents on %{run_mode}'
 bundle:
   responses:
     404:

@@ -55,4 +55,14 @@ describe 'Aem' do
 
   end
 
+  describe 'test get_agents' do
+
+    it 'should succeed' do
+      result = @aem.aem().get_agents('author')
+      expect(result.message).to eq('Retrieved agents on author')
+      expect(result.data.length).not_to eq(0)
+    end
+
+  end
+
 end

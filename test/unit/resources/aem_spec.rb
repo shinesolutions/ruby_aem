@@ -141,4 +141,15 @@ describe 'Aem' do
 
   end
 
+  describe 'test get_agents' do
+
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Aem, 'get_agents', { :run_mode => 'author' })
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_agents('author')
+    end
+
+  end
+
 end

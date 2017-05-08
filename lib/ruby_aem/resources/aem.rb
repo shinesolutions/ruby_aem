@@ -142,6 +142,15 @@ module RubyAem
         result
       end
 
+      # List the name of all agents under /etc/replication.
+      #
+      # @param run_mode AEM run mode: author or publish
+      # @return RubyAem::Result
+      def get_agents(run_mode)
+        @call_params[:run_mode] = run_mode
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
     end
   end
 end

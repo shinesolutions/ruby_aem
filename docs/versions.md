@@ -1,5 +1,7 @@
 | ruby_aem | Supported AEM | Supported Ruby | Documentation |
 |----------|---------------|----------------|---------------|
+| 1.1.0    | 6.2                    | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/1.1.0/index.html)
+[Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#110) |
 | 1.0.19   | 6.2                    | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/1.0.19/index.html)
 [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#1019) |
 | 1.0.18   | 6.2                    | 1.9, 2.0, 2.1, 2.2, 2.3 | [API](https://shinesolutions.github.io/ruby_aem/api/1.0.18/index.html)

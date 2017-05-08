@@ -1,5 +1,6 @@
 ### 1.1.0
 * Add aem get_agents method #8
+* Add SSL support for flush agent
 
 ### 1.0.19
 * Add user#change_password error handling #5

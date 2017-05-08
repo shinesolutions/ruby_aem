@@ -94,6 +94,7 @@ flushagent:
           jcrcontenttrigger_specific: true
           jcrcontentcqtemplate: /libs/cq/replication/templates/agent
           jcrcontentenabled: true
+          jcrcontentssl: '%{ssl}'
       responses:
         200:
           handler: simple

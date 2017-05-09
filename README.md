@@ -31,6 +31,34 @@ Initialise client:
       :debug => false
     })
 
+Aem:
+
+    # wait until AEM login page is ready
+    aem = aem.aem()
+    result = aem.get_login_page_wait_until_ready({
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }})
+
+    # wait until AEM Health Check has OK status
+    # this requires aem-healthcheck package to be installed
+    # https://github.com/shinesolutions/aem-healthcheck
+    aem = aem.aem()
+    result = aem.get_aem_health_check_wait_until_ok({
+      tags: 'shallow',
+      combine_tags_or: false,
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }})
+
+    # get an array of all agent names within AEM author or publish instance
+    aem = aem.aem()
+    result = aem.get_agents('author')
+
 Bundle:
 
     # stop bundle

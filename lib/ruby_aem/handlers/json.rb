@@ -119,7 +119,7 @@ module RubyAem
 
       agent_names = []
       json.each do |key, value|
-        if (!key.start_with? 'jcr:')
+        if !key.start_with? 'jcr:' and !key.start_with? 'rep:'
           agent_names.push(key)
         end
       end

@@ -151,7 +151,7 @@ describe 'JSON Handler' do
       data =
         '{' \
         '  "jcr:primaryType": "cq:Page",' \
-        '  "jcr:createdBy": "admin",' \
+        '  "rep:policy": "",' \
         '  "agent1": {},' \
         '  "agent2": {}' \
         '}'

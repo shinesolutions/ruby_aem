@@ -58,6 +58,13 @@ describe 'Aem' do
   describe 'test get_agents' do
 
     it 'should succeed' do
+
+      # ensure there is at least one agent
+      flush_agent = @aem.flush_agent('author', 'some-flush-agent')
+      if flush_agent.exists().data == false
+        result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
+      end
+
       result = @aem.aem().get_agents('author')
       expect(result.message).to eq('Retrieved agents on author')
       expect(result.data.length).not_to eq(0)

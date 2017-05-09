@@ -293,6 +293,11 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
       puts err.result.data
     end
 
+Testing
+-------
+
+Integration tests require an AEM instance running on port 4502 with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed.
+
 Reports
 -------
 

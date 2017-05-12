@@ -1,4 +1,5 @@
 ### 1.1.1
+* Fix user and group resources find_authorizable_id action to use GET method
 * Prevent flush and replication agents from getting reverse replicated
 
 ### 1.1.0

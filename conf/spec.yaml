@@ -162,7 +162,7 @@ group:
           message: 'Group %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
       api: sling
-      operation: postQuery
+      operation: getQuery
       params:
         required:
           path: '%{path}'
@@ -807,7 +807,7 @@ user:
           message: 'User %{name} created at %{path}/%{authorizable_id}'
     find_authorizable_id:
       api: sling
-      operation: postQuery
+      operation: getQuery
       params:
         required:
           path: '%{path}'

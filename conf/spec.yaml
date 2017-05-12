@@ -95,6 +95,8 @@ flushagent:
           jcrcontentcqtemplate: /libs/cq/replication/templates/agent
           jcrcontentenabled: true
           jcrcontentssl: '%{ssl}'
+          jcrcontentcqdistribute: false
+          jcrcontentcqdistribute_type_hint: Boolean
       responses:
         200:
           handler: simple
@@ -574,6 +576,8 @@ replicationagent:
           jcrcontentretry_delay: '%{retry_delay}'
           jcrcontentcqtemplate: /libs/cq/replication/templates/agent
           jcrcontentenabled: true
+          jcrcontentcqdistribute: false
+          jcrcontentcqdistribute_type_hint: Boolean
       responses:
         200:
           handler: simple

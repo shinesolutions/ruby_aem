@@ -1,3 +1,6 @@
+### 1.1.1
+* Prevent flush and replication agents from getting reverse replicated
+
 ### 1.1.0
 * Add aem get_agents method #8
 * Add SSL support for flush agent

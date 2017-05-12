@@ -1,5 +1,6 @@
 ### 1.1.1
 * Fix user and group resources find_authorizable_id action to use GET method
+* Ensure leading slash on user and group path for find_authorizable_id action
 * Prevent flush and replication agents from getting reverse replicated
 
 ### 1.1.0

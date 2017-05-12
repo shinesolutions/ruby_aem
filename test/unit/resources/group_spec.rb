@@ -140,6 +140,16 @@ describe 'Group' do
       @group.find_authorizable_id
     end
 
+    it 'should prepend leading slash when path does not have one' do
+      group = RubyAem::Resources::Group.new(@mock_client, 'home/groups/s/', 'somegroup')
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::Group,
+        'find_authorizable_id',
+        { :path => '/home/groups/s/',
+          :name => 'somegroup' })
+      group.find_authorizable_id
+    end
+
   end
 
 end

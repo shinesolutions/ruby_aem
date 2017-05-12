@@ -145,6 +145,16 @@ describe 'User' do
       @user.find_authorizable_id
     end
 
+    it 'should prepend leading slash when path does not have one' do
+      user = RubyAem::Resources::User.new(@mock_client, 'home/users/s/', 'someuser')
+      expect(@mock_client).to receive(:call).once().with(
+        RubyAem::Resources::User,
+        'find_authorizable_id',
+        { :path => '/home/users/s/',
+          :name => 'someuser' })
+      user.find_authorizable_id
+    end
+
   end
 
 end

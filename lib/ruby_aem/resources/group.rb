@@ -94,6 +94,9 @@ module RubyAem
       #
       # @return RubyAem::Result
       def find_authorizable_id()
+        if !@call_params[:path].match(/^\//)
+          @call_params[:path] = "/#{@call_params[:path]}"
+        end
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 

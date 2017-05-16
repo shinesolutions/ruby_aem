@@ -2,7 +2,6 @@
 * Fix user and group resources find_authorizable_id action to use GET method
 * Fix group#add_member missing leading slash in group path
 * Ensure leading slash on user and group path for find_authorizable_id action
-* Prevent flush and replication agents from getting reverse replicated
 
 ### 1.1.0
 * Add aem get_agents method #8

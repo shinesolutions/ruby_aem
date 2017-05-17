@@ -1,3 +1,6 @@
+### 1.1.2
+* Remove unused cq:distribute property from flush agents
+
 ### 1.1.1
 * Fix user and group resources find_authorizable_id action to use GET method
 * Fix group#add_member missing leading slash in group path

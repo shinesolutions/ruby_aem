@@ -109,10 +109,12 @@ module RubyAem
       # @param opts optional parameters:
       # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
       # @return RubyAem::Result
-      def upload(file_path,
+      def upload(
+        file_path,
         opts = {
           force: true
-        })
+        }
+      )
         @call_params[:file_path] = file_path
         @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
@@ -202,7 +204,8 @@ module RubyAem
       # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
       # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
-      def upload_wait_until_ready(file_path,
+      def upload_wait_until_ready(
+        file_path,
         opts = {
           force: true,
           _retries: {
@@ -210,7 +213,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:force] ||= true
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30

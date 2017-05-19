@@ -41,13 +41,17 @@ module RubyAem
       # - log_level: error, info, debug, default is error
       # - retry_delay: in milliseconds, default is 30_000
       # @return RubyAem::Result
-      def create_update(title, description, dest_base_url,
+      def create_update(
+        title,
+        description,
+        dest_base_url,
         opts = {
           transport_user: 'admin',
           transport_password: 'admin',
           log_level: 'error',
           retry_delay: 30_000
-        })
+        }
+      )
         @call_params[:title] = title
         @call_params[:description] = description
         @call_params[:dest_base_url] = dest_base_url

@@ -9,6 +9,9 @@ deps:
 clean:
 	rm -f ruby_aem-*.gem
 
+lint:
+	rubocop
+
 build: clean
 	gem build ruby_aem.gemspec
 

@@ -1,0 +1,13 @@
+AllCops:
+  DisplayCopNames: true
+Metrics/BlockLength:
+  Exclude:
+    - "**/**/*_spec.rb"
+Metrics/ClassLength:
+  Max: 200
+Metrics/LineLength:
+  Max: 280
+Metrics/MethodLength:
+  Max: 30
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent

@@ -1,24 +1,21 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 module RubyAem
   module Resources
     # Group class contains API calls related to managing an AEM group.
     class Group
-
       # Initialise a group.
       #
       # @param client RubyAem::Client
@@ -36,17 +33,15 @@ module RubyAem
       # Create a new group.
       #
       # @return RubyAem::Result
-      def create()
-        if !@call_params[:path].match(/^\//)
-          @call_params[:path] = "/#{@call_params[:path]}"
-        end
+      def create
+        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].match(%r{^/})
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Delete the group.
       #
       # @return RubyAem::Result
-      def delete()
+      def delete
         result = find_authorizable_id
         @call_params[:authorizable_id] = result.data
         @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
@@ -58,7 +53,7 @@ module RubyAem
       # false otherwise.
       #
       # @return RubyAem::Result
-      def exists()
+      def exists
         result = find_authorizable_id
         @call_params[:authorizable_id] = result.data
         @call_params[:path] = RubyAem::Swagger.path(@call_params[:path])
@@ -93,13 +88,10 @@ module RubyAem
       # cannot be found.
       #
       # @return RubyAem::Result
-      def find_authorizable_id()
-        if !@call_params[:path].match(/^\//)
-          @call_params[:path] = "/#{@call_params[:path]}"
-        end
+      def find_authorizable_id
+        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].match(%r{^/})
         @client.call(self.class, __callee__.to_s, @call_params)
       end
-
     end
   end
 end

@@ -1,18 +1,16 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'retries'
 require 'ruby_aem/error'
@@ -21,7 +19,6 @@ module RubyAem
   module Resources
     # AEM class contains API calls related to managing the AEM instance itself.
     class Aem
-
       # Initialise an AEM instance.
       #
       # @param client RubyAem::Client
@@ -35,7 +32,7 @@ module RubyAem
       # Retrieve AEM login page.
       #
       # @return RubyAem::Result
-      def get_login_page()
+      def get_login_page
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -77,17 +74,17 @@ module RubyAem
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
         result = nil
-        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
-            result = get_login_page()
+            result = get_login_page
             if result.response.body !~ /QUICKSTART_HOMEPAGE/
-              puts 'Retrieve login page attempt #%d: %s but not ready yet' % [retries_count, result.message]
+              puts format('Retrieve login page attempt #%d: %s but not ready yet', retries_count, result.message)
               raise StandardError.new(result.message)
             else
-              puts 'Retrieve login page attempt #%d: %s and ready' % [retries_count, result.message]
+              puts format('Retrieve login page attempt #%d: %s and ready', retries_count, result.message)
             end
           rescue RubyAem::Error => err
-            puts 'Retrieve login page attempt #%d: %s' % [retries_count, err.message]
+            puts format('Retrieve login page attempt #%d: %s', retries_count, err.message)
             raise StandardError.new(err.message)
           end
         }
@@ -118,10 +115,10 @@ module RubyAem
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
         result = nil
-        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
-            result = get_aem_health_check({ :tags => opts[:tags], :combine_tags_or => opts[:combine_tags_or] })
-            is_ok = true;
+            result = get_aem_health_check(tags: opts[:tags], combine_tags_or: opts[:combine_tags_or])
+            is_ok = true
             result.data.each { |check|
               if check['status'] != 'OK'
                 is_ok = false
@@ -129,13 +126,13 @@ module RubyAem
               end
             }
             if is_ok == false
-              puts 'Retrieve AEM Health Check attempt #%d: %s but not ok yet' % [retries_count, result.message]
+              puts format('Retrieve AEM Health Check attempt #%d: %s but not ok yet', retries_count, result.message)
               raise StandardError.new(result.message)
             else
-              puts 'Retrieve AEM Health Check attempt #%d: %s and ok' % [retries_count, result.message]
+              puts format('Retrieve AEM Health Check attempt #%d: %s and ok', retries_count, result.message)
             end
           rescue RubyAem::Error => err
-            puts 'Retrieve AEM Health Check attempt #%d: %s' % [retries_count, err.message]
+            puts format('Retrieve AEM Health Check attempt #%d: %s', retries_count, err.message)
             raise StandardError.new(err.message)
           end
         }
@@ -150,7 +147,6 @@ module RubyAem
         @call_params[:run_mode] = run_mode
         @client.call(self.class, __callee__.to_s, @call_params)
       end
-
     end
   end
 end

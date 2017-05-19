@@ -1,18 +1,16 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'retries'
 
@@ -20,7 +18,6 @@ module RubyAem
   module Resources
     # Package class contains API calls related to managing an AEM package.
     class Package
-
       # Initialise a package.
       # Package name and version will then be used to construct the package file in the filesystem.
       # E.g. package name 'somepackage' with version '1.2.3' will translate to somepackage-1.2.3.zip in the filesystem.
@@ -42,7 +39,7 @@ module RubyAem
       # Create the package.
       #
       # @return RubyAem::Result
-      def create()
+      def create
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -59,14 +56,14 @@ module RubyAem
       # Delete the package.
       #
       # @return RubyAem::Result
-      def delete()
+      def delete
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
       # Build the package.
       #
       # @return RubyAem::Result
-      def build()
+      def build
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -76,8 +73,8 @@ module RubyAem
       # - recursive: if true then subpackages will also be installed, false otherwise
       # @return RubyAem::Result
       def install(opts = {
-          recursive: true
-        })
+        recursive: true
+      })
         @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end
@@ -85,7 +82,7 @@ module RubyAem
       # Uninstall the package.
       #
       # @return RubyAem::Result
-      def uninstall()
+      def uninstall
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -93,7 +90,7 @@ module RubyAem
       # Package will then be added to replication agents.
       #
       # @return RubyAem::Result
-      def replicate()
+      def replicate
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -125,7 +122,7 @@ module RubyAem
       # Filter value is stored as result data as an array of paths.
       #
       # @return RubyAem::Result
-      def get_filter()
+      def get_filter
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -138,7 +135,7 @@ module RubyAem
       # @param modified_only if true, then only modified items in the path will be activated
       # @return an array of RubyAem::Result
       def activate_filter(ignore_deactivated, modified_only)
-        result = get_filter()
+        result = get_filter
 
         results = [result]
         result.data.each { |filter_path|
@@ -151,7 +148,7 @@ module RubyAem
       # List all packages available in AEM instance.
       #
       # @return RubyAem::Result
-      def list_all()
+      def list_all
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -159,8 +156,8 @@ module RubyAem
       # True result data indicates that the package is uploaded, false otherwise.
       #
       # @return RubyAem::Result
-      def is_uploaded()
-        packages = list_all().data
+      def is_uploaded
+        packages = list_all.data
         package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
 
         if package.to_s != ''
@@ -180,8 +177,8 @@ module RubyAem
       # True result data indicates that the package is installed, false otherwise.
       #
       # @return RubyAem::Result
-      def is_installed()
-        packages = list_all().data
+      def is_installed
+        packages = list_all.data
         package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
         last_unpacked_by = package.xpath('lastUnpackedBy')
 
@@ -226,9 +223,9 @@ module RubyAem
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
         result = upload(file_path, opts)
-        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
-          check_result = is_uploaded()
-          puts 'Upload check #%d: %s - %s' % [retries_count, check_result.data, check_result.message]
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          check_result = is_uploaded
+          puts format('Upload check #%d: %s - %s', retries_count, check_result.data, check_result.message)
           if check_result.data == false
             raise StandardError.new(check_result.message)
           end
@@ -259,10 +256,10 @@ module RubyAem
         opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
-        result = install()
-        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
-          check_result = is_installed()
-          puts 'Install check #%d: %s - %s' % [retries_count, check_result.data, check_result.message]
+        result = install
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          check_result = is_installed
+          puts format('Install check #%d: %s - %s', retries_count, check_result.data, check_result.message)
           if check_result.data == false
             raise StandardError.new(check_result.message)
           end
@@ -293,17 +290,16 @@ module RubyAem
         opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
-        result = delete()
-        with_retries(:max_tries => opts[:_retries][:max_tries], :base_sleep_seconds => opts[:_retries][:base_sleep_seconds], :max_sleep_seconds => opts[:_retries][:max_sleep_seconds]) { |retries_count|
-          check_result = is_uploaded()
-          puts 'Delete check #%d: %s - %s' % [retries_count, !check_result.data, check_result.message]
+        result = delete
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          check_result = is_uploaded
+          puts format('Delete check #%d: %s - %s', retries_count, !check_result.data, check_result.message)
           if check_result.data == true
             raise StandardError.new(check_result.message)
           end
         }
         result
       end
-
     end
   end
 end

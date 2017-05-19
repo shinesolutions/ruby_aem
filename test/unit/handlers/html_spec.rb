@@ -9,7 +9,6 @@ describe 'HTML Handler' do
   end
 
   describe 'test html_authorizable_id' do
-
     it 'should return result with status from data payload' do
       data =
         '<html>' \
@@ -22,18 +21,16 @@ describe 'HTML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Group %{name} created at %{path}/%{authorizable_id}' }
-      call_params = { :name => 'somegroup', :path => '/home/groups/s' }
+      call_params = { name: 'somegroup', path: '/home/groups/s' }
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.html_authorizable_id(response, response_spec, call_params)
       expect(result.message).to eq('Group somegroup created at /home/groups/s/GDKHvEk6jG4lRaPUsAty')
       expect(result.response).to be(response)
     end
-
   end
 
   describe 'test html_package_service_allow_error' do
-
     it 'should return result with status from data payload' do
       data =
         '<html>' \
@@ -58,11 +55,9 @@ describe 'HTML Handler' do
       expect(result.message).to eq('Allowed package installation error - Error 500 : Problem accessing /crx/packmgr/service/.json/etc/packages/adobe/cq620/servicepack/aem-service-pkg-6.2.SP1.zip. Reason: java.lang.NullPointerException')
       expect(result.response).to be(response)
     end
-
   end
 
   describe 'test html_change_password' do
-
     it 'should identify success response body and display username in message' do
       data =
         '<html>' \
@@ -86,7 +81,7 @@ describe 'HTML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'User %{user}\'s password has been changed' }
-      call_params = { :old_password => 'someoldpassword', :new_password => 'somenewpassword' }
+      call_params = { old_password: 'someoldpassword', new_password: 'somenewpassword' }
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.html_change_password(response, response_spec, call_params)
@@ -117,18 +112,16 @@ describe 'HTML Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'User %{name}\'s password has been changed' }
-      call_params = { :old_password => 'someoldpassword', :new_password => 'somenewpassword' }
+      call_params = { old_password: 'someoldpassword', new_password: 'somenewpassword' }
 
       begin
         response = RubyAem::Response.new(status_code, data, headers)
         RubyAem::Handlers.html_change_password(response, response_spec, call_params)
-        fail
+        raise
       rescue RubyAem::Error => err
         expect(err.message).to eq('Failed to change password for user \'someuser\': Failed to change password: Old password does not match.')
         expect(err.result.response).to be(response)
       end
     end
-
   end
-
 end

@@ -9,7 +9,6 @@ describe 'Result' do
   end
 
   describe 'test initialize' do
-
     it 'should have message data and response' do
       mock_response = double('mock_response')
       result = RubyAem::Result.new('somemessage', mock_response)
@@ -18,7 +17,5 @@ describe 'Result' do
       expect(result.response).to eq(mock_response)
       expect(result.data).to eq('somedata')
     end
-
   end
-
 end

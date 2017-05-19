@@ -1,18 +1,16 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'json'
 require 'ruby_aem/error'
@@ -20,15 +18,13 @@ require 'ruby_aem/error'
 module RubyAem
   # Response handlers for JSON payload.
   module Handlers
-
     # Handle JSON response payload containing authorizable ID.
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.json_authorizable_id(response, response_spec, call_params)
-
+    def self.json_authorizable_id(response, response_spec, call_params)
       json = JSON.parse(response.body)
       authorizable_id = nil
       if json['success'] == true && json['hits'].length == 1
@@ -50,8 +46,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params additional call_params information
     # @return RubyAem::Result
-    def Handlers.json_package_service(response, response_spec, call_params)
-
+    def self.json_package_service(response, response_spec, call_params)
       json = JSON.parse(response.body)
 
       message = json['msg']
@@ -70,15 +65,12 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params additional call_params information
     # @return RubyAem::Result
-    def Handlers.json_package_filter(response, response_spec, call_params)
-
+    def self.json_package_filter(response, response_spec, call_params)
       json = JSON.parse(response.body)
 
       filter = []
       json.each do |key, value|
-        if json[key]['root'] != nil
-          filter.push(json[key]['root'])
-        end
+        filter.push(json[key]['root']) unless json[key]['root'].nil?
       end
 
       message = response_spec['message'] % call_params
@@ -86,7 +78,6 @@ module RubyAem
       result = RubyAem::Result.new(message, response)
       result.data = filter
       result
-
     end
 
     # Handle AEM Health Check Servlet JSON payload.
@@ -95,8 +86,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params additional call_params information
     # @return RubyAem::Result
-    def Handlers.json_aem_health_check(response, response_spec, call_params)
-
+    def self.json_aem_health_check(response, response_spec, call_params)
       json = JSON.parse(response.body)
 
       message = response_spec['message'] % call_params
@@ -104,7 +94,6 @@ module RubyAem
       result = RubyAem::Result.new(message, response)
       result.data = json['results']
       result
-
     end
 
     # Extract a list of agent names from getAgents JSON payload.
@@ -113,8 +102,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params additional call_params information
     # @return RubyAem::Result
-    def Handlers.json_agents(response, response_spec, call_params)
-
+    def self.json_agents(response, response_spec, call_params)
       json = JSON.parse(response.body)
 
       agent_names = []
@@ -129,8 +117,6 @@ module RubyAem
       result = RubyAem::Result.new(message, response)
       result.data = agent_names
       result
-
     end
-
   end
 end

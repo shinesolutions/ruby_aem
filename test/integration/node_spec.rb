@@ -6,10 +6,8 @@ describe 'Node' do
 
     # ensure node doesn't exist prior to testing
     @node = @aem.node('/apps/system/', 'somefolder')
-    if @node.exists().data == true
-      @node.delete()
-    end
-    result = @node.exists()
+    @node.delete unless @node.exists.data == false
+    result = @node.exists
     expect(result.data).to eq(false)
   end
 
@@ -17,19 +15,17 @@ describe 'Node' do
   end
 
   describe 'test node create' do
-
     it 'should succeed when node does not yet exist' do
       result = @node.create('sling:Folder')
       expect(result.message).to eq('Node apps/system/somefolder created')
-      result = @node.exists()
+      result = @node.exists
       expect(result.data).to eq(true)
     end
 
     it 'should raise error when node already exists' do
-
       result = @node.create('sling:Folder')
       expect(result.message).to eq('Node apps/system/somefolder created')
-      result = @node.exists()
+      result = @node.exists
       expect(result.data).to eq(true)
 
       # create the same node the second time
@@ -42,7 +38,7 @@ describe 'Node' do
 
     it 'should succeed existence check when node already exists' do
       # node does not exist
-      result = @node.exists()
+      result = @node.exists
       expect(result.message).to eq('Node apps/system/somefolder not found')
       expect(result.data).to eq(false)
 
@@ -51,61 +47,53 @@ describe 'Node' do
       expect(result.message).to eq('Node apps/system/somefolder created')
 
       # node should exist
-      result = @node.exists()
+      result = @node.exists
       expect(result.message).to eq('Node apps/system/somefolder exists')
       expect(result.data).to eq(true)
     end
-
   end
 
   describe 'test node delete' do
-
     it 'should succeed when node exists' do
-
       # ensure node exists prior to deletion
       result = @node.create('sling:Folder')
       expect(result.message).to eq('Node apps/system/somefolder created')
-      result = @node.exists()
+      result = @node.exists
       expect(result.data).to eq(true)
 
-      result = @node.delete()
+      result = @node.delete
       expect(result.message).to eq('Node apps/system/somefolder deleted')
-      result = @node.exists()
+      result = @node.exists
       expect(result.data).to eq(false)
     end
 
     it 'should raise error when node does not exist' do
-
       # ensure node doesn't exist
-      result = @node.exists()
+      result = @node.exists
       expect(result.data).to eq(false)
 
       begin
-        @node.delete()
+        @node.delete
       rescue RubyAem::Error => err
         expect(err.result.message).to eq('Node apps/system/somefolder not found')
       end
     end
-
   end
 
   describe 'test node exists' do
-
     it 'should be true when node exists' do
       result = @node.create('sling:Folder')
       expect(result.message).to eq('Node apps/system/somefolder created')
 
-      result = @node.exists()
+      result = @node.exists
       expect(result.message).to eq('Node apps/system/somefolder exists')
       expect(result.data).to eq(true)
     end
 
     it 'should be false when node does not exist' do
-      result = @node.exists()
+      result = @node.exists
       expect(result.message).to eq('Node apps/system/somefolder not found')
       expect(result.data).to eq(false)
     end
-
   end
-
 end

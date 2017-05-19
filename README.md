@@ -22,19 +22,19 @@ Initialise client:
     require 'ruby_aem'
 
     aem = RubyAem::Aem.new({
-      :username => 'admin',
-      :password => 'admin',
-      :protocol => 'http',
-      :host => 'localhost',
-      :port => 4502,
+      username: 'admin',
+      password: 'admin',
+      protocol: 'http',
+      host: 'localhost',
+      port: 4502,
       :timeout => 300,
-      :debug => false
+      debug: false
     })
 
 Aem:
 
     # wait until AEM login page is ready
-    aem = aem.aem()
+    aem = aem.aem
     result = aem.get_login_page_wait_until_ready({
       _retries: {
         max_tries: 60,
@@ -45,7 +45,7 @@ Aem:
     # wait until AEM Health Check has OK status
     # this requires aem-healthcheck package to be installed
     # https://github.com/shinesolutions/aem-healthcheck
-    aem = aem.aem()
+    aem = aem.aem
     result = aem.get_aem_health_check_wait_until_ok({
       tags: 'shallow',
       combine_tags_or: false,
@@ -56,18 +56,18 @@ Aem:
       }})
 
     # get an array of all agent names within AEM author or publish instance
-    aem = aem.aem()
+    aem = aem.aem
     result = aem.get_agents('author')
 
 Bundle:
 
     # stop bundle
     bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.stop()
+    result = bundle.stop
 
     # start bundle
     bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.start()
+    result = bundle.start
 
 Configuration property:
 
@@ -81,14 +81,14 @@ Flush agent:
     flush_agent = aem.flush_agent('author', 'some-flush-agent')
 
     # create or update flush agent
-    opts = { log_level: 'info', retry_delay: 60000 }
+    opts = { log_level: 'info', retry_delay: 60_000 }
     result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', opts)
 
     # check flush agent's existence
-    result = flush_agent.exists()
+    result = flush_agent.exists
 
     # delete flush agent
-    result = flush_agent.delete()
+    result = flush_agent.delete
 
 Group:
 
@@ -96,18 +96,18 @@ Group:
     group = aem.group('/home/groups/s/', 'somegroup')
 
     # check group's existence
-    result = group.exists()
+    result = group.exists
 
     # set group permission
     result = group.set_permission('/etc/replication', 'read:true,modify:true')
 
     # add another group as a member
     member_group = aem.group('/home/groups/s/', 'somemembergroup')
-    result = member_group.create()
+    result = member_group.create
     result = group.add_member('somemembergroup')
 
     # delete group
-    result = group.delete()
+    result = group.delete
 
 Node:
 
@@ -117,10 +117,10 @@ Node:
     result = node.create('sling:Folder')
 
     # check node's existence
-    result = node.exists()
+    result = node.exists
 
     # delete node
-    result = node.delete()
+    result = node.delete
 
 Package:
 
@@ -131,7 +131,7 @@ Package:
     result = package.upload('/tmp', opts)
 
     # check whether package is uploaded
-    result = package.is_uploaded()
+    result = package.is_uploaded
 
     # install package
     opts = { recursive: true }
@@ -141,31 +141,31 @@ Package:
     result = package.uninstall(opts)
 
     # check whether package is installed
-    result = package.is_installed()
+    result = package.is_installed
 
     # replicate package
-    result = package.replicate()
+    result = package.replicate
 
     # download package to /tmp directory
     result = package.download('/tmp')
 
     # create package
-    result = package.create()
+    result = package.create
 
     # build package
-    result = package.build()
+    result = package.build
 
     # update package filter
     result = package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
 
     # get package filter
-    result = package.get_filter()
+    result = package.get_filter
 
     # activate filter
     results = package.activate_filter(true, false)
 
     # list all packages
-    result = package.list_all()
+    result = package.list_all
 
 Path:
 
@@ -186,15 +186,15 @@ Replication agent:
       transport_user: 'admin',
       transport_password: 'admin',
       log_level: 'info',
-      retry_delay: 60000
+      retry_delay: 60_000
     }
     result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
     # check replication agent's existence
-    result = replication_agent.exists()
+    result = replication_agent.exists
 
     # delete replication agent
-    result = replication_agent.delete()
+    result = replication_agent.delete
 
 Outbox replication agent:
 
@@ -208,10 +208,10 @@ Outbox replication agent:
     result = outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', opts)
 
     # check outbox replication agent's existence
-    result = outbox_replication_agent.exists()
+    result = outbox_replication_agent.exists
 
     # delete outbox replication agent
-    result = outbox_replication_agent.delete()
+    result = outbox_replication_agent.delete
 
 Reverse replication agent:
 
@@ -222,19 +222,19 @@ Reverse replication agent:
       transport_user: 'admin',
       transport_password: 'admin',
       log_level: 'info',
-      retry_delay: 60000
+      retry_delay: 60_000
     }
     result = reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080', opts)
 
     # check reverse replication agent's existence
-    result = reverse_replication_agent.exists()
+    result = reverse_replication_agent.exists
 
     # delete reverse replication agent
-    result = reverse_replication_agent.delete()
+    result = reverse_replication_agent.delete
 
 Repository:
 
-    repository = aem.repository()
+    repository = aem.repository
 
     # block repository writes
     result = repository.block_writes
@@ -250,7 +250,7 @@ User:
     result = user.create('somepassword')
 
     # check user's existence
-    result = user.exists()
+    result = user.exists
 
     # set user permission
     result = user.set_permission('/etc/replication', 'read:true,modify:true')
@@ -262,7 +262,7 @@ User:
     result = user.add_to_group('/home/groups/s/', 'somegroup')
 
     # delete user
-    result = user.delete()
+    result = user.delete
 
 Result
 ------
@@ -270,7 +270,7 @@ Result
 Each of the above method calls returns a [RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html), which contains message, [RubyAem::Response](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Response.html), and data payload. For example:
 
     bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.stop()
+    result = bundle.stop
     puts result.message
     puts result.response.status_code
     puts result.response.body
@@ -284,7 +284,7 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
 
     begin
       bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-      result = bundle.stop()
+      result = bundle.stop
     rescue RubyAem::Error => err
       puts err.message
       puts err.result.response.status_code

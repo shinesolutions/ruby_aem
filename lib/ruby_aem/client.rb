@@ -1,18 +1,16 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'ruby_aem/error'
 require 'ruby_aem/handlers/file'
@@ -28,7 +26,6 @@ module RubyAem
   # Client class makes Swagger AEM API calls and handles the response as
   # configured in conf/spec.yaml .
   class Client
-
     # Initialise a client.
     #
     # @param apis a hash of Swagger AEM client's API instances
@@ -50,7 +47,6 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def call(clazz, action, call_params)
-
       resource_name = clazz.name.downcase.sub('rubyaem::resources::', '')
       resource = @spec[resource_name]
       action_spec = resource['actions'][action]
@@ -126,13 +122,12 @@ module RubyAem
       if responses_spec.key?(response.status_code)
         response_spec = responses_spec[response.status_code]
         handler = response_spec['handler']
-        result = Handlers.send(handler, response, response_spec, call_params)
+        Handlers.send(handler, response, response_spec, call_params)
       else
         message = "Unexpected response\nstatus code: #{response.status_code}\nheaders: #{response.headers}\nbody: #{response.body}"
         result = Result.new(message, response)
         raise RubyAem::Error.new(message, result)
       end
     end
-
   end
 end

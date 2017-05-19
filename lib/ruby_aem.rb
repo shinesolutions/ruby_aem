@@ -1,18 +1,16 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'ruby_aem/client'
 require 'ruby_aem/resources/aem'
@@ -34,7 +32,6 @@ require 'yaml'
 module RubyAem
   # Aem class represents an AEM client instance.
   class Aem
-
     # Initialise a Ruby AEM instance.
     #
     # @param conf configuration hash of the following configuration values:
@@ -47,7 +44,6 @@ module RubyAem
     # - debug: if true, then additional debug messages will be included, default: false
     # @return new RubyAem::Aem instance
     def initialize(conf = {})
-
       conf[:username] ||= 'admin'
       conf[:password] ||= 'admin'
       conf[:protocol] ||= 'http'
@@ -56,21 +52,23 @@ module RubyAem
       conf[:timeout] ||= 300
       conf[:debug] ||= false
 
-      SwaggerAemClient.configure { |swagger_conf| [
-        swagger_conf.host = "#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}",
-        swagger_conf.username = conf[:username],
-        swagger_conf.password = conf[:password],
-        swagger_conf.timeout = conf[:timeout],
-        swagger_conf.debugging = conf[:debug],
-        swagger_conf.params_encoding = :multi
-      ]}
+      SwaggerAemClient.configure { |swagger_conf|
+        [
+          swagger_conf.host = "#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}",
+          swagger_conf.username = conf[:username],
+          swagger_conf.password = conf[:password],
+          swagger_conf.timeout = conf[:timeout],
+          swagger_conf.debugging = conf[:debug],
+          swagger_conf.params_encoding = :multi
+        ]
+      }
 
       apis = {
-        :console => SwaggerAemClient::ConsoleApi.new,
-        :custom => SwaggerAemClient::CustomApi.new,
-        :cq => SwaggerAemClient::CqApi.new,
-        :crx => SwaggerAemClient::CrxApi.new,
-        :sling => SwaggerAemClient::SlingApi.new
+        console: SwaggerAemClient::ConsoleApi.new,
+        custom: SwaggerAemClient::CustomApi.new,
+        cq: SwaggerAemClient::CqApi.new,
+        crx: SwaggerAemClient::CrxApi.new,
+        sling: SwaggerAemClient::SlingApi.new
       }
 
       spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
@@ -81,7 +79,7 @@ module RubyAem
     # Create an AEM instance.
     #
     # @return new RubyAem::Resources::Aem instance
-    def aem()
+    def aem
       RubyAem::Resources::Aem.new(@client)
     end
 
@@ -190,6 +188,5 @@ module RubyAem
     def user(path, name)
       RubyAem::Resources::User.new(@client, path, name)
     end
-
   end
 end

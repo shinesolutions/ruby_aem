@@ -1,25 +1,22 @@
-=begin
-Copyright 2016 Shine Solutions
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-=end
+# Copyright 2016-2017 Shine Solutions
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 require 'nokogiri'
 
 module RubyAem
   # Response handlers for HTML payload.
   module Handlers
-
     # Parse authorizable ID from response body data.
     # This is used to get the authorizable ID of a newly created user/group.
     #
@@ -27,12 +24,11 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.html_authorizable_id(response, response_spec, call_params)
-
+    def self.html_authorizable_id(response, response_spec, call_params)
       html = Nokogiri::HTML(response.body)
       authorizable_id = html.xpath('//title/text()').to_s
       authorizable_id.slice! "Content created #{call_params[:path]}"
-      call_params[:authorizable_id] = authorizable_id.sub(/^\//, '')
+      call_params[:authorizable_id] = authorizable_id.sub(%r{^/}, '')
 
       message = response_spec['message'] % call_params
 
@@ -48,8 +44,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.html_package_service_allow_error(response, response_spec, call_params)
-
+    def self.html_package_service_allow_error(response, response_spec, call_params)
       html = Nokogiri::HTML(response.body)
       title = html.xpath('//title/text()').to_s
       desc = html.xpath('//p/text()').to_s
@@ -70,8 +65,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def Handlers.html_change_password(response, response_spec, call_params)
-
+    def self.html_change_password(response, response_spec, call_params)
       html = Nokogiri::HTML(response.body)
       user = html.xpath('//body/div/table/tr/td/b/text()').to_s
       desc = html.xpath('//body/div/table/tr/td/font/text()').to_s
@@ -86,6 +80,5 @@ module RubyAem
         raise RubyAem::Error.new(message, result)
       end
     end
-
   end
 end

@@ -9,23 +9,22 @@ describe 'File Handler' do
   end
 
   describe 'test file_download' do
-
     it 'should move file and return success result' do
       mock_data = double('mock_data')
-      expect(mock_data).to receive(:path).once().and_return('/some/download/path')
-      expect(mock_data).to receive(:delete).once()
+      expect(mock_data).to receive(:path).once.and_return('/some/download/path')
+      expect(mock_data).to receive(:delete).once
 
-      expect(FileUtils).to receive(:cp).once().with('/some/download/path', '/tmp/somepackage-1.2.3.zip')
+      expect(FileUtils).to receive(:cp).once.with('/some/download/path', '/tmp/somepackage-1.2.3.zip')
 
       data = mock_data
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip' }
       call_params = {
-        :group_name => 'somepackagegroup',
-        :package_name => 'somepackage',
-        :package_version => '1.2.3',
-        :file_path => '/tmp'
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3',
+        file_path: '/tmp'
       }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -33,7 +32,5 @@ describe 'File Handler' do
       expect(result.message).to eq('Package downloaded to /tmp/somepackage-1.2.3.zip')
       expect(result.response).to be(response)
     end
-
   end
-
 end

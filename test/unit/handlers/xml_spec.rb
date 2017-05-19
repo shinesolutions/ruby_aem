@@ -9,7 +9,6 @@ describe 'XML Handler' do
   end
 
   describe 'test xml_package_list' do
-
     it 'should return success result when data payload contains 200 ok element' do
       data =
         '<crx version="1.4.1" user="admin" workspace="crx.default">' \
@@ -68,7 +67,5 @@ describe 'XML Handler' do
       expect(result.message).to eq('Unable to retrieve package list, getting status code 500 and status text error')
       expect(result.response).to be(response)
     end
-
   end
-
 end

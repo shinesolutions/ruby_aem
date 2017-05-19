@@ -9,7 +9,6 @@ describe 'Swagger' do
   end
 
   describe 'test operation_to_method' do
-
     it 'should replace all uppercases with lowercases letters, each prefixed with an underscore' do
       method = RubyAem::Swagger.operation_to_method('postBundle')
       expect(method).to eq('post_bundle')
@@ -19,11 +18,9 @@ describe 'Swagger' do
       method = RubyAem::Swagger.operation_to_method('post')
       expect(method).to eq('post')
     end
-
   end
 
   describe 'test property_to_parameter' do
-
     it 'should replace all dots with underscores' do
       method = RubyAem::Swagger.property_to_parameter('foo.bar.foo')
       expect(method).to eq('foo_bar_foo')
@@ -38,11 +35,9 @@ describe 'Swagger' do
       method = RubyAem::Swagger.property_to_parameter('alias')
       expect(method).to eq('_alias')
     end
-
   end
 
   describe 'test path' do
-
     it 'should trim leading and trailing slashes' do
       method = RubyAem::Swagger.path('/path/to/')
       expect(method).to eq('path/to')
@@ -52,11 +47,9 @@ describe 'Swagger' do
       method = RubyAem::Swagger.path('path/to')
       expect(method).to eq('path/to')
     end
-
   end
 
   describe 'test config_node_name_to_config_name' do
-
     it 'should return config name when config node name exists' do
       method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.felix.http')
       expect(method).to eq('Apache Felix Jetty Based HTTP Service')
@@ -81,7 +74,5 @@ describe 'Swagger' do
       method = RubyAem::Swagger.config_node_name_to_config_name('some.inexisting.node')
       expect(method).to eq(nil)
     end
-
   end
-
 end

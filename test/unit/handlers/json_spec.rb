@@ -9,13 +9,12 @@ describe 'JSON Handler' do
   end
 
   describe 'test json_authorizable_id' do
-
     it 'should return success result when authorizable ID is found' do
       data = '{"success":true,"results":1,"total":1,"more":false,"offset":0,"hits":[{"path":"/home/groups/s/cnf6J9EF5WtGm9X6CZT4","excerpt":"","name":"cnf6J9EF5WtGm9X6CZT4","title":"cnf6J9EF5WtGm9X6CZT4","lastModified":"2016-09-12 21:13:07","created":"2016-09-12 21:13:07"}]}'
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
-      call_params = { :name => 'someuser' }
+      call_params = { name: 'someuser' }
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_authorizable_id(response, response_spec, call_params)
@@ -29,7 +28,7 @@ describe 'JSON Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Found user %{name} authorizable ID %{authorizable_id}' }
-      call_params = { :name => 'someuser' }
+      call_params = { name: 'someuser' }
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_authorizable_id(response, response_spec, call_params)
@@ -37,11 +36,9 @@ describe 'JSON Handler' do
       expect(result.response).to be(response)
       expect(result.data).to eq(nil)
     end
-
   end
 
   describe 'test json_package_service' do
-
     it 'should return result with status and message from data payload' do
       data = '{ "success": true, "msg": "Package built" }'
       status_code = nil
@@ -65,17 +62,15 @@ describe 'JSON Handler' do
       begin
         response = RubyAem::Response.new(status_code, data, headers)
         RubyAem::Handlers.json_package_service(response, response_spec, call_params)
-        fail
+        raise
       rescue RubyAem::Error => err
         expect(err.message).to eq('Package built')
         expect(err.result.response).to eq(response)
       end
     end
-
   end
 
   describe 'test json_package_filter' do
-
     it 'should return success result with filter data payload' do
       data =
         '{' \
@@ -106,11 +101,9 @@ describe 'JSON Handler' do
       expect(result.data[0]).to eq('/apps/geometrixx')
       expect(result.data[1]).to eq('/apps/geometrixx-common')
     end
-
   end
 
   describe 'test json_aem_health_check' do
-
     it 'should return success result with filter data payload' do
       data =
         '{' \
@@ -142,11 +135,9 @@ describe 'JSON Handler' do
       expect(result.data[1]['name']).to eq('name2')
       expect(result.data[1]['status']).to eq('CRITICAL')
     end
-
   end
 
   describe 'test json_agents' do
-
     it 'should return agent names' do
       data =
         '{' \
@@ -158,7 +149,7 @@ describe 'JSON Handler' do
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Retrieved agents on %{run_mode}' }
-      call_params = { :run_mode => 'author' }
+      call_params = { run_mode: 'author' }
 
       response = RubyAem::Response.new(status_code, data, headers)
       result = RubyAem::Handlers.json_agents(response, response_spec, call_params)
@@ -168,7 +159,5 @@ describe 'JSON Handler' do
       expect(result.data[0]).to eq('agent1')
       expect(result.data[1]).to eq('agent2')
     end
-
   end
-
 end

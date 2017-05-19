@@ -11,17 +11,15 @@ describe 'Path' do
   end
 
   describe 'test activate' do
-
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once().with(
+      expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Path,
         'activate',
-        { :name => '/etc/designs/cloudservices',
-          :ignoredeactivated => true,
-          :onlymodified => false })
+        name: '/etc/designs/cloudservices',
+        ignoredeactivated: true,
+        onlymodified: false
+      )
       @path.activate(true, false)
     end
-
   end
-
 end

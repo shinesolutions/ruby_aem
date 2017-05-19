@@ -9,7 +9,6 @@ describe 'Path' do
   end
 
   describe 'test path activation' do
-
     it 'should succeed when path exists' do
       path = @aem.path('/etc/designs/cloudservices')
       result = path.activate(true, false)
@@ -22,7 +21,5 @@ describe 'Path' do
       result = path.activate(true, false)
       expect(result.message).to eq('Path /some/inexisting/path activated')
     end
-
   end
-
 end

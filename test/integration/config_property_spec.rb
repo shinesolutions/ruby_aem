@@ -9,20 +9,18 @@ describe 'ConfigProperty' do
   end
 
   describe 'test properties create SSL config' do
-
     it 'should create a sling folder by default when path node does not exist' do
       config_property = @aem.config_property('someproperty', 'Boolean', true)
       config_property.create('author', 'org.apache.felix.http')
     end
 
     # it 'should create Apache Felix Jetty Based HTTP Service config property correctly when node exists' do
-    #
     #   # ensure node is created new
     #   node = @aem.node('/apps/system/config.author', 'org.apache.felix.http')
-    #   if node.exists().data == true
-    #     node.delete()
+    #   if node.exists.data == true
+    #     node.delete
     #   end
-    #   result = node.exists()
+    #   result = node.exists
     #   expect(result.data).to eq(false)
     #   result = node.create('sling:OsgiConfig')
     #
@@ -31,45 +29,36 @@ describe 'ConfigProperty' do
     #   expect(result.message).to eq('Set author org.apache.felix.http config Boolean property org.apache.felix.https.enable=true')
     #
     #   # wait until Jetty finishes restart following org.apache.felix.http config change
-    #   aem = @aem.aem()
-    #   result = aem.get_login_page_wait_until_ready()
+    #   aem = @aem.aem
+    #   result = aem.get_login_page_wait_until_ready
     #   expect(result.message).to eq('Login page retrieved')
     #   expect(result.response.body).to include('QUICKSTART_HOMEPAGE')
     # end
 
     it 'should create AEM Password Reset Activator config property correctly when node exists' do
-
       # ensure node is created new
       node = @aem.node('/apps/system/config.author', 'com.shinesolutions.aem.passwordreset.Activator')
-      if node.exists().data == true
-        node.delete()
-      end
-      result = node.exists()
+      node.delete unless node.exists.data == false
+      result = node.exists
       expect(result.data).to eq(false)
-      result = node.create('sling:OsgiConfig')
+      node.create('sling:OsgiConfig')
 
-      config_property = @aem.config_property('pwdreset.authorizables', 'String[]', ['admin', 'orchestrator', 'deployer'])
+      config_property = @aem.config_property('pwdreset.authorizables', 'String[]', %w[admin orchestrator deployer])
       result = config_property.create('author', 'com.shinesolutions.aem.passwordreset.Activator')
       expect(result.message).to eq('Set author com.shinesolutions.aem.passwordreset.Activator config String[] property pwdreset.authorizables=["admin", "orchestrator", "deployer"]')
-
     end
 
     it 'should create AEM Health Check Servlet config property correctly when node exists' do
-
       # ensure node is created new
       node = @aem.node('/apps/system/config.author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
-      if node.exists().data == true
-        node.delete()
-      end
-      result = node.exists()
+      node.delete unless node.exists.data == false
+      result = node.exists
       expect(result.data).to eq(false)
-      result = node.create('sling:OsgiConfig')
+      node.create('sling:OsgiConfig')
 
       config_property = @aem.config_property('bundles.ignored', 'String[]', ['com.day.cq.dam.dam-webdav-support'])
       result = config_property.create('author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
       expect(result.message).to eq('Set author com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck config String[] property bundles.ignored=["com.day.cq.dam.dam-webdav-support"]')
-
     end
   end
-
 end

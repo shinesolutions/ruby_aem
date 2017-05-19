@@ -11,3 +11,8 @@ Metrics/MethodLength:
   Max: 30
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
+Style/BlockDelimiters:
+  Enabled: false
+# enable Style/PredicateName as part of ruby_aem v2
+Style/PredicateName:
+  Enabled: false

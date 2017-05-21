@@ -16,3 +16,5 @@ Style/BlockDelimiters:
 # enable Style/PredicateName as part of ruby_aem v2
 Style/PredicateName:
   Enabled: false
+Style/RaiseArgs:
+  EnforcedStyle: compact

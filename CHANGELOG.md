@@ -1,3 +1,6 @@
+### 1.1.3
+* Remove support for Ruby 1.9
+
 ### 1.1.2
 * Remove unused cq:distribute property from flush agents
 

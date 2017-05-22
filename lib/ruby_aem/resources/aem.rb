@@ -45,7 +45,6 @@ module RubyAem
       # @param combine_tags_or
       # @return RubyAem::Result
       def get_aem_health_check(opts = {})
-
         @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end

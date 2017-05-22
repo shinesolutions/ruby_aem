@@ -24,7 +24,6 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.xml_package_list(response, response_spec, call_params)
-
       xml = Nokogiri::XML(response.body)
 
       status_code = xml.xpath('//crx/response/status/@code').to_s

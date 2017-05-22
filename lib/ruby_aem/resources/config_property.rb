@@ -39,7 +39,6 @@ module RubyAem
       # @param @param config_node_name the node name of a given OSGI config
       # @return RubyAem::Result
       def create(run_mode, config_node_name)
-
         name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
         type_hint_prefix = name.gsub(/^_/, '')
 

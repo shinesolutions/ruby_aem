@@ -15,7 +15,6 @@
 module RubyAem
   # Swagger module contains logic related to swagger_aem.
   module Swagger
-
     # Convert ruby_aem spec's operation (consistent with Swagger spec's operationId)
     # into swagger_aem's generated method name.
     #

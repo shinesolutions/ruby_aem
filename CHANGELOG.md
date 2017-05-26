@@ -1,4 +1,5 @@
-### 1.1.3
+### 1.2.0
+* Limit memory consumption when downloading large package file
 * Remove support for Ruby 1.9
 
 ### 1.1.2

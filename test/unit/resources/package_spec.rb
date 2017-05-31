@@ -450,6 +450,91 @@ describe 'Package' do
     end
   end
 
+  describe 'test is_built' do
+    it 'should return true result data when package exists and not empty' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <size>30948209423</size>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).twice.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.is_built
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is built')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(true)
+    end
+
+    it 'should return false result data when package exists and empty' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <size>0</size>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).twice.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.is_built
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+    end
+
+    it 'should return false result data when package does not exist' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>otherpackagegroup</group>' \
+        '    <name>otherpackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <size>23422342</size>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.is_built
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not built because it does not exist')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+    end
+  end
+
   describe 'test upload_wait_until_ready' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

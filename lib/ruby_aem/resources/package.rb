@@ -235,6 +235,32 @@ module RubyAem
         result
       end
 
+      # Check if this package is built. The indicator whether a package is built is when it exists and is not empty.
+      # True result data indicates that the package is built, false otherwise.
+      #
+      # @return RubyAem::Result
+      def is_built
+        exists_result = exists
+
+        if exists_result.data == true
+          is_empty_result = is_empty
+          if is_empty_result.data == false
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is built"
+            is_built = true
+          else
+            message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not built because it is empty"
+            is_built = false
+          end
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not built because it does not exist"
+          is_built = false
+        end
+        result = RubyAem::Result.new(message, nil)
+        result.data = is_built
+
+        result
+      end
+
       # Upload the package and wait until the package status states it is uploaded.
       #
       # @param file_path the directory where the package file to be uploaded is

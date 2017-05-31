@@ -155,6 +155,9 @@ Package:
     # build package
     result = package.build
 
+    # check whether package is built
+    result = package.is_built
+
     # update package filter
     result = package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
 

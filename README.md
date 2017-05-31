@@ -155,6 +155,9 @@ Package:
     # build package
     result = package.build
 
+    # build package and wait until package is built (package exists and size is not empty)
+    result = package.build_wait_until_ready
+
     # check whether package is built
     result = package.is_built
 

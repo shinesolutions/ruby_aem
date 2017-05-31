@@ -24,8 +24,20 @@ describe 'Package' do
       expect(result.message).to eq('Package created')
 
       # build package
-      result = @package.build
+      result = @package.build_wait_until_ready
       expect(result.message).to eq('Package built')
+
+      # package exists
+      result = @package.exists
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 exists')
+
+      # package is not empty
+      result = @package.is_empty
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not empty')
+
+      # package is built
+      result = @package.is_built
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is built')
 
       # package is not installed yet
       result = @package.is_installed

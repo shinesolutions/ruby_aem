@@ -725,5 +725,66 @@ describe 'Package' do
         @package.delete_wait_until_ready
       end
     end
+
+    describe 'test build_wait_until_ready' do
+      it 'should call client with expected parameters' do
+        expect(@mock_client).to receive(:call).once.with(
+          RubyAem::Resources::Package,
+          'build',
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        )
+
+        mock_data_list_all_exists_but_empty = Nokogiri::XML(
+          '<packages>' \
+          '  <package>' \
+          '    <group>somepackagegroup</group>' \
+          '    <name>somepackage</name>' \
+          '    <version>1.2.3</version>' \
+          '    <size>0</size>' \
+          '  </package>' \
+          '</packages>'
+        )
+        mock_result_list_all_exists_but_empty = double('mock_result_list_all_exists_but_empty')
+        expect(mock_result_list_all_exists_but_empty).to receive(:data).and_return(mock_data_list_all_exists_but_empty)
+        expect(mock_result_list_all_exists_but_empty).to receive(:data).and_return(mock_data_list_all_exists_but_empty)
+
+        expect(@mock_client).to receive(:call).twice.with(
+          RubyAem::Resources::Package,
+          'list_all',
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        ).and_return(mock_result_list_all_exists_but_empty)
+
+        mock_data_list_all_exists_but_not_empty = Nokogiri::XML(
+          '<packages>' \
+          '  <package>' \
+          '    <group>somepackagegroup</group>' \
+          '    <name>somepackage</name>' \
+          '    <version>1.2.3</version>' \
+          '    <size>9384729437</size>' \
+          '  </package>' \
+          '</packages>'
+        )
+        mock_result_list_all_exists_but_not_empty = double('mock_result_list_all_exists_but_not_empty')
+        expect(mock_result_list_all_exists_but_not_empty).to receive(:data).and_return(mock_data_list_all_exists_but_not_empty)
+        expect(mock_result_list_all_exists_but_not_empty).to receive(:data).and_return(mock_data_list_all_exists_but_not_empty)
+
+        expect(@mock_client).to receive(:call).twice.with(
+          RubyAem::Resources::Package,
+          'list_all',
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        ).and_return(mock_result_list_all_exists_but_not_empty)
+
+        expect(STDOUT).to receive(:puts).with('Build check #1: false - Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')
+        expect(STDOUT).to receive(:puts).with('Build check #2: true - Package somepackagegroup/somepackage-1.2.3 is built')
+
+        @package.build_wait_until_ready
+      end
+    end
   end
 end

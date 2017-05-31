@@ -266,7 +266,7 @@ module RubyAem
       # @param file_path the directory where the package file to be uploaded is
       # @param opts optional parameters:
       # - force: if false then a package file will not be uploaded when the package already exists with the same group, name, and version, default is true (will overwrite existing package file)
-      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_tries, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
       def upload_wait_until_ready(
         file_path,
@@ -304,7 +304,7 @@ module RubyAem
       # Install the package and wait until the package status states it is installed.
       #
       # @param opts optional parameters:
-      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_tries, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
       def install_wait_until_ready(
         opts = {
@@ -338,7 +338,7 @@ module RubyAem
       # Delete the package and wait until the package status states it is not uploaded.
       #
       # @param opts optional parameters:
-      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_tries, base_sleep_seconds, max_sleep_seconds
       # @return RubyAem::Result
       def delete_wait_until_ready(
         opts = {
@@ -363,6 +363,40 @@ module RubyAem
           check_result = is_uploaded
           puts format('Delete check #%d: %s - %s', retries_count, !check_result.data, check_result.message)
           if check_result.data == true
+            raise StandardError.new(check_result.message)
+          end
+        }
+        result
+      end
+
+      # Build the package and wait until the package status states it is built (exists and not empty).
+      #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_tries, base_sleep_seconds, max_sleep_seconds
+      # @return RubyAem::Result
+      def build_wait_until_ready(
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        })
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
+        result = build
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          check_result = is_built
+          puts format('Build check #%d: %s - %s', retries_count, check_result.data, check_result.message)
+          if check_result.data == false
             raise StandardError.new(check_result.message)
           end
         }

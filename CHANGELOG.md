@@ -1,5 +1,6 @@
 ### 1.3.0
 * Add package#is_empty method
+* Add package#exists method
 
 ### 1.2.0
 * Limit memory consumption when downloading large package file

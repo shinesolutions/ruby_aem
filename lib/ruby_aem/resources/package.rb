@@ -154,6 +154,27 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Check if this package exists.
+      # True result data indicates that the package is uploaded, false otherwise.
+      #
+      # @return RubyAem::Result
+      def exists
+        packages = list_all.data
+        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+
+        if package.to_s != ''
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} exists"
+          exists = true
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} does not exist"
+          exists = false
+        end
+        result = RubyAem::Result.new(message, nil)
+        result.data = exists
+
+        result
+      end
+
       # Check if this package is uploaded.
       # True result data indicates that the package is uploaded, false otherwise.
       #

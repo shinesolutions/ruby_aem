@@ -192,6 +192,52 @@ describe 'Package' do
     end
   end
 
+  describe 'test exists' do
+    it 'should return true result data when package exists on the list' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.exists
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 exists')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(true)
+    end
+
+    it 'should return false result data when package does not exist on the list' do
+      mock_data_list_all = Nokogiri::XML('')
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.exists
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 does not exist')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+    end
+  end
+
   describe 'test is_uploaded' do
     it 'should return true result data when package exists on the list' do
       mock_data_list_all = Nokogiri::XML(

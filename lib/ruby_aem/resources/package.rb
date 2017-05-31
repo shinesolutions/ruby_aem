@@ -154,6 +154,29 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Find all versions of the package
+      # Result data should contain an array of version values, empty array if there's none.
+      #
+      # @return RubyAem::Result
+      def get_versions
+        packages = list_all.data
+        package_versions = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\"]")
+
+        versions = []
+        package_versions.each do | package |
+          version = package.xpath("version/text()")
+          if version.to_s != ''
+            versions.push(version.to_s)
+          end
+        end
+
+        message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} has #{versions.length} version(s)"
+        result = RubyAem::Result.new(message, nil)
+        result.data = versions
+
+        result
+      end
+
       # Check if this package exists.
       # True result data indicates that the package exists, false otherwise.
       #

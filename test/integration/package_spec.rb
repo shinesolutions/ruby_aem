@@ -124,6 +124,13 @@ describe 'Package' do
       # replicate package
       result = @package.replicate
       expect(result.message).to eq('Package is replicated asynchronously')
+
+      # get all versions of the package
+      result = @package.get_versions
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 has 1 version(s)')
+      expect(result.data.length).to eq(1)
+      expect(result.data[0]).to eq('1.2.3')
+
     end
   end
 

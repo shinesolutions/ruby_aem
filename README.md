@@ -176,6 +176,9 @@ Package:
     # check whether package is empty
     result = package.is_empty
 
+    # get all versions of the package
+    result = package.get_versions
+
 Path:
 
     # check path's existence

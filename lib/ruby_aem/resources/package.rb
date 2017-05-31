@@ -155,7 +155,7 @@ module RubyAem
       end
 
       # Check if this package exists.
-      # True result data indicates that the package is uploaded, false otherwise.
+      # True result data indicates that the package exists, false otherwise.
       #
       # @return RubyAem::Result
       def exists
@@ -175,23 +175,18 @@ module RubyAem
         result
       end
 
-      # Check if this package is uploaded.
+      # Check if this package is uploaded. The indicator whether a package is uploaded is when it exists
       # True result data indicates that the package is uploaded, false otherwise.
       #
       # @return RubyAem::Result
       def is_uploaded
-        packages = list_all.data
-        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        result = exists
 
-        if package.to_s != ''
-          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
-          is_uploaded = true
+        if result.data == true
+          result.message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
         else
-          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
-          is_uploaded = false
+          result.message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
         end
-        result = RubyAem::Result.new(message, nil)
-        result.data = is_uploaded
 
         result
       end

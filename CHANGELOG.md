@@ -1,3 +1,6 @@
+### 1.3.0
+* Add package#is_empty method
+
 ### 1.2.0
 * Limit memory consumption when downloading large package file
 * Remove support for Ruby 1.9

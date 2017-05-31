@@ -197,6 +197,28 @@ module RubyAem
         result
       end
 
+      # Check if this package is empty (has size 0).
+      # True result data indicates that the package is empty, false otherwise.
+      #
+      # @return RubyAem::Result
+      def is_empty
+        packages = list_all.data
+        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        size = package.xpath('size/text()').to_s.to_i
+
+        if size == 0
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is empty"
+          is_empty = true
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not empty"
+          is_empty = false
+        end
+        result = RubyAem::Result.new(message, nil)
+        result.data = is_empty
+
+        result
+      end
+
       # Upload the package and wait until the package status states it is uploaded.
       #
       # @param file_path the directory where the package file to be uploaded is

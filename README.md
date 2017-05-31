@@ -167,6 +167,9 @@ Package:
     # list all packages
     result = package.list_all
 
+    # check whether package is empty
+    result = package.is_empty
+
 Path:
 
     # check path's existence

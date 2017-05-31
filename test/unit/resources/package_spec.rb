@@ -348,6 +348,62 @@ describe 'Package' do
     end
   end
 
+  describe 'test is_empty' do
+    it 'should return true result data when package has size attribute value zero' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <size>0</size>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.is_empty
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is empty')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(true)
+    end
+
+    it 'should return false result  data when package has size attribute value non-zero' do
+      mock_data_list_all = Nokogiri::XML(
+        '<packages>' \
+        '  <package>' \
+        '    <group>somepackagegroup</group>' \
+        '    <name>somepackage</name>' \
+        '    <version>1.2.3</version>' \
+        '    <size>2394</size>' \
+        '  </package>' \
+        '</packages>'
+      )
+      mock_result_list_all = double('mock_result_list_all')
+      expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
+
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Package,
+        'list_all',
+        group_name: 'somepackagegroup',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      ).and_return(mock_result_list_all)
+      result = @package.is_empty
+      expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not empty')
+      expect(result.response).to be(nil)
+      expect(result.data).to eq(false)
+    end
+  end
+
   describe 'test upload_wait_until_ready' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

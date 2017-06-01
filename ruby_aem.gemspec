@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.description       = 'ruby_aem is a Ruby client for Adobe Experience Manager (AEM) API, written on top of swagger_aem'
   s.license           = 'Apache 2.0'
   s.required_ruby_version = '>= 2.0'
-  s.files             = Dir.glob("{conf,lib}/**/*")
+  s.files             = Dir.glob('{conf,lib}/**/*')
   s.require_paths     = ['lib']
 
   s.add_runtime_dependency 'nokogiri', '~> 1.6', '< 1.7'

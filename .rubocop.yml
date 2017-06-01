@@ -9,6 +9,8 @@ Metrics/LineLength:
   Max: 280
 Metrics/MethodLength:
   Max: 30
+Style/AccessorMethodName:
+  Enabled: false
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 Style/BlockDelimiters:

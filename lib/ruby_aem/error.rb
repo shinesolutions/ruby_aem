@@ -13,6 +13,8 @@
 # limitations under the License.
 
 module RubyAem
+  # RubyAem error, contains a message and RubyAem::Result object
+  # useful for debugging the result and response when an error occurs
   class Error < StandardError
     attr_accessor :result
 

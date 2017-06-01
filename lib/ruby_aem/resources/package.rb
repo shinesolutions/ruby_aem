@@ -163,11 +163,9 @@ module RubyAem
         package_versions = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\"]")
 
         versions = []
-        package_versions.each do | package |
-          version = package.xpath("version/text()")
-          if version.to_s != ''
-            versions.push(version.to_s)
-          end
+        package_versions.each do |package|
+          version = package.xpath('version/text()')
+          versions.push(version.to_s) if version.to_s != ''
         end
 
         message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} has #{versions.length} version(s)"
@@ -223,7 +221,7 @@ module RubyAem
         package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
         last_unpacked_by = package.xpath('lastUnpackedBy')
 
-        if not ['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
+        if !['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
           is_installed = true
         else
@@ -245,7 +243,7 @@ module RubyAem
         package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
         size = package.xpath('size/text()').to_s.to_i
 
-        if size == 0
+        if size.zero?
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is empty"
           is_empty = true
         else
@@ -336,7 +334,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2
@@ -370,7 +369,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2
@@ -404,7 +404,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2

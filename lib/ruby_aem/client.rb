@@ -56,7 +56,7 @@ module RubyAem
 
       params = []
       required_params = action_spec['params']['required'] || {}
-      required_params.each { |key, value|
+      required_params.each { |_key, value|
         params.push(value % call_params)
       }
       params.push({})

@@ -130,7 +130,6 @@ describe 'Package' do
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 has 1 version(s)')
       expect(result.data.length).to eq(1)
       expect(result.data[0]).to eq('1.2.3')
-
     end
   end
 

@@ -61,7 +61,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2
@@ -102,7 +103,8 @@ module RubyAem
             base_sleep_seconds: 2,
             max_sleep_seconds: 2
           }
-        })
+        }
+      )
         opts[:_retries] ||= {}
         opts[:_retries][:max_tries] ||= 30
         opts[:_retries][:base_sleep_seconds] ||= 2

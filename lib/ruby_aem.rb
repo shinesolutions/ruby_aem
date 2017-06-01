@@ -52,6 +52,12 @@ module RubyAem
       conf[:timeout] ||= 300
       conf[:debug] ||= false
 
+      # handle custom configuration value being passed as a String
+      # e.g. when the values are passed via environment variables
+      conf[:port] = conf[:port].to_i
+      conf[:timeout] = conf[:timeout].to_i
+      conf[:debug] = conf[:debug] == 'true' if conf[:debug].is_a? String
+
       SwaggerAemClient.configure { |swagger_conf|
         [
           swagger_conf.host = "#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}",

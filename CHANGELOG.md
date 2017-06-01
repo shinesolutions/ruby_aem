@@ -1,9 +1,6 @@
 ### 1.3.0
-* Add package is_empty method
-* Add package exists method
-* Add package is_built method
-* Add package build_wait_until_ready method
-* Add package get_versions method
+* Add package is_empty, exists, is_built, build_wait_until_ready, get_versions methods
+* Handle String value on non-String configuration parameters
 
 ### 1.2.0
 * Limit memory consumption when downloading large package file

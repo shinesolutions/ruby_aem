@@ -1,5 +1,5 @@
-all: deps clean build install test-unit test-integration doc
-ci: deps clean build install test-unit doc
+all: deps clean build lint install test-unit test-integration doc
+ci: deps clean build lint install test-unit doc
 
 deps:
 	gem install bundler
@@ -36,4 +36,4 @@ publish:
 tools:
 	npm install -g gh-pages
 
-.PHONY: all ci deps clean build install test-unit test-integration doc doc-publish publish tools
+.PHONY: all ci deps clean build lint install test-unit test-integration doc doc-publish publish tools

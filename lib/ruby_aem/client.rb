@@ -94,18 +94,16 @@ module RubyAem
         end
       # if value is provided in optional param spec,
       # then apply variable interpolation the same way as required param
-      else
-        if value.class == String
-          if value == '__FILE__'
-            File.open("#{call_params[:file_path]}/#{call_params[:package_name]}-#{call_params[:package_version]}.zip", 'r') { |file|
-              params[-1][key.to_sym] = file
-            }
-          else
-            params[-1][key.to_sym] = value % call_params
-          end
+      elsif value.class == String
+        if value == '__FILE__'
+          File.open("#{call_params[:file_path]}/#{call_params[:package_name]}-#{call_params[:package_version]}.zip", 'r') { |file|
+            params[-1][key.to_sym] = file
+          }
         else
-          params[-1][key.to_sym] = value
+          params[-1][key.to_sym] = value % call_params
         end
+      else
+        params[-1][key.to_sym] = value
       end
     end
 

@@ -203,11 +203,12 @@ module RubyAem
       def is_uploaded
         result = exists
 
-        if result.data == true
-          result.message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
-        else
-          result.message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
-        end
+        result.message =
+          if result.data == true
+            "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is uploaded"
+          else
+            "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not uploaded"
+          end
 
         result
       end

@@ -1,14 +1,21 @@
+# TODO: re-enable Metric/AbcSize, Metrics/CyclomaticComplexity, and Metrics/PerceivedComplexity
 AllCops:
   DisplayCopNames: true
+Metrics/AbcSize:
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - "**/**/*_spec.rb"
 Metrics/ClassLength:
-  Max: 200
+  Max: 300
 Metrics/LineLength:
   Max: 280
 Metrics/MethodLength:
   Max: 30
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
 Style/AccessorMethodName:
   Enabled: false
 Style/BracesAroundHashParameters:

@@ -36,7 +36,7 @@ module RubyAem
       # @return RubyAem::Result
       def create(password)
         @call_params[:password] = password
-        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].match(%r{^/})
+        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].start_with? '/'
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -102,7 +102,7 @@ module RubyAem
       #
       # @return RubyAem::Result
       def find_authorizable_id
-        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].match(%r{^/})
+        @call_params[:path] = "/#{@call_params[:path]}" unless @call_params[:path].start_with? '/'
         @client.call(self.class, __callee__.to_s, @call_params)
       end
     end

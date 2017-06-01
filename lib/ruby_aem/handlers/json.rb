@@ -46,17 +46,14 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params additional call_params information
     # @return RubyAem::Result
-    def self.json_package_service(response, response_spec, call_params)
+    def self.json_package_service(response, _response_spec, _call_params)
       json = JSON.parse(response.body)
 
       message = json['msg']
       result = RubyAem::Result.new(message, response)
 
-      if json['success'] == true
-        result
-      else
-        raise RubyAem::Error.new(message, result)
-      end
+      return result if json['success'] == true
+      raise RubyAem::Error.new(message, result)
     end
 
     # Handle package filter JSON payload.
@@ -69,7 +66,7 @@ module RubyAem
       json = JSON.parse(response.body)
 
       filter = []
-      json.each do |key, value|
+      json.each do |key, _value|
         filter.push(json[key]['root']) unless json[key]['root'].nil?
       end
 
@@ -106,7 +103,7 @@ module RubyAem
       json = JSON.parse(response.body)
 
       agent_names = []
-      json.each do |key, value|
+      json.each do |key, _value|
         if (!key.start_with? 'jcr:') && (!key.start_with? 'rep:')
           agent_names.push(key)
         end

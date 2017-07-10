@@ -1,3 +1,6 @@
+### 1.3.1
+* Add response code 201 as package creation success scenario #14
+
 ### 1.3.0
 * Add package is_empty, exists, is_built, build_wait_until_ready, get_versions methods
 * Handle String value on non-String configuration parameters

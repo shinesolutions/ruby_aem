@@ -221,6 +221,12 @@ and provides resource-oriented API and convenient response handling.</p>
 <span class='comment'># build package
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span>
 
+<span class='comment'># build package and wait until package is built (package exists and size is not empty)
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_build_wait_until_ready'>build_wait_until_ready</span>
+
+<span class='comment'># check whether package is built
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_is_built'>is_built</span>
+
 <span class='comment'># update package filter
 </span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>[{&quot;root&quot;:&quot;/apps/geometrixx&quot;,&quot;rules&quot;:[]},{&quot;root&quot;:&quot;/apps/geometrixx-common&quot;,&quot;rules&quot;:[]}]</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 
@@ -231,7 +237,13 @@ and provides resource-oriented API and convenient response handling.</p>
 </span><span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_activate_filter'>activate_filter</span><span class='lparen'>(</span><span class='kw'>true</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
 
 <span class='comment'># list all packages
-</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_list_all'>list_all</span></code></pre>
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_list_all'>list_all</span>
+
+<span class='comment'># check whether package is empty
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_is_empty'>is_empty</span>
+
+<span class='comment'># get all versions of the package
+</span><span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_package'>package</span><span class='period'>.</span><span class='id identifier rubyid_get_versions'>get_versions</span></code></pre>
 
 <p>Path:</p>
 
@@ -383,7 +395,7 @@ report</a></p>
 </div></div>
 
       <div id="footer">
-  Generated on Fri May 26 10:20:39 2017 by
+  Generated on Mon Jul 10 11:03:44 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.0.0).
 </div>

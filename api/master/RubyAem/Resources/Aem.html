@@ -528,7 +528,6 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
       <pre class="lines">
 
 
-98
 99
 100
 101
@@ -569,10 +568,12 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
 136
 137
 138
-139</pre>
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/aem.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/aem.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_aem_health_check_wait_until_ok'>get_aem_health_check_wait_until_ok</span><span class='lparen'>(</span>
   <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -581,7 +582,8 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
       <span class='label'>base_sleep_seconds:</span> <span class='int'>2</span><span class='comma'>,</span>
       <span class='label'>max_sleep_seconds:</span> <span class='int'>2</span>
     <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:max_tries</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='int'>30</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:base_sleep_seconds</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='int'>2</span>
@@ -685,13 +687,13 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
       <pre class="lines">
 
 
-145
-146
 147
-148</pre>
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/aem.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/aem.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_agents'>get_agents</span><span class='lparen'>(</span><span class='id identifier rubyid_run_mode'>run_mode</span><span class='rparen'>)</span>
   <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:run_mode</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_run_mode'>run_mode</span>
@@ -878,7 +880,8 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
 88
 89
 90
-91</pre>
+91
+92</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/aem.rb', line 57</span>
@@ -890,7 +893,8 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
       <span class='label'>base_sleep_seconds:</span> <span class='int'>2</span><span class='comma'>,</span>
       <span class='label'>max_sleep_seconds:</span> <span class='int'>2</span>
     <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:max_tries</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='int'>30</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:_retries</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:base_sleep_seconds</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='int'>2</span>
@@ -928,7 +932,7 @@ restricted to max_trie, base_sleep_seconds, max_sleep_seconds</p>
 </div>
 
       <div id="footer">
-  Generated on Fri May 26 10:20:40 2017 by
+  Generated on Mon Jul 10 11:03:44 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.0.0).
 </div>

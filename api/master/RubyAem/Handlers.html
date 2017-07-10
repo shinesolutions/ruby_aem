@@ -309,7 +309,7 @@ param.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#json_package_service-class_method" title="json_package_service (class method)">.<strong>json_package_service</strong>(response, response_spec, call_params)  &#x21d2; Object </a>
+      <a href="#json_package_service-class_method" title="json_package_service (class method)">.<strong>json_package_service</strong>(response, _response_spec, _call_params)  &#x21d2; Object </a>
     
 
     
@@ -1099,18 +1099,18 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
       <pre class="lines">
 
 
+86
+87
+88
 89
 90
 91
 92
 93
-94
-95
-96
-97</pre>
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_json_aem_health_check'>json_aem_health_check</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='comma'>,</span> <span class='id identifier rubyid_response_spec'>response_spec</span><span class='comma'>,</span> <span class='id identifier rubyid_call_params'>call_params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_json'>json</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -1222,6 +1222,9 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
       <pre class="lines">
 
 
+102
+103
+104
 105
 106
 107
@@ -1234,20 +1237,17 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
 114
 115
 116
-117
-118
-119
-120</pre>
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_json_agents'>json_agents</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='comma'>,</span> <span class='id identifier rubyid_response_spec'>response_spec</span><span class='comma'>,</span> <span class='id identifier rubyid_call_params'>call_params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_json'>json</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_agent_names'>agent_names</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_json'>json</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jcr:</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>and</span> <span class='op'>!</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rep:</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_json'>json</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid__value'>_value</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jcr:</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rep:</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
       <span class='id identifier rubyid_agent_names'>agent_names</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -1494,6 +1494,9 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
       <pre class="lines">
 
 
+65
+66
+67
 68
 69
 70
@@ -1504,19 +1507,16 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
 75
 76
 77
-78
-79
-80
-81</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_json_package_filter'>json_package_filter</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='comma'>,</span> <span class='id identifier rubyid_response_spec'>response_spec</span><span class='comma'>,</span> <span class='id identifier rubyid_call_params'>call_params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_json'>json</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_json'>json</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+  <span class='id identifier rubyid_json'>json</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid__value'>_value</span><span class='op'>|</span>
     <span class='id identifier rubyid_filter'>filter</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_json'>json</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_json'>json</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='kw'>end</span>
 
@@ -1534,7 +1534,7 @@ to respond with error 500 but it&#39;s still processing behind the scene.</p>
       <div class="method_details ">
   <h3 class="signature " id="json_package_service-class_method">
   
-    .<strong>json_package_service</strong>(response, response_spec, call_params)  &#x21d2; <tt>Object</tt> 
+    .<strong>json_package_service</strong>(response, _response_spec, _call_params)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1621,6 +1621,19 @@ success field.</p>
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Error.html" title="RubyAem::Error (class)">RubyAem::Error</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1636,25 +1649,19 @@ success field.</p>
 54
 55
 56
-57
-58
-59
-60</pre>
+57</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/ruby_aem/handlers/json.rb', line 49</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_json_package_service'>json_package_service</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='comma'>,</span> <span class='id identifier rubyid_response_spec'>response_spec</span><span class='comma'>,</span> <span class='id identifier rubyid_call_params'>call_params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_json_package_service'>json_package_service</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='comma'>,</span> <span class='id identifier rubyid__response_spec'>_response_spec</span><span class='comma'>,</span> <span class='id identifier rubyid__call_params'>_call_params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_json'>json</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='id identifier rubyid_json'>json</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>msg</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_json'>json</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>success</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>true</span>
-    <span class='id identifier rubyid_result'>result</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Error</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='kw'>if</span> <span class='id identifier rubyid_json'>json</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>success</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Error</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2388,7 +2395,7 @@ configured in conf/spec.yaml AS-IS.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri May 26 10:20:40 2017 by
+  Generated on Mon Jul 10 11:03:44 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.0.0).
 </div>

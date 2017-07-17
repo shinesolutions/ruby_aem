@@ -870,6 +870,3 @@ user:
         200:
           handler: html_change_password
           message: 'User %{user}''s password has been changed'
-        201:
-          handler: html_change_password
-          message: 'User %{user}''s password has been changed'

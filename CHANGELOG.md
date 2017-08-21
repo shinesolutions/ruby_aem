@@ -1,5 +1,5 @@
 ### 1.3.3
-*
+* Prevent reverse replication from triggering on modification
 
 ### 1.3.1
 * Add response code 201 as package creation success scenario #14

@@ -644,7 +644,7 @@ outboxreplicationagent:
           jcrcontentcqtemplate: /libs/cq/replication/templates/agent
           jcrcontentenabled: true
           jcrcontenttrigger_distribute: true
-          jcrcontenttrigger_modified: true
+          jcrcontenttrigger_modified: false
           jcrcontenttrigger_specific: true
           jcrcontentuser_id: '%{user_id}'
       responses:

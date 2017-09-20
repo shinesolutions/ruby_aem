@@ -1,5 +1,5 @@
 ### 1.3.4
-*
+* Integration tests AEM instance parameters are now configurable
 
 ### 1.3.3
 * Prevent reverse replication from triggering on modification

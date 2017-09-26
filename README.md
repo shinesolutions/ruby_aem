@@ -312,8 +312,14 @@ Integration tests require an AEM instance with [Shine Solutions AEM Health Check
 
 By default it uses AEM running on http://localhost:4502 with `admin` username and `admin` password. AEM instance parameters can be configured using environment variables `aem_protocol`, `aem_host`, `aem_port`, `aem_username`, `aem_password`, and `aem_debug`.
 
-Reports
--------
+Others
+------
+
+Reports:
 
 * [API - master](https://shinesolutions.github.io/ruby_aem/api/master/index.html)
 * [Coverage report](https://shinesolutions.github.io/ruby_aem/coverage/index.html)
+
+Presentation:
+
+* [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/)

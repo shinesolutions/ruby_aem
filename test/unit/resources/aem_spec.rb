@@ -158,8 +158,8 @@ describe 'Aem' do
       mock_body_not_finished = SwaggerAemClient::InstallStatus.new({ status: status_not_finished })
       mock_response_not_finished = double('mock_response_not_finished')
       mock_result_not_finished = double('mock_result_not_finished')
-      expect(mock_response_not_finished).to receive(:body).and_return(mock_body_not_finished)
-      expect(mock_result_not_finished).to receive(:response).and_return(mock_response_not_finished)
+      expect(mock_response_not_finished).to receive(:body).twice.and_return(mock_body_not_finished)
+      expect(mock_result_not_finished).to receive(:response).twice.and_return(mock_response_not_finished)
       expect(mock_result_not_finished).to receive(:message).twice.and_return(mock_message_not_finished)
 
       mock_message_finished = 'Install status retrieved'
@@ -167,8 +167,8 @@ describe 'Aem' do
       mock_body_finished = SwaggerAemClient::InstallStatus.new({ status: status_finished })
       mock_response_finished = double('mock_response_finished')
       mock_result_finished = double('mock_result_finished')
-      expect(mock_response_finished).to receive(:body).and_return(mock_body_finished)
-      expect(mock_result_finished).to receive(:response).and_return(mock_response_finished)
+      expect(mock_response_finished).to receive(:body).twice.and_return(mock_body_finished)
+      expect(mock_result_finished).to receive(:response).twice.and_return(mock_response_finished)
       expect(mock_result_finished).to receive(:message).and_return(mock_message_finished)
 
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {}).and_raise(mock_error)
@@ -177,7 +177,7 @@ describe 'Aem' do
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
       expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #1: Install status has some error')
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #2: Install status retrieved but not finished yet')
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #2: Install status retrieved but not finished yet, still installing 123 package(s)')
       expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #3: Install status retrieved and finished')
       aem.get_install_status_wait_until_finished
     end

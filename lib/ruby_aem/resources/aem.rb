@@ -184,10 +184,11 @@ module RubyAem
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
             result = get_install_status
-            if result.response.body.status.finished == true
+            item_count = result.response.body.status.item_count
+            if result.response.body.status.finished == true && item_count == 0
               puts format('Retrieve AEM install status attempt #%d: %s and finished', retries_count, result.message)
             else
-              puts format('Retrieve AEM install status attempt #%d: %s but not finished yet', retries_count, result.message)
+              puts format('Retrieve AEM install status attempt #%d: %s but not finished yet, still installing %d package(s)', retries_count, result.message, item_count)
               raise StandardError.new(result.message)
             end
           rescue RubyAem::Error => err

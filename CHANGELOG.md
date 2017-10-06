@@ -1,5 +1,6 @@
 ### 1.3.4
 * Integration tests AEM instance parameters are now configurable
+* Add aem get_install_status and get_install_status_wait_until_finished
 
 ### 1.3.3
 * Prevent reverse replication from triggering on modification

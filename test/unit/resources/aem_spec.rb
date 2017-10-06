@@ -138,4 +138,48 @@ describe 'Aem' do
       aem.get_agents('author')
     end
   end
+
+  describe 'test get_install_status' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {})
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_install_status
+    end
+  end
+
+  describe 'test get_aem_health_check_wait_until_finished' do
+    it 'should call client with expected parameters' do
+      mock_message_error = 'Install status has some error'
+      mock_result_error = double('mock_result_error')
+      mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
+
+      mock_message_not_finished = 'Install status retrieved'
+      status_not_finished = SwaggerAemClient::InstallStatusStatus.new({ finished: false, itemCount: 123 })
+      mock_body_not_finished = SwaggerAemClient::InstallStatus.new({ status: status_not_finished })
+      mock_response_not_finished = double('mock_response_not_finished')
+      mock_result_not_finished = double('mock_result_not_finished')
+      expect(mock_response_not_finished).to receive(:body).and_return(mock_body_not_finished)
+      expect(mock_result_not_finished).to receive(:response).and_return(mock_response_not_finished)
+      expect(mock_result_not_finished).to receive(:message).twice.and_return(mock_message_not_finished)
+
+      mock_message_finished = 'Install status retrieved'
+      status_finished = SwaggerAemClient::InstallStatusStatus.new({ finished: true, itemCount: 0 })
+      mock_body_finished = SwaggerAemClient::InstallStatus.new({ status: status_finished })
+      mock_response_finished = double('mock_response_finished')
+      mock_result_finished = double('mock_result_finished')
+      expect(mock_response_finished).to receive(:body).and_return(mock_body_finished)
+      expect(mock_result_finished).to receive(:response).and_return(mock_response_finished)
+      expect(mock_result_finished).to receive(:message).and_return(mock_message_finished)
+
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {}).and_raise(mock_error)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {}).and_return(mock_result_not_finished)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {}).and_return(mock_result_finished)
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #1: Install status has some error')
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #2: Install status retrieved but not finished yet')
+      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #3: Install status retrieved and finished')
+      aem.get_install_status_wait_until_finished
+    end
+  end
 end

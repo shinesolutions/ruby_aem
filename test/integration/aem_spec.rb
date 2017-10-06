@@ -7,7 +7,7 @@ describe 'Aem' do
 
   after do
   end
-
+  
   describe 'test get_login_page' do
     it 'should contain readyness indicator' do
       aem = @aem.aem
@@ -62,6 +62,30 @@ describe 'Aem' do
       result = @aem.aem.get_agents('author')
       expect(result.message).to eq('Retrieved agents on author')
       expect(result.data.length).not_to eq(0)
+    end
+  end
+
+  describe 'test get_install_status' do
+    it 'should contain finished indicator' do
+      aem = @aem.aem
+      result = aem.get_install_status
+      expect(result.message).to eq('Install status retrieved successfully')
+      expect(result.response.body.status.finished).to equal(true)
+    end
+  end
+
+  describe 'test get_install_status_wait_until_finished' do
+    it 'should try once and contain readyness indicator' do
+      aem = @aem.aem
+      result = aem.get_install_status_wait_until_finished(
+        _retries: {
+          max_tries: 60,
+          base_sleep_seconds: 2,
+          max_sleep_seconds: 2
+        }
+      )
+      expect(result.message).to eq('Install status retrieved successfully')
+      expect(result.response.body.status.finished).to equal(true)
     end
   end
 end

@@ -148,6 +148,55 @@ module RubyAem
         @call_params[:run_mode] = run_mode
         @client.call(self.class, __callee__.to_s, @call_params)
       end
+
+      # Retrieve AEM install status.
+      #
+      # @return RubyAem::Result
+      def get_install_status
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
+      # Retrieve AEM install status with retries until its status is finished
+      #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # @return RubyAem::Result
+      def get_install_status_wait_until_finished(
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        }
+      )
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
+        result = nil
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          begin
+            result = get_install_status
+            if result.response.body.status.finished == true
+              puts format('Retrieve AEM install status attempt #%d: %s and finished', retries_count, result.message)
+            else
+              puts format('Retrieve AEM install status attempt #%d: %s but not finished yet', retries_count, result.message)
+              raise StandardError.new(result.message)
+            end
+          rescue RubyAem::Error => err
+            puts format('Retrieve AEM install status attempt #%d: %s', retries_count, err.message)
+            raise StandardError.new(err.message)
+          end
+        }
+        result
+      end
     end
   end
 end

@@ -31,6 +31,15 @@ aem:
         200:
           handler: json_agents
           message: 'Retrieved agents on %{run_mode}'
+    get_install_status:
+      api: crx
+      operation: getInstallStatus
+      params:
+        required:
+      responses:
+        200:
+          handler: simple
+          message: 'Install status retrieved successfully'
 bundle:
   responses:
     404:

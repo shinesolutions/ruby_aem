@@ -6,7 +6,7 @@
 <title>
   Class: RubyAem::Resources::Package
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: RubyAem::Resources::Package
   
@@ -927,7 +925,7 @@ one result for each activation</p>
 
   <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_result'>result</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_filter_path'>filter_path</span><span class='op'>|</span>
-    <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Path</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_filter_path'>filter_path</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Resources.html" title="RubyAem::Resources (module)">Resources</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Path.html" title="RubyAem::Resources::Path (class)">Path</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Path.html#initialize-instance_method" title="RubyAem::Resources::Path#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_filter_path'>filter_path</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_activate'>activate</span><span class='lparen'>(</span><span class='id identifier rubyid_ignore_deactivated'>ignore_deactivated</span><span class='comma'>,</span> <span class='id identifier rubyid_modified_only'>modified_only</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_results'>results</span>
@@ -1573,7 +1571,7 @@ exists, false otherwise.</p>
     <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package </span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:group_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_version</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> does not exist</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_exists'>exists</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Result.html" title="RubyAem::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Result.html#initialize-instance_method" title="RubyAem::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_exists'>exists</span>
 
   <span class='id identifier rubyid_result'>result</span>
@@ -1719,7 +1717,7 @@ version values, empty array if there&#39;s none.</p>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package </span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:group_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_version</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_versions'>versions</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='embexpr_end'>}</span><span class='tstring_content'> version(s)</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Result.html" title="RubyAem::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Result.html#initialize-instance_method" title="RubyAem::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_versions'>versions</span>
 
   <span class='id identifier rubyid_result'>result</span>
@@ -2062,7 +2060,7 @@ package is built, false otherwise.</p>
     <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package </span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:group_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_version</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not built because it does not exist</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_is_built'>is_built</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Result.html" title="RubyAem::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Result.html#initialize-instance_method" title="RubyAem::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_is_built'>is_built</span>
 
   <span class='id identifier rubyid_result'>result</span>
@@ -2150,7 +2148,7 @@ that the package is empty, false otherwise.</p>
     <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package </span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:group_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_version</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not empty</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_is_empty'>is_empty</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Result.html" title="RubyAem::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Result.html#initialize-instance_method" title="RubyAem::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_is_empty'>is_empty</span>
 
   <span class='id identifier rubyid_result'>result</span>
@@ -2238,7 +2236,7 @@ package is installed, false otherwise.</p>
     <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package </span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:group_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:package_version</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not installed</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_is_installed'>is_installed</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Result</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Result.html" title="RubyAem::Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Result.html#initialize-instance_method" title="RubyAem::Result#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_is_installed'>is_installed</span>
 
   <span class='id identifier rubyid_result'>result</span>
@@ -2891,9 +2889,9 @@ restricted to max_tries, base_sleep_seconds, max_sleep_seconds</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Aug 21 13:35:43 2017 by
+  Generated on Sat Oct  7 15:52:01 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.0.0).
+  0.9.9 (ruby-2.0.0).
 </div>
 
     </div>

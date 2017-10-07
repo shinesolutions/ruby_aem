@@ -6,7 +6,7 @@
 <title>
   Class: RubyAem::Resources::User
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../../class_list.html"></iframe>
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -58,8 +58,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="../../class_list.html"></iframe>
 
       <div id="content"><h1>Class: RubyAem::Resources::User
   
@@ -524,7 +522,7 @@
       <pre class="code"><span class="info file"># File 'lib/ruby_aem/resources/user.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_to_group'>add_to_group</span><span class='lparen'>(</span><span class='id identifier rubyid_group_path'>group_path</span><span class='comma'>,</span> <span class='id identifier rubyid_group_name'>group_name</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_group'>group</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Resources</span><span class='op'>::</span><span class='const'>Group</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_group_path'>group_path</span><span class='comma'>,</span> <span class='id identifier rubyid_group_name'>group_name</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_group'>group</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Resources.html" title="RubyAem::Resources (module)">Resources</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Group.html" title="RubyAem::Resources::Group (class)">Group</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Group.html#initialize-instance_method" title="RubyAem::Resources::Group#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='ivar'>@client</span><span class='comma'>,</span> <span class='id identifier rubyid_group_path'>group_path</span><span class='comma'>,</span> <span class='id identifier rubyid_group_name'>group_name</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_group'>group</span><span class='period'>.</span><span class='id identifier rubyid_add_member'>add_member</span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -773,7 +771,7 @@ SwaggerAemClient.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_find_authorizable_id'>find_authorizable_id</span>
   <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:authorizable_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
-  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Swagger</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Swagger.html" title="RubyAem::Swagger (module)">Swagger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_path'><span class='object_link'><a href="../Swagger.html#path-class_method" title="RubyAem::Swagger.path (method)">path</a></span></span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@call_params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -839,7 +837,7 @@ returns a true result data, false otherwise.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_exists'>exists</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_find_authorizable_id'>find_authorizable_id</span>
   <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:authorizable_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
-  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>RubyAem</span><span class='op'>::</span><span class='const'>Swagger</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../RubyAem.html" title="RubyAem (module)">RubyAem</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Swagger.html" title="RubyAem::Swagger (module)">Swagger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_path'><span class='object_link'><a href="../Swagger.html#path-class_method" title="RubyAem::Swagger.path (method)">path</a></span></span><span class='lparen'>(</span><span class='ivar'>@call_params</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='ivar'>@client</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='comma'>,</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='ivar'>@call_params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1015,9 +1013,9 @@ read:true,modify:true</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Aug 21 13:35:42 2017 by
+  Generated on Sat Oct  7 15:52:01 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.0.0).
+  0.9.9 (ruby-2.0.0).
 </div>
 
     </div>

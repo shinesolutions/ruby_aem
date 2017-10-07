@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.9
   
 </title>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="file_list.html"></iframe>
+      <iframe id="nav" src="file_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -56,8 +56,6 @@
 </div>
         <div class="clear"></div>
       </div>
-
-      <iframe id="search_frame" src="file_list.html"></iframe>
 
       <div id="content"><div id='filecontents'>
 <p><a href="https://img.shields.io/travis/shinesolutions/ruby_aem.svg">{Build
@@ -378,11 +376,20 @@ href="https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html">R
 
 <h2 id="label-Testing">Testing</h2>
 
-<p>Integration tests require an AEM instance running on port 4502 with <a
+<p>Integration tests require an AEM instance with <a
 href="https://github.com/shinesolutions/aem-healthcheck">Shine Solutions
 AEM Health Check</a> package installed.</p>
 
-<h2 id="label-Reports">Reports</h2>
+<p>By default it uses AEM running on <a
+href="http://localhost:4502">localhost:4502</a> with <code>admin</code>
+username and <code>admin</code> password. AEM instance parameters can be
+configured using environment variables <code>aem_protocol</code>,
+<code>aem_host</code>, <code>aem_port</code>, <code>aem_username</code>,
+<code>aem_password</code>, and <code>aem_debug</code>.</p>
+
+<h2 id="label-Others">Others</h2>
+
+<p>Reports:</p>
 <ul><li>
 <p><a
 href="https://shinesolutions.github.io/ruby_aem/api/master/index.html">API
@@ -392,12 +399,19 @@ href="https://shinesolutions.github.io/ruby_aem/api/master/index.html">API
 href="https://shinesolutions.github.io/ruby_aem/coverage/index.html">Coverage
 report</a></p>
 </li></ul>
+
+<p>Presentation:</p>
+<ul><li>
+<p><a
+href="https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/">Building
+An AEM API Clients Ecosystem</a></p>
+</li></ul>
 </div></div>
 
       <div id="footer">
-  Generated on Mon Aug 21 13:35:41 2017 by
+  Generated on Sat Oct  7 15:52:00 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.0.0).
+  0.9.9 (ruby-2.0.0).
 </div>
 
     </div>

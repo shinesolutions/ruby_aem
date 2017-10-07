@@ -154,8 +154,8 @@ describe 'Aem' do
       mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
 
       mock_message_not_finished = 'Install status retrieved'
-      status_not_finished = SwaggerAemClient::InstallStatusStatus.new({ finished: false, itemCount: 123 })
-      mock_body_not_finished = SwaggerAemClient::InstallStatus.new({ status: status_not_finished })
+      status_not_finished = SwaggerAemClient::InstallStatusStatus.new(finished: false, itemCount: 123)
+      mock_body_not_finished = SwaggerAemClient::InstallStatus.new(status: status_not_finished)
       mock_response_not_finished = double('mock_response_not_finished')
       mock_result_not_finished = double('mock_result_not_finished')
       expect(mock_response_not_finished).to receive(:body).twice.and_return(mock_body_not_finished)
@@ -163,8 +163,8 @@ describe 'Aem' do
       expect(mock_result_not_finished).to receive(:message).twice.and_return(mock_message_not_finished)
 
       mock_message_finished = 'Install status retrieved'
-      status_finished = SwaggerAemClient::InstallStatusStatus.new({ finished: true, itemCount: 0 })
-      mock_body_finished = SwaggerAemClient::InstallStatus.new({ status: status_finished })
+      status_finished = SwaggerAemClient::InstallStatusStatus.new(finished: true, itemCount: 0)
+      mock_body_finished = SwaggerAemClient::InstallStatus.new(status: status_finished)
       mock_response_finished = double('mock_response_finished')
       mock_result_finished = double('mock_result_finished')
       expect(mock_response_finished).to receive(:body).twice.and_return(mock_body_finished)

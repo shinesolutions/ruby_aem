@@ -7,7 +7,7 @@ describe 'Aem' do
 
   after do
   end
-  
+
   describe 'test get_login_page' do
     it 'should contain readyness indicator' do
       aem = @aem.aem

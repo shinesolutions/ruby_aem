@@ -20,7 +20,7 @@ describe 'HTML Handler' do
         '</html>'
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'Group %{name} created at %{path}/%{authorizable_id}' }
+      response_spec = { 'message' => 'Group %{name} created at %{path}/%<authorizable_id>s' }
       call_params = { name: 'somegroup', path: '/home/groups/s' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -47,7 +47,7 @@ describe 'HTML Handler' do
         '</html>'
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'Allowed package installation error - %{title}: %{desc} %{reason}' }
+      response_spec = { 'message' => 'Allowed package installation error - %<title>s: %<desc>s %<reason>s' }
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -80,7 +80,7 @@ describe 'HTML Handler' do
         '</html>'
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'User %{user}\'s password has been changed' }
+      response_spec = { 'message' => 'User %<user>s\'s password has been changed' }
       call_params = { old_password: 'someoldpassword', new_password: 'somenewpassword' }
 
       response = RubyAem::Response.new(status_code, data, headers)
@@ -111,7 +111,7 @@ describe 'HTML Handler' do
         '</html>'
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'User %{name}\'s password has been changed' }
+      response_spec = { 'message' => 'User %<name>s\'s password has been changed' }
       call_params = { old_password: 'someoldpassword', new_password: 'somenewpassword' }
 
       begin

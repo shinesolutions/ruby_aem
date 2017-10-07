@@ -66,7 +66,7 @@ module RubyAem
       json = JSON.parse(response.body)
 
       filter = []
-      json.each do |key, _value|
+      json.each_key do |key|
         filter.push(json[key]['root']) unless json[key]['root'].nil?
       end
 
@@ -103,7 +103,7 @@ module RubyAem
       json = JSON.parse(response.body)
 
       agent_names = []
-      json.each do |key, _value|
+      json.each_key do |key|
         if (!key.start_with? 'jcr:') && (!key.start_with? 'rep:')
           agent_names.push(key)
         end

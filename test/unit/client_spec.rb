@@ -12,7 +12,7 @@ describe 'Client' do
             'operation' => 'postBundle',
             'params' => {
               'required' => {
-                'name' => '%{name}',
+                'name' => '%<name>s',
                 'action' => 'start'
               }
             },
@@ -20,7 +20,7 @@ describe 'Client' do
               200 => {
                 'status' => 'success',
                 'handler' => 'simple',
-                'message' => 'Bundle %{name} started'
+                'message' => 'Bundle %<name>s started'
               }
             }
           }
@@ -76,7 +76,7 @@ describe 'Client' do
                 200 => {
                   'status' => 'success',
                   'handler' => 'simple',
-                  'message' => 'Bundle %{name} started'
+                  'message' => 'Bundle %<name>s started'
                 }
               }
             }
@@ -112,7 +112,7 @@ describe 'Client' do
                 200 => {
                   'status' => 'success',
                   'handler' => 'simple',
-                  'message' => 'Bundle %{name} started'
+                  'message' => 'Bundle %<name>s started'
                 }
               }
             }
@@ -148,7 +148,7 @@ describe 'Client' do
                 200 => {
                   'status' => 'success',
                   'handler' => 'simple',
-                  'message' => 'Bundle %{name} started'
+                  'message' => 'Bundle %<name>s started'
                 }
               }
             }
@@ -183,7 +183,7 @@ describe 'Client' do
                 200 => {
                   'status' => 'success',
                   'handler' => 'simple',
-                  'message' => 'Bundle %{name} started'
+                  'message' => 'Bundle %<name>s started'
                 }
               }
             }
@@ -213,7 +213,7 @@ describe 'Client' do
       headers = nil
       response = RubyAem::Response.new(status_code, data, headers)
       responses_spec = {
-        200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+        200 => { 'status' => 'success', 'message' => 'Bundle %<name>s started' }
       }
       call_params = {
         name: 'somebundle'
@@ -236,13 +236,13 @@ describe 'Client' do
       headers = nil
       response = RubyAem::Response.new(status_code, data, headers)
       responses_spec = {
-        200 => { 'status' => 'success', 'message' => 'Bundle %{name} started' }
+        200 => { 'status' => 'success', 'message' => 'Bundle %<name>s started' }
       }
       call_params = {
         name: 'somebundle'
       }
 
-      expect(RubyAem::Handlers).to receive(:send).once.with(nil, response, { 'status' => 'success', 'message' => 'Bundle %{name} started' }, { name: 'somebundle' })
+      expect(RubyAem::Handlers).to receive(:send).once.with(nil, response, { 'status' => 'success', 'message' => 'Bundle %<name>s started' }, { name: 'somebundle' })
 
       client = RubyAem::Client.new(nil, nil)
       client.handle(response, responses_spec, call_params)

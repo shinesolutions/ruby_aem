@@ -19,7 +19,7 @@ describe 'File Handler' do
       data = mock_data
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'Package downloaded to %{file_path}/%{package_name}-%{package_version}.zip' }
+      response_spec = { 'message' => 'Package downloaded to %<file_path>s/%<package_name>s-%<package_version>s.zip' }
       call_params = {
         group_name: 'somepackagegroup',
         package_name: 'somepackage',

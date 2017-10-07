@@ -185,7 +185,7 @@ module RubyAem
           begin
             result = get_install_status
             item_count = result.response.body.status.item_count
-            if result.response.body.status.finished == true && item_count == 0
+            if result.response.body.status.finished == true && item_count.zero?
               puts format('Retrieve AEM install status attempt #%d: %s and finished', retries_count, result.message)
             else
               puts format('Retrieve AEM install status attempt #%d: %s but not finished yet, still installing %d package(s)', retries_count, result.message, item_count)

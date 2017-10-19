@@ -1,5 +1,5 @@
 ### 1.4.1
-*
+* Improve clarity of error message when changing the password but user does not exist
 
 ### 1.4.0
 * Integration tests AEM instance parameters are now configurable

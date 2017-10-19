@@ -123,5 +123,22 @@ describe 'HTML Handler' do
         expect(err.result.response).to be(response)
       end
     end
+
+    it 'should pass error message when response body is empty' do
+      data = ''
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'User %<name>s\'s password has been changed' }
+      call_params = { old_password: 'someoldpassword', new_password: 'somenewpassword' }
+
+      begin
+        response = RubyAem::Response.new(status_code, data, headers)
+        RubyAem::Handlers.html_change_password(response, response_spec, call_params)
+        raise
+      rescue RubyAem::Error => err
+        expect(err.message).to eq('Failed to change password: Response body is empty, user likely does not exist.')
+        expect(err.result.response).to be(response)
+      end
+    end
   end
 end

@@ -60,12 +60,21 @@ module RubyAem
     end
 
     # Check response body for indicator of change password failure.
+    # If response body is empty, that indicates that there's an error due to inexisting user.
+    # Successful action produces a HTML page as response body.
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_change_password(response, response_spec, call_params)
+
+      if (response.body.to_s.empty?)
+        message = 'Failed to change password: Response body is empty, user likely does not exist.'
+        result = RubyAem::Result.new(message, response)
+        raise RubyAem::Error.new(message, result)
+      end
+
       html = Nokogiri::HTML(response.body)
       user = html.xpath('//body/div/table/tr/td/b/text()').to_s
       desc = html.xpath('//body/div/table/tr/td/font/text()').to_s

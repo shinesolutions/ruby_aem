@@ -1,3 +1,6 @@
+### 1.4.1
+*
+
 ### 1.4.0
 * Integration tests AEM instance parameters are now configurable
 * Add aem get_install_status and get_install_status_wait_until_finished

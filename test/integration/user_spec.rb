@@ -30,8 +30,11 @@ describe 'User' do
       expect(result.message).to eq('Permission read:true,modify:true on path /etc/replication set for user someuser')
     end
 
+    # test the API, but don't change the admin password itself because the same
+    # one is still needed for running the other tests
     it 'should succeed admin password change' do
-      result = @user.change_password('admin', 'admin')
+      admin_password = ENV['aem_password'] || 'admin'
+      result = @user.change_password(admin_password, admin_password)
       expect(result.message).to eq('User admin\'s password has been changed')
     end
 
@@ -39,10 +42,10 @@ describe 'User' do
       aem = RubyAem::Aem.new(
         username: 'someuser',
         password: 'somepassword',
-        protocol: 'http',
-        host: 'localhost',
-        port: 4502,
-        debug: false
+        protocol: ENV['aem_protocol'] || 'http',
+        host: ENV['aem_host'] || 'localhost',
+        port: ENV['aem_port'] ? ENV['aem_port'].to_i : 4502,
+        debug: ENV['aem_debug'] ? ENV['aem_debug'] == 'true' : false
       )
       user = aem.user('/home/users/s/', 'someuser')
       result = user.change_password('somepassword', 'somenewpassword')

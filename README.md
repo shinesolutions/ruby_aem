@@ -308,7 +308,7 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
 Testing
 -------
 
-Integration tests require an AEM instance with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed.
+Integration tests require an AEM instance with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed and `org.apache.sling.jcr.webdav` bundle to be running.
 
 By default it uses AEM running on http://localhost:4502 with `admin` username and `admin` password. AEM instance parameters can be configured using environment variables `aem_protocol`, `aem_host`, `aem_port`, `aem_username`, `aem_password`, and `aem_debug`.
 

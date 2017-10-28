@@ -68,8 +68,7 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_change_password(response, response_spec, call_params)
-
-      if (response.body.to_s.empty?)
+      if response.body.to_s.empty?
         message = 'Failed to change password: Response body is empty, user likely does not exist.'
         result = RubyAem::Result.new(message, response)
         raise RubyAem::Error.new(message, result)

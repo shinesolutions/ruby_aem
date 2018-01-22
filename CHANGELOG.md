@@ -1,3 +1,6 @@
+### 1.4.2
+*
+
 ### 1.4.1
 * Improve clarity of error message when changing the password but user does not exist
 * Fix integration tests that expect default credential, host, and port

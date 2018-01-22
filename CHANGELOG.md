@@ -1,7 +1,8 @@
 ### 1.4.1
 * Improve clarity of error message when changing the password but user does not exist
 * Fix integration tests that expect default credential, host, and port
-* Upgrade yard to be >= 0.9.11 due to security vulnerability
+* Upgrade yard to >= 0.9.11 and nokogiri to >= 1.8.1 due to security vulnerabilities
+* Change required ruby version to >= 2.1 due to nokogiri 1.8.1 requirement
 
 ### 1.4.0
 * Integration tests AEM instance parameters are now configurable

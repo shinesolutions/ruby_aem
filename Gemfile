@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'nokogiri', '~> 1.6', '< 1.7'
+gem 'nokogiri', '~> 1.8.1'
 gem 'retries', '~> 0.0.5'
 gem 'swagger_aem', '~> 1.2.0'
 

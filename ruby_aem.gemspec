@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary           = 'AEM API Ruby client'
   s.description       = 'ruby_aem is a Ruby client for Adobe Experience Manager (AEM) API, written on top of swagger_aem'
   s.license           = 'Apache 2.0'
-  s.required_ruby_version = '>= 2.0'
+  s.required_ruby_version = '>= 2.1'
   s.files             = Dir.glob('{conf,lib}/**/*')
   s.require_paths     = ['lib']
 

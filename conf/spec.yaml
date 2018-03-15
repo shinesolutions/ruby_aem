@@ -40,6 +40,18 @@ aem:
         200:
           handler: simple
           message: 'Install status retrieved successfully'
+    get_crxde_status:
+      api: crx
+      operation: getCrxdeStatus
+      params:
+        required:
+      responses:
+        200:
+          handler: simple
+          message: 'CRXDE is enabled'
+        404:
+          handler: simple
+          message: 'CRXDE is disabled'
 bundle:
   responses:
     404:

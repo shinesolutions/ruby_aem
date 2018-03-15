@@ -36,6 +36,13 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Retrieve AEM CRXDE Status
+      #
+      # @return RubyAem::Result
+      def get_crxde_status
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
       # Retrieve AEM Health Check.
       # This is a custom API and requires
       # https://github.com/shinesolutions/aem-healthcheck

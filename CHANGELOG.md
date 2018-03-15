@@ -1,5 +1,6 @@
 ### 1.4.2
-*
+* Fix empty reply error when using https protocol
+* Add verify_ssl option
 
 ### 1.4.1
 * Improve clarity of error message when changing the password but user does not exist

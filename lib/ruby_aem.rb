@@ -44,27 +44,18 @@ module RubyAem
     # - debug: if true, then additional debug messages will be included, default: false
     # @return new RubyAem::Aem instance
     def initialize(conf = {})
-      conf[:username] ||= 'admin'
-      conf[:password] ||= 'admin'
-      conf[:protocol] ||= 'http'
-      conf[:host] ||= 'localhost'
-      conf[:port] ||= 4502
-      conf[:timeout] ||= 300
-      conf[:debug] ||= false
-
-      # handle custom configuration value being passed as a String
-      # e.g. when the values are passed via environment variables
-      conf[:port] = conf[:port].to_i
-      conf[:timeout] = conf[:timeout].to_i
-      conf[:debug] = conf[:debug] == 'true' if conf[:debug].is_a? String
+      sanitise_conf(conf)
 
       SwaggerAemClient.configure { |swagger_conf|
         [
-          swagger_conf.host = "#{conf[:protocol]}://#{conf[:host]}:#{conf[:port]}",
+          swagger_conf.scheme = conf[:protocol],
+          swagger_conf.host = "#{conf[:host]}:#{conf[:port]}",
           swagger_conf.username = conf[:username],
           swagger_conf.password = conf[:password],
           swagger_conf.timeout = conf[:timeout],
           swagger_conf.debugging = conf[:debug],
+          swagger_conf.verify_ssl = conf[:verify_ssl],
+          swagger_conf.verify_ssl_host = conf[:verify_ssl],
           swagger_conf.params_encoding = :multi
         ]
       }
@@ -80,6 +71,22 @@ module RubyAem
       spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
 
       @client = RubyAem::Client.new(apis, spec)
+    end
+
+    # Set default configuration values and handle numeric/boolean String values
+    def sanitise_conf(conf)
+      conf[:username] ||= 'admin'
+      conf[:password] ||= 'admin'
+      conf[:protocol] ||= 'http'
+      conf[:host] ||= 'localhost'
+      conf[:port] ||= 4502
+      conf[:timeout] ||= 300
+      # handle custom configuration value being passed as a String
+      # e.g. when the values are passed via environment variables
+      conf[:port] = conf[:port].to_i
+      conf[:timeout] = conf[:timeout].to_i
+      conf[:verify_ssl] = conf[:verify_ssl] == 'true' if conf[:verify_ssl].is_a? String
+      conf[:debug] = conf[:debug] == 'true' if conf[:debug].is_a? String
     end
 
     # Create an AEM instance.

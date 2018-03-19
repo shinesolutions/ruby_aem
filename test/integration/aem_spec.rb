@@ -32,6 +32,16 @@ describe 'Aem' do
     end
   end
 
+  describe 'test get_crxde_status' do
+    it 'should contain readyness indicator' do
+      aem = @aem.aem
+      result = aem.get_crxde_status
+      expect(result.data).to eq(true)
+      expect(result.message).to eq('CRXDE is enabled')
+      expect(result.response.status_code).to eq(200)
+    end
+  end
+
   describe 'test get_aem_health_check_wait_until_ok' do
     it 'should try once and contain readyness indicator' do
       aem = @aem.aem

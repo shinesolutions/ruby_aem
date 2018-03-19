@@ -17,6 +17,14 @@ describe 'Aem' do
     end
   end
 
+  describe 'test get_crxde_status' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_crxde_status', {})
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_crxde_status
+    end
+  end
+
   describe 'test get_aem_health_check' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false)

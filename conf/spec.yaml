@@ -47,10 +47,10 @@ aem:
         required:
       responses:
         200:
-          handler: simple
+          handler: simple_true
           message: 'CRXDE is enabled'
         404:
-          handler: simple
+          handler: simple_false
           message: 'CRXDE is disabled'
 bundle:
   responses:

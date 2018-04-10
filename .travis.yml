@@ -5,5 +5,10 @@ rvm:
   - "2.2"
   - "2.3"
   - "2.4"
+before_install:
+  - wget https://apt.puppetlabs.com/puppet5-release-trusty.deb
+  - sudo dpkg -i puppet5-release-trusty.deb
+  - sudo apt-get update
+  - sudo apt-get install -y puppet-agent
 script:
-  - make ci
+  - PATH=/opt/puppetlabs/puppet/bin/:$PATH make ci

@@ -1,6 +1,9 @@
 # TODO: re-enable Metric/AbcSize, Metrics/CyclomaticComplexity, and Metrics/PerceivedComplexity
 AllCops:
   DisplayCopNames: true
+  Exclude:
+    - .bundle/*
+    - bin/*
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:

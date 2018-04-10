@@ -1,3 +1,5 @@
+.bundle
+bin
 .DS_Store
 .yardoc
 coverage

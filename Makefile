@@ -4,13 +4,13 @@ ci: deps clean build lint install test-unit doc
 deps:
 	gem install bundler
 	rm -rf .bundle
-	bundle install
+	bundle install --binstubs
 
 clean:
 	rm -f ruby_aem-*.gem
 
 lint:
-	rubocop
+	bundle exec rubocop
 
 build: clean
 	gem build ruby_aem.gemspec
@@ -19,13 +19,13 @@ install: build
 	gem install `ls ruby_aem-*.gem`
 
 test-unit:
-	rspec test/unit
+	bundle exec rspec test/unit
 
 test-integration: install
-	rspec test/integration
+	bundle exec rspec test/integration
 
 doc:
-	yard doc --output-dir doc/api/master/
+	bundle exec yard doc --output-dir doc/api/master/
 
 doc-publish:
 	gh-pages --dist doc/

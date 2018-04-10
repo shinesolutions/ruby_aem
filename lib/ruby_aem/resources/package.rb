@@ -315,10 +315,8 @@ module RubyAem
         result = upload(file_path, opts)
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_uploaded
-          puts format('Upload check #%d: %s - %s', retries_count, check_result.data, check_result.message)
-          if check_result.data == false
-            raise StandardError.new(check_result.message)
-          end
+          puts format('Upload check #%<retries_count>d: %<check_result_data>s - %<check_result_message>s', retries_count: retries_count, check_result_data: check_result.data, check_result_message: check_result.message)
+          raise StandardError.new(check_result.message) if check_result.data == false
         }
         result
       end
@@ -350,10 +348,8 @@ module RubyAem
         result = install
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_installed
-          puts format('Install check #%d: %s - %s', retries_count, check_result.data, check_result.message)
-          if check_result.data == false
-            raise StandardError.new(check_result.message)
-          end
+          puts format('Install check #%<retries_count>d: %<check_result_data>s - %<check_result_message>s', retries_count: retries_count, check_result_data: check_result.data, check_result_message: check_result.message)
+          raise StandardError.new(check_result.message) if check_result.data == false
         }
         result
       end
@@ -385,10 +381,8 @@ module RubyAem
         result = delete
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_uploaded
-          puts format('Delete check #%d: %s - %s', retries_count, !check_result.data, check_result.message)
-          if check_result.data == true
-            raise StandardError.new(check_result.message)
-          end
+          puts format('Delete check #%<retries_count>d: %<check_result_data>s - %<check_result_message>s', retries_count: retries_count, check_result_data: !check_result.data, check_result_message: check_result.message)
+          raise StandardError.new(check_result.message) if check_result.data == true
         }
         result
       end
@@ -420,10 +414,8 @@ module RubyAem
         result = build
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           check_result = is_built
-          puts format('Build check #%d: %s - %s', retries_count, check_result.data, check_result.message)
-          if check_result.data == false
-            raise StandardError.new(check_result.message)
-          end
+          puts format('Build check #%<retries_count>d: %<check_result_data>s - %<check_result_message>s', retries_count: retries_count, check_result_data: check_result.data, check_result_message: check_result.message)
+          raise StandardError.new(check_result.message) if check_result.data == false
         }
         result
       end

@@ -89,9 +89,7 @@ module RubyAem
       # if there is no value in optional param spec,
       # then only add optional param that is set in call parameters
       if !value
-        if call_params.key? key.to_sym
-          params[-1][key.to_sym] = call_params[key.to_sym]
-        end
+        params[-1][key.to_sym] = call_params[key.to_sym] if call_params.key? key.to_sym
       # if value is provided in optional param spec,
       # then apply variable interpolation the same way as required param
       elsif value.class == String

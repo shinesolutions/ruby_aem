@@ -85,13 +85,13 @@ module RubyAem
           begin
             result = get_login_page
             if result.response.body !~ /QUICKSTART_HOMEPAGE/
-              puts format('Retrieve login page attempt #%d: %s but not ready yet', retries_count, result.message)
+              puts format('Retrieve login page attempt #%<retries_count>d: %<message>s but not ready yet', retries_count: retries_count, message: result.message)
               raise StandardError.new(result.message)
             else
-              puts format('Retrieve login page attempt #%d: %s and ready', retries_count, result.message)
+              puts format('Retrieve login page attempt #%<retries_count>d: %<message>s and ready', retries_count: retries_count, message: result.message)
             end
           rescue RubyAem::Error => err
-            puts format('Retrieve login page attempt #%d: %s', retries_count, err.message)
+            puts format('Retrieve login page attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
             raise StandardError.new(err.message)
           end
         }
@@ -134,13 +134,13 @@ module RubyAem
               end
             }
             if is_ok == false
-              puts format('Retrieve AEM Health Check attempt #%d: %s but not ok yet', retries_count, result.message)
+              puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s but not ok yet', retries_count: retries_count, message: result.message)
               raise StandardError.new(result.message)
             else
-              puts format('Retrieve AEM Health Check attempt #%d: %s and ok', retries_count, result.message)
+              puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s and ok', retries_count: retries_count, message: result.message)
             end
           rescue RubyAem::Error => err
-            puts format('Retrieve AEM Health Check attempt #%d: %s', retries_count, err.message)
+            puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
             raise StandardError.new(err.message)
           end
         }
@@ -193,13 +193,13 @@ module RubyAem
             result = get_install_status
             item_count = result.response.body.status.item_count
             if result.response.body.status.finished == true && item_count.zero?
-              puts format('Retrieve AEM install status attempt #%d: %s and finished', retries_count, result.message)
+              puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s and finished', retries_count: retries_count, message: result.message)
             else
-              puts format('Retrieve AEM install status attempt #%d: %s but not finished yet, still installing %d package(s)', retries_count, result.message, item_count)
+              puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s but not finished yet, still installing %<item_count>d package(s)', retries_count: retries_count, message: result.message, item_count: item_count)
               raise StandardError.new(result.message)
             end
           rescue RubyAem::Error => err
-            puts format('Retrieve AEM install status attempt #%d: %s', retries_count, err.message)
+            puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
             raise StandardError.new(err.message)
           end
         }

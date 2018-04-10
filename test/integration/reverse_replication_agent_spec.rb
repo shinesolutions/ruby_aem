@@ -6,9 +6,7 @@ describe 'ReverseReplicationAgent' do
 
     # ensure agent doesn't exist prior to testing
     @reverse_replication_agent = @aem.reverse_replication_agent('author', 'some-reverse-replication-agent')
-    if @reverse_replication_agent.exists.data == true
-      @reverse_replication_agent.delete
-    end
+    @reverse_replication_agent.delete if @reverse_replication_agent.exists.data == true
     result = @reverse_replication_agent.exists
     expect(result.data).to eq(false)
 

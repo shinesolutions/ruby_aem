@@ -6,9 +6,7 @@ describe 'OutboxReplicationAgent' do
 
     # ensure agent doesn't exist prior to testing
     @outbox_replication_agent = @aem.outbox_replication_agent('author', 'some-outbox-replication-agent')
-    if @outbox_replication_agent.exists.data == true
-      @outbox_replication_agent.delete
-    end
+    @outbox_replication_agent.delete if @outbox_replication_agent.exists.data == true
     result = @outbox_replication_agent.exists
     expect(result.data).to eq(false)
 

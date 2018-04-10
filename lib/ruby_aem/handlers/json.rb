@@ -104,9 +104,7 @@ module RubyAem
 
       agent_names = []
       json.each_key do |key|
-        if (!key.start_with? 'jcr:') && (!key.start_with? 'rep:')
-          agent_names.push(key)
-        end
+        agent_names.push(key) if (!key.start_with? 'jcr:') && (!key.start_with? 'rep:')
       end
 
       message = response_spec['message'] % call_params

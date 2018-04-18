@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = 'ruby_aem'
-  s.version           = '1.4.2'
+  s.version           = '1.4.3'
   s.platform          = Gem::Platform::RUBY
   s.authors           = ['Shine Solutions', 'Cliffano Subagio']
   s.email             = ['opensource@shinesolutions.com', 'cliffano@gmail.com']
@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.require_paths     = ['lib']
 
   s.add_runtime_dependency 'nokogiri', '~> 1.8.1'
+  s.add_runtime_dependency 'nori', '~> 2.6.0'
   s.add_runtime_dependency 'retries', '~> 0.0.5'
   s.add_runtime_dependency 'swagger_aem', '~> 1.2.1'
 

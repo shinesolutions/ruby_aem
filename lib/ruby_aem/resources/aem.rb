@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'nori'
 require 'retries'
 require 'ruby_aem/error'
 
 module RubyAem
+  #  AEM resources
   module Resources
     # AEM class contains API calls related to managing the AEM instance itself.
     class Aem
@@ -204,6 +206,32 @@ module RubyAem
           end
         }
         result
+      end
+
+      # Get a list of all packages available on AEM instance.
+      # The list of packages are returned as result data.
+      # Example:
+      # {
+      #    "group"          => "shinesolutions",
+      #    "name"           => "aem-password-reset-content",
+      #    "version"        => "1.0.1",
+      #    "downloadName"   => "aem-password-reset-content-1.0.1.zip",
+      #    "size"           => "23579",
+      #    "created"        => "Tue, 4   Apr 2017 13:38:35   +1000",
+      #    "createdBy"      => "root",
+      #    "lastModified"   => nil,
+      #    "lastModifiedBy" => "null",
+      #    "lastUnpacked"   => "Wed, 18   Apr 2018 22:57:01   +1000",
+      #    "lastUnpackedBy" => "admin"
+      # }
+      #
+      # @return RubyAem::Result
+      def get_packages
+        result = @client.call(self.class, __callee__.to_s, @call_params)
+        packages = Nori.new.parse(result.data.to_s)['packages']['package']
+        result_copy = RubyAem::Result.new(result.message, result.response)
+        result_copy.data = packages
+        result_copy
       end
     end
   end

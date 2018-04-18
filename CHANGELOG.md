@@ -1,3 +1,6 @@
+### 1.4.3
+* Add aem get_packages
+
 ### 1.4.2
 * Add get_crxde_status action
 * Fix empty reply error when using https protocol

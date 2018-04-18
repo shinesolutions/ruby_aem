@@ -96,4 +96,14 @@ describe 'Aem' do
       expect(result.response.body.status.finished).to equal(true)
     end
   end
+
+  describe 'test get_packages' do
+    it 'should return a list of all packages' do
+      aem = @aem.aem
+      result = aem.get_packages
+      expect(result.message).to eq('All packages list retrieved successfully')
+      expect(result.data.length).to be >= 1
+      puts result.data
+    end
+  end
 end

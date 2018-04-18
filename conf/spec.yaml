@@ -52,6 +52,16 @@ aem:
         404:
           handler: simple_false
           message: 'CRXDE is disabled'
+    get_packages:
+      api: crx
+      operation: postPackageService
+      params:
+        required:
+          cmd: ls
+      responses:
+        200:
+          handler: xml_package_list
+          message: 'All packages list retrieved successfully'
 bundle:
   responses:
     404:

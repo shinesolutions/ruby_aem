@@ -189,5 +189,35 @@ describe 'Aem' do
       expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #3: Install status retrieved and finished')
       aem.get_install_status_wait_until_finished
     end
+
+    describe 'test get_packages' do
+      it 'should have result data of packages list' do
+        mock_packages_xml =
+          '<packages>' \
+          '  <package>' \
+          '    <group>shinesolutions</group>' \
+          '    <name>aem-password-reset-content</name>' \
+          '    <version>1.0.1</version>' \
+          '    <downloadName>aem-password-reset-content-1.0.1.zip</downloadName>' \
+          '    <size>23579</size>' \
+          '    <created>Tue, 4 Apr 2017 13:38:35 +1000</created>' \
+          '    <createdBy>root</createdBy>' \
+          '    <lastModified/>' \
+          '    <lastModifiedBy>null</lastModifiedBy>' \
+          '    <lastUnpacked>Wed, 18 Apr 2018 22:57:01 +1000</lastUnpacked>' \
+          '    <lastUnpackedBy>admin</lastUnpackedBy>' \
+          '  </package>' \
+          '</packages>'
+        mock_message = double('mock_message')
+        mock_response = double('mock_response')
+        mock_result_ok = double('mock_result_ok')
+        expect(mock_result_ok).to receive(:message).and_return(mock_message)
+        expect(mock_result_ok).to receive(:response).and_return(mock_response)
+        expect(mock_result_ok).to receive(:data).and_return(Nokogiri::XML(mock_packages_xml))
+        expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_packages', {}).and_return(mock_result_ok)
+        aem = RubyAem::Resources::Aem.new(@mock_client)
+        aem.get_packages
+      end
+    end
   end
 end

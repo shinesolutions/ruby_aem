@@ -34,6 +34,25 @@ describe 'Aem' do
 
   describe 'test get_crxde_status' do
     it 'should contain readyness indicator' do
+
+      # ensure CRXDE is enabled
+      # vanilla installation of AEM 6.3 and prior defaults to CRXDE enabled
+      # vanilla installation of AEM 6.4 defaults to CRXDE disabled
+      node = @aem.node('/apps/system/config', 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      node.delete unless node.exists.data == false
+      result = node.exists
+      expect(result.data).to eq(false)
+      node.create('sling:OsgiConfig')
+
+      config_property = @aem.config_property('alias', 'String', '/crx/server')
+      result = config_property.create('author', 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      expect(result.message).to eq('Set author org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config String property alias=/crx/server')
+
+      config_property = @aem.config_property('dav.create-absolute-uri', 'Boolean', true)
+      result = config_property.create('author', 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      expect(result.message).to eq('Set author org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config Boolean property dav.create-absolute-uri=true')
+
+      # check CRXDE status enabled
       aem = @aem.aem
       result = aem.get_crxde_status
       expect(result.data).to eq(true)

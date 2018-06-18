@@ -2,6 +2,7 @@
 * Add feature path deletion
 * Update User & Group deletion
 * Remove support for Ruby 2.1
+* Enable CRXDE prior to testing CRXDE status #16 
 
 ### 1.4.3
 * Add aem get_packages

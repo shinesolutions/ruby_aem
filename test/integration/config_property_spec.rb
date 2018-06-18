@@ -37,7 +37,7 @@ describe 'ConfigProperty' do
 
     it 'should create AEM Password Reset Activator config property correctly when node exists' do
       # ensure node is created new
-      node = @aem.node('/apps/system/config.author', 'com.shinesolutions.aem.passwordreset.Activator')
+      node = @aem.node('/apps/system/config', 'com.shinesolutions.aem.passwordreset.Activator')
       node.delete unless node.exists.data == false
       result = node.exists
       expect(result.data).to eq(false)
@@ -50,7 +50,7 @@ describe 'ConfigProperty' do
 
     it 'should create AEM Health Check Servlet config property correctly when node exists' do
       # ensure node is created new
-      node = @aem.node('/apps/system/config.author', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
+      node = @aem.node('/apps/system/config', 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
       node.delete unless node.exists.data == false
       result = node.exists
       expect(result.data).to eq(false)

@@ -17,12 +17,10 @@ describe 'ConfigProperty' do
     it 'should create Apache Felix Jetty Based HTTP Service config property correctly when node exists' do
       # ensure node is created new
       node = @aem.node('/apps/system/config', 'org.apache.felix.http')
-      if node.exists.data == true
-        node.delete
-      end
+      node.delete unless node.exists.data == false
       result = node.exists
       expect(result.data).to eq(false)
-      result = node.create('sling:OsgiConfig')
+      node.create('sling:OsgiConfig')
 
       config_property = @aem.config_property('org.apache.felix.https.enable', 'Boolean', true)
       result = config_property.create('author', 'org.apache.felix.http')

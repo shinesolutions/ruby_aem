@@ -1,5 +1,6 @@
-### 1.4.4
-*
+### 2.0.0
+* Enable CRXDE prior to testing CRXDE status #16 
+* Remove config runmode from config property tests
 
 ### 1.4.3
 * Add aem get_packages

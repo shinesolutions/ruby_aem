@@ -22,4 +22,16 @@ describe 'Path' do
       @path.activate(true, false)
     end
   end
+
+  describe 'test deletion' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Path,
+        'delete',
+        name: '/etc/designs/cloudservices',
+        path: '/etc/designs'
+      )
+      @path.delete('/etc/designs')
+    end
+  end
 end

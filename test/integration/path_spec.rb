@@ -22,4 +22,12 @@ describe 'Path' do
       expect(result.message).to eq('Path /some/inexisting/path activated')
     end
   end
+
+  describe 'test path deletion' do
+    it 'should succeed when path is deleted' do
+      path = @aem.path('cloudservices')
+      result = path.delete('/etc/designs')
+      expect(result.message).to eq('Path /etc/designs/cloudservices deleted')
+    end
+  end
 end

@@ -288,15 +288,26 @@ node:
           message: 'Node %{path}/%{name} created'
     delete:
       api: sling
-      operation: deleteNode
+      operation: postNode
       params:
         required:
           path: '%{path}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Node %{path}/%{name} deleted'
+        201:
+          handler: simple
+          message: 'Node %{path}/%{name} deleted'
         204:
           handler: simple
           message: 'Node %{path}/%{name} deleted'
+        403:
+          handler: simple
+          message: 'Node %{path}/%{name} does not exist'
     exists:
       api: sling
       operation: getNode

@@ -224,9 +224,6 @@ group:
         204:
           handler: simple
           message: 'Group %{name} deleted at %{path}/%{authorizable_id}'
-        403:
-          handler: simple
-          message: 'Group %{name} at %{path}/%{authorizable_id} does not exist'
     exists:
       api: sling
       operation: getNode
@@ -305,9 +302,6 @@ node:
         204:
           handler: simple
           message: 'Node %{path}/%{name} deleted'
-        403:
-          handler: simple
-          message: 'Node %{path}/%{name} does not exist'
     exists:
       api: sling
       operation: getNode
@@ -491,9 +485,6 @@ path:
         204:
           handler: simple
           message: 'Path %{path} deleted'
-        403:
-          handler: simple
-          message: 'Path %{path} does not exist'
 configproperty:
   actions:
     createapachefelixjettybasedhttpservice:
@@ -913,9 +904,6 @@ user:
         204:
           handler: simple
           message: 'User %{name} deleted at %{path}/%{authorizable_id}'
-        403:
-          handler: simple
-          message: 'User %{name} at %{path}/%{authorizable_id} does not exist'
     exists:
       api: sling
       operation: getNode

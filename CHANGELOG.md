@@ -1,6 +1,7 @@
-### 2.0.1
+### 2.1.0
 * Add feature path deletion
 * Update User & Group deletion
+* Remove support for Ruby 2.1
 
 ### 2.0.0
 * Enable CRXDE prior to testing CRXDE status #16

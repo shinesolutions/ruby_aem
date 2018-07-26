@@ -34,7 +34,6 @@ describe 'Aem' do
 
   describe 'test get_crxde_status' do
     it 'should contain readyness indicator' do
-
       # ensure CRXDE is enabled
       # vanilla installation of AEM 6.3 and prior defaults to CRXDE enabled
       # vanilla installation of AEM 6.4 defaults to CRXDE disabled

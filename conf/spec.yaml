@@ -207,15 +207,23 @@ group:
           message: 'Group %{name} not found'
     delete:
       api: sling
-      operation: deleteNode
+      operation: postNode
       params:
         required:
           path: '%{path}'
           name: '%{authorizable_id}'
+        optional:
+          delete_authorizable: ''
       responses:
+        200:
+          handler: simple
+          message: 'Group %{name} deleted at %{path}/%{authorizable_id}'
+        201:
+          handler: simple
+          message: 'Group %{name} deleted at %{path}/%{authorizable_id}'
         204:
           handler: simple
-          message: 'Group %{name} deleted at /%{path}/%{authorizable_id}'
+          message: 'Group %{name} deleted at %{path}/%{authorizable_id}'
     exists:
       api: sling
       operation: getNode
@@ -277,12 +285,20 @@ node:
           message: 'Node %{path}/%{name} created'
     delete:
       api: sling
-      operation: deleteNode
+      operation: postNode
       params:
         required:
           path: '%{path}'
           name: '%{name}'
+        optional:
+          operation: delete
       responses:
+        200:
+          handler: simple
+          message: 'Node %{path}/%{name} deleted'
+        201:
+          handler: simple
+          message: 'Node %{path}/%{name} deleted'
         204:
           handler: simple
           message: 'Node %{path}/%{name} deleted'
@@ -450,6 +466,25 @@ path:
         200:
           handler: simple
           message: 'Path %{name} activated'
+    delete:
+      api: sling
+      operation: postNode
+      params:
+        required:
+          path: '%{path}'
+          name: '%{name}'
+        optional:
+          operation: delete
+      responses:
+        200:
+          handler: simple
+          message: 'Path %{path} deleted'
+        201:
+          handler: simple
+          message: 'Path %{path} deleted'
+        204:
+          handler: simple
+          message: 'Path %{path} deleted'
 configproperty:
   actions:
     createapachefelixjettybasedhttpservice:
@@ -852,15 +887,23 @@ user:
           message: 'User %{name} not found'
     delete:
       api: sling
-      operation: deleteNode
+      operation: postNode
       params:
         required:
           path: '%{path}'
           name: '%{authorizable_id}'
+        optional:
+          delete_authorizable: ''
       responses:
+        200:
+          handler: simple
+          message: 'User %{name} deleted at %{path}/%{authorizable_id}'
+        201:
+          handler: simple
+          message: 'User %{name} deleted at %{path}/%{authorizable_id}'
         204:
           handler: simple
-          message: 'User %{name} deleted at /%{path}/%{authorizable_id}'
+          message: 'User %{name} deleted at %{path}/%{authorizable_id}'
     exists:
       api: sling
       operation: getNode

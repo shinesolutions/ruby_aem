@@ -1,6 +1,7 @@
 ### 1.5.0
 * Add feature path deletion
 * Update User & Group deletion
+* Remove support for Ruby 2.1
 
 ### 1.4.3
 * Add aem get_packages

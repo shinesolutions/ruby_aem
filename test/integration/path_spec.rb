@@ -25,8 +25,8 @@ describe 'Path' do
 
   describe 'test path deletion' do
     it 'should succeed when path is deleted' do
-      path = @aem.path('cloudservices')
-      result = path.delete('/etc/designs')
+      path = @aem.path('/etc/designs/cloudservices')
+      result = path.delete
       expect(result.message).to eq('Path /etc/designs/cloudservices deleted')
     end
   end

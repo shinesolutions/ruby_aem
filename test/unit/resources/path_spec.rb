@@ -29,9 +29,9 @@ describe 'Path' do
         RubyAem::Resources::Path,
         'delete',
         name: '/etc/designs/cloudservices',
-        path: '/etc/designs'
+        path: '/etc/designs/cloudservices'
       )
-      @path.delete('/etc/designs')
+      @path.delete
     end
   end
 end

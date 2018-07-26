@@ -44,10 +44,10 @@ module RubyAem
       #
       # @param path Define the path which contains the node to delete
       # @return RubyAem::Result
-      def delete(path)
+      def delete
         # The path parameter will be combined with the name parameter
         # in order to delete the full path.
-        @call_params[:path] = path
+        @call_params[:path] = @call_params[:name]
 
         @client.call(self.class, __callee__.to_s, @call_params)
       end

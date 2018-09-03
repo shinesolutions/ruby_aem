@@ -67,6 +67,8 @@ module RubyAem
         'AEM Password Reset Activator'
       when 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck'
         'AEM Health Check Servlet'
+      when 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
+        'Adobe Granite SAML Authentication Handler'
       end
     end
   end

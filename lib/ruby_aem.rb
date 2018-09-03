@@ -14,6 +14,7 @@
 
 require 'ruby_aem/client'
 require 'ruby_aem/resources/aem'
+require 'ruby_aem/resources/authorizable_keystore'
 require 'ruby_aem/resources/bundle'
 require 'ruby_aem/resources/config_property'
 require 'ruby_aem/resources/flush_agent'
@@ -24,7 +25,9 @@ require 'ruby_aem/resources/path'
 require 'ruby_aem/resources/replication_agent'
 require 'ruby_aem/resources/outbox_replication_agent'
 require 'ruby_aem/resources/reverse_replication_agent'
+require 'ruby_aem/resources/saml'
 require 'ruby_aem/resources/repository'
+require 'ruby_aem/resources/truststore'
 require 'ruby_aem/resources/user'
 require 'swagger_aem'
 require 'yaml'
@@ -132,6 +135,13 @@ module RubyAem
       RubyAem::Resources::Group.new(@client, path, name)
     end
 
+    # Create a Keystore instance for given authorizable id.
+    #
+    # @return new RubyAem::Resources::AuhtorizableKeystore instance
+    def authorizable_keystore(intermediate_path, authorizable_id)
+      RubyAem::Resources::AuthorizableKeystore.new(@client, intermediate_path, authorizable_id)
+    end
+
     # Create a node instance.
     #
     # @param path the path to the node, e.g. /apps/system/
@@ -191,6 +201,20 @@ module RubyAem
     # @return new RubyAem::Resources::Repository instance
     def repository
       RubyAem::Resources::Repository.new(@client)
+    end
+
+    # Create a Saml instance.
+    #
+    # @return new RubyAem::Resources::Saml instance
+    def saml
+      RubyAem::Resources::Saml.new(@client)
+    end
+
+    # Create a Truststore instance.
+    #
+    # @return new RubyAem::Resources::Truststore instance
+    def truststore
+      RubyAem::Resources::Truststore.new(@client)
     end
 
     # Create a user instance.

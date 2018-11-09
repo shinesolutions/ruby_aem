@@ -261,14 +261,14 @@ Saml:
 
     # Configure SAML for AEM
     opts = {
-      key_store_password: 'admin',
+      key_store_password: 'someKeystorePassword',
       service_ranking: 5002,
       idp_http_redirect: true,
       create_user: true,
-      default_redirect_url: '/sites.html',
-      user_id_attribute: 'NameID',
-      default_groups: ['def-groups'],
-      idp_cert_alias: 'alias_1234'.
+      default_redirect_url: '/some_sites.html',
+      user_id_attribute: 'someUserID',
+      default_groups: ['some-groups'],
+      idp_cert_alias: 'some_alias_name_1234'.
       add_group_memberships: true,
       path: ['/'],
       synchronize_attributes: [
@@ -360,7 +360,7 @@ Authorizable Keystore:
     private_key_alias = 'alias_456'
     private_key_password = 'private_password'
 
-    result = keystore.upload_keystore_from_file(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password)
+    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password)
 
     # Force upload a keystore backup
     file_path = '/root/store.p12'
@@ -370,7 +370,7 @@ Authorizable Keystore:
     private_key_password = 'private_password'
     force = true
 
-    result = keystore.upload_keystore_from_file(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password, force)
+    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password, force)
 
     # Upload Certificate Chain into the Keystore
     private_key_alias = 'alias_456'

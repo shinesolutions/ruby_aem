@@ -23,8 +23,21 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def self.file_download(response, response_spec, call_params)
+    def self.package_file_download(response, response_spec, call_params)
       FileUtils.cp(response.body.path, "#{call_params[:file_path]}/#{call_params[:package_name]}-#{call_params[:package_version]}.zip")
+      response.body.delete
+
+      message = response_spec['message'] % call_params
+
+      RubyAem::Result.new(message, response)
+    end
+
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def self.file_download(response, response_spec, call_params)
+      FileUtils.cp(response.body.path, call_params[:file_path].to_s)
       response.body.delete
 
       message = response_spec['message'] % call_params

@@ -1,6 +1,11 @@
 | ruby_aem | Supported AEM | Supported Ruby | Documentation |
 |----------|---------------|----------------|---------------|
-| 1.4.1    | 6.2, 6.3               | 2.1, 2.2, 2.3      | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.1/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#141) |
+| 2.2.0    | 6.2, 6.3, 6.4          | 2.2, 2.3, 2.4      | [API](https://shinesolutions.github.io/ruby_aem/api/2.2.0/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#220) |
+| 2.1.0    | 6.2, 6.3, 6.4          | 2.2, 2.3, 2.4      | [API](https://shinesolutions.github.io/ruby_aem/api/2.1.0/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#210) |
+| 2.0.0    | 6.2, 6.3, 6.4          | 2.1, 2.2, 2.3, 2.4      | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.1/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#200) |
+| 1.4.3    | 6.2, 6.3               | 2.1, 2.2, 2.3, 2.4      | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.3/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#143) |
+| 1.4.2    | 6.2, 6.3               | 2.1, 2.2, 2.3, 2.4      | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.2/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#142) |
+| 1.4.1    | 6.2, 6.3               | 2.1, 2.2, 2.3           | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.1/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#141) |
 | 1.4.0    | 6.2, 6.3               | 2.0, 2.1, 2.2, 2.3      | [API](https://shinesolutions.github.io/ruby_aem/api/1.4.0/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#140) |
 | 1.3.3    | 6.2, 6.3               | 2.0, 2.1, 2.2, 2.3      | [API](https://shinesolutions.github.io/ruby_aem/api/1.3.3/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#133) |
 | 1.3.2    | 6.2, 6.3               | 2.0, 2.1, 2.2, 2.3      | [API](https://shinesolutions.github.io/ruby_aem/api/1.3.2/index.html) [Changes](https://github.com/shinesolutions/ruby_aem/blob/master/CHANGELOG.md#132) |

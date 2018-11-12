@@ -255,6 +255,329 @@ Repository:
     # unblock repository writes
     result = repository.unblock_writes
 
+Saml:
+
+    saml = aem.saml
+
+    # Configure SAML for AEM
+    opts = {
+      key_store_password: 'someKeystorePassword',
+      service_ranking: 5002,
+      idp_http_redirect: true,
+      create_user: true,
+      default_redirect_url: '/some_sites.html',
+      user_id_attribute: 'someUserID',
+      default_groups: ['some-groups'],
+      idp_cert_alias: 'some_alias_name_1234'.
+      add_group_memberships: true,
+      path: ['/'],
+      synchronize_attributes: [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance: 60,
+      group_membership_attribute: 'http://temp/variable/aem-groups',
+      idp_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id: 'https://prod-aemauthor.com/saml_login',
+      handle_logout: true,
+      sp_private_key_alias: '',
+      use_encryption: false,
+      name_id_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method	: 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+    }
+    result = saml.create(opts)
+
+    # Delete  the SAML Configuration
+    result = saml.delete
+
+    # Get the current SAML Configuration
+    result = saml.get
+
+Authorizable Keystore:
+
+    keystore = aem.authorizable_keystore('/home/users/system', 'authentication-service')
+
+    # Create Keystore
+    keystore_password = 'password'
+    result = keystore.create(keystore_password)
+
+    # Change Keystore Password
+    old_keystore_password = 'old_password'
+    new_keystore_password = 'new_password'
+    change_password(old_keystore_password, new_keystore_password)
+
+    # Delete keystore
+    result = keystore.delete
+
+    # Delete Certificate Chain from Keystore
+    private_key_alias = 'alias_123'
+    delete_certificate_chain(private_key_alias)
+
+    # Download keystore to a specific F=file
+    opts = { file: '/root/saved_keystore.p12' }
+    result = keystore.download(**opts)
+
+    # Download keystore to a specific directory
+    opts = { path: '/root' }
+    result = keystore.download_keystore(**opts)
+
+    # Check if keystore exists
+    result = keystore.exists
+
+    # Check if Alias exists
+    private_key_alias = 'alias_123'
+    exists_certificate_chain(private_key_alias)
+
+    # Get informations about an existing keystore
+    result = keystore.get
+
+    # Get informations about an Certificate Chain in the Keystore
+    private_key_alias = 'alias_123'
+    get_certificate_chain(private_key_alias)
+
+    # Get informations about an keystore provided as a file
+    file_path = '/root/store.p12'
+    keystore_password = 'admin'
+    result = keystore.read_keystore(file_path, keystore_password)
+
+    # Read certificate informations from file
+    file_path = '/root/store.p12'
+    read_cert_from_file(file_path)
+
+    # Read certificate informations provided as string
+    certificate_raw = '-----BEGIN CERTIFICATE-----
+    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+    -----END CERTIFICATE-----'
+    def read_certificate_raw(certificate_raw)
+
+    # Upload a keystore backup
+    file_path = '/root/store.p12'
+    new_alias = alias_123
+    key_store_file_password = 'admin'
+    private_key_alias = 'alias_456'
+    private_key_password = 'private_password'
+
+    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password)
+
+    # Force upload a keystore backup
+    file_path = '/root/store.p12'
+    new_alias = alias_123
+    key_store_file_password = 'admin'
+    private_key_alias = 'alias_456'
+    private_key_password = 'private_password'
+    force = true
+
+    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password, force)
+
+    # Upload Certificate Chain into the Keystore
+    private_key_alias = 'alias_456'
+    certificate = '/tmp/cert.crt'
+    private_key = '/tmp/private_key.der'
+    upload_certificate_chain(private_key_alias, certificate, private_key)
+
+    # Upload Certificate Chain into the Keystore with certificate provided as string
+    certificate_raw = '-----BEGIN CERTIFICATE-----
+    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+    -----END CERTIFICATE-----'
+    private_key_alias = 'alias_456'
+    private_key = '/tmp/private_key.der'
+    upload_certificate_chain_raw(private_key_alias, certificate_raw, private_key)
+
+    # Wait till keystore backup is uploaded
+    opts = {
+      file_path: '/root/saved_keystore.p12',
+      new_alias: alias_123,
+      key_store_file_password: 'admin',
+      private_key_alias: 'alias_456',
+      private_key_password: 'private_password',
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = keystore.upload_keystore_from_file_wait_until_ready(opts)
+
+    # Wait until Certificate Chain is uploaded into the keystore
+    opts = {
+      private_key_alias: 'alias_456',
+      certificate: '/tmp/cert.crt',
+      private_key: '/tmp/private_key.der',
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+
+    upload_certificate_chain_from_file_wait_until_ready(opts)
+
+    # Wait until Certificate Chain is uploaded into the keystore with certificate provided as string
+    opts = {
+      private_key_alias: 'alias_456',
+      certificate_raw : '-----BEGIN CERTIFICATE-----
+      MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+      -----END CERTIFICATE-----',
+      private_key: '/tmp/private_key.der',
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+
+    upload_certificate_chain_from_file_wait_until_ready(opts)
+
+Truststore:
+
+    truststore = aem.truststore
+
+    # Create Truststore
+    truststore_password = 'admin'
+    result = truststore.create_truststore(truststore_password)
+
+    # Delete Truststore
+    truststore_password = 'admin'
+    result = truststore.delete_truststore
+
+    # Download Truststore to a specific F=file
+    file = '/root/saved_truststore.p12'
+    result = truststore.download_truststore(file: file)
+
+    # Download Truststore to a specific directory
+    path = '/root'
+    result = truststore.download_truststore(path: path)
+
+    # Check if Truststore exists
+    result = truststore.exists_truststore
+
+    # Get informations about an existing Truststore
+    result = truststore.get_truststore_informations
+
+    # Get informations about an Truststore provided as a file
+    opts = {
+      file_path: '/root/saved_truststore.p12'
+      truststore_password: 'admin',
+    }
+    result = truststore.read_truststore(opts)
+
+    # Upload a Truststore backup
+    file_path = '/root/saved_truststore.p12'
+    result = truststore.upload_truststore_from_file(file_path: file_path)
+
+    # Force upload a Truststore backup
+    opts = {
+      file_path: '/root/saved_truststore.p12'
+      force: true,
+    }
+    result = truststore.upload_truststore_from_file(opts)
+
+    # Wait till Truststore backup is uploaded
+    opts = {
+      file_path: '/root/saved_truststore.p12',
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = truststore.upload_truststore_from_file(opts)
+
+    # Force upload of a Truststore backup and wait till it is uploaded
+    opts = {
+      file_path: '/root/saved_truststore.p12',
+      force: true,
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = truststore.upload_truststore_from_file(opts)
+
+
+Certificate:
+
+    certificate = aem.truststore
+
+    # Delete Certificate via Truststore alias name
+    certalias = 'alias_1234'
+    result = certificate.delete_cert(certalias: certalias)
+
+    # Delete Certificate via serial number
+    serial = 1234567890
+    result = certificate.delete_cert(certalias: serial)
+
+    # Check if a Certificate exists via Truststore alias name
+    certalias = 'alias_1234'
+    result = certificate.exists_certs(certalias: certalias)
+
+    # Check if a Certificate exists via serial number
+    serial = 1234567890
+    result = certificate.exists_certs(certalias: serial)
+
+    # Export a certificate via serial number
+    opts = {
+      serial: 1234567890,
+      truststore_password: 'admin',
+    }
+    result = certificate.export_certificate(opts)
+
+    # Get a Certificate via Truststore alias name
+    certalias = 'alias_1234'
+    result = certificate.get_certificate(certalias: certalias)
+
+    # Get a Certificate via serial number
+    serial = 1234567890
+    result = certificate.get_certificate(certalias: serial)
+
+    # Read certificate informations provided via string
+    certificate_raw = '-----BEGIN CERTIFICATE-----
+    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+    -----END CERTIFICATE-----'
+    result = certificate.read_cert_raw(certificate_raw)
+
+    # Read certificate informations provided via file
+    file_path = '/root/cert.crt'
+    result = certificate.read_cert_from_file(file_path)
+
+    # Upload a certificate provided via string
+    certificate_raw = '-----BEGIN CERTIFICATE-----
+    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+    -----END CERTIFICATE-----'
+    result = certificate.upload_cert_raw(certificate_raw)
+
+    # Upload a certificate provided via file
+    file_path = '/root/cert.crt'
+    result = certificate.upload_cert_from_file(file_path)
+
+    # Upload a certificate via file and wait till it is uploaded
+    opts = {
+      file_path:'/root/cert.crt'
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = certificate.upload_cert_from_file_wait_until_ready(opts)
+
+    # Read certificate informations provided via string and wait till it is uploaded
+    opts = {
+      certificate_raw = '-----BEGIN CERTIFICATE-----
+      MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
+      -----END CERTIFICATE-----'
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = certificate.upload_cert_raw_wait_until_ready(opts)
+
 User:
 
     user = aem.user('/home/users/s/', 'someuser')

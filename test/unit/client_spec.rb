@@ -176,7 +176,10 @@ describe 'Client' do
               'operation' => 'postBundle',
               'params' => {
                 'optional' => {
-                  'optional1' => '__FILE_PACKAGE__'
+                  'optional1' => '__FILE_PACKAGE__',
+                  'optional2' => '__FILE_PLAIN__',
+                  'optional3' => '__FILE_CERTIFICATE__',
+                  'optional4' => '__FILE_PRIVATE_KEY__'
                 }
               },
               'responses' => {
@@ -191,18 +194,39 @@ describe 'Client' do
         }
       }
 
-      mock_file = double('mock_file')
-      expect(File).to receive(:open).once.with('/tmp/somepackage-1.2.3.zip', 'r').and_yield(mock_file)
+      mock_file_package = double('mock_file_package')
+      mock_file_plain = double('mock_file_plain')
+      mock_file_certificate = double('mock_file_certificate')
+      mock_file_private_key = double('mock_file_private_key')
+      expect(File).to receive(:open).once.with('/tmp/somepackage-1.2.3.zip', 'r').and_yield(mock_file_package)
+      expect(File).to receive(:open).once.with('/tmp', 'r').and_yield(mock_file_plain)
+      expect(File).to receive(:open).once.with('/tmp/somecert', 'r').and_yield(mock_file_certificate)
+      expect(File).to receive(:open).once.with('/tmp/someprivatekey', 'r').and_yield(mock_file_private_key)
 
       mock_class = double('mock_class')
       expect(mock_class).to receive(:name).once.and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once.with(optional1: mock_file).and_return(['some data', 200, {}])
+      expect(mock_api).to receive(:post_bundle_with_http_info)
+        .once.with(optional1: mock_file_package, optional2: mock_file_plain, optional3: mock_file_certificate, optional4: mock_file_private_key)
+        .and_return(['some data', 200, {}])
       apis = { console: mock_api }
 
       client = RubyAem::Client.new(apis, spec)
-      client.call(mock_class, 'start', name: 'somebundle', optional1: '__FILE_PACKAGE__', file_path: '/tmp', package_name: 'somepackage', package_version: '1.2.3')
+      client.call(
+        mock_class,
+        'start',
+        name: 'somebundle',
+        optional1: '__FILE_PACKAGE__',
+        optional2: '__FILE_PLAIN__',
+        optional3: '__FILE_CERTIFICATE__',
+        optional4: '__FILE_PRIVATE_KEY__',
+        file_path: '/tmp',
+        file_path_certificate: '/tmp/somecert',
+        file_path_private_key: '/tmp/someprivatekey',
+        package_name: 'somepackage',
+        package_version: '1.2.3'
+      )
     end
   end
 

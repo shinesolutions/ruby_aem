@@ -176,7 +176,7 @@ describe 'Client' do
               'operation' => 'postBundle',
               'params' => {
                 'optional' => {
-                  'optional1' => '__FILE__'
+                  'optional1' => '__FILE_PACKAGE__'
                 }
               },
               'responses' => {
@@ -202,7 +202,7 @@ describe 'Client' do
       apis = { console: mock_api }
 
       client = RubyAem::Client.new(apis, spec)
-      client.call(mock_class, 'start', name: 'somebundle', optional1: '__FILE__', file_path: '/tmp', package_name: 'somepackage', package_version: '1.2.3')
+      client.call(mock_class, 'start', name: 'somebundle', optional1: '__FILE_PACKAGE__', file_path: '/tmp', package_name: 'somepackage', package_version: '1.2.3')
     end
   end
 

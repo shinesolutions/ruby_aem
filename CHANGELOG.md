@@ -4,6 +4,7 @@
 * Add feature to manage Certificates in AEM Truststore
 * Add feature to configure SAML Authentication
 * Drop Ruby 2.2 support due to openssl 2.1.2 
+* Remove run mode parameter from config property resource
 
 ### 2.1.0
 * Add feature path deletion

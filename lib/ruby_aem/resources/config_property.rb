@@ -35,14 +35,12 @@ module RubyAem
 
       # Create a new config property.
       #
-      # @param run_mode AEM run mode: author or publish
       # @param @param config_node_name the node name of a given OSGI config
       # @return RubyAem::Result
-      def create(run_mode, config_node_name)
+      def create(config_node_name)
         name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
         type_hint_prefix = name.gsub(/^_/, '')
 
-        @call_params[:run_mode] = run_mode
         @call_params[:config_node_name] = config_node_name
         @call_params[name.to_sym] = @call_params[:value]
         @call_params["#{type_hint_prefix}_type_hint".to_sym] = @call_params[:type]

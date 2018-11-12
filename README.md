@@ -75,7 +75,7 @@ Configuration property:
     config_property = aem.config_property('someproperty', 'Boolean', true)
 
     # set config property on /apps/system/config/somenode
-    result = config_property.create('author', 'somenode')
+    result = config_property.create('somenode')
 
 Flush agent:
 

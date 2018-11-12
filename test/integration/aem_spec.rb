@@ -44,12 +44,12 @@ describe 'Aem' do
       node.create('sling:OsgiConfig')
 
       config_property = @aem.config_property('alias', 'String', '/crx/server')
-      result = config_property.create('author', 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
-      expect(result.message).to eq('Set author org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config String property alias=/crx/server')
+      result = config_property.create('org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      expect(result.message).to eq('Set org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config String property alias=/crx/server')
 
       config_property = @aem.config_property('dav.create-absolute-uri', 'Boolean', true)
-      result = config_property.create('author', 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
-      expect(result.message).to eq('Set author org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config Boolean property dav.create-absolute-uri=true')
+      result = config_property.create('org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
+      expect(result.message).to eq('Set org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet config Boolean property dav.create-absolute-uri=true')
 
       # check CRXDE status enabled
       aem = @aem.aem

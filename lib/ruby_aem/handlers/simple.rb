@@ -76,41 +76,5 @@ module RubyAem
       result = Handlers.simple(response, response_spec, call_params)
       raise RubyAem::Error.new(result.message, result)
     end
-
-    # Simple handler which checks the result message.
-    # Sets result data to true if the result message matches the expected message.
-    #
-    # @param expected_message the expected message text
-    # @param response HTTP response containing status_code, body, and headers
-    # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params API call parameters
-    # @return RubyAem::Result
-    def self.simple_message(expected_message, response, response_spec, call_params)
-      result = Handlers.simple(response, response_spec, call_params)
-      result.data = result.message.eql? expected_message
-      result
-    end
-
-    # Simple handler which checks the truststore result message.
-    #
-    # @param expected_message the expected message text
-    # @param response HTTP response containing status_code, body, and headers
-    # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params API call parameters
-    # @return RubyAem::Result
-    def self.simple_truststore(response, response_spec, call_params)
-      simple_message('Truststore exists', response, response_spec, call_params)
-    end
-
-    # Simple handler which checks the keystore result message.
-    #
-    # @param expected_message the expected message text
-    # @param response HTTP response containing status_code, body, and headers
-    # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params API call parameters
-    # @return RubyAem::Result
-    def self.simple_authorizablekeystore(response, response_spec, call_params)
-      simple_message('Keystore exists', response, response_spec, call_params)
-    end
   end
 end

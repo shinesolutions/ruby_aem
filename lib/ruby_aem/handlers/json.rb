@@ -113,5 +113,47 @@ module RubyAem
       result.data = agent_names
       result
     end
+
+    # Truststore payload handler, checks for exists and aliases properties in
+    # order to identify existence.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def self.json_truststore(response, response_spec, call_params)
+      json = JSON.parse(response.body)
+
+      result = Handlers.simple(response, response_spec, call_params)
+
+      if json['exists'].eql?(false)
+        result.data = false
+      elsif json['aliases']
+        result.data = true
+      end
+
+      result
+    end
+
+    # Authorizable keystore payload handler, checks for exists and aliases
+    # properties in order to identify existence.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def self.json_authorizable_keystore(response, response_spec, call_params)
+      json = JSON.parse(response.body)
+
+      result = Handlers.simple(response, response_spec, call_params)
+
+      if json['exists'].eql?(false)
+        result.data = false
+      elsif json['aliases']
+        result.data = true
+      end
+
+      result
+    end
   end
 end

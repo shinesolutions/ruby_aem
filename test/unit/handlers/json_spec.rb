@@ -160,4 +160,74 @@ describe 'JSON Handler' do
       expect(result.data[1]).to eq('agent2')
     end
   end
+
+  describe 'test json_truststore' do
+    it 'should construct result message with true data when the payload contains aliases' do
+      data =
+        '{' \
+        '  "aliases": []' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Truststore exists' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      expect(result.data).to be(true)
+      expect(result.message).to eq('Truststore exists')
+      expect(result.response).to be(response)
+    end
+    it 'should construct result message with false data when the expected message does not exist' do
+      data =
+        '{' \
+        '  "exists": false' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Truststore not found' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      expect(result.data).to be(false)
+      expect(result.message).to eq('Truststore not found')
+      expect(result.response).to be(response)
+    end
+  end
+
+  describe 'test json_authorizable_keystore' do
+    it 'should construct result message with true data when the payload contains aliases' do
+      data =
+        '{' \
+        '  "aliases": []' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Authorizable keystore exists' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      expect(result.data).to be(true)
+      expect(result.message).to eq('Authorizable keystore exists')
+      expect(result.response).to be(response)
+    end
+    it 'should construct result message with false data when the expected message does not exist' do
+      data =
+        '{' \
+        '  "exists": false' \
+        '}'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Authorizable keystore not found' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      expect(result.data).to be(false)
+      expect(result.message).to eq('Authorizable keystore not found')
+      expect(result.response).to be(response)
+    end
+  end
 end

@@ -331,23 +331,23 @@ Authorizable Keystore:
     private_key_alias = 'alias_123'
     exists_certificate_chain(private_key_alias)
 
-    # Get informations about an existing keystore
+    # Get info about an existing keystore
     result = keystore.get
 
-    # Get informations about an Certificate Chain in the Keystore
+    # Get info about an Certificate Chain in the Keystore
     private_key_alias = 'alias_123'
     get_certificate_chain(private_key_alias)
 
-    # Get informations about an keystore provided as a file
+    # Get info about an keystore provided as a file
     file_path = '/root/store.p12'
     keystore_password = 'admin'
     result = keystore.read_keystore(file_path, keystore_password)
 
-    # Read certificate informations from file
+    # Read certificate info from file
     file_path = '/root/store.p12'
     read_cert_from_file(file_path)
 
-    # Read certificate informations provided as string
+    # Read certificate info provided as string
     certificate_raw = '-----BEGIN CERTIFICATE-----
     MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
     -----END CERTIFICATE-----'
@@ -454,10 +454,10 @@ Truststore:
     # Check if Truststore exists
     result = truststore.exists_truststore
 
-    # Get informations about an existing Truststore
-    result = truststore.get_truststore_informations
+    # Get info about an existing Truststore
+    result = truststore.get_truststore_info
 
-    # Get informations about an Truststore provided as a file
+    # Get info about an Truststore provided as a file
     opts = {
       file_path: '/root/saved_truststore.p12'
       truststore_password: 'admin',
@@ -534,13 +534,13 @@ Certificate:
     serial = 1234567890
     result = certificate.get_certificate(certalias: serial)
 
-    # Read certificate informations provided via string
+    # Read certificate info provided via string
     certificate_raw = '-----BEGIN CERTIFICATE-----
     MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
     -----END CERTIFICATE-----'
     result = certificate.read_cert_raw(certificate_raw)
 
-    # Read certificate informations provided via file
+    # Read certificate info provided via file
     file_path = '/root/cert.crt'
     result = certificate.read_cert_from_file(file_path)
 
@@ -565,7 +565,7 @@ Certificate:
     }
     result = certificate.upload_cert_from_file_wait_until_ready(opts)
 
-    # Read certificate informations provided via string and wait till it is uploaded
+    # Read certificate info provided via string and wait till it is uploaded
     opts = {
       certificate_raw = '-----BEGIN CERTIFICATE-----
       MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ

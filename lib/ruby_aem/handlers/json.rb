@@ -122,13 +122,14 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.json_truststore(response, response_spec, call_params)
-      truststoreInfo = response.body
+      truststore_info = response.body
 
       result = Handlers.simple(response, response_spec, call_params)
 
-      if truststoreInfo.exists == false
+      if truststore_info.exists == false
         result.data = false
-      elsif truststoreInfo.aliases.kind_of?(Array)
+        result.message = 'Truststore not found'
+      elsif truststore_info.aliases.is_a?(Array)
         result.data = true
       end
 
@@ -143,13 +144,13 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.json_authorizable_keystore(response, response_spec, call_params)
-      keystoreInfo = response.body
+      keystore_info = response.body
 
       result = Handlers.simple(response, response_spec, call_params)
 
-      if keystoreInfo.exists == false
+      if keystore_info.exists == false
         result.data = false
-      elsif keystoreInfo.aliases.kind_of?(Array)
+      elsif keystore_info.aliases.is_a?(Array)
         result.data = true
       end
 

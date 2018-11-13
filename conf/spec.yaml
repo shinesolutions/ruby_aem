@@ -62,6 +62,108 @@ aem:
         200:
           handler: xml_package_list
           message: 'All packages list retrieved successfully'
+authorizablekeystore:
+  actions:
+    create:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          new_password: '%{keystore_password}'
+          re_password: '%{keystore_password}'
+          operation: createStore
+      responses:
+        200:
+          handler: simple
+          message: 'Keystore successfully created'
+        201:
+          handler: simple
+          message: 'Keystore successfully created'
+        404:
+          handler: simple_false
+          message: 'Error: Could not create Keystore'
+    delete:
+      api: sling
+      operation: postNode
+      params:
+        required:
+          path: '%{intermediate_path}/%{authorizable_id}/keystore'
+          name: store.p12
+        optional:
+          operation: delete
+      responses:
+        200:
+          handler: simple
+          message: 'Keystore deleted'
+        201:
+          handler: simple
+          message: 'Keystore deleted'
+        403:
+          handler: simple
+          message: 'Keystore does not exist'
+    get:
+      api: sling
+      operation: getAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+      responses:
+        200:
+          handler: simple
+          message: 'Keystore result'
+        404:
+          handler: simple_false
+          message: 'Keystore not found'
+    change_password:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          current_password: '%{old_keystore_password}'
+          new_password: '%{new_keystore_password}'
+          re_password: '%{new_keystore_password}'
+      responses:
+        200:
+          handler: simple
+          message: 'Keystore password successfully changed'
+    upload:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          new_alias: '%{new_alias}'
+          key_store: __FILE_PLAIN__
+          key_store_pass: '%{key_store_file_password}'
+          _alias: '%{private_key_alias}'
+          key_password: '%{private_key_password}'
+      responses:
+        200:
+          handler: simple
+          message: 'Keystore successfully uploaded'
+        201:
+          handler: simple
+          message: 'Keystore successfully uploaded'
+    download:
+      api: sling
+      operation: getKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+      responses:
+        200:
+          handler: file_download
+          message: 'Keystore successfully downloaded to %{file_path}'
 bundle:
   responses:
     404:
@@ -90,6 +192,65 @@ bundle:
         200:
           handler: simple
           message: 'Bundle %{name} stopped'
+certificate:
+  actions:
+    upload:
+      api: sling
+      operation: postTruststore
+      params:
+        optional:
+          certificate: __FILE_PLAIN__
+          key_store_type: jks
+      responses:
+        200:
+          handler: simple
+          message: 'Certificate uploaded'
+        201:
+          handler: simple
+          message: 'Certificate uploaded'
+    delete:
+      api: sling
+      operation: postTruststore
+      params:
+        optional:
+          remove_alias: '%{certalias}'
+      responses:
+        200:
+          handler: simple
+          message: 'Certificate %{certalias} deleted'
+certificate_chain:
+  actions:
+    upload:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          _alias: '%{_alias}'
+          cert_chain: __FILE_CERTIFICATE__
+          pk: __FILE_PRIVATE_KEY__
+      responses:
+        200:
+          handler: simple
+          message: 'Private key and Certificate Chain successfully uploaded'
+        201:
+          handler: simple
+          message: 'Private key and Certificate Chain successfully uploaded'
+    delete:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          remove_alias: '%{_alias}'
+      responses:
+        200:
+          handler: simple
+          message: 'Certificate %{_alias} deleted'
 flushagent:
   responses:
     404:
@@ -265,139 +426,6 @@ group:
         200:
           handler: simple
           message: 'User/group %{member} added to group %{name}'
-authorizablekeystore:
-  actions:
-    create:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          new_password: '%{keystore_password}'
-          re_password: '%{keystore_password}'
-          operation: createStore
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore successfully created'
-        201:
-          handler: simple
-          message: 'Keystore successfully created'
-        404:
-          handler: simple_false
-          message: 'Error: Could not create Keystore'
-    delete:
-      api: sling
-      operation: postNode
-      params:
-        required:
-          path: '%{intermediate_path}/%{authorizable_id}/keystore'
-          name: store.p12
-        optional:
-          operation: delete
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore deleted'
-        201:
-          handler: simple
-          message: 'Keystore deleted'
-        403:
-          handler: simple
-          message: 'Keystore does not exist'
-    get:
-      api: sling
-      operation: getAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore result'
-        404:
-          handler: simple_false
-          message: 'Keystore not found'
-    change_password:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          current_password: '%{old_keystore_password}'
-          new_password: '%{new_keystore_password}'
-          re_password: '%{new_keystore_password}'
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore password successfully changed'
-    upload:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          new_alias: '%{new_alias}'
-          key_store: __FILE_PLAIN__
-          key_store_pass: '%{key_store_file_password}'
-          _alias: '%{private_key_alias}'
-          key_password: '%{private_key_password}'
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore successfully uploaded'
-        201:
-          handler: simple
-          message: 'Keystore successfully uploaded'
-    download:
-      api: sling
-      operation: getKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-      responses:
-        200:
-          handler: file_download
-          message: 'Keystore successfully downloaded to %{file_path}'
-    upload_certificate_chain:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          _alias: '%{_alias}'
-          cert_chain: __FILE_CERTIFICATE__
-          pk: __FILE_PRIVATE_KEY__
-      responses:
-        200:
-          handler: simple
-          message: 'Private key and Certificate Chain successfully uploaded'
-        201:
-          handler: simple
-          message: 'Private key and Certificate Chain successfully uploaded'
-    delete_certificate_chain:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          remove_alias: '%{_alias}'
-      responses:
-        200:
-          handler: simple
-          message: 'Certificate %{_alias} deleted'
 node:
   responses:
     404:
@@ -636,7 +664,7 @@ configproperty:
           - org_apache_felix_https_keystore_key_type_hint
           - org_apache_felix_https_keystore_key_password
           - org_apache_felix_https_keystore_key_password_type_hint
-          - org_apache_felix_https_truststore
+          - org_apache_felix_https_
           - org_apache_felix_https_truststore_key_type_hint
           - org_apache_felix_https_truststore_password
           - org_apache_felix_https_truststore_password_type_hint
@@ -1038,103 +1066,6 @@ repository:
         200:
           handler: simple
           message: 'Repository writes unblocked'
-truststore:
-  actions:
-    create_truststore:
-      api: sling
-      operation: postTruststore
-      params:
-        optional:
-          new_password: '%{truststore_password}'
-          re_password: '%{truststore_password}'
-          operation: createStore
-      responses:
-        200:
-          handler: simple
-          message: 'Truststore created'
-        201:
-          handler: simple
-          message: 'Truststore created'
-        404:
-          handler: simple_false
-          message: 'Could not create Truststore'
-    delete_truststore:
-      api: sling
-      operation: postNode
-      params:
-        required:
-          path: /etc/truststore/
-          name: truststore.p12
-        optional:
-          operation: delete
-      responses:
-        200:
-          handler: simple
-          message: 'Truststore deleted'
-        201:
-          handler: simple
-          message: 'Truststore deleted'
-        403:
-          handler: simple
-          message: 'Truststore does not exist'
-    upload_cert_from_file:
-      api: sling
-      operation: postTruststore
-      params:
-        optional:
-          certificate: __FILE_PLAIN__
-          key_store_type: jks
-      responses:
-        200:
-          handler: simple
-          message: 'Certificate uploaded'
-        201:
-          handler: simple
-          message: 'Certificate uploaded'
-    upload_truststore_from_file:
-      api: sling
-      operation: post_truststore_pkcs12
-      params:
-        optional:
-          truststore_p12: __FILE_PLAIN__
-      responses:
-        200:
-          handler: simple
-          message: 'Truststore uploaded'
-        201:
-          handler: simple
-          message: 'Truststore uploaded'
-    delete_cert_by_alias:
-      api: sling
-      operation: postTruststore
-      params:
-        optional:
-          remove_alias: '%{certalias}'
-      responses:
-        200:
-          handler: simple
-          message: 'Certificate %{certalias} deleted'
-    get_truststore_informations:
-      api: sling
-      operation: getTruststoreInformations
-      params:
-        required:
-      responses:
-        200:
-          handler: simple
-          message: 'Truststore result'
-        404:
-          handler: simple_false
-          message: 'Truststore not found'
-    download_truststore:
-      api: sling
-      operation: getTruststore
-      params:
-        required:
-      responses:
-        200:
-          handler: file_download
-          message: 'Truststore downloaded to %{file_path}'
 saml:
   actions:
     get:
@@ -1200,6 +1131,79 @@ saml:
         200:
           handler: simple
           message: 'SAML Configuration successfully deleted'
+truststore:
+  actions:
+    create:
+      api: sling
+      operation: postTruststore
+      params:
+        optional:
+          new_password: '%{password}'
+          re_password: '%{password}'
+          operation: createStore
+      responses:
+        200:
+          handler: simple
+          message: 'Truststore created'
+        201:
+          handler: simple
+          message: 'Truststore created'
+        404:
+          handler: simple_false
+          message: 'Could not create truststore'
+    upload:
+      api: sling
+      operation: post_truststore_pkcs12
+      params:
+        optional:
+          truststore_p12: __FILE_PLAIN__
+      responses:
+        200:
+          handler: simple
+          message: 'Truststore uploaded'
+        201:
+          handler: simple
+          message: 'Truststore uploaded'
+    download:
+      api: sling
+      operation: getTruststore
+      params:
+        required:
+      responses:
+        200:
+          handler: file_download
+          message: 'Truststore downloaded to %{file_path}'
+    delete:
+      api: sling
+      operation: postNode
+      params:
+        required:
+          path: /etc/truststore/
+          name: truststore.p12
+        optional:
+          operation: delete
+      responses:
+        200:
+          handler: simple
+          message: 'Truststore deleted'
+        201:
+          handler: simple
+          message: 'Truststore deleted'
+        403:
+          handler: simple_error
+          message: 'Truststore not found'
+    exists:
+      api: sling
+      operation: getTruststoreInfo
+      params:
+        required:
+      responses:
+        200:
+          handler: json_truststore
+          message: 'Truststore exists'
+        404:
+          handler: json_truststore
+          message: 'Truststore not found'
 user:
   responses:
     404:

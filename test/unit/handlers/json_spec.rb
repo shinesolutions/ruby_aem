@@ -163,10 +163,8 @@ describe 'JSON Handler' do
 
   describe 'test json_truststore' do
     it 'should construct result message with true data when the payload contains aliases' do
-      data =
-        '{' \
-        '  "aliases": []' \
-        '}'
+      data = SwaggerAemClient::TruststoreInfo.new
+      data.aliases = []
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Truststore exists' }
@@ -179,10 +177,8 @@ describe 'JSON Handler' do
       expect(result.response).to be(response)
     end
     it 'should construct result message with false data when the expected message does not exist' do
-      data =
-        '{' \
-        '  "exists": false' \
-        '}'
+      data = SwaggerAemClient::TruststoreInfo.new
+      data.exists = false
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Truststore not found' }
@@ -198,10 +194,8 @@ describe 'JSON Handler' do
 
   describe 'test json_authorizable_keystore' do
     it 'should construct result message with true data when the payload contains aliases' do
-      data =
-        '{' \
-        '  "aliases": []' \
-        '}'
+      data = SwaggerAemClient::KeystoreInfo.new
+      data.aliases = []
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Authorizable keystore exists' }
@@ -214,10 +208,8 @@ describe 'JSON Handler' do
       expect(result.response).to be(response)
     end
     it 'should construct result message with false data when the expected message does not exist' do
-      data =
-        '{' \
-        '  "exists": false' \
-        '}'
+      data = SwaggerAemClient::KeystoreInfo.new
+      data.exists = false
       status_code = nil
       headers = nil
       response_spec = { 'message' => 'Authorizable keystore not found' }

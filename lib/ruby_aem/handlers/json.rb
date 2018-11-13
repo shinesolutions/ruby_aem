@@ -122,13 +122,13 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.json_truststore(response, response_spec, call_params)
-      json = JSON.parse(response.body)
+      truststoreInfo = response.body
 
       result = Handlers.simple(response, response_spec, call_params)
 
-      if json['exists'].eql?(false)
+      if truststoreInfo.exists == false
         result.data = false
-      elsif json['aliases']
+      elsif truststoreInfo.aliases.kind_of?(Array)
         result.data = true
       end
 
@@ -143,13 +143,13 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.json_authorizable_keystore(response, response_spec, call_params)
-      json = JSON.parse(response.body)
+      keystoreInfo = response.body
 
       result = Handlers.simple(response, response_spec, call_params)
 
-      if json['exists'].eql?(false)
+      if keystoreInfo.exists == false
         result.data = false
-      elsif json['aliases']
+      elsif keystoreInfo.aliases.kind_of?(Array)
         result.data = true
       end
 

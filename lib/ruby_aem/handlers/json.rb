@@ -121,7 +121,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def self.json_truststore(response, response_spec, call_params)
+    def self.json_truststore_exists(response, response_spec, call_params)
       truststore_info = response.body
 
       result = Handlers.simple(response, response_spec, call_params)
@@ -143,7 +143,7 @@ module RubyAem
     # @param response_spec response specification as configured in conf/spec.yaml
     # @param call_params API call parameters
     # @return RubyAem::Result
-    def self.json_authorizable_keystore(response, response_spec, call_params)
+    def self.json_authorizable_keystore_exists(response, response_spec, call_params)
       keystore_info = response.body
 
       result = Handlers.simple(response, response_spec, call_params)

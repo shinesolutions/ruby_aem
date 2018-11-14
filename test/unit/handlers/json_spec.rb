@@ -161,7 +161,7 @@ describe 'JSON Handler' do
     end
   end
 
-  describe 'test json_truststore' do
+  describe 'test json_truststore_exists' do
     it 'should construct result message with true data when the payload contains aliases' do
       data = SwaggerAemClient::TruststoreInfo.new
       data.aliases = []
@@ -171,7 +171,7 @@ describe 'JSON Handler' do
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      result = RubyAem::Handlers.json_truststore_exists(response, response_spec, call_params)
       expect(result.data).to be(true)
       expect(result.message).to eq('Truststore exists')
       expect(result.response).to be(response)
@@ -185,14 +185,14 @@ describe 'JSON Handler' do
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      result = RubyAem::Handlers.json_truststore_exists(response, response_spec, call_params)
       expect(result.data).to be(false)
       expect(result.message).to eq('Truststore not found')
       expect(result.response).to be(response)
     end
   end
 
-  describe 'test json_authorizable_keystore' do
+  describe 'test json_authorizable_keystore_exists' do
     it 'should construct result message with true data when the payload contains aliases' do
       data = SwaggerAemClient::KeystoreInfo.new
       data.aliases = []
@@ -202,7 +202,7 @@ describe 'JSON Handler' do
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.json_truststore(response, response_spec, call_params)
+      result = RubyAem::Handlers.json_truststore_exists(response, response_spec, call_params)
       expect(result.data).to be(true)
       expect(result.message).to eq('Authorizable keystore exists')
       expect(result.response).to be(response)
@@ -216,7 +216,7 @@ describe 'JSON Handler' do
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.json_authorizable_keystore(response, response_spec, call_params)
+      result = RubyAem::Handlers.json_authorizable_keystore_exists(response, response_spec, call_params)
       expect(result.data).to be(false)
       expect(result.message).to eq('Authorizable keystore not found')
       expect(result.response).to be(response)

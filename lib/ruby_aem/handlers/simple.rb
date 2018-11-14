@@ -76,5 +76,17 @@ module RubyAem
       result = Handlers.simple(response, response_spec, call_params)
       raise RubyAem::Error.new(result.message, result)
     end
+
+    # Simple handler with response body as result data.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def self.simple_body(response, response_spec, call_params)
+      result = Handlers.simple(response, response_spec, call_params)
+      result.data = response.body
+      result
+    end
   end
 end

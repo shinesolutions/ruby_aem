@@ -89,4 +89,20 @@ describe 'Simple Handler' do
       end
     end
   end
+
+  describe 'test simple_body' do
+    it 'should construct result message with response body data' do
+      data = 'some body'
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Some message' }
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.simple_body(response, response_spec, call_params)
+      expect(result.message).to eq('Some message')
+      expect(result.response).to be(response)
+      expect(result.data).to eq('some body')
+    end
+  end
 end

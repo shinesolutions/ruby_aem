@@ -61,6 +61,18 @@ describe 'AuthorizableKeystore' do
     end
   end
 
+  describe 'test info' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::AuthorizableKeystore,
+        'info',
+        intermediate_path: '/home/users/s',
+        authorizable_id: 'someauthorizableid'
+      )
+      @authorizable_keystore.info
+    end
+  end
+
   describe 'test download' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

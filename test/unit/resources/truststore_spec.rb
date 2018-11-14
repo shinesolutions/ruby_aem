@@ -43,6 +43,17 @@ describe 'Truststore' do
     end
   end
 
+  describe 'test info' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(
+        RubyAem::Resources::Truststore,
+        'info',
+        {}
+      )
+      @truststore.info
+    end
+  end
+
   describe 'test download' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

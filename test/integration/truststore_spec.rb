@@ -18,7 +18,7 @@ describe 'Truststore' do
   after do
   end
 
-  describe 'test truststore create' do
+  describe 'test create' do
     it 'should return true on existence check' do
       result = @truststore.exists
       expect(result.message).to eq('Truststore exists')
@@ -26,7 +26,14 @@ describe 'Truststore' do
     end
   end
 
-  describe 'test truststore delete' do
+  describe 'test info' do
+    it 'should return the truststore info' do
+      result = @truststore.info
+      expect(result.message).to eq('Retrieved truststore info')
+    end
+  end
+
+  describe 'test delete' do
     it 'should succeed when truststore exists' do
       result = @truststore.delete
       expect(result.message).to eq('Truststore deleted')

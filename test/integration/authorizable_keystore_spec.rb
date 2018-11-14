@@ -18,7 +18,7 @@ describe 'AuthorizableKeystore' do
   after do
   end
 
-  describe 'test authorizable_keystore create' do
+  describe 'test create' do
     it 'should return true on existence check' do
       result = @authorizable_keystore.exists
       expect(result.message).to eq('Authorizable keystore exists')
@@ -26,7 +26,14 @@ describe 'AuthorizableKeystore' do
     end
   end
 
-  describe 'test authorizable keystore delete' do
+  describe 'test info' do
+    it 'should return the authorizable keystore info' do
+      result = @authorizable_keystore.info
+      expect(result.message).to eq('Retrieved authorizable keystore info')
+    end
+  end
+
+  describe 'test delete' do
     it 'should succeed when authorizable keystore exists' do
       result = @authorizable_keystore.exists
       expect(result.message).to eq('Authorizable keystore exists')
@@ -61,7 +68,7 @@ describe 'AuthorizableKeystore' do
     end
   end
 
-  describe 'test authorizable keystore change password' do
+  describe 'test change password' do
     it 'should return true on existence check' do
       result = @authorizable_keystore.change_password('s0m3p4ssw0rd', 's0m3n3wp4ssw0rd')
       expect(result.message).to eq('Authorizable keystore password successfully changed')

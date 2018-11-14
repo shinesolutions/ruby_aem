@@ -160,11 +160,22 @@ authorizablekeystore:
           authorizable_id: '%{authorizable_id}'
       responses:
         200:
-          handler: json_authorizable_keystore
+          handler: json_authorizable_keystore_exists
           message: 'Authorizable keystore exists'
         404:
-          handler: json_authorizable_keystore
+          handler: json_authorizable_keystore_exists
           message: 'Authorizable keystore not found'
+    info:
+      api: sling
+      operation: getAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+      responses:
+        200:
+          handler: simple_body
+          message: 'Retrieved authorizable keystore info'
 bundle:
   responses:
     404:
@@ -195,7 +206,7 @@ bundle:
           message: 'Bundle %{name} stopped'
 certificate:
   actions:
-    upload:
+    import:
       api: sling
       operation: postTruststore
       params:
@@ -1201,11 +1212,20 @@ truststore:
         required:
       responses:
         200:
-          handler: json_truststore
+          handler: json_truststore_exists
           message: 'Truststore exists'
         404:
-          handler: json_truststore
+          handler: json_truststore_exists
           message: 'Truststore not found'
+    info:
+      api: sling
+      operation: getTruststoreInfo
+      params:
+        required:
+      responses:
+        200:
+          handler: simple_body
+          message: 'Retrieved truststore info'
 user:
   responses:
     404:

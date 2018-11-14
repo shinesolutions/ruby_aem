@@ -61,7 +61,7 @@ module RubyAem
       # @param file_path local file path to Keystore PKCS12 file
       # @param password Password of the Keystore PKCS12 File
       # @return OpenSSL::PKCS12
-      def read_keystore(file_path, password)
+      def read(file_path, password)
         authorizable_keystore_raw = File.read file_path
         OpenSSL::PKCS12.new(authorizable_keystore_raw, password)
       end
@@ -88,6 +88,13 @@ module RubyAem
       #
       # @return RubyAem::Result
       def exists
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
+      # Retrieve AEM Authorizable Keystore info.
+      #
+      # @return RubyAem::Result
+      def info
         @client.call(self.class, __callee__.to_s, @call_params)
       end
     end

@@ -90,6 +90,13 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Retrieve AEM Truststore info.
+      #
+      # @return RubyAem::Result
+      def info
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
       # Upload AEM Truststore and wait until the certificate is uploaded.
       #
       # @param file_path local file path to truststore PKCS12 file

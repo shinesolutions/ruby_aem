@@ -63,6 +63,10 @@ aem:
           handler: xml_package_list
           message: 'All packages list retrieved successfully'
 authorizablekeystore:
+  responses:
+    404:
+      handler: simple_error
+      message: 'Authorizable keystore not found'
   actions:
     create:
       api: sling
@@ -72,19 +76,62 @@ authorizablekeystore:
           intermediate_path: '%{intermediate_path}'
           authorizable_id: '%{authorizable_id}'
         optional:
-          new_password: '%{keystore_password}'
-          re_password: '%{keystore_password}'
+          new_password: '%{password}'
+          re_password: '%{password}'
           operation: createStore
       responses:
         200:
           handler: simple
-          message: 'Keystore successfully created'
+          message: 'Authorizable keystore created'
         201:
           handler: simple
-          message: 'Keystore successfully created'
-        404:
-          handler: simple_false
-          message: 'Error: Could not create Keystore'
+          message: 'Authorizable keystore created'
+    change_password:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          current_password: '%{old_password}'
+          new_password: '%{new_password}'
+          re_password: '%{new_password}'
+      responses:
+        200:
+          handler: simple
+          message: 'Authorizable keystore password successfully changed'
+    upload:
+      api: sling
+      operation: postAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+        optional:
+          new_alias: '%{new_alias}'
+          key_store: __FILE_PLAIN__
+          key_store_pass: '%{keystore_password}'
+          _alias: '%{private_key_alias}'
+          key_password: '%{private_key_password}'
+      responses:
+        200:
+          handler: simple
+          message: 'Authorizable keystore uploaded'
+        201:
+          handler: simple
+          message: 'Authorizable keystore uploaded'
+    download:
+      api: sling
+      operation: getKeystore
+      params:
+        required:
+          intermediate_path: '%{intermediate_path}'
+          authorizable_id: '%{authorizable_id}'
+      responses:
+        200:
+          handler: file_download
+          message: 'Authorizable keystore downloaded to %{file_path}'
     delete:
       api: sling
       operation: postNode
@@ -97,14 +144,14 @@ authorizablekeystore:
       responses:
         200:
           handler: simple
-          message: 'Keystore deleted'
+          message: 'Authorizable keystore deleted'
         201:
           handler: simple
-          message: 'Keystore deleted'
+          message: 'Authorizable keystore deleted'
         403:
-          handler: simple
-          message: 'Keystore does not exist'
-    get:
+          handler: simple_error
+          message: 'Authorizable keystore not found'
+    exists:
       api: sling
       operation: getAuthorizableKeystore
       params:
@@ -113,57 +160,11 @@ authorizablekeystore:
           authorizable_id: '%{authorizable_id}'
       responses:
         200:
-          handler: simple
-          message: 'Keystore result'
+          handler: json_authorizable_keystore
+          message: 'Authorizable keystore exists'
         404:
-          handler: simple_false
-          message: 'Keystore not found'
-    change_password:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          current_password: '%{old_keystore_password}'
-          new_password: '%{new_keystore_password}'
-          re_password: '%{new_keystore_password}'
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore password successfully changed'
-    upload:
-      api: sling
-      operation: postAuthorizableKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-        optional:
-          new_alias: '%{new_alias}'
-          key_store: __FILE_PLAIN__
-          key_store_pass: '%{key_store_file_password}'
-          _alias: '%{private_key_alias}'
-          key_password: '%{private_key_password}'
-      responses:
-        200:
-          handler: simple
-          message: 'Keystore successfully uploaded'
-        201:
-          handler: simple
-          message: 'Keystore successfully uploaded'
-    download:
-      api: sling
-      operation: getKeystore
-      params:
-        required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
-      responses:
-        200:
-          handler: file_download
-          message: 'Keystore successfully downloaded to %{file_path}'
+          handler: json_authorizable_keystore
+          message: 'Authorizable keystore not found'
 bundle:
   responses:
     404:
@@ -1132,6 +1133,10 @@ saml:
           handler: simple
           message: 'SAML Configuration successfully deleted'
 truststore:
+  responses:
+    404:
+      handler: simple_error
+      message: 'Truststore not found'
   actions:
     create:
       api: sling
@@ -1148,9 +1153,6 @@ truststore:
         201:
           handler: simple
           message: 'Truststore created'
-        404:
-          handler: simple_false
-          message: 'Could not create truststore'
     upload:
       api: sling
       operation: post_truststore_pkcs12

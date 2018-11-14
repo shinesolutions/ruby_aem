@@ -150,6 +150,7 @@ module RubyAem
 
       if keystore_info.exists == false
         result.data = false
+        result.message = 'Authorizable keystore not found'
       elsif keystore_info.aliases.is_a?(Array)
         result.data = true
       end

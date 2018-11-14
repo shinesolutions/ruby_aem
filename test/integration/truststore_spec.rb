@@ -55,15 +55,15 @@ describe 'Truststore' do
 
   describe 'test download upload' do
     it 'should succeed' do
-      # download package
+      # download truststore
       result = @truststore.download('/tmp/truststore.p12')
       expect(result.message).to eq('Truststore downloaded to /tmp/truststore.p12')
 
-      # upload package and wait until ready
+      # upload truststore and wait until ready
       result = @truststore.upload_wait_until_ready('/tmp/truststore.p12', force: true)
       expect(result.message).to eq('Truststore uploaded')
 
-      # force upload package
+      # force upload truststore
       result = @truststore.upload('/tmp/truststore.p12')
       expect(result.message).to eq('Truststore uploaded')
     end

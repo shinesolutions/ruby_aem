@@ -36,4 +36,13 @@ publish:
 tools:
 	npm install -g gh-pages
 
+fixtures:
+	# based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
+	# you will be prompted for private key password, the integration tests are expecting 'someprivatekeypassword' as the password for the fixtures data
+	mkdir -p test/integration/fixtures/
+	openssl genrsa -aes256 -out test/integration/fixtures/private_key.key 4096
+	openssl req -sha256 -new -key test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_sign_request.csr -subj '/CN=localhost'
+	openssl x509 -req -days 365 -in test/integration/fixtures/cert_sign_request.csr -signkey test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_chain.crt
+	openssl pkcs8 -topk8 -inform PEM -outform DER -in test/integration/fixtures/private_key.key -out test/integration/fixtures/private_key.der -nocrypt
+
 .PHONY: all ci deps clean build lint install test-unit test-integration doc doc-publish publish tools

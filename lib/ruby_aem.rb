@@ -119,10 +119,13 @@ module RubyAem
 
     # # Create a certificate chain instance.
     # #
+    # @param private_key_alias Alias of the private key associated to this certificate chain
+    # @param keystore_intermediate_path AEM User home path
+    # @param keystore_authorizable_id AEM User id
     # # @return new RubyAem::Resources::CertificateChain instance
-    # def certificate_chain
-    #   RubyAem::Resources::CertificateChain.new(@client)
-    # end
+    def certificate_chain(private_key_alias, keystore_intermediate_path, keystore_authorizable_id)
+      RubyAem::Resources::CertificateChain.new(@client, private_key_alias, keystore_intermediate_path, keystore_authorizable_id)
+    end
 
     # Create a config property instance.
     #

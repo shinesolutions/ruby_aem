@@ -242,39 +242,53 @@ certificate:
         404:
           handler: json_certificate_exists
           message: 'Certificate not found'
-certificate_chain:
+certificatechain:
   actions:
-    upload:
+    import:
       api: sling
       operation: postAuthorizableKeystore
       params:
         required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
+          intermediate_path: '%{keystore_intermediate_path}'
+          authorizable_id: '%{keystore_authorizable_id}'
         optional:
-          _alias: '%{_alias}'
+          _alias: '%{private_key_alias}'
           cert_chain: __FILE_CERTIFICATE__
           pk: __FILE_PRIVATE_KEY__
       responses:
         200:
           handler: simple
-          message: 'Private key and Certificate Chain successfully uploaded'
+          message: 'Certificate chain and private key successfully imported'
         201:
           handler: simple
-          message: 'Private key and Certificate Chain successfully uploaded'
+          message: 'Certificate chain and private key successfully imported'
     delete:
       api: sling
       operation: postAuthorizableKeystore
       params:
         required:
-          intermediate_path: '%{intermediate_path}'
-          authorizable_id: '%{authorizable_id}'
+          intermediate_path: '%{keystore_intermediate_path}'
+          authorizable_id: '%{keystore_authorizable_id}'
         optional:
-          remove_alias: '%{_alias}'
+          remove_alias: '%{private_key_alias}'
       responses:
         200:
           handler: simple
-          message: 'Certificate %{_alias} deleted'
+          message: 'Certificate chain deleted'
+    exists:
+      api: sling
+      operation: getAuthorizableKeystore
+      params:
+        required:
+          intermediate_path: '%{keystore_intermediate_path}'
+          authorizable_id: '%{keystore_authorizable_id}'
+      responses:
+        200:
+          handler: json_certificate_chain_exists
+          message: 'Certificate chain exists'
+        404:
+          handler: json_certificate_chain_exists
+          message: 'Certificate chain not found'
 flushagent:
   responses:
     404:

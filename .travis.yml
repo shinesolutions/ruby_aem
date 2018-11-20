@@ -7,6 +7,6 @@ before_install:
   - wget https://apt.puppetlabs.com/puppet5-release-trusty.deb
   - sudo dpkg -i puppet5-release-trusty.deb
   - sudo apt-get update
-  - sudo apt-get install -y puppet-agent libssl1.0.0
+  - sudo apt-get install -y puppet-agent libssl-dev
 script:
   - PATH=/opt/puppetlabs/puppet/bin/:$PATH make ci

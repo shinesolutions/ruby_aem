@@ -114,6 +114,33 @@ module RubyAem
       result
     end
 
+    # Truststore payload handler, checks for the existence of certificate within
+    # AEM Truststore, identified by cert_alias call parameter.
+    #
+    # @param response HTTP response containing status_code, body, and headers
+    # @param response_spec response specification as configured in conf/spec.yaml
+    # @param call_params API call parameters
+    # @return RubyAem::Result
+    def self.json_certificate_exists(response, response_spec, call_params)
+      truststore_info = response.body
+
+      result = Handlers.simple(response, response_spec, call_params)
+
+      certificate_exists = false
+      truststore_info.aliases.each { |certificate_alias|
+        certificate_exists = true if certificate_alias.serial_number.to_s == call_params[:serial_number].to_s
+      }
+      if certificate_exists == false
+        result.data = false
+        result.message = 'Certificate not found'
+      else
+        result.data = true
+        result.message = 'Certificate exists'
+      end
+
+      result
+    end
+
     # Truststore payload handler, checks for exists and aliases properties in
     # order to identify existence.
     #

@@ -16,6 +16,8 @@ require 'ruby_aem/client'
 require 'ruby_aem/resources/aem'
 require 'ruby_aem/resources/authorizable_keystore'
 require 'ruby_aem/resources/bundle'
+require 'ruby_aem/resources/certificate'
+require 'ruby_aem/resources/certificate_chain'
 require 'ruby_aem/resources/config_property'
 require 'ruby_aem/resources/flush_agent'
 require 'ruby_aem/resources/group'
@@ -106,6 +108,21 @@ module RubyAem
     def bundle(name)
       RubyAem::Resources::Bundle.new(@client, name)
     end
+
+    # Create a certificate instance.
+    #
+    # @param serial_number the certificate's serial number
+    # @return new RubyAem::Resources::Certificate instance
+    def certificate(serial_number)
+      RubyAem::Resources::Certificate.new(@client, serial_number)
+    end
+
+    # # Create a certificate chain instance.
+    # #
+    # # @return new RubyAem::Resources::CertificateChain instance
+    # def certificate_chain
+    #   RubyAem::Resources::CertificateChain.new(@client)
+    # end
 
     # Create a config property instance.
     #

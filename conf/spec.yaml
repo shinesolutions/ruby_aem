@@ -216,20 +216,32 @@ certificate:
       responses:
         200:
           handler: simple
-          message: 'Certificate uploaded'
+          message: 'Certificate imported'
         201:
           handler: simple
-          message: 'Certificate uploaded'
+          message: 'Certificate imported'
     delete:
       api: sling
       operation: postTruststore
       params:
         optional:
-          remove_alias: '%{certalias}'
+          remove_alias: '%{cert_alias}'
       responses:
         200:
           handler: simple
-          message: 'Certificate %{certalias} deleted'
+          message: 'Certificate %{serial_number} deleted'
+    exists:
+      api: sling
+      operation: getTruststoreInfo
+      params:
+        required:
+      responses:
+        200:
+          handler: json_certificate_exists
+          message: 'Certificate exists'
+        404:
+          handler: json_certificate_exists
+          message: 'Certificate not found'
 certificate_chain:
   actions:
     upload:

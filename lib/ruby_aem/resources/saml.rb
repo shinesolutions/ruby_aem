@@ -29,10 +29,15 @@ module RubyAem
 
       # Create SAML configuration
       #
-      # @param truststore_password Password for the Truststore
+      # @param opts optional parameters, parameter names can be retrieved from
+      #   AEM OSGI config page for `com.adobe.granite.auth.saml.SamlAuthenticationHandler.config`
+      #   Alternatively, they can also be retrieved from Swagger AEM specification
+      #   at https://github.com/shinesolutions/swagger-aem/blob/master/conf/api.yml
+      #   on operation ID `postConfigAdobeGraniteSamlAuthenticationHandler`
+      #   Some parameters explanation can be found on https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/saml-2-0-authenticationhandler.html
       # @return RubyAem::Result
-      def create(params)
-        @call_params = params
+      def create(opts)
+        @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 

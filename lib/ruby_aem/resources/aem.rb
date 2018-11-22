@@ -50,8 +50,10 @@ module RubyAem
       # https://github.com/shinesolutions/aem-healthcheck
       # to be installed.
       #
-      # @param tags comma separated tags
-      # @param combine_tags_or
+      # @param opts optional parameters:
+      # - tags: comma separated tags of AEM Health Check tags
+      # - combine_tags_or: if true, the check needs to only pass one of the check tags in order to get the health check pass,
+      #   if false, all check tags need to pass in order to get the health check pass.
       # @return RubyAem::Result
       def get_aem_health_check(opts = {})
         @call_params = @call_params.merge(opts)

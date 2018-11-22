@@ -53,7 +53,6 @@ module RubyAem
 
       # Get SAML configuration
       #
-      # @param truststore_password Password for the Truststore
       # @return RubyAem::Result
       def get
         @client.call(self.class, __callee__.to_s, @call_params)

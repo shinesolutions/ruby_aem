@@ -42,7 +42,6 @@ module RubyAem
 
       # Delete a path.
       #
-      # @param path Define the path which contains the node to delete
       # @return RubyAem::Result
       def delete
         # The path parameter will be combined with the name parameter

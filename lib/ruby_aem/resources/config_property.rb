@@ -35,7 +35,7 @@ module RubyAem
 
       # Create a new config property.
       #
-      # @param @param config_node_name the node name of a given OSGI config
+      # @param config_node_name the node name of a given OSGI config
       # @return RubyAem::Result
       def create(config_node_name)
         name = RubyAem::Swagger.property_to_parameter(@call_params[:name])

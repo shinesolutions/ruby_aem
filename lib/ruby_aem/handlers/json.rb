@@ -41,10 +41,12 @@ module RubyAem
     end
 
     # Handle package JSON payload. Result status is determined directly by success field.
+    # NOTE: _response_spec and _call_params are not used in the implementation
+    # of this method, but they are needed for the handler signature.
     #
     # @param response HTTP response containing status_code, body, and headers
-    # @param response_spec response specification as configured in conf/spec.yaml
-    # @param call_params additional call_params information
+    # @param _response_spec response specification as configured in conf/spec.yaml
+    # @param _call_params additional call_params information
     # @return RubyAem::Result
     def self.json_package_service(response, _response_spec, _call_params)
       json = JSON.parse(response.body)

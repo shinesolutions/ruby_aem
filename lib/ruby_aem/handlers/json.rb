@@ -55,6 +55,7 @@ module RubyAem
       result = RubyAem::Result.new(message, response)
 
       return result if json['success'] == true
+
       raise RubyAem::Error.new(message, result)
     end
 

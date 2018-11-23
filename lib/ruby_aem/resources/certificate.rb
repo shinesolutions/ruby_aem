@@ -93,6 +93,7 @@ module RubyAem
       def delete
         result = exists
         raise RubyAem::Error.new('Certificate not found', result) if result.data == false
+
         @call_params[:cert_alias] = @cert_alias
         @client.call(self.class, __callee__.to_s, @call_params)
       end

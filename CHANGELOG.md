@@ -1,3 +1,6 @@
+### 2.2.1
+*
+
 ### 2.2.0
 * Add feature to manage AEM Truststore
 * Add feature to manage AEM Authorizable Keystore

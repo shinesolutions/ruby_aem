@@ -56,16 +56,6 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
-      # Read an authorizable keystore in PKCS#12 Format
-      #
-      # @param file_path local file path to Keystore PKCS12 file
-      # @param password Password of the Keystore PKCS12 File
-      # @return OpenSSL::PKCS12
-      def read(file_path, password)
-        authorizable_keystore_raw = File.read file_path
-        OpenSSL::PKCS12.new(authorizable_keystore_raw, password)
-      end
-
       # Download the AEM Keystore to a specified directory.
       #
       # @param file_path the directory where the Keystore will be downloaded to

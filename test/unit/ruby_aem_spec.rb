@@ -12,7 +12,10 @@ describe 'RubyAem' do
     it 'should return client with resource methods' do
       aem = RubyAem::Aem.new
       expect(aem).to respond_to(:aem)
+      expect(aem).to respond_to(:authorizable_keystore)
       expect(aem).to respond_to(:bundle)
+      expect(aem).to respond_to(:certificate)
+      expect(aem).to respond_to(:certificate_chain)
       expect(aem).to respond_to(:config_property)
       expect(aem).to respond_to(:flush_agent)
       expect(aem).to respond_to(:group)
@@ -23,6 +26,7 @@ describe 'RubyAem' do
       expect(aem).to respond_to(:outbox_replication_agent)
       expect(aem).to respond_to(:reverse_replication_agent)
       expect(aem).to respond_to(:repository)
+      expect(aem).to respond_to(:truststore)
       expect(aem).to respond_to(:user)
     end
   end
@@ -31,6 +35,13 @@ describe 'RubyAem' do
     it 'should return aem instance' do
       aem = RubyAem::Aem.new.aem
       expect(aem).to_not be(nil)
+    end
+  end
+
+  describe 'test authorizable keystore' do
+    it 'should return authorizable keystore instance' do
+      authorizable_keystore = RubyAem::Aem.new.authorizable_keystore('/home/users/system', 'authentication-service')
+      expect(authorizable_keystore).to_not be(nil)
     end
   end
 
@@ -47,6 +58,20 @@ describe 'RubyAem' do
       expect(config_property).to_not be(nil)
     end
   end
+
+  # describe 'test certificate' do
+  #   it 'should return certificate instance' do
+  #     certificate = RubyAem::Aem.new.certificate('15863505968020663268')
+  #     expect(certificate).to_not be(nil)
+  #   end
+  # end
+
+  # describe 'test certificate chain' do
+  #   it 'should return certificate  chaininstance' do
+  #     certificate_chain = RubyAem::Aem.new.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
+  #     expect(certificate_chain).to_not be(nil)
+  #   end
+  # end
 
   describe 'test flush agent' do
     it 'should return flush agent instance' do
@@ -108,6 +133,13 @@ describe 'RubyAem' do
     it 'should return repository instance' do
       repository = RubyAem::Aem.new.repository
       expect(repository).to_not be(nil)
+    end
+  end
+
+  describe 'test truststore' do
+    it 'should return truststore instance' do
+      truststore = RubyAem::Aem.new.truststore
+      expect(truststore).to_not be(nil)
     end
   end
 

@@ -68,6 +68,9 @@ describe 'Swagger' do
 
       method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
       expect(method).to eq('AEM Health Check Servlet')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('com.adobe.granite.auth.saml.SamlAuthenticationHandler.config')
+      expect(method).to eq('Adobe Granite SAML Authentication Handler')
     end
 
     it 'should return null when config node name does not exist' do

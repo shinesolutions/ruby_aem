@@ -38,7 +38,7 @@ module RubyAem
       # @param opts optional parameters:
       # - user_id: outbox agent's user ID, default is admin
       # - log_level: error, info, debug, default is error
-      # - retry_delay: in milliseconds, default is 30_000
+      # - retry_delay: in milliseconds, default is 30000
       # @return RubyAem::Result
       def create_update(
         title,
@@ -47,7 +47,7 @@ module RubyAem
         opts = {
           user_id: 'admin',
           log_level: 'error',
-          retry_delay: 30_000
+          retry_delay: 30000
         }
       )
         @call_params[:title] = title

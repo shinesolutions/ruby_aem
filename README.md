@@ -82,7 +82,7 @@ Flush agent:
     flush_agent = aem.flush_agent('author', 'some-flush-agent')
 
     # create or update flush agent
-    opts = { log_level: 'info', retry_delay: 60_000 }
+    opts = { log_level: 'info', retry_delay: 60000 }
     result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', opts)
 
     # check flush agent's existence
@@ -199,7 +199,7 @@ Replication agent:
       transport_user: 'admin',
       transport_password: 'admin',
       log_level: 'info',
-      retry_delay: 60_000
+      retry_delay: 60000
     }
     result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
@@ -235,7 +235,7 @@ Reverse replication agent:
       transport_user: 'admin',
       transport_password: 'admin',
       log_level: 'info',
-      retry_delay: 60_000
+      retry_delay: 60000
     }
     result = reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080', opts)
 

@@ -23,7 +23,7 @@ describe 'ReplicationAgent' do
         transport_user: 'admin',
         transport_password: 'admin',
         log_level: 'error',
-        retry_delay: 30_000
+        retry_delay: 30000
       )
       @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080')
     end
@@ -40,9 +40,9 @@ describe 'ReplicationAgent' do
         transport_user: 'someuser',
         transport_password: 'somepassword',
         log_level: 'info',
-        retry_delay: 60_000
+        retry_delay: 60000
       )
-      @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', transport_user: 'someuser', transport_password: 'somepassword', log_level: 'info', retry_delay: 60_000)
+      @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', transport_user: 'someuser', transport_password: 'somepassword', log_level: 'info', retry_delay: 60000)
     end
   end
 

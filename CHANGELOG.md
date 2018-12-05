@@ -1,5 +1,5 @@
 ### 2.2.2
-*
+* Fix retry delay default value formatting
 
 ### 2.2.1
 * Fix missing org_apache_felix_https_truststore param on postConfigApacheFelixJettyBasedHttpService operation

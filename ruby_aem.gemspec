@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = 'ruby_aem'
-  s.version           = '2.2.1'
+  s.version           = '2.2.2'
   s.platform          = Gem::Platform::RUBY
   s.authors           = ['Shine Solutions', 'Cliffano Subagio']
   s.email             = ['opensource@shinesolutions.com', 'cliffano@gmail.com']

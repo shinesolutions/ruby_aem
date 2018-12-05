@@ -1,12 +1,15 @@
-### 2.2.1
+### 2.2.2
 *
+
+### 2.2.1
+* Fix missing org_apache_felix_https_truststore param on postConfigApacheFelixJettyBasedHttpService operation
 
 ### 2.2.0
 * Add feature to manage AEM Truststore
 * Add feature to manage AEM Authorizable Keystore
 * Add feature to manage Certificates in AEM Truststore
 * Add feature to configure SAML Authentication
-* Drop Ruby 2.2 support due to openssl 2.1.2 
+* Drop Ruby 2.2 support due to openssl 2.1.2
 * Remove run mode parameter from config property resource
 
 ### 2.1.0

@@ -38,7 +38,7 @@ module RubyAem
       # @param dest_base_url base URL of the agent target destination, e.g. http://somedispatcher:8080
       # @param opts optional parameters:
       # - log_level: error, info, debug, default is error
-      # - retry_delay: in milliseconds, default is 30000
+      # - retry_delay: in milliseconds, default is 30_000
       # @return RubyAem::Result
       def create_update(
         title,
@@ -46,7 +46,7 @@ module RubyAem
         dest_base_url,
         opts = {
           log_level: 'error',
-          retry_delay: 30000
+          retry_delay: 30_000
         }
       )
         @call_params[:title] = title

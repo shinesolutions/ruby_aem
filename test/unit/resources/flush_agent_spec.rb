@@ -22,7 +22,7 @@ describe 'FlushAgent' do
         dest_base_url: 'http://somehost:8080',
         ssl: '',
         log_level: 'error',
-        retry_delay: 30000
+        retry_delay: 30_000
       )
       @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
     end
@@ -38,9 +38,9 @@ describe 'FlushAgent' do
         dest_base_url: 'https://somehost:8080',
         ssl: 'relaxed',
         log_level: 'info',
-        retry_delay: 60000
+        retry_delay: 60_000
       )
-      @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'https://somehost:8080', log_level: 'info', retry_delay: 60000)
+      @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'https://somehost:8080', log_level: 'info', retry_delay: 60_000)
     end
   end
 

@@ -22,7 +22,7 @@ describe 'OutboxReplicationAgent' do
         dest_base_url: 'http://somehost:8080',
         user_id: 'admin',
         log_level: 'error',
-        retry_delay: 30000
+        retry_delay: 30_000
       )
       @outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080')
     end
@@ -38,9 +38,9 @@ describe 'OutboxReplicationAgent' do
         dest_base_url: 'http://somehost:8080',
         user_id: 'someuser',
         log_level: 'info',
-        retry_delay: 60000
+        retry_delay: 60_000
       )
-      @outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', user_id: 'someuser', log_level: 'info', retry_delay: 60000)
+      @outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', user_id: 'someuser', log_level: 'info', retry_delay: 60_000)
     end
   end
 

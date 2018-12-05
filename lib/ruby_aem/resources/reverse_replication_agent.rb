@@ -39,7 +39,7 @@ module RubyAem
       # - transport_user: username for transport user, default is admin
       # - transport_password: password for transport user, default is admin
       # - log_level: error, info, debug, default is error
-      # - retry_delay: in milliseconds, default is 30000
+      # - retry_delay: in milliseconds, default is 30_000
       # @return RubyAem::Result
       def create_update(
         title,
@@ -49,7 +49,7 @@ module RubyAem
           transport_user: 'admin',
           transport_password: 'admin',
           log_level: 'error',
-          retry_delay: 30000
+          retry_delay: 30_000
         }
       )
         @call_params[:title] = title

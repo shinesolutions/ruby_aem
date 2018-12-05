@@ -23,7 +23,7 @@ describe 'ReverseReplicationAgent' do
         transport_user: 'admin',
         transport_password: 'admin',
         log_level: 'error',
-        retry_delay: 30000
+        retry_delay: 30_000
       )
       @reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080')
     end
@@ -40,7 +40,7 @@ describe 'ReverseReplicationAgent' do
         transport_user: 'someuser',
         transport_password: 'somepassword',
         log_level: 'info',
-        retry_delay: 60000
+        retry_delay: 60_000
       )
       @reverse_replication_agent.create_update(
         'Some Reverse Replication Agent Title',
@@ -49,7 +49,7 @@ describe 'ReverseReplicationAgent' do
         transport_user: 'someuser',
         transport_password: 'somepassword',
         log_level: 'info',
-        retry_delay: 60000
+        retry_delay: 60_000
       )
     end
   end

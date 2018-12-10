@@ -124,4 +124,15 @@ describe 'Aem' do
       puts result.data
     end
   end
+
+  describe 'test get_product_info' do
+    it 'should return product infos' do
+      aem = @aem.aem
+      result = aem.get_product_info
+
+      expect(result.message).to eq('AEM Product informations found')
+      expect(result.data.length).to be >= 1
+      puts result.data
+    end
+  end
 end

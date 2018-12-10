@@ -62,6 +62,18 @@ aem:
         200:
           handler: xml_package_list
           message: 'All packages list retrieved successfully'
+    get_product_info:
+      api: console
+      operation: getAemProductInfo
+      params:
+        required:
+      responses:
+        200:
+          handler: json_product_info
+          message: 'Get Productinfo sucessfully'
+        404:
+          handler: simple
+          message: 'Error getting Productinfo'
 authorizablekeystore:
   responses:
     404:

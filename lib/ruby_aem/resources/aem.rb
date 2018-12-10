@@ -242,7 +242,6 @@ module RubyAem
       def get_product_info
         @client.call(self.class, __callee__.to_s, @call_params)
       end
-
     end
   end
 end

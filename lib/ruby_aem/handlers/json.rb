@@ -224,11 +224,11 @@ module RubyAem
     # @param _call_params additional call_params information
     # @return RubyAem::Result
     def self.json_product_info(response, _response_spec, _call_params)
-      message = "AEM Product informations found"
+      message = 'AEM Product informations found'
       result = RubyAem::Result.new(message, response)
       result.data = response.body
 
-      return result
+      result
     end
   end
 end

@@ -45,4 +45,4 @@ fixtures:
 	openssl x509 -req -days 365 -in test/integration/fixtures/cert_sign_request.csr -signkey test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_chain.crt
 	openssl pkcs8 -topk8 -inform PEM -outform DER -in test/integration/fixtures/private_key.key -out test/integration/fixtures/private_key.der -nocrypt
 
-.PHONY: all ci deps clean build lint install test-unit test-integration doc doc-publish publish tools
+.PHONY: all ci deps clean lint build install test-unit test-integration doc doc-publish publish tools fixtures

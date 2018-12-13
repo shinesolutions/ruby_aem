@@ -235,6 +235,13 @@ module RubyAem
         result_copy.data = packages
         result_copy
       end
+
+      # Retrieve AEM Product informations
+      #
+      # @return RubyAem::Result
+      def get_product_info
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
     end
   end
 end

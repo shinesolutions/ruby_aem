@@ -1,5 +1,5 @@
 ### 2.2.2
-*
+* Add feature to retrieve AEM product informations shinesolutions/swagger-aem#36
 
 ### 2.2.1
 * Fix missing org_apache_felix_https_truststore param on postConfigApacheFelixJettyBasedHttpService operation

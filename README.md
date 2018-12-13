@@ -60,6 +60,10 @@ Aem:
     aem = aem.aem
     result = aem.get_agents('author')
 
+    # get an array of AEM product informations
+    aem = aem.aem
+    result = aem.get_product_info
+
 Bundle:
 
     # stop bundle

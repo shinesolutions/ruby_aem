@@ -5,4 +5,3 @@ bin
 coverage
 doc
 ruby_aem-*.gem
-Gemfile.lock

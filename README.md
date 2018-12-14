@@ -7,10 +7,19 @@ ruby_aem
 ruby_aem is a Ruby client for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 It is written on top of [swagger_aem](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) and provides resource-oriented API and convenient response handling.
 
-[Versions History](docs/versions.md)
+Learn more about ruby_aem:
 
-Install
--------
+* [Installation](https://github.com/shinesolutions/ruby_aem#installation)
+* [Usage](https://github.com/shinesolutions/ruby_aem#usage)
+* [Result Model](https://github.com/shinesolutions/ruby_aem#result)
+* [Error Handling](https://github.com/shinesolutions/ruby_aem#error-handling)
+* [Testing](https://github.com/shinesolutions/ruby_aem#testing)
+* [Versions History](https://github.com/shinesolutions/ruby_aem/blob/master/docs/versions.md)
+
+ruby_aem is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
+
+Installation
+------------
 
     gem install ruby_aem
 
@@ -617,7 +626,7 @@ Each of the above method calls returns a [RubyAem::Result](https://shinesolution
     puts result.response.headers
     puts result.data
 
-Error handling
+Error Handling
 --------------
 
 Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html) .
@@ -639,15 +648,3 @@ Testing
 Integration tests require an AEM instance with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed.
 
 By default it uses AEM running on http://localhost:4502 with `admin` username and `admin` password. AEM instance parameters can be configured using environment variables `aem_protocol`, `aem_host`, `aem_port`, `aem_username`, `aem_password`, and `aem_debug`.
-
-Others
-------
-
-Reports:
-
-* [API - master](https://shinesolutions.github.io/ruby_aem/api/master/index.html)
-* [Coverage report](https://shinesolutions.github.io/ruby_aem/coverage/index.html)
-
-Presentation:
-
-* [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/)

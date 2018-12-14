@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add feature to retrieve AEM product informations shinesolutions/swagger-aem#36
 
+### Changed
+- Update swagger_aem to 2.3.0
+
 ## [2.2.1] - 2018-12-03
 
 ### Changed

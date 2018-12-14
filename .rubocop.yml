@@ -1,4 +1,6 @@
-# TODO: re-enable Metric/AbcSize, Metrics/CyclomaticComplexity, and Metrics/PerceivedComplexity
+inherit_mode:
+  merge:
+    - Exclude
 AllCops:
   TargetRubyVersion: 2.3
   DisplayCopNames: true

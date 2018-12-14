@@ -11,6 +11,7 @@ clean:
 
 lint:
 	bundle exec rubocop
+	bundle exec yaml-lint .*.yml conf/*.yaml
 
 build: clean
 	gem build ruby_aem.gemspec

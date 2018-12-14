@@ -9,4 +9,5 @@ gem 'swagger_aem', '~> 2.3.0'
 gem 'rspec', require: false
 gem 'rubocop', require: false
 gem 'simplecov', require: false, group: :test
+gem 'yaml-lint', require: false
 gem 'yard', '~> 0.9.11', require: false

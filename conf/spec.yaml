@@ -870,6 +870,31 @@ configproperty:
         201:
           handler: simple
           message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+    createapachehttpcomponentsproxyconfiguration:
+      api: sling
+      operation: postConfigApacheHttpComponentsProxyConfiguration
+      params:
+        required:
+        optional:
+          - proxy_host
+          - proxy_host_type_hint
+          - proxy_port
+          - proxy_port_type_hint
+          - proxy_exceptions
+          - proxy_exceptions_type_hint
+          - proxy_enabled
+          - proxy_enabled_type_hint
+          - proxy_user
+          - proxy_user_type_hint
+          - proxy_password
+          - proxy_password_type_hint
+      responses:
+        200:
+          handler: simple
+          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+        201:
+          handler: simple
+          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
 replicationagent:
   responses:
     404:

@@ -1,5 +1,5 @@
 ### 2.2.2
-*
+* Add new bundle configuration for Apache HTTP Components Proxy Configuration shinesolutions/aem-aws-stack-builder#235
 
 ### 2.2.1
 * Fix missing org_apache_felix_https_truststore param on postConfigApacheFelixJettyBasedHttpService operation

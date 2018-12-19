@@ -71,6 +71,9 @@ describe 'Swagger' do
 
       method = RubyAem::Swagger.config_node_name_to_config_name('com.adobe.granite.auth.saml.SamlAuthenticationHandler.config')
       expect(method).to eq('Adobe Granite SAML Authentication Handler')
+
+      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.http.proxyconfigurator.config')
+      expect(method).to eq('Apache HTTP Components Proxy Configuration')
     end
 
     it 'should return null when config node name does not exist' do

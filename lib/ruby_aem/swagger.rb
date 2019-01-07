@@ -69,6 +69,8 @@ module RubyAem
         'AEM Health Check Servlet'
       when 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
         'Adobe Granite SAML Authentication Handler'
+      when 'org.apache.http.proxyconfigurator.config'
+        'Apache HTTP Components Proxy Configuration'
       end
     end
   end

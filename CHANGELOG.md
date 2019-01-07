@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add spec YAML syntax check to lint target
 - Add new bundle configuration for Apache HTTP Components Proxy Configuration shinesolutions/aem-aws-stack-builder#235
 
+### Changed
+- Update swagger_aem to 2.4.0
+
 ## [2.3.0] - 2018-12-14
 
 ### Added

@@ -1,6 +1,6 @@
 sudo: required
 
-language: ruby
+language: generic
 
 services:
   - docker
@@ -10,4 +10,3 @@ before_install:
 
 script:
   - docker run --rm --workdir /opt/workspace -v `pwd`:/opt/workspace -i -t shinesolutions/aem-platform-buildenv bash -c "make ci"
-

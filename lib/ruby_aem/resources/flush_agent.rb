@@ -60,7 +60,7 @@ module RubyAem
         opts = {
           enabled: true,
           serialization_type: 'flush',
-          retry_delay: 30_000,
+          retry_delay: 30_000
           agent_user_id: nil,
           log_level: 'error',
           reverse_replication: false,

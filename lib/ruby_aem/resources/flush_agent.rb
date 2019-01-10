@@ -58,21 +58,21 @@ module RubyAem
         description,
         dest_base_url,
         opts = {
-          enabled: true,
+          enabled: 'true',
           serialization_type: 'flush',
-          retry_delay: 30_000
+          retry_delay: 30_000,
           agent_user_id: nil,
           log_level: 'error',
-          reverse_replication: false,
+          reverse_replication: 'false',
           ssl: nil,
-          http_expired: false,
-          specific: true,
-          modified: false,
-          distribute: false,
-          on_off_time: false,
-          receive: false,
-          no_status_update: true,
-          no_versioning: true
+          http_expired: 'false',
+          specific: 'true',
+          modified: 'false',
+          distribute: 'false',
+          on_off_time: 'false',
+          receive: 'false',
+          no_status_update: 'true',
+          no_versioning: 'true'
         }
       )
         @call_params[:title] = title

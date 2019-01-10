@@ -54,10 +54,10 @@ module RubyAem
           transport_user: 'admin',
           transport_password: 'admin',
           log_level: 'error',
-          retry_delay: 30_000
+          retry_delay: 30_000,
           serialization_type: 'durbo',
           user_id: nil,
-          enabled: true,
+          enabled: 'true',
           ssl: nil,
           http_expired: nil
         }

@@ -40,6 +40,11 @@ module RubyAem
       # - transport_password: password for transport user, default is admin
       # - log_level: error, info, debug, default is error
       # - retry_delay: in milliseconds, default is 30_000
+      # - serialization_type: default is durbo
+      # - user_id: default is nil
+      # - enabled: default is true
+      # - ssl: default is nil
+      # - http_expired: default is nil
       # @return RubyAem::Result
       def create_update(
         title,
@@ -49,12 +54,21 @@ module RubyAem
           transport_user: 'admin',
           transport_password: 'admin',
           log_level: 'error',
-          retry_delay: 30_000
+          retry_delay: 30_000,
+          serialization_type: 'durbo',
+          user_id: nil,
+          enabled: true,
+          ssl: nil,
+          http_expired: nil
         }
       )
         @call_params[:title] = title
         @call_params[:description] = description
         @call_params[:dest_base_url] = dest_base_url
+
+        uri = URI.parse(dest_base_url)
+        @call_params[:ssl] = uri.scheme == 'https' ? 'relaxed' : ''
+
         @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end

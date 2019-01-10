@@ -37,16 +37,42 @@ module RubyAem
       # @param description flush agent description
       # @param dest_base_url base URL of the agent target destination, e.g. http://somedispatcher:8080
       # @param opts optional parameters:
-      # - log_level: error, info, debug, default is error
+      # - enabled: default is true
+      # - flush_serialization_type: default is flush
       # - retry_delay: in milliseconds, default is 30_000
+      # - agent_user_id: default is nil
+      # - log_level: error, info, debug, default is error
+      # - reverse_replication: default is false
+      # - ssl: Default, Relaxed, Client Auth, default is nil
+      # - https_expired: default is false
+      # - specific: default is true
+      # - modified: default is false
+      # - distribute: default is false
+      # - on_off_time: default is false
+      # - receive: default is false
+      # - no_status_update: default is true
+      # - no_versioning: default is true
       # @return RubyAem::Result
       def create_update(
         title,
         description,
         dest_base_url,
         opts = {
+          enabled: true,
+          serialization_type: 'flush',
+          retry_delay: 30_000,
+          agent_user_id: nil,
           log_level: 'error',
-          retry_delay: 30_000
+          reverse_replication: false,
+          ssl: nil,
+          http_expired: false,
+          specific: true,
+          modified: false,
+          distribute: false,
+          on_off_time: false,
+          receive: false,
+          no_status_update: true,
+          no_versioning: true
         }
       )
         @call_params[:title] = title

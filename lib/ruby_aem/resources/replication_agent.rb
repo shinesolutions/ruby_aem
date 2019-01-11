@@ -56,10 +56,10 @@ module RubyAem
           log_level: 'error',
           retry_delay: 30_000,
           serialization_type: 'durbo',
-          user_id: nil,
+          user_id: '',
           enabled: 'true',
-          ssl: nil,
-          http_expired: nil
+          ssl: '',
+          http_expired: ''
         }
       )
         @call_params[:title] = title

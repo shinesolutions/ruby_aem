@@ -17,6 +17,14 @@ describe 'Aem' do
     end
   end
 
+  describe 'test get_package_manager_servlet_state' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {})
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_package_manager_servlet_state
+    end
+  end
+
   describe 'test get_crxde_status' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_crxde_status', {})
@@ -64,6 +72,38 @@ describe 'Aem' do
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #2: Login page retrieved but not ready yet')
       expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #3: Login page retrieved and ready')
       aem.get_login_page_wait_until_ready(
+        _retries: {
+          max_tries: '60',
+          base_sleep_seconds: '2',
+          max_sleep_seconds: '2'
+        }
+      )
+    end
+  end
+
+  ########################################################################
+  # TO-DO:
+  # This test needs to be updated as it only works if
+  # package manager is active at the moment
+  ########################################################################
+  describe 'test get_package_manager_servlet_state_wait_until_ready' do
+    it 'should call client with expected parameters' do
+      mock_message_error = 'Package Manager disabled'
+      mock_result_error = double('mock_result_error')
+      mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
+
+      mock_data_ok = double('true')
+      mock_message_ok = 'Package Manager active'
+      mock_result_ok = double('mock_result_ok')
+      expect(mock_result_ok).to receive(:data).and_return(mock_data_ok)
+      expect(mock_result_ok).to receive(:message).and_return(mock_message_ok)
+
+      # expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {}).and_raise(mock_error)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {}).and_return(mock_result_ok)
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+
+      expect(STDOUT).to receive(:puts).with('Check CRX Package Manager service attempt #1: Package Manager active')
+      aem.get_package_manager_servlet_state_wait_until_ready(
         _retries: {
           max_tries: '60',
           base_sleep_seconds: '2',

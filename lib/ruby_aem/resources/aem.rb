@@ -182,12 +182,13 @@ module RubyAem
         opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
         opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
 
+        result = nil
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           result = get_package_manager_servlet_state
           puts format('Check CRX Package Manager service attempt #%<retries_count>d: %<result_message>s', retries_count: retries_count, result_message: result.message)
           raise StandardError.new(result.message) if result.data == false
-          result
         }
+        result
       end
 
       # List the name of all agents under /etc/replication.

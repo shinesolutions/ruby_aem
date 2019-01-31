@@ -88,9 +88,9 @@ describe 'Aem' do
   ########################################################################
   describe 'test get_package_manager_servlet_state_wait_until_ready' do
     it 'should call client with expected parameters' do
-      mock_message_error = 'Package Manager disabled'
-      mock_result_error = double('mock_result_error')
-      mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
+      # mock_message_error = 'Package Manager disabled'
+      # mock_result_error = double('mock_result_error')
+      # mock_error = RubyAem::Error.new(mock_message_error, mock_result_error)
 
       mock_data_ok = double('true')
       mock_message_ok = 'Package Manager active'

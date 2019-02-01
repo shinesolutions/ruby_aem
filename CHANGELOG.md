@@ -6,12 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add new feature to retrieve CRX Package Manager Servlet status state shinesolutions/aem-aws-stack-builder#214
+
+### Changed
+- Update swagger_aem to 2.5.0
+
 ## [2.4.0] - 2019-01-07
 
 ### Added
 - Add spec YAML syntax check to lint target
 - Add new bundle configuration for Apache HTTP Components Proxy Configuration shinesolutions/aem-aws-stack-builder#235
-- Add new  feature to retrieve CRX Package Manager Servlet status state shinesolutions/aem-aws-stack-builder#214
 
 ### Changed
 - Update swagger_aem to 2.4.0

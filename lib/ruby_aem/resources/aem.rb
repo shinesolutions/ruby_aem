@@ -60,6 +60,13 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Retrieve AEM CRX Package Manager Servlet service state.
+      #
+      # @return RubyAem::Result
+      def get_package_manager_servlet_state
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
       # Retrieve AEM login page with retries until it is successful.
       #
       # @param opts optional parameters:
@@ -147,6 +154,39 @@ module RubyAem
             puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
             raise StandardError.new(err.message)
           end
+        }
+        result
+      end
+
+      # Retrieve AEM CRX Package Manager Servlet service state. with retries until its status is OK.
+      #
+      # @param opts optional parameters:
+      # - _retries: retries library's options (http://www.rubydoc.info/gems/retries/0.0.5#Usage), restricted to max_trie, base_sleep_seconds, max_sleep_seconds
+      # @return RubyAem::Result
+      def get_package_manager_servlet_state_wait_until_ready(
+        opts = {
+          _retries: {
+            max_tries: 30,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
+        }
+      )
+        opts[:_retries] ||= {}
+        opts[:_retries][:max_tries] ||= 30
+        opts[:_retries][:base_sleep_seconds] ||= 2
+        opts[:_retries][:max_sleep_seconds] ||= 2
+
+        # ensure integer retries setting (Puppet 3 passes numeric string)
+        opts[:_retries][:max_tries] = opts[:_retries][:max_tries].to_i
+        opts[:_retries][:base_sleep_seconds] = opts[:_retries][:base_sleep_seconds].to_i
+        opts[:_retries][:max_sleep_seconds] = opts[:_retries][:max_sleep_seconds].to_i
+
+        result = nil
+        with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
+          result = get_package_manager_servlet_state
+          puts format('Check CRX Package Manager service attempt #%<retries_count>d: %<result_message>s', retries_count: retries_count, result_message: result.message)
+          raise StandardError.new(result.message) if result.data == false
         }
         result
       end

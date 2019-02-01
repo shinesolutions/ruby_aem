@@ -21,6 +21,18 @@ aem:
         200:
           handler: json_aem_health_check
           message: 'AEM health check retrieved'
+    get_package_manager_servlet_state:
+      api: crx
+      operation: getPackageManagerServlet
+      params:
+        required:
+      responses:
+        405:
+          handler: simple_true
+          message: 'Package Manager active'
+        404:
+          handler: simple_false
+          message: 'Package Manager disabled'
     get_agents:
       api: sling
       operation: getAgents

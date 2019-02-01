@@ -135,4 +135,28 @@ describe 'Aem' do
       puts result.data
     end
   end
+
+  describe 'test get_package_manager_servlet_state' do
+    it 'should contain readyness indicator' do
+      aem = @aem.aem
+      result = aem.get_package_manager_servlet_state
+      expect(result.message).to eq('Package Manager active')
+      expect(result.data).eql? true
+    end
+  end
+
+  describe 'test get_package_manager_servlet_state_wait_until_ok' do
+    it 'should try once and contain readyness indicator' do
+      aem = @aem.aem
+      result = aem.get_package_manager_servlet_state_wait_until_ready(
+        _retries: {
+          max_tries: 60,
+          base_sleep_seconds: 2,
+          max_sleep_seconds: 2
+        }
+      )
+      expect(result.message).to eq('Package Manager active')
+      expect(result.data).eql? true
+    end
+  end
 end

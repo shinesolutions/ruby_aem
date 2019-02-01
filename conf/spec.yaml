@@ -21,7 +21,7 @@ aem:
         200:
           handler: json_aem_health_check
           message: 'AEM health check retrieved'
-    get_package_manager_servlet_state:
+    get_package_manager_servlet_status:
       api: crx
       operation: getPackageManagerServlet
       params:

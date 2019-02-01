@@ -17,11 +17,11 @@ describe 'Aem' do
     end
   end
 
-  describe 'test get_package_manager_servlet_state' do
+  describe 'test get_package_manager_servlet_status' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {})
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_status', {})
       aem = RubyAem::Resources::Aem.new(@mock_client)
-      aem.get_package_manager_servlet_state
+      aem.get_package_manager_servlet_status
     end
   end
 
@@ -86,7 +86,7 @@ describe 'Aem' do
   # This test needs to be updated as it only works if
   # package manager is active at the moment
   ########################################################################
-  describe 'test get_package_manager_servlet_state_wait_until_ready' do
+  describe 'test get_package_manager_servlet_status_wait_until_ready' do
     it 'should call client with expected parameters' do
       # mock_message_error = 'Package Manager disabled'
       # mock_result_error = double('mock_result_error')
@@ -98,12 +98,12 @@ describe 'Aem' do
       expect(mock_result_ok).to receive(:data).and_return(mock_data_ok)
       expect(mock_result_ok).to receive(:message).and_return(mock_message_ok)
 
-      # expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {}).and_raise(mock_error)
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_state', {}).and_return(mock_result_ok)
+      # expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_status', {}).and_raise(mock_error)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_status', {}).and_return(mock_result_ok)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
       expect(STDOUT).to receive(:puts).with('Check CRX Package Manager service attempt #1: Package Manager active')
-      aem.get_package_manager_servlet_state_wait_until_ready(
+      aem.get_package_manager_servlet_status_wait_until_ready(
         _retries: {
           max_tries: '60',
           base_sleep_seconds: '2',

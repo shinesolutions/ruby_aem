@@ -2,7 +2,7 @@ all: deps clean build lint install test-unit test-integration doc
 ci: deps clean build lint install test-unit doc
 
 deps:
-	gem install bundler
+	gem install bundler --version=1.17.3
 	rm -rf .bundle
 	bundle install --binstubs
 

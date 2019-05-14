@@ -38,7 +38,7 @@ release:
 	rtk release
 
 tools:
-	npm install -g gh-pages
+	npm install -g gh-pages@2.0.1
 
 fixtures:
 	# based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert

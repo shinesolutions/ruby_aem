@@ -7,7 +7,7 @@ deps:
 	bundle install --binstubs
 
 clean:
-	rm -f ruby_aem-*.gem
+	rm -f ruby_aem-*.gem Gemfile.lock
 
 lint:
 	bundle exec rubocop

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add application configuration file containing version number
+- Upgrade swagger_aem to 3.0.0
 
 ## [2.5.1] - 2019-02-02
 

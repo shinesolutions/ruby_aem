@@ -1,13 +1,13 @@
-all: deps clean build lint install test-unit test-integration doc
-ci: deps clean build lint install test-unit doc
+all: clean deps build lint install test-unit test-integration doc
+ci: clean deps build lint install test-unit doc
+
+clean:
+	rm -f ruby_aem-*.gem Gemfile.lock
 
 deps:
 	gem install bundler --version=1.17.3
 	rm -rf .bundle
 	bundle install --binstubs
-
-clean:
-	rm -f ruby_aem-*.gem Gemfile.lock
 
 lint:
 	bundle exec rubocop

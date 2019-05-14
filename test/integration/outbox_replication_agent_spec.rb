@@ -46,8 +46,8 @@ describe 'OutboxReplicationAgent' do
       begin
         outbox_replication_agent.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Outbox replication agent some-inexistingoutbox-replication-agent not found on author')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Outbox replication agent some-inexistingoutbox-replication-agent not found on author')
       end
     end
   end

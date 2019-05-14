@@ -63,9 +63,9 @@ describe 'JSON Handler' do
         response = RubyAem::Response.new(status_code, data, headers)
         RubyAem::Handlers.json_package_service(response, response_spec, call_params)
         raise
-      rescue RubyAem::Error => err
-        expect(err.message).to eq('Package built')
-        expect(err.result.response).to eq(response)
+      rescue RubyAem::Error => e
+        expect(e.message).to eq('Package built')
+        expect(e.result.response).to eq(response)
       end
     end
   end

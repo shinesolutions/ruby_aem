@@ -73,8 +73,8 @@ module RubyAem
         method = RubyAem::Swagger.operation_to_method(operation)
         data, status_code, headers = api.send("#{method}_with_http_info", *params)
         response = RubyAem::Response.new(status_code, data, headers)
-      rescue SwaggerAemClient::ApiError => err
-        response = RubyAem::Response.new(err.code, err.response_body, err.response_headers)
+      rescue SwaggerAemClient::ApiError => e
+        response = RubyAem::Response.new(e.code, e.response_body, e.response_headers)
       end
       handle(response, responses_spec, call_params)
     end

@@ -54,8 +54,8 @@ describe 'Truststore' do
       begin
         @truststore.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Truststore not found')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Truststore not found')
       end
     end
   end

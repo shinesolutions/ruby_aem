@@ -101,9 +101,9 @@ module RubyAem
             else
               puts format('Retrieve login page attempt #%<retries_count>d: %<message>s and ready', retries_count: retries_count, message: result.message)
             end
-          rescue RubyAem::Error => err
-            puts format('Retrieve login page attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
-            raise StandardError.new(err.message)
+          rescue RubyAem::Error => e
+            puts format('Retrieve login page attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: e.message)
+            raise StandardError.new(e.message)
           end
         }
         result
@@ -150,9 +150,9 @@ module RubyAem
             else
               puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s and ok', retries_count: retries_count, message: result.message)
             end
-          rescue RubyAem::Error => err
-            puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
-            raise StandardError.new(err.message)
+          rescue RubyAem::Error => e
+            puts format('Retrieve AEM Health Check attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: e.message)
+            raise StandardError.new(e.message)
           end
         }
         result
@@ -242,9 +242,9 @@ module RubyAem
               puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s but not finished yet, still installing %<item_count>d package(s)', retries_count: retries_count, message: result.message, item_count: item_count)
               raise StandardError.new(result.message)
             end
-          rescue RubyAem::Error => err
-            puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: err.message)
-            raise StandardError.new(err.message)
+          rescue RubyAem::Error => e
+            puts format('Retrieve AEM install status attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: e.message)
+            raise StandardError.new(e.message)
           end
         }
         result

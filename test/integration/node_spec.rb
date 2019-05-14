@@ -31,8 +31,8 @@ describe 'Node' do
       # create the same node the second time
       begin
         @node.create('sling:Folder')
-      rescue RubyAem::Error => err
-        expect(err.message).to match(/^Unexpected response/)
+      rescue RubyAem::Error => e
+        expect(e.message).to match(/^Unexpected response/)
       end
     end
 
@@ -74,8 +74,8 @@ describe 'Node' do
 
       begin
         @node.delete
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Node apps/system/somefolder not found')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Node apps/system/somefolder not found')
       end
     end
   end

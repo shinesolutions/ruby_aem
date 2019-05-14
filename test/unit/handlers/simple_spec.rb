@@ -83,9 +83,9 @@ describe 'Simple Handler' do
       response = RubyAem::Response.new(status_code, data, headers)
       begin
         RubyAem::Handlers.simple_error(response, response_spec, call_params)
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Bundle somebundle started')
-        expect(err.result.response).to be(response)
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Bundle somebundle started')
+        expect(e.result.response).to be(response)
       end
     end
   end

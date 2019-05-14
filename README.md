@@ -634,12 +634,12 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
     begin
       bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
       result = bundle.stop
-    rescue RubyAem::Error => err
-      puts err.message
-      puts err.result.response.status_code
-      puts err.result.response.body
-      puts err.result.response.headers
-      puts err.result.data
+    rescue RubyAem::Error => e
+      puts e.message
+      puts e.result.response.status_code
+      puts e.result.response.body
+      puts e.result.response.headers
+      puts e.result.data
     end
 
 Testing

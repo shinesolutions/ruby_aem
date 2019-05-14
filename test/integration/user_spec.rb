@@ -71,8 +71,8 @@ describe 'User' do
       begin
         user.set_permission('/etc/replication', 'read:true,modify:true')
         raise
-      rescue RubyAem::Error => err
-        expect(err.message).to match(/^Unexpected response/)
+      rescue RubyAem::Error => e
+        expect(e.message).to match(/^Unexpected response/)
       end
     end
   end

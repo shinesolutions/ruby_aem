@@ -118,9 +118,9 @@ describe 'HTML Handler' do
         response = RubyAem::Response.new(status_code, data, headers)
         RubyAem::Handlers.html_change_password(response, response_spec, call_params)
         raise
-      rescue RubyAem::Error => err
-        expect(err.message).to eq('Failed to change password for user \'someuser\': Failed to change password: Old password does not match.')
-        expect(err.result.response).to be(response)
+      rescue RubyAem::Error => e
+        expect(e.message).to eq('Failed to change password for user \'someuser\': Failed to change password: Old password does not match.')
+        expect(e.result.response).to be(response)
       end
     end
 
@@ -135,9 +135,9 @@ describe 'HTML Handler' do
         response = RubyAem::Response.new(status_code, data, headers)
         RubyAem::Handlers.html_change_password(response, response_spec, call_params)
         raise
-      rescue RubyAem::Error => err
-        expect(err.message).to eq('Failed to change password: Response body is empty, user likely does not exist.')
-        expect(err.result.response).to be(response)
+      rescue RubyAem::Error => e
+        expect(e.message).to eq('Failed to change password: Response body is empty, user likely does not exist.')
+        expect(e.result.response).to be(response)
       end
     end
   end

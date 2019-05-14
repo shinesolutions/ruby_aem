@@ -46,8 +46,8 @@ describe 'FlushAgent' do
       begin
         flush_agent.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Flush agent some-inexisting-flush-agent not found on author')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Flush agent some-inexisting-flush-agent not found on author')
       end
     end
   end

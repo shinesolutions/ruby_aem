@@ -62,8 +62,8 @@ describe 'AuthorizableKeystore' do
       begin
         @authorizable_keystore.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Authorizable keystore not found')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Authorizable keystore not found')
       end
     end
   end

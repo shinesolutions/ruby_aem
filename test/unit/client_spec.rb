@@ -246,11 +246,11 @@ describe 'Client' do
       client = RubyAem::Client.new(nil, nil)
       begin
         client.handle(response, responses_spec, call_params)
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \nbody: somepayload")
-        expect(err.result.response.status_code).to eq(404)
-        expect(err.result.response.body).to eq('somepayload')
-        expect(err.result.response.headers).to eq(nil)
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq("Unexpected response\nstatus code: 404\nheaders: \nbody: somepayload")
+        expect(e.result.response.status_code).to eq(404)
+        expect(e.result.response.body).to eq('somepayload')
+        expect(e.result.response.headers).to eq(nil)
       end
     end
 

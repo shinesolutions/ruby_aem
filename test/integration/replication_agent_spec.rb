@@ -46,8 +46,8 @@ describe 'ReplicationAgent' do
       begin
         replication_agent.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Replication agent some-inexisting-replication-agent not found on author')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Replication agent some-inexisting-replication-agent not found on author')
       end
     end
   end

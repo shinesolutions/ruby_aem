@@ -46,8 +46,8 @@ describe 'ReverseReplicationAgent' do
       begin
         reverse_replication_agent.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Reverse replication agent some-inexistingreverse-replication-agent not found on author')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Reverse replication agent some-inexistingreverse-replication-agent not found on author')
       end
     end
   end

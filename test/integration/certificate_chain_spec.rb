@@ -71,8 +71,8 @@ describe 'CertificateChain' do
       begin
         @certificate_chain.delete
         raise
-      rescue RubyAem::Error => err
-        expect(err.result.message).to eq('Certificate chain not found')
+      rescue RubyAem::Error => e
+        expect(e.result.message).to eq('Certificate chain not found')
       end
     end
   end
@@ -125,8 +125,8 @@ describe 'CertificateChain' do
   #     begin
   #       @certificate.delete
   #       raise
-  #     rescue RubyAem::Error => err
-  #       expect(err.result.message).to eq('Certificate not found')
+  #     rescue RubyAem::Error => e
+  #       expect(e.result.message).to eq('Certificate not found')
   #     end
   #   end
   # end

@@ -1,10 +1,10 @@
 require 'yaml'
 
-app_conf = YAML.load_file('conf/app.yaml')
+gem_conf = YAML.load_file('conf/gem.yaml')
 
 Gem::Specification.new do |s|
   s.name              = 'ruby_aem'
-  s.version           = app_conf['version']
+  s.version           = gem_conf['version']
   s.platform          = Gem::Platform::RUBY
   s.authors           = ['Shine Solutions', 'Cliffano Subagio']
   s.email             = ['opensource@shinesolutions.com', 'cliffano@gmail.com']

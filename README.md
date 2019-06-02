@@ -73,6 +73,12 @@ Aem:
     aem = aem.aem
     result = aem.get_product_info
 
+AEM Config Manager:
+
+    # Create OpenAPI Spec of all configuration nodes
+    configmgr = aem.aem_configmgr('./source_api.yaml', 'api_dest.yaml')
+    result = configmgr.get_all_configuration_nodes
+
 Bundle:
 
     # stop bundle

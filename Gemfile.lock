@@ -10,8 +10,6 @@ GEM
     jaro_winkler (1.5.2)
     json (2.2.0)
     mini_portile2 (2.4.0)
-    nokogiri (1.10.3)
-      mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     openssl (2.1.2)
     parallel (1.17.0)
@@ -58,8 +56,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri (= 1.10.3)
-  nori (= 2.6.0)
   openssl (= 2.1.2)
   retries (= 0.0.5)
   rspec (= 3.8.0)

@@ -45,8 +45,6 @@ module RubyAem
       # @param Configuration nodes operation id
       # @return Hash with configuration nodes post schema
       def setup_config_node_post_schema(operation_id)
-
-        config_node_post_schema =
         {
           'post' => {
             'parameters' => [
@@ -56,31 +54,31 @@ module RubyAem
                 'schema' => {
                   'type' => 'boolean'
                 }
-              },{
+              }, {
                 'name' => 'apply',
                 'in' => 'query',
                 'schema' => {
                   'type' => 'boolean'
                 }
-              },{
+              }, {
                 'name' => 'delete',
                 'in' => 'query',
                 'schema' => {
                   'type' => 'boolean'
                 }
-              },{
+              }, {
                 'name' => 'action',
                 'in' => 'query',
                 'schema' => {
                   'type' => 'string'
                 }
-              },{
+              }, {
                 'name' => '$location',
                 'in' => 'query',
                 'schema' => {
                   'type' => 'string'
                 }
-              },{
+              }, {
                 'name' => 'propertylist',
                 'in' => 'query',
                 'style' => 'form',
@@ -99,30 +97,29 @@ module RubyAem
               'console'
             ],
             'responses' => {
-                '200' => {
-                      'description' => "Successfully retrieved configuration parameters",
-                      'content' => {
-                                'application/json' => {
-                                  'schema' => {
-                                    '$ref' => "#/components/schemas/#{operation_id}Info"
-                                  }
-                                }
-                      }
-                },
-                'default' => {
-                      'description' => "Default response",
-                      'content' => {
-                                'application/json' => {
-                                  'schema' => {
-                                    'type' => 'string'
-                                  }
-                                }
-                      }
+              '200' => {
+                'description' => 'Successfully retrieved configuration parameters',
+                'content' => {
+                  'application/json' => {
+                    'schema' => {
+                      '$ref' => "#/components/schemas/#{operation_id}Info"
+                    }
+                  }
+                }
+              },
+              'default' => {
+                'description' => 'Default response',
+                'content' => {
+                  'application/json' => {
+                    'schema' => {
+                      'type' => 'string'
+                    }
+                  }
+                }
               }
             }
           }
         }
-        config_node_post_schema
       end
 
       # Setup configuration node property items schema
@@ -130,7 +127,6 @@ module RubyAem
       # @param Configuration node property item value
       # @return Hash with configuration nodes property items schema
       def setup_config_node_property_response_schema(config_node_property_type)
-        config_node_property_response_schema =
         {
           'type' => 'object',
           'properties' => {
@@ -157,7 +153,6 @@ module RubyAem
             }
           }
         }
-        config_node_property_response_schema
       end
 
       # Setup configuration node property items schema for
@@ -166,7 +161,6 @@ module RubyAem
       # @param Configuration node property item value
       # @return Hash with configuration nodes property items schema
       def setup_config_node_property_response_dropdown_schema(config_node_property_type)
-        config_node_property_response_schema =
         {
           'type' => 'object',
           'properties' => {
@@ -187,11 +181,9 @@ module RubyAem
               'description' => 'Property value',
               'type' => 'array',
               'items' => {
-                'anyOf' => [
-                  'string',
-                  'integer'
-                ]
-                }
+                'anyOf' =>
+                  %w[string integer]
+              }
             },
             'description' => {
               'description' => 'Property description',
@@ -199,22 +191,21 @@ module RubyAem
             }
           }
         }
-        config_node_property_response_schema
       end
 
       # Setup configuration node property items schema for
       # Array property items
       #
       # @return Hash with configuration nodes property items schema Array
-      def setup_config_node_property_array_response_schema()
+      def setup_config_node_property_array_response_schema
         config_node_property_array_response_schema =
-        {
-          'description' => 'Property value',
-          'type' => 'array',
-          'items' => {
-            'type' => 'string'
+          {
+            'description' => 'Property value',
+            'type' => 'array',
+            'items' => {
+              'type' => 'string'
+            }
           }
-        }
         setup_config_node_property_response_schema(config_node_property_array_response_schema)
       end
 
@@ -222,21 +213,19 @@ module RubyAem
       # property items with a drop-down menu
       #
       # @return Hash with configuration nodes property items schema drop-down
-      def setup_config_node_property_dropdown_response_schema()
+      def setup_config_node_property_dropdown_response_schema
         config_node_property_dropdown_response_schema =
-        {
-          'description' => 'Property value',
-          'type' => 'object',
-          'items' => {
-            'type' => 'array',
+          {
+            'description' => 'Property value',
+            'type' => 'object',
             'items' => {
-              'anyOf' => [
-                'string',
-                'integer'
-              ]
+              'type' => 'array',
+              'items' => {
+                'anyOf' =>
+                  %w[string integer]
+              }
             }
           }
-        }
         setup_config_node_property_response_dropdown_schema(config_node_property_dropdown_response_schema)
       end
 
@@ -244,54 +233,54 @@ module RubyAem
       # Boolean property items
       #
       # @return Hash with configuration nodes property items schema Boolean
-      def setup_config_node_property_boolean_response_schema()
-          config_node_property_boolean_response_schema =
+      def setup_config_node_property_boolean_response_schema
+        config_node_property_boolean_response_schema =
           {
             'description' => 'Property value',
             'type' => 'boolean'
           }
 
-          setup_config_node_property_response_schema(config_node_property_boolean_response_schema)
+        setup_config_node_property_response_schema(config_node_property_boolean_response_schema)
       end
 
       # Setup configuration node property items schema for
       # Integer property items
       #
       # @return Hash with configuration nodes property items schema Integer
-      def setup_config_node_property_integer_response_schema()
-          config_node_property_integer_response_schema =
+      def setup_config_node_property_integer_response_schema
+        config_node_property_integer_response_schema =
           {
             'description' => 'Property value',
             'type' => 'integer'
           }
 
-          setup_config_node_property_response_schema(config_node_property_integer_response_schema)
+        setup_config_node_property_response_schema(config_node_property_integer_response_schema)
       end
 
       # Setup configuration node property items schema for
       # Float property items
       #
       # @return Hash with configuration nodes property items schema Float
-      def setup_config_node_property_float_response_schema()
-          config_node_property_float_response_schema =
+      def setup_config_node_property_float_response_schema
+        config_node_property_float_response_schema =
           {
             'description' => 'Property value',
             'type' => 'number'
           }
 
-          setup_config_node_property_response_schema(config_node_property_float_response_schema)
+        setup_config_node_property_response_schema(config_node_property_float_response_schema)
       end
 
       # Setup configuration node property items schema for
       # String property items
       #
       # @return Hash with configuration nodes property items schema String
-      def setup_config_node_property_string_response_schema()
-          config_node_property_string_response_schema =
-        {
-          'description' => 'Property value',
-          'type' => 'string'
-        }
+      def setup_config_node_property_string_response_schema
+        config_node_property_string_response_schema =
+          {
+            'description' => 'Property value',
+            'type' => 'string'
+          }
         setup_config_node_property_response_schema(config_node_property_string_response_schema)
       end
 
@@ -300,48 +289,48 @@ module RubyAem
       # @param Dictionary containing the config node property
       # @return Hash with configuration nodes property post schema
       def setup_config_node_property_post_schema(config_node_property)
-
         # Save items  in config_node_property in new variables
         config_node_property_name = config_node_property[0]
         config_node_property_type = get_config_node_property_type(config_node_property)
 
         config_node_property_type_schema = case config_node_property_type
-        when Integer
-          {
-            'type' => 'integer'
-          }
-        when Float
-          {
-            'type' => 'number'
-          }
-        when String
-          {
-            'type' => 'string'
-          }
-        when [true].include?(config_node_property_type)
-          {
-            'type' => 'boolean'
-          }
-        when Array
-          {
-            'type' => 'array',
-            'items' =>
-            {
-              'type' => 'string'
-            }
-          }
-        else
-          p 'ERROR:'
-          p 'config node property type unknown.'
-          p "Config node property type I got was #{config_node_property_type}"
-          exit 1
-        end
+                                           when Integer
+                                             {
+                                               'type' => 'integer'
+                                             }
+                                           when Float
+                                             {
+                                               'type' => 'number'
+                                             }
+                                           when String
+                                             {
+                                               'type' => 'string'
+                                             }
+                                           when [true].include?(config_node_property_type)
+                                             {
+                                               'type' => 'boolean'
+                                             }
+                                           when Array
+                                             {
+                                               'type' => 'array',
+                                               'items' =>
+                                               {
+                                                 'type' => 'string'
+                                               }
+                                             }
+                                           else
+                                             p 'ERROR:'
+                                             p 'config node property type unknown.'
+                                             p "Config node property type I got was #{config_node_property_type}"
+                                             exit 1
+                                           end
 
-        config_node_property_post_schema = {
-          'name' => config_node_property_name,
-          'in' => 'query',
-          'schema' => config_node_property_type_schema
-        }
+        config_node_property_post_schema =
+          {
+            'name' => config_node_property_name,
+            'in' => 'query',
+            'schema' => config_node_property_type_schema
+          }
 
         config_node_property_post_schema
       end
@@ -378,13 +367,13 @@ module RubyAem
         end
 
         config_node_property_type_response_schema =
-        {
-          "#{config_node_property_name}" =>
           {
-            'description' => config_node_property_description,
-            '$ref' => "#/components/schemas/#{config_node_property_type_reponse_schema_name}"
+            config_node_property_name.to_s =>
+            {
+              'description' => config_node_property_description,
+              '$ref' => "#/components/schemas/#{config_node_property_type_reponse_schema_name}"
+            }
           }
-        }
 
         config_node_property_type_response_schema
       end
@@ -393,7 +382,7 @@ module RubyAem
       # all configuration nodes
       #
       # @return RubyAem::Result
-      def get_configmgr()
+      def get_configmgr
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
@@ -403,14 +392,14 @@ module RubyAem
       # @return Hash with all values for specified configuration node
       def get_config_node(config_node_id)
         # Make config node id html compatible
-        config_node_id_url = config_node_id.gsub(' ','%20')
+        config_node_id_url = config_node_id.gsub(' ', '%20')
 
         request = Typhoeus::Request.new(
           "#{@scheme}://#{@host}/system/console/configMgr/#{config_node_id_url}",
           method: :post,
-          body: "this is a request body",
-          params: { post: "true" },
-          headers: { ContentType: "application/json"},
+          body: 'this is a request body',
+          params: { post: 'true' },
+          headers: { ContentType: 'application/json' },
           userpwd: "#{@username}:#{@password}"
         )
         response_body = request.run.body
@@ -458,11 +447,10 @@ module RubyAem
           case config_node_property_value
           when Array
             # Multi-String
-            config_node_property_type_value = [
-            ]
+            config_node_property_type_value = []
           else String
-              # String
-              config_node_property_type_value = 'string'
+            # String
+            config_node_property_type_value = 'string'
           end
         when 2 # Long
           config_node_property_type_value = 1
@@ -475,17 +463,14 @@ module RubyAem
         when 12 # Secrets
           config_node_property_type_value = 'string'
         when Hash # Hash
-            # Check if values in the config property are a string or integer
-            config_node_property_values.each do | config_node_property_value |
-              @config_node_property_value_integer = config_node_property_value.match?(/^\d/)
-            end
+          # Check if values in the config property are a string or integer
+          config_node_property_values.each do |value|
+            @config_node_property_value_integer = value.match?(/^\d/)
+          end
 
-            # Set config property type schema
-            if @config_node_property_value_integer
-              config_node_property_type_value = 1
-            else
-              config_node_property_type_value = 'string'
-            end
+          # Set config property type schema
+          config_node_property_type_value = 1 if @config_node_property_value_integer
+          config_node_property_type_value = 'string' unless @config_node_property_value_integer
         else
           p 'ERROR:'
           p 'config node property unknown. I only know about 1, 2, 3, 7, 11 & 12.'
@@ -531,8 +516,8 @@ module RubyAem
             # Multi-String
             config_node_property_type_response_value = []
           else String
-              # String
-              config_node_property_type_response_value = 'string'
+            # String
+            config_node_property_type_response_value = 'string'
           end
         when 2 # Long
           config_node_property_type_response_value = 1
@@ -545,7 +530,7 @@ module RubyAem
         when 12 # Secrets
           config_node_property_type_response_value = 'string'
         when Hash # Hash
-            config_node_property_type_response_value = {}
+          config_node_property_type_response_value = {}
         else
           p 'ERROR:'
           p 'config node property unknown. I only know about 1, 2, 3, 7, 11 & 12.'
@@ -564,30 +549,31 @@ module RubyAem
       # @return configuration node ID name without special char and
       #         with each char after a special char in CAPITAL character.
       def gen_operation_id(config_node_id)
-
         # Clone config node id so we get a new object_id to alter with
         operation_id_raw = config_node_id.clone
 
         # Convert each first char after non alphabetical char to UPPERCASE
-        operation_id_uppercase_after_dots = operation_id_raw.gsub!(/(\W[a-zA-Z])/){ $1.upcase }
+        # operation_id_uppercase_after_dots = operation_id_raw.gsub!(/(\W[a-zA-Z])/){ $1.upcase }
+        operation_id_uppercase_after_dots = operation_id_raw.gsub!(/(\W[a-zA-Z])/) { Regexp.last_match(1).upcase }
 
         # Replace each special char with '.' if config_node_id_uppercase_after_dots is not nil
-        operation_id_raw =  operation_id_uppercase_after_dots.gsub(/\W/, '') unless operation_id_uppercase_after_dots.nil?
+        operation_id_raw = operation_id_uppercase_after_dots.gsub(/\W/, '') unless operation_id_uppercase_after_dots.nil?
 
         # If config_node_id doesn't has any non alphabetical char we return the
         # operation_id_raw
         return operation_id_raw if operation_id_uppercase_after_dots.nil?
 
         # Convert first char to lower case
-        operation_id = operation_id_raw.gsub!(/(^.)/){ $1.downcase }
+        # operation_id = operation_id_raw.gsub!(/(^.)/) { $1.downcase }
+        operation_id = operation_id_raw.gsub!(/(^.)/) { Regexp.last_match(1).downcase }
 
         operation_id
       end
 
       # Generate a template dict for post method
       #
-      #@returns Returns a dict template to be used by the post method
-      def generate_config_nodes_post_dict_template()
+      # @returns Returns a dict template to be used by the post method
+      def generate_config_nodes_post_dict_template
         {
           'paths' =>
           {
@@ -601,20 +587,19 @@ module RubyAem
 
       # Generate a template dict for response schema
       #
-      #@returns Returns a dict template to be used to setup the response schema
-      def generate_config_nodes_response_schema_dict_template()
+      # @returns Returns a dict template to be used to setup the response schema
+      def generate_config_nodes_response_schema_dict_template
         {
           'components' =>
           {
             'schemas' =>
             {
-              'configNodePropertyInteger' => setup_config_node_property_integer_response_schema(),
-              'configNodePropertyFloat' => setup_config_node_property_float_response_schema(),
-              'configNodePropertyArray' => setup_config_node_property_array_response_schema(),
-              'configNodePropertyDropDown' => setup_config_node_property_dropdown_response_schema(),
-              'configNodePropertyBoolean' => setup_config_node_property_boolean_response_schema(),
-              'configNodePropertyString' => setup_config_node_property_string_response_schema(),
-
+              'configNodePropertyInteger' => setup_config_node_property_integer_response_schema,
+              'configNodePropertyFloat' => setup_config_node_property_float_response_schema,
+              'configNodePropertyArray' => setup_config_node_property_array_response_schema,
+              'configNodePropertyDropDown' => setup_config_node_property_dropdown_response_schema,
+              'configNodePropertyBoolean' => setup_config_node_property_boolean_response_schema,
+              'configNodePropertyString' => setup_config_node_property_string_response_schema
             }
           }
         }
@@ -622,15 +607,15 @@ module RubyAem
 
       # Generate a list of all found configuration nodes.
       #
-      #@params RubyAem::Result.data from method get_configmgr()
-      #@returns Returns a list of all found pids
+      # @params RubyAem::Result.data from method get_configmgr
+      # @returns Returns a list of all found pids
       def generate_config_node_pid_list(data)
         # This is the heart of the whole function
         # it only works because we are checking for the
         # value configData in the page source code which
         # contains all config nodes which exists in AEM.
         config_data = data.match('configData(.*)')
-        sub_config_data = config_data.to_s.sub('configData = ','').gsub(/\;$/,'')
+        sub_config_data = config_data.to_s.sub('configData = ', '').gsub(/\;$/, '')
         config_data_json = JSON.parse(sub_config_data)
         config_nodes_pids = config_data_json['pids']
         config_nodes_fpids = config_data_json['fpids']
@@ -638,26 +623,25 @@ module RubyAem
         config_nodes_pids.concat(config_nodes_fpids)
       end
 
-      def get_all_configuration_nodes()
+      def get_all_configuration_nodes
         ############################################################
         # To-Do:
         # * Check for default values
         ############################################################
-        data, status_code, headers = get_configmgr()
+        data, _status_code, _headers = get_configmgr
         config_nodes_pids = generate_config_node_pid_list(data.response.body)
 
         ############################################################
         # Create dictionary templates
         ############################################################
         # Create config nodes post dictionary template
-        config_nodes_post_dict = generate_config_nodes_post_dict_template()
+        config_nodes_post_dict = generate_config_nodes_post_dict_template
 
         # Create config nodes response schema dictionary template
-        config_nodes_response_schema_dict = generate_config_nodes_response_schema_dict_template()
-
+        config_nodes_response_schema_dict = generate_config_nodes_response_schema_dict_template
 
         # Iterate through the full list of all config nodes
-        config_nodes_pids.each do | config_node |
+        config_nodes_pids.each do |config_node|
           # Set config node id
           config_node_id = config_node['id']
 
@@ -669,60 +653,61 @@ module RubyAem
           # if config_node_json['factoryPid'] is not empty we know this is a
           # pre-configured configuration node and we can skip it as we only
           # want parent configuration node in our OpenAPI Spec
-          next unless "#{config_node_json['factoryPid']}".to_s.strip.empty?
+
+          next unless config_node_json['factoryPid'].to_s.strip.empty?
 
           # Generate Operations ID for Swagger
           operation_id = gen_operation_id(config_node_id)
 
           # Setup config node dictionary template
-          config_nodes_post_dict["paths"]["/system/console/configMgr/#{config_node_id}"] = setup_config_node_post_schema(operation_id)
+          config_nodes_post_dict['paths']["/system/console/configMgr/#{config_node_id}"] = setup_config_node_post_schema(operation_id)
 
           # Setup config node response schema dictionary template
           config_nodes_response_schema_dict['components']['schemas']["#{operation_id}Info"] =
-          {
-            'type' => 'object',
-            'properties' => {
+            {
+              'type' => 'object',
+              'properties' => {
 
+              }
             }
-          }
           config_nodes_response_schema_dict['components']['schemas']["#{operation_id}Properties"] =
-          {
-            'type' => 'object',
-            'properties' => {
+            {
+              'type' => 'object',
+              'properties' => {
 
+              }
             }
-          }
 
           # Create config node response schema for each found config node item
-          config_node_json.each do | config_node_item |
+          config_node_json.each do |config_node_item|
             # Setup config node response schema
             # Since the PID contains two bundle locations items
             # bundle_location and bundleLocation we only want to know
             # bundle_location, since bundleLocation get's translated to
             # bundle_location as well which would than overwrite
             # the previous set bundle_location param
-            next if "#{config_node_item[0]}".eql?('bundleLocation')
+            next if config_node_item[0].to_s.eql?('bundleLocation')
 
-            config_nodes_response_schema_dict['components']['schemas']["#{operation_id}Info"]['properties']["#{config_node_item[0]}"] =
-            {
-              'type' => 'string'
-            }
+            config_nodes_response_schema_dict['components']['schemas']["#{operation_id}Info"]['properties'][config_node_item[0].to_s] =
+              {
+                'type' => 'string'
+              }
           end
 
           # Setup config node property response schema dict
           config_nodes_response_schema_dict['components']['schemas']["#{operation_id}Info"]['properties']['properties'] =
-          {
-            '$ref' => "#/components/schemas/#{operation_id}Properties"
-          }
+            {
+              '$ref' => "#/components/schemas/#{operation_id}Properties"
+            }
 
           # Iterate through each found config node property to
           # setup config node properties post & response schema dict
-          config_node_json['properties'].each do | config_node_property |
+          config_node_json['properties'].each do |config_node_property|
             # Setup config node property post schema
             config_node_property_post_schema = setup_config_node_property_post_schema(config_node_property)
 
             # check if config node post paramter already exists
-            config_nodes_post_dict["paths"]["/system/console/configMgr/#{config_node_id}"]['post']['parameters'].each do | config_node_name |
+            config_nodes_post_dict['paths']["/system/console/configMgr/#{config_node_id}"]['post']['parameters'].each do |config_node_name|
               @config_node_post_parameter_exist = false
               @config_node_post_parameter_exist = true if config_node_name['name'].eql?(config_node_property_post_schema['name'])
               break if @config_node_post_parameter_exist.eql?(true)
@@ -731,7 +716,7 @@ module RubyAem
             next if @config_node_post_parameter_exist.eql?(true)
 
             # Add config node property post schema to config node post schema if it does not already exists
-            config_nodes_post_dict["paths"]["/system/console/configMgr/#{config_node_id}"]['post']['parameters'].push(config_node_property_post_schema)
+            config_nodes_post_dict['paths']["/system/console/configMgr/#{config_node_id}"]['post']['parameters'].push(config_node_property_post_schema)
 
             # Set up config node property response schema
             config_node_property_response_schema = setup_config_node_property_type_response_schema(config_node_property)
@@ -743,20 +728,19 @@ module RubyAem
         # We need to merge our created dicts where
         config_nodes_post_dict.merge!(config_nodes_response_schema_dict)
 
-
-        # yaml_config_nodes_response_schema_dict = config_nodes_post_dict.to_yaml()
+        # yaml_config_nodes_response_schema_dict = config_nodes_post_dict.to_yaml
         api_spec_yaml = YAML.load_file(@api_source_file)
 
-        api_spec_paths = config_nodes_post_dict["paths"].merge!(api_spec_yaml["paths"])
+        api_spec_paths = config_nodes_post_dict['paths'].merge!(api_spec_yaml['paths'])
         api_spec_components_schema = config_nodes_post_dict['components']['schemas'].merge!(api_spec_yaml['components']['schemas'])
 
-        api_spec_yaml["paths"].merge!(api_spec_paths)
+        api_spec_yaml['paths'].merge!(api_spec_paths)
         api_spec_yaml['components']['schemas'].merge!(api_spec_components_schema)
 
         api_spec = api_spec_yaml
 
-        File.open(@api_dest_file,"w") do |file|
-            file.write api_spec.to_yaml
+        File.open(@api_dest_file, 'w') do |file|
+          file.write api_spec.to_yaml
         end
       end
     end

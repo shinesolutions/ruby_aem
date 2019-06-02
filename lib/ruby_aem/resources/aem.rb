@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'nori'
+require 'rexml/document'
 require 'retries'
 require 'ruby_aem/error'
 
@@ -270,7 +270,7 @@ module RubyAem
       # @return RubyAem::Result
       def get_packages
         result = @client.call(self.class, __callee__.to_s, @call_params)
-        packages = Nori.new.parse(result.data.to_s)['packages']['package']
+        packages = XPath.match(Document.new(result.data.to_s), "//packages/package")
         result_copy = RubyAem::Result.new(result.message, result.response)
         result_copy.data = packages
         result_copy

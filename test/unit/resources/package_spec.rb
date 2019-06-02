@@ -1,6 +1,8 @@
 require_relative '../spec_helper'
 require_relative '../../../lib/ruby_aem/resources/package'
-require 'nokogiri'
+
+require 'rexml/document'
+include REXML
 
 describe 'Package' do
   before do
@@ -194,7 +196,7 @@ describe 'Package' do
 
   describe 'test get_versions' do
     it 'should retrieve all versions when the package has multiple versions' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -227,7 +229,7 @@ describe 'Package' do
     end
 
     it 'should retrieve the version when the package only has one version' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -254,7 +256,7 @@ describe 'Package' do
     end
 
     it 'should retrieve empty array when the package does not exist at all' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>otherpackagegroup</group>' \
@@ -282,7 +284,7 @@ describe 'Package' do
 
   describe 'test exists' do
     it 'should return true result data when package exists on the list' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -308,7 +310,7 @@ describe 'Package' do
     end
 
     it 'should return false result data when package does not exist on the list' do
-      mock_data_list_all = Nokogiri::XML('')
+      mock_data_list_all = Document.new('')
       mock_result_list_all = double('mock_result_list_all')
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
@@ -328,7 +330,7 @@ describe 'Package' do
 
   describe 'test is_uploaded' do
     it 'should return true result data when package exists on the list' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -354,7 +356,7 @@ describe 'Package' do
     end
 
     it 'should return false result data when package does not exist on the list' do
-      mock_data_list_all = Nokogiri::XML('')
+      mock_data_list_all = Document.new('')
       mock_result_list_all = double('mock_result_list_all')
       expect(mock_result_list_all).to receive(:data).and_return(mock_data_list_all)
 
@@ -374,7 +376,7 @@ describe 'Package' do
 
   describe 'test is_installed' do
     it 'should return true result data when package has lastUnpackedBy attribute value' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -401,7 +403,7 @@ describe 'Package' do
     end
 
     it 'should return false result  data when package has null lastUnpackedBy attribute value' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -428,7 +430,7 @@ describe 'Package' do
     end
 
     it 'should return false result  data when package has null lastUnpackedBy attribute value' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -455,7 +457,7 @@ describe 'Package' do
     end
 
     it 'should return false result  data when checked package segment does not exist at all' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>otherpackagegroup</group>' \
@@ -484,7 +486,7 @@ describe 'Package' do
 
   describe 'test is_empty' do
     it 'should return true result data when package has size attribute value zero' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -511,7 +513,7 @@ describe 'Package' do
     end
 
     it 'should return false result  data when package has size attribute value non-zero' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -540,7 +542,7 @@ describe 'Package' do
 
   describe 'test is_built' do
     it 'should return true result data when package exists and not empty' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -568,7 +570,7 @@ describe 'Package' do
     end
 
     it 'should return false result data when package exists and empty' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -596,7 +598,7 @@ describe 'Package' do
     end
 
     it 'should return false result data when package does not exist' do
-      mock_data_list_all = Nokogiri::XML(
+      mock_data_list_all = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>otherpackagegroup</group>' \
@@ -640,7 +642,7 @@ describe 'Package' do
         }
       )
 
-      mock_data_list_all_not_installed = Nokogiri::XML('')
+      mock_data_list_all_not_installed = Document.new('')
       mock_result_list_all_not_installed = double('mock_result_list_all_not_installed')
       expect(mock_result_list_all_not_installed).to receive(:data).and_return(mock_data_list_all_not_installed)
 
@@ -659,7 +661,7 @@ describe 'Package' do
         }
       ).and_return(mock_result_list_all_not_installed)
 
-      mock_data_list_all_uploaded = Nokogiri::XML(
+      mock_data_list_all_uploaded = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -712,7 +714,7 @@ describe 'Package' do
         recursive: true
       )
 
-      mock_data_list_all_not_installed = Nokogiri::XML(
+      mock_data_list_all_not_installed = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -734,7 +736,7 @@ describe 'Package' do
         recursive: true
       ).and_return(mock_result_list_all_not_installed)
 
-      mock_data_list_all_installed = Nokogiri::XML(
+      mock_data_list_all_installed = Document.new(
         '<packages>' \
         '  <package>' \
         '    <group>somepackagegroup</group>' \
@@ -772,7 +774,7 @@ describe 'Package' do
           package_version: '1.2.3'
         )
 
-        mock_data_list_all_uploaded = Nokogiri::XML(
+        mock_data_list_all_uploaded = Document.new(
           '<packages>' \
           '  <package>' \
           '    <group>somepackagegroup</group>' \
@@ -792,7 +794,7 @@ describe 'Package' do
           package_version: '1.2.3'
         ).and_return(mock_result_list_all_uploaded)
 
-        mock_data_list_all_not_uploaded = Nokogiri::XML(
+        mock_data_list_all_not_uploaded = Document.new(
           '<packages>' \
           '</packages>'
         )
@@ -824,7 +826,7 @@ describe 'Package' do
           package_version: '1.2.3'
         )
 
-        mock_data_list_all_exists_but_empty = Nokogiri::XML(
+        mock_data_list_all_exists_but_empty = Document.new(
           '<packages>' \
           '  <package>' \
           '    <group>somepackagegroup</group>' \
@@ -846,7 +848,7 @@ describe 'Package' do
           package_version: '1.2.3'
         ).and_return(mock_result_list_all_exists_but_empty)
 
-        mock_data_list_all_exists_but_not_empty = Nokogiri::XML(
+        mock_data_list_all_exists_but_not_empty = Document.new(
           '<packages>' \
           '  <package>' \
           '    <group>somepackagegroup</group>' \

@@ -642,6 +642,17 @@ Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.i
       puts e.result.data
     end
 
+Tools
+______
+tools/aem_configmgr_openapi_generator.rb:
+  Description:
+  Auto Generate OpenAPI v3 specification file with all configuration nodes available in AEM.
+
+  Usage:
+  `./aem_configmgr_openapi_generator.rb --in conf/api.yml --out conf/api2.yml`
+
+
+
 Testing
 -------
 

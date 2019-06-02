@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'nokogiri'
+require 'rexml/document'
+
+include REXML
 
 module RubyAem
   # Response handlers for XML payload.
@@ -24,15 +26,15 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.xml_package_list(response, response_spec, call_params)
-      xml = Nokogiri::XML(response.body)
+      xml = Document.new(response.body)
 
-      status_code = xml.xpath('//crx/response/status/@code').to_s
-      status_text = xml.xpath('//crx/response/status/text()').to_s
+      status_code = XPath.first(xml, '//crx/response/status/@code').to_s
+      status_text = XPath.first(xml, '//crx/response/status/text()').to_s
 
       if status_code == '200' && status_text == 'ok'
         message = response_spec['message'] % call_params
         result = RubyAem::Result.new(message, response)
-        result.data = xml.xpath('//crx/response/data/packages')
+        result.data = XPath.first(xml, '//crx/response/data/packages')
       else
         result = RubyAem::Result.new("Unable to retrieve package list, getting status code #{status_code} and status text #{status_text}", response)
       end

@@ -14,11 +14,11 @@
 
 require 'rexml/document'
 
-include REXML
-
 module RubyAem
   # Response handlers for XML payload.
   module Handlers
+    include REXML
+
     # Handle package list XML by removing non-packages data.
     #
     # @param response HTTP response containing status_code, body, and headers

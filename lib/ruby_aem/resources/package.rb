@@ -14,12 +14,12 @@
 
 require 'retries'
 require 'rexml/document'
-include REXML
 
 module RubyAem
   module Resources
     # Package class contains API calls related to managing an AEM package.
     class Package
+      include REXML
       # Initialise a package.
       # Package name and version will then be used to construct the package file in the filesystem.
       # E.g. package name 'somepackage' with version '1.2.3' will translate to somepackage-1.2.3.zip in the filesystem.

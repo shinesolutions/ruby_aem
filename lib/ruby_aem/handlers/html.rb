@@ -14,11 +14,10 @@
 
 require 'rexml/document'
 
-include REXML
-
 module RubyAem
   # Response handlers for HTML payload.
   module Handlers
+    include REXML
     # Parse authorizable ID from response body data.
     # This is used to get the authorizable ID of a newly created user/group.
     #

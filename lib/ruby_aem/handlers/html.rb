@@ -98,6 +98,16 @@ module RubyAem
       end
     end
 
+    # Sanitise HTML string but only when the regex to be replaced actually
+    # exists. The intention for sanitising the HTML is to strip out unused
+    # invalid HTML tags, so that the remaining HTML is valid for rexml to parse.
+    # It's important to not assume that the regex exists due to the possibility
+    # of future AEM versions to produce a different response body that might /
+    # might not contain the invalid HTML tags on the older AEM versions.
+    #
+    # @param html HTML response body string
+    # @param regex Ruby regular expression, all regex matches will be replaced
+    # @param replacement all existence of the regex will be replaced with this string
     def self._sanitise_html(html, regex, replacement)
       if regex.match?(html)
         html.gsub!(regex, replacement)

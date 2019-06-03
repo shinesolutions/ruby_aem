@@ -13,9 +13,13 @@
 # limitations under the License.
 
 require 'rexml/document'
+require 'sanitize'
 
 module RubyAem
   # Response handlers for HTML payload.
+  # AEM response body needs to be sanitized due to missing closing HTML tags
+  # scattered across many AEM web pages, so for this HTML handler, it whitelists
+  # only the HTML tags that need to be parsed.
   module Handlers
     include REXML
     # Parse authorizable ID from response body data.
@@ -26,7 +30,8 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_authorizable_id(response, response_spec, call_params)
-      html = Document.new(response.body)
+      sanitized_body = Sanitize.document(response.body, elements: %w[html title])
+      html = Document.new(sanitized_body)
       authorizable_id = XPath.first(html, '//title/text()').to_s
       authorizable_id.slice! "Content created #{call_params[:path]}"
       call_params[:authorizable_id] = authorizable_id.sub(%r{^/}, '')
@@ -46,7 +51,8 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_package_service_allow_error(response, response_spec, call_params)
-      html = Document.new(response.body)
+      sanitized_body = Sanitize.document(response.body, elements: %w[html title p pre])
+      html = Document.new(sanitized_body)
       title = XPath.first(html, '//title/text()').to_s
       desc = XPath.first(html, '//p/text()').to_s
       reason = XPath.first(html, '//pre/text()').to_s
@@ -75,7 +81,8 @@ module RubyAem
         raise RubyAem::Error.new(message, result)
       end
 
-      html = Document.new(response.body)
+      sanitized_body = Sanitize.document(response.body, elements: %w[html body div table tr td b font])
+      html = Document.new(sanitized_body)
       user = XPath.first(html, '//body/div/table/tr/td/b/text()').to_s
       desc = XPath.first(html, '//body/div/table/tr/td/font/text()').to_s
 

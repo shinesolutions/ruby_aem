@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'openssl', '2.1.2'
 gem 'retries', '0.0.5'
+gem 'sanitize', '5.0.0'
 gem 'swagger_aem', '3.0.0'
 
 gem 'rspec', '3.8.0', require: false

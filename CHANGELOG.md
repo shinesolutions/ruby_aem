@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
-- Replace nokogiri with rexml + sanitize for html and xml handlers #26
+- Replace nokogiri with rexml + custom sanitisation for html and xml handlers #26
 
 ## 3.0.0 - 2019-05-14
 ### Added

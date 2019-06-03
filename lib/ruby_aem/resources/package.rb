@@ -13,11 +13,13 @@
 # limitations under the License.
 
 require 'retries'
+require 'rexml/document'
 
 module RubyAem
   module Resources
     # Package class contains API calls related to managing an AEM package.
     class Package
+      include REXML
       # Initialise a package.
       # Package name and version will then be used to construct the package file in the filesystem.
       # E.g. package name 'somepackage' with version '1.2.3' will translate to somepackage-1.2.3.zip in the filesystem.
@@ -160,11 +162,11 @@ module RubyAem
       # @return RubyAem::Result
       def get_versions
         packages = list_all.data
-        package_versions = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\"]")
+        package_versions = XPath.match(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\"]")
 
         versions = []
         package_versions.each do |package|
-          version = package.xpath('version/text()')
+          version = XPath.first(package, 'version/text()')
           versions.push(version.to_s) if version.to_s != ''
         end
 
@@ -181,7 +183,7 @@ module RubyAem
       # @return RubyAem::Result
       def exists
         packages = list_all.data
-        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        package = XPath.first(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
 
         if package.to_s != ''
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} exists"
@@ -219,8 +221,8 @@ module RubyAem
       # @return RubyAem::Result
       def is_installed
         packages = list_all.data
-        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
-        last_unpacked_by = package.xpath('lastUnpackedBy')
+        package = XPath.first(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        last_unpacked_by = XPath.first(package, 'lastUnpackedBy') if package
 
         if !['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
@@ -241,8 +243,8 @@ module RubyAem
       # @return RubyAem::Result
       def is_empty
         packages = list_all.data
-        package = packages.xpath("//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
-        size = package.xpath('size/text()').to_s.to_i
+        package = XPath.first(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
+        size = XPath.first(package, 'size/text()').to_s.to_i
 
         if size.zero?
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is empty"

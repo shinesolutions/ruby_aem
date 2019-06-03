@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'nokogiri', '1.10.3'
-gem 'nori', '2.6.0'
 gem 'openssl', '2.1.2'
 gem 'retries', '0.0.5'
 gem 'swagger_aem', '3.0.0'

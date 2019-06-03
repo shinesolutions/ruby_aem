@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'nokogiri'
+require 'rexml/document'
 
 module RubyAem
   # Response handlers for HTML payload.
   module Handlers
+    include REXML
     # Parse authorizable ID from response body data.
     # This is used to get the authorizable ID of a newly created user/group.
     #
@@ -25,8 +26,8 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_authorizable_id(response, response_spec, call_params)
-      html = Nokogiri::HTML(response.body)
-      authorizable_id = html.xpath('//title/text()').to_s
+      html = Document.new(response.body)
+      authorizable_id = XPath.first(html, '//title/text()').to_s
       authorizable_id.slice! "Content created #{call_params[:path]}"
       call_params[:authorizable_id] = authorizable_id.sub(%r{^/}, '')
 
@@ -45,10 +46,10 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_package_service_allow_error(response, response_spec, call_params)
-      html = Nokogiri::HTML(response.body)
-      title = html.xpath('//title/text()').to_s
-      desc = html.xpath('//p/text()').to_s
-      reason = html.xpath('//pre/text()').to_s
+      html = Document.new(response.body)
+      title = XPath.first(html, '//title/text()').to_s
+      desc = XPath.first(html, '//p/text()').to_s
+      reason = XPath.first(html, '//pre/text()').to_s
 
       call_params[:title] = title
       call_params[:desc] = desc
@@ -74,9 +75,9 @@ module RubyAem
         raise RubyAem::Error.new(message, result)
       end
 
-      html = Nokogiri::HTML(response.body)
-      user = html.xpath('//body/div/table/tr/td/b/text()').to_s
-      desc = html.xpath('//body/div/table/tr/td/font/text()').to_s
+      html = Document.new(response.body)
+      user = XPath.first(html, '//body/div/table/tr/td/b/text()').to_s
+      desc = XPath.first(html, '//body/div/table/tr/td/font/text()').to_s
 
       if desc == 'Password successfully changed.'
         call_params[:user] = user

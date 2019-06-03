@@ -76,7 +76,6 @@ describe 'HTML Handler' do
         '      <td><font color="green">Password successfully changed.</font></td>' \
         '    </tr>' \
         '  </table>' \
-        '  </div>' \
         '</body>' \
         '</html>'
       status_code = nil
@@ -108,7 +107,6 @@ describe 'HTML Handler' do
         '      <td><font color="red">Failed to change password for user \'someuser\': Failed to change password: Old password does not match.</font></td>' \
         '    </tr>' \
         '  </table>' \
-        '  </div>' \
         '</body>' \
         '</html>'
       status_code = nil

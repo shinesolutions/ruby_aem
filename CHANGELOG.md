@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix swagger_aem dep to 3.1.0 in gemspec
+
 ## 3.2.0 - 2019-06-04
 ### Changed
 - Upgrade swagger_aem to 3.1.0

@@ -602,7 +602,7 @@ end
 # * Check for default values
 ############################################################
 configmgr = @client.aem_configmgr()
-data, _status_code, _headers = configmgr.get_configmgr
+data, _status_code, _headers = configmgr.get
 config_nodes_pids = generate_config_node_pid_list(data.response.body)
 
 ############################################################

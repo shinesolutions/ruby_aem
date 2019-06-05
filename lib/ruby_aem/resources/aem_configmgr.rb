@@ -33,7 +33,7 @@ module RubyAem
       # all configuration nodes
       #
       # @return RubyAem::Result
-      def get_configmgr
+      def get
         @client.call(self.class, __callee__.to_s, @call_params)
       end
     end

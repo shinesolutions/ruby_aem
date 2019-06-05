@@ -230,7 +230,7 @@ bundle:
           message: 'Bundle %{name} stopped'
 aemconfigmgr:
   actions:
-    get_configmgr:
+    get:
       api: console
       operation: getConfigMgr
       params:

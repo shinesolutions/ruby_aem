@@ -105,8 +105,8 @@ module RubyAem
     # Create an AEM ConfigMgr instance.
     #
     # @return new RubyAem::Resources::Aem instance
-    def aem_configmgr(api_source_file, api_dest_file)
-      RubyAem::Resources::AemConfigMgr.new(@client, api_source_file, api_dest_file)
+    def aem_configmgr()
+      RubyAem::Resources::AemConfigMgr.new(@client)
     end
 
     # Create a bundle instance.

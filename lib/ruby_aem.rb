@@ -32,6 +32,7 @@ require 'ruby_aem/resources/repository'
 require 'ruby_aem/resources/truststore'
 require 'ruby_aem/resources/user'
 require 'swagger_aem'
+require 'swagger_aem_osgi'
 require 'yaml'
 
 module RubyAem
@@ -65,8 +66,23 @@ module RubyAem
         ]
       }
 
+      SwaggerAemOsgiClient.configure { |swagger_conf|
+        [
+          swagger_conf.scheme = conf[:protocol],
+          swagger_conf.host = "#{conf[:host]}:#{conf[:port]}",
+          swagger_conf.username = conf[:username],
+          swagger_conf.password = conf[:password],
+          swagger_conf.timeout = conf[:timeout],
+          swagger_conf.debugging = conf[:debug],
+          swagger_conf.verify_ssl = conf[:verify_ssl],
+          swagger_conf.verify_ssl_host = conf[:verify_ssl],
+          swagger_conf.params_encoding = :multi
+        ]
+      }
+
       apis = {
         console: SwaggerAemClient::ConsoleApi.new,
+        configmgr: SwaggerAemOsgiClient::ConfigmgrApi.new,
         custom: SwaggerAemClient::CustomApi.new,
         cq: SwaggerAemClient::CqApi.new,
         crx: SwaggerAemClient::CrxApi.new,

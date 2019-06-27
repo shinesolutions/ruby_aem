@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new api client for configmgr api calls
+
+### Changed
+- Change SAML Api calls to use configmgr api
+
 ## 3.2.1 - 2019-06-05
 ### Fixed
 - Fix swagger_aem dep to 3.1.0 in gemspec

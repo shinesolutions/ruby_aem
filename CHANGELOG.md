@@ -10,9 +10,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new resource aem_configmgr
 
+## 3.2.1 - 2019-06-05
+### Fixed
+- Fix swagger_aem dep to 3.1.0 in gemspec
+
+## 3.2.0 - 2019-06-04
+### Changed
+- Upgrade swagger_aem to 3.1.0
+
+## 3.1.0 - 2019-06-03
+### Changed
+- Replace nokogiri with rexml + custom sanitisation for html and xml handlers [#26]
+
 ## 3.0.0 - 2019-05-14
 ### Added
 - Add application configuration file containing version number
+
+### Changed
 - Upgrade swagger_aem to 3.0.0
 
 ## 2.5.1 - 2019-02-02

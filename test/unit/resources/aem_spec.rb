@@ -1,6 +1,8 @@
 require_relative '../spec_helper'
 require_relative '../../../lib/ruby_aem/resources/aem'
 
+require 'rexml/document'
+
 describe 'Aem' do
   before do
     @mock_client = double('mock_client')
@@ -253,7 +255,7 @@ describe 'Aem' do
         mock_result_ok = double('mock_result_ok')
         expect(mock_result_ok).to receive(:message).and_return(mock_message)
         expect(mock_result_ok).to receive(:response).and_return(mock_response)
-        expect(mock_result_ok).to receive(:data).and_return(Nokogiri::XML(mock_packages_xml))
+        expect(mock_result_ok).to receive(:data).and_return(REXML::Document.new(mock_packages_xml))
         expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_packages', {}).and_return(mock_result_ok)
         aem = RubyAem::Resources::Aem.new(@mock_client)
         aem.get_packages

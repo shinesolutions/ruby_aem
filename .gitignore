@@ -5,3 +5,4 @@ bin
 coverage
 doc
 ruby_aem-*.gem
+.vscode

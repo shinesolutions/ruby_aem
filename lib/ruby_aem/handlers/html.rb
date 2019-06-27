@@ -12,11 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'nokogiri'
+require 'rexml/document'
 
 module RubyAem
   # Response handlers for HTML payload.
+  # AEM response body needs to be sanitized due to missing closing HTML tags
+  # scattered across many AEM web pages. The sanitisations are done manually
+  # using simple gsub call in order to avoid dependency to nokogiri which
+  # carries native compilation cost and security vulnerability on libxml
+  # dependency.
   module Handlers
+    include REXML
     # Parse authorizable ID from response body data.
     # This is used to get the authorizable ID of a newly created user/group.
     #
@@ -25,8 +31,9 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_authorizable_id(response, response_spec, call_params)
-      html = Nokogiri::HTML(response.body)
-      authorizable_id = html.xpath('//title/text()').to_s
+      sanitized_body = _sanitise_html(response.body, /<img.+">/, '')
+      html = Document.new(sanitized_body)
+      authorizable_id = XPath.first(html, '//title/text()').to_s
       authorizable_id.slice! "Content created #{call_params[:path]}"
       call_params[:authorizable_id] = authorizable_id.sub(%r{^/}, '')
 
@@ -45,10 +52,10 @@ module RubyAem
     # @param call_params API call parameters
     # @return RubyAem::Result
     def self.html_package_service_allow_error(response, response_spec, call_params)
-      html = Nokogiri::HTML(response.body)
-      title = html.xpath('//title/text()').to_s
-      desc = html.xpath('//p/text()').to_s
-      reason = html.xpath('//pre/text()').to_s
+      html = Document.new(response.body)
+      title = XPath.first(html, '//title/text()').to_s
+      desc = XPath.first(html, '//p/text()').to_s
+      reason = XPath.first(html, '//pre/text()').to_s
 
       call_params[:title] = title
       call_params[:desc] = desc
@@ -74,9 +81,11 @@ module RubyAem
         raise RubyAem::Error.new(message, result)
       end
 
-      html = Nokogiri::HTML(response.body)
-      user = html.xpath('//body/div/table/tr/td/b/text()').to_s
-      desc = html.xpath('//body/div/table/tr/td/font/text()').to_s
+      sanitized_body = _sanitise_html(response.body, /<input.+>/, '')
+      sanitized_body = _sanitise_html(sanitized_body, /< 0/, '&lt; 0')
+      html = Document.new(sanitized_body)
+      user = XPath.first(html, '//body/div/table/tr/td/b/text()').to_s
+      desc = XPath.first(html, '//body/div/table/tr/td/font/text()').to_s
 
       if desc == 'Password successfully changed.'
         call_params[:user] = user
@@ -86,6 +95,24 @@ module RubyAem
         message = desc
         result = RubyAem::Result.new(message, response)
         raise RubyAem::Error.new(message, result)
+      end
+    end
+
+    # Sanitise HTML string but only when the regex to be replaced actually
+    # exists. The intention for sanitising the HTML is to strip out unused
+    # invalid HTML tags, so that the remaining HTML is valid for rexml to parse.
+    # It's important to not assume that the regex exists due to the possibility
+    # of future AEM versions to produce a different response body that might /
+    # might not contain the invalid HTML tags on the older AEM versions.
+    #
+    # @param html HTML response body string
+    # @param regex Ruby regular expression, all regex matches will be replaced
+    # @param replacement all existence of the regex will be replaced with this string
+    def self._sanitise_html(html, regex, replacement)
+      if regex.match?(html)
+        html.gsub!(regex, replacement)
+      else
+        html
       end
     end
   end

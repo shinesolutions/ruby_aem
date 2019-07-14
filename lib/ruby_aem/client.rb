@@ -75,6 +75,8 @@ module RubyAem
         response = RubyAem::Response.new(status_code, data, headers)
       rescue SwaggerAemClient::ApiError => e
         response = RubyAem::Response.new(e.code, e.response_body, e.response_headers)
+      rescue SwaggerAemOsgiClient::ApiError => e
+        response = RubyAem::Response.new(e.code, e.response_body, e.response_headers)
       end
       handle(response, responses_spec, call_params)
     end

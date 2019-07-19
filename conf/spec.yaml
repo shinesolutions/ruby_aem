@@ -228,6 +228,17 @@ bundle:
         200:
           handler: simple
           message: 'Bundle %{name} stopped'
+aemconfigmgr:
+  actions:
+    get:
+      api: console
+      operation: getConfigMgr
+      params:
+        required:
+      responses:
+        200:
+          handler: simple
+          message: 'Configuration Manager page successfully received'
 certificate:
   actions:
     import:

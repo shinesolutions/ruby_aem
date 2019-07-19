@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add new api client for configmgr api calls
+- Add new resource aem_configmgr
 
 ### Changed
 - Change SAML Api calls to use configmgr api

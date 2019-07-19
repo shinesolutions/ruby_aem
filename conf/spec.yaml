@@ -1167,8 +1167,8 @@ repository:
 saml:
   actions:
     get:
-      api: console
-      operation: postSamlConfiguration
+      api: configmgr
+      operation: comAdobeGraniteAuthSamlSamlAuthenticationHandler
       params:
         optional:
           post: true
@@ -1177,8 +1177,8 @@ saml:
           handler: simple
           message: 'SAML Configuration found'
     create:
-      api: console
-      operation: postSamlConfiguration
+      api: configmgr
+      operation: comAdobeGraniteAuthSamlSamlAuthenticationHandler
       params:
         optional:
           - post
@@ -1219,8 +1219,8 @@ saml:
           handler: simple
           message: 'SAML Configuration created'
     delete:
-      api: console
-      operation: postSamlConfiguration
+      api: configmgr
+      operation: comAdobeGraniteAuthSamlSamlAuthenticationHandler
       params:
         optional:
           - apply

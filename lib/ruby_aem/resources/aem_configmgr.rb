@@ -29,6 +29,7 @@ module RubyAem
         @call_params = {
         }
       end
+
       # Connect to AEM /system/console/configMgr to collect
       # all configuration nodes
       #

@@ -105,7 +105,7 @@ module RubyAem
     # Create an AEM ConfigMgr instance.
     #
     # @return new RubyAem::Resources::Aem instance
-    def aem_configmgr()
+    def aem_configmgr
       RubyAem::Resources::AemConfigMgr.new(@client)
     end
 

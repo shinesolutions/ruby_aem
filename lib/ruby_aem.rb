@@ -14,6 +14,7 @@
 
 require 'ruby_aem/client'
 require 'ruby_aem/resources/aem'
+require 'ruby_aem/resources/aem_configmgr'
 require 'ruby_aem/resources/authorizable_keystore'
 require 'ruby_aem/resources/bundle'
 require 'ruby_aem/resources/certificate'
@@ -99,6 +100,13 @@ module RubyAem
     # @return new RubyAem::Resources::Aem instance
     def aem
       RubyAem::Resources::Aem.new(@client)
+    end
+
+    # Create an AEM ConfigMgr instance.
+    #
+    # @return new RubyAem::Resources::Aem instance
+    def aem_configmgr()
+      RubyAem::Resources::AemConfigMgr.new(@client)
     end
 
     # Create a bundle instance.

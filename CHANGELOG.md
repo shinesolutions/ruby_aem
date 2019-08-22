@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new dependency swagger_aem_osgi 1.1.0 to gemspec
+
 ## 3.3.0 - 2019-08-22
 ### Added
 - Add new api client for configmgr api calls

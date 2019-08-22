@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new api client for configmgr api calls
 - Add new resource aem_configmgr
+- Add new dependency swagger_aem_osgi 1.1.0
 
 ### Changed
 - Change SAML Api calls to use configmgr api

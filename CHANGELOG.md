@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Update method `config_property` to support all in `swagger-aem-osgi` available OSGI configuration nodes [shinesolutions/puppet-aem-resources#87]
+
 ## 3.4.0 - 2019-08-22
 ### Added
 - Add new dependency swagger_aem_osgi 1.1.0 to gemspec

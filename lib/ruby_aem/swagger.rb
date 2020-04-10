@@ -26,6 +26,35 @@ module RubyAem
       }
     end
 
+    # Generate compatible operation ID for swagger-aem-osgi
+    #
+    # @param config_node_id configuration node IP
+    # @return Swagger compatible operation_id
+    def gen_operation_id(config_node_id)
+      # Clone config node id so we get a new object_id to alter with
+      operation_id_cloned = config_node_id.clone
+
+      # Operation Ids with more than 70 chars are not supported
+      operation_id_raw = operation_id_cloned.slice(0...70)
+
+      # Convert each first char after non alphabetical char to UPPERCASE
+      # operation_id_uppercase_after_dots = operation_id_raw.gsub!(/(\W[a-zA-Z])/){ $1.upcase }
+      operation_id_uppercase_after_dots = operation_id_raw.gsub!(/(\W[a-zA-Z])/) { Regexp.last_match(1).upcase }
+
+      # Replace each special char with '.' if config_node_id_uppercase_after_dots is not nil
+      operation_id_raw = operation_id_uppercase_after_dots.gsub(/\W/, '') unless operation_id_uppercase_after_dots.nil?
+
+      # If config_node_id doesn't has any non alphabetical char we return the
+      # operation_id_raw
+      return operation_id_raw if operation_id_uppercase_after_dots.nil?
+
+      # Convert first char to lower case
+      # operation_id = operation_id_raw.gsub!(/(^.)/) { $1.downcase }
+      operation_id = operation_id_raw.gsub!(/(^.)/) { Regexp.last_match(1).downcase }
+
+      operation_id
+    end
+
     # Convert ruby_aem spec's property name (by replacing dots with underscores)
     # into swagger_aem's generated parameter name.
     #
@@ -46,32 +75,6 @@ module RubyAem
     # @return sanitised path name
     def self.path(path)
       path.gsub(%r{^/}, '').gsub(%r{/$}, '')
-    end
-
-    # Given a config node name, return the corresponding OSGI config name.
-    # OSGI config name are available from AEM Web Console's Config Manager page.
-    #
-    # @param config_node_name the name of the node for a given config
-    # @return config name
-    def self.config_node_name_to_config_name(config_node_name)
-      case config_node_name
-      when 'org.apache.felix.http'
-        'Apache Felix Jetty Based HTTP Service'
-      when 'org.apache.sling.servlets.get.DefaultGetServlet'
-        'Apache Sling GET Servlet'
-      when 'org.apache.sling.security.impl.ReferrerFilter'
-        'Apache Sling Referrer Filter'
-      when 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet'
-        'Apache Sling DavEx Servlet'
-      when 'com.shinesolutions.aem.passwordreset.Activator'
-        'AEM Password Reset Activator'
-      when 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck'
-        'AEM Health Check Servlet'
-      when 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
-        'Adobe Granite SAML Authentication Handler'
-      when 'org.apache.http.proxyconfigurator.config'
-        'Apache HTTP Components Proxy Configuration'
-      end
     end
   end
 end

@@ -53,6 +53,10 @@ module RubyAem
 
       api = @apis[action_spec['api'].to_sym]
       operation = action_spec['operation']
+      if call_params[:config_node_name]
+        operation = operation % call_params
+        operation = gen_operation_id(operation)
+      end
 
       params = []
       required_params = action_spec['params']['required'] || {}

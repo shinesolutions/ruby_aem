@@ -721,130 +721,47 @@ path:
           message: 'Path %{path} deleted'
 configproperty:
   actions:
-    createapachefelixjettybasedhttpservice:
-      api: sling
-      operation: postConfigApacheFelixJettyBasedHttpService
+    get:
+      api: configmgr
+      operation: '%{config_node_name}'
       params:
-        required:
         optional:
-          - org_apache_felix_https_nio
-          - org_apache_felix_https_nio_type_hint
-          - org_apache_felix_https_keystore
-          - org_apache_felix_https_keystore_type_hint
-          - org_apache_felix_https_keystore_password
-          - org_apache_felix_https_keystore_password_type_hint
-          - org_apache_felix_https_keystore_key
-          - org_apache_felix_https_keystore_key_type_hint
-          - org_apache_felix_https_keystore_key_password
-          - org_apache_felix_https_keystore_key_password_type_hint
-          - org_apache_felix_https_truststore
-          - org_apache_felix_https_truststore_key_type_hint
-          - org_apache_felix_https_truststore_password
-          - org_apache_felix_https_truststore_password_type_hint
-          - org_apache_felix_https_clientcertificate
-          - org_apache_felix_https_clientcertificate_type_hint
-          - org_apache_felix_https_enable
-          - org_apache_felix_https_enable_type_hint
-          - org_osgi_service_http_port_secure
-          - org_osgi_service_http_port_secure_type_hint
-          - json_maximumresults
-          - json_maximumresults_type_hint
+          post: true
       responses:
         200:
           handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-    createapacheslinggetservlet:
-      api: sling
-      operation: postConfigApacheSlingGetServlet
+          message: 'Get %{config_node_name} config %{type} property %{name}=%{value}'
+    create:
+      api: configmgr
+      operation: '%{config_node_name}'
       params:
-        required:
         optional:
-          - json_maximumresults
-          - json_maximumresults_type_hint
-          - enable_html
-          - enable_html_type_hint
-          - enable_txt
-          - enable_txt_type_hint
-          - enable_xml
-          - enable_xml_type_hint
+          - post
+          - apply
+          - delete
+          - action
+          - location
+          - path
+          - service_ranking
       responses:
         200:
           handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
+          message: '%{config_node_name} config %{type} property %{name}=%{value}'
+        302:
           handler: simple
           message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-    createapacheslingreferrerfilter:
-      api: sling
-      operation: postConfigApacheSlingReferrerFilter
+    delete:
+      api: configmgr
+      operation: '%{config_node_name}'
       params:
-        required:
         optional:
-          - allow_empty
-          - allow_empty_type_hint
-          - allow_hosts
-          - allow_hosts_type_hint
-          - allow_hosts_regexp
-          - allow_hosts_regexp_type_hint
-          - filter_methods
-          - filter_methods_type_hint
+          - apply
+          - delete
       responses:
         200:
           handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-    createapacheslingdavexservlet:
-      api: sling
-      operation: postConfigApacheSlingDavExServlet
-      params:
-        required:
-        optional:
-          - _alias
-          - alias_type_hint
-          - dav_create_absolute_uri
-          - dav_create_absolute_uri_type_hint
-      responses:
-        200:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-    createaempasswordresetactivator:
-      api: custom
-      operation: postConfigAemPasswordReset
-      params:
-        required:
-        optional:
-          - pwdreset_authorizables
-          - pwdreset_authorizables_type_hint
-      responses:
-        200:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-    createaemhealthcheckservlet:
-      api: custom
-      operation: postConfigAemHealthCheckServlet
-      params:
-        required:
-        optional:
-          - bundles_ignored
-          - bundles_ignored_type_hint
-      responses:
-        200:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
-        201:
-          handler: simple
-          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+          message: 'Delete %{config_node_name} config %{type} property %{name}=%{value}'
+
     createadobegranitesamlauthenticationhandler:
       api: sling
       operation: postConfigAdobeGraniteSamlAuthenticationHandler

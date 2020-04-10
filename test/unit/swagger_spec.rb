@@ -48,37 +48,4 @@ describe 'Swagger' do
       expect(method).to eq('path/to')
     end
   end
-
-  describe 'test config_node_name_to_config_name' do
-    it 'should return config name when config node name exists' do
-      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.felix.http')
-      expect(method).to eq('Apache Felix Jetty Based HTTP Service')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.servlets.get.DefaultGetServlet')
-      expect(method).to eq('Apache Sling GET Servlet')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.security.impl.ReferrerFilter')
-      expect(method).to eq('Apache Sling Referrer Filter')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet')
-      expect(method).to eq('Apache Sling DavEx Servlet')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.aem.passwordreset.Activator')
-      expect(method).to eq('AEM Password Reset Activator')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck')
-      expect(method).to eq('AEM Health Check Servlet')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('com.adobe.granite.auth.saml.SamlAuthenticationHandler.config')
-      expect(method).to eq('Adobe Granite SAML Authentication Handler')
-
-      method = RubyAem::Swagger.config_node_name_to_config_name('org.apache.http.proxyconfigurator.config')
-      expect(method).to eq('Apache HTTP Components Proxy Configuration')
-    end
-
-    it 'should return null when config node name does not exist' do
-      method = RubyAem::Swagger.config_node_name_to_config_name('some.inexisting.node')
-      expect(method).to eq(nil)
-    end
-  end
 end

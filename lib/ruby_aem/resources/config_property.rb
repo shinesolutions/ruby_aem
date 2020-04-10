@@ -45,8 +45,7 @@ module RubyAem
         @call_params[name.to_sym] = @call_params[:value]
         @call_params["#{type_hint_prefix}_type_hint".to_sym] = @call_params[:type]
 
-        config_name = Swagger.config_node_name_to_config_name(config_node_name)
-        @client.call(self.class, __callee__.to_s.concat(config_name.downcase.gsub(/\s+/, '')), @call_params)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
     end
   end

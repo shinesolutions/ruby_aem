@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Update resource `config_property` to allow the configuration of all OSGI configuration nodes #31
 - Upgrade swagger_aem to 3.2.0
 
 ## 3.4.0 - 2019-08-22

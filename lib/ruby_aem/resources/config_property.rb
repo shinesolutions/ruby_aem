@@ -29,8 +29,11 @@ module RubyAem
         @call_params = {
           name: name,
           type: type,
-          value: value
+          value: value,
+          query_params: {}
         }
+        @call_params[:query_params][@call_params[:name]] = @call_params[:value]
+        @call_params[:query_params]["#{@call_params[:name]}@TypeHint"] = @call_params[:type]
       end
 
       # Create a new config property.
@@ -38,15 +41,8 @@ module RubyAem
       # @param config_node_name the node name of a given OSGI config
       # @return RubyAem::Result
       def create(config_node_name)
-        name = RubyAem::Swagger.property_to_parameter(@call_params[:name])
-        type_hint_prefix = name.gsub(/^_/, '')
-
         @call_params[:config_node_name] = config_node_name
-        @call_params[name.to_sym] = @call_params[:value]
-        @call_params["#{type_hint_prefix}_type_hint".to_sym] = @call_params[:type]
-
-        config_name = Swagger.config_node_name_to_config_name(config_node_name)
-        @client.call(self.class, __callee__.to_s.concat(config_name.downcase.gsub(/\s+/, '')), @call_params)
+        @client.call(self.class, __callee__.to_s, @call_params)
       end
     end
   end

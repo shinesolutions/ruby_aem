@@ -721,6 +721,21 @@ path:
           message: 'Path %{path} deleted'
 configproperty:
   actions:
+    create:
+      api: sling
+      operation: postConfigProperty
+      params:
+        required:
+          config_node_name: '%{config_node_name}'
+        optional:
+          - query_params
+      responses:
+        200:
+          handler: simple
+          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+        201:
+          handler: simple
+          message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
     createapachefelixjettybasedhttpservice:
       api: sling
       operation: postConfigApacheFelixJettyBasedHttpService

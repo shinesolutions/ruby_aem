@@ -35,9 +35,11 @@ require 'ruby_aem/resources/user'
 require 'swagger_aem'
 require 'swagger_aem_osgi'
 require 'yaml'
+require 'ruby_aem/resources/ssl'
 
 module RubyAem
   # Aem class represents an AEM client instance.
+  # rubocop:disable Metrics/ParameterLists
   class Aem
     # Initialise a Ruby AEM instance.
     #
@@ -254,6 +256,13 @@ module RubyAem
       RubyAem::Resources::Saml.new(@client)
     end
 
+    # Upload ssl certificate to AEM.
+    #
+    # @return new RubyAem::Resources::SSL instance
+    def ssl(keystore_password, truststore_password, https_hostname, https_port, privatekey_file, certificate_file)
+      RubyAem::Resources::Ssl.new(@client, keystore_password, truststore_password, https_hostname, https_port, privatekey_file, certificate_file)
+    end
+
     # Create a Truststore instance.
     #
     # @return new RubyAem::Resources::Truststore instance
@@ -271,3 +280,4 @@ module RubyAem
     end
   end
 end
+# rubocop:enable Metrics/ParameterLists

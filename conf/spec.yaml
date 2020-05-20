@@ -1422,3 +1422,22 @@ user:
         200:
           handler: html_change_password
           message: 'User %{user}''s password has been changed'
+ssl:
+  actions:
+    create:
+      api: granite
+      operation: sslSetup
+      params:
+        required:
+          keystore_password: '%{keystore_password}'
+          keystore_passwordConfirm: '%{keystore_password}'
+          truststore_password: '%{truststore_password}'
+          truststore_passwordConfirm: '%{truststore_password}'
+          https_hostname: '%{https_hostname}'
+          https_port: '%{https_port}'
+          privatekey_file: __FILE_PLAIN__
+          certificate_file: __FILE_PLAIN__
+      responses:
+        201:
+          handler: html_authorizable_id
+          message: 'Group %{name} created at %{path}/%{authorizable_id}'

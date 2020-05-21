@@ -15,16 +15,14 @@ describe 'Ssl' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Ssl,
         'enable',
-        {
-          keystore_password: 'password',
-          keystore_passwordConfirm: 'password',
-          truststore_password: 'password',
-          truststore_passwordConfirm: 'password',
-          https_hostname: 'localhost',
-          https_port: 5432,
-          file_path_private_key: './test/integration/fixtures/cert_ssl.der',
-          file_path_certificate: './test/integration/fixtures/cert_ssl.crt'
-        }
+        keystore_password: 'password',
+        keystore_passwordConfirm: 'password',
+        truststore_password: 'password',
+        truststore_passwordConfirm: 'password',
+        https_hostname: 'localhost',
+        https_port: 5432,
+        file_path_private_key: './test/integration/fixtures/cert_ssl.der',
+        file_path_certificate: './test/integration/fixtures/cert_ssl.crt'
       )
       opts = {
         keystore_password: 'password',

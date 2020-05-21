@@ -1422,3 +1422,44 @@ user:
         200:
           handler: html_change_password
           message: 'User %{user}''s password has been changed'
+ssl:
+  actions:
+    enable:
+      api: granite
+      operation: sslSetup
+      params:
+        required:
+          keystore_password: '%{keystore_password}'
+          keystore_passwordConfirm: '%{keystore_passwordConfirm}'
+          truststore_password: '%{truststore_password}'
+          truststore_passwordConfirm: '%{truststore_passwordConfirm}'
+          https_hostname: '%{https_hostname}'
+          https_port: '%{https_port}'
+        optional:
+          privatekey_file: __FILE_PRIVATE_KEY__
+          certificate_file: __FILE_CERTIFICATE__
+      responses:
+        200:
+          handler: simple
+          message: 'HTTPS has been configured on port %{https_port}'
+    get:
+      api: configmgr
+      operation: comAdobeGraniteJettySslInternalGraniteSslConnectorFactory
+      params:
+        optional:
+          post: true
+      responses:
+        200:
+          handler: simple
+          message: 'HTTPS Configuration found'
+    disable:
+      api: configmgr
+      operation: comAdobeGraniteJettySslInternalGraniteSslConnectorFactory
+      params:
+        optional:
+          apply: true
+          delete: true
+      responses:
+        200:
+          handler: simple
+          message: 'HTTPS has been disabled'

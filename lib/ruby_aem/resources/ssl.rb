@@ -42,8 +42,8 @@ module RubyAem
       # - truststore_password: AEM Global Truststore password. Truststore will be created if it  doesn't exist.
       # - https_hostname: Hostname for enabling HTTPS listener matching the certificate's common name.
       # - https_port: Port to listen on for HTTPS requests.
-      # - privatekey_file_path: Path to the HTTPS Private Key file.
       # - certificate_file_path:  Path to the HTTPS public certificate file.
+      # - privatekey_file_path: Path to the HTTPS Private Key file.
       # @return RubyAem::Result
       def enable(opts = {
         keystore_password: nil,

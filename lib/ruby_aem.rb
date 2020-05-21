@@ -29,6 +29,7 @@ require 'ruby_aem/resources/replication_agent'
 require 'ruby_aem/resources/outbox_replication_agent'
 require 'ruby_aem/resources/reverse_replication_agent'
 require 'ruby_aem/resources/saml'
+require 'ruby_aem/resources/ssl'
 require 'ruby_aem/resources/repository'
 require 'ruby_aem/resources/truststore'
 require 'ruby_aem/resources/user'
@@ -87,7 +88,8 @@ module RubyAem
         custom: SwaggerAemClient::CustomApi.new,
         cq: SwaggerAemClient::CqApi.new,
         crx: SwaggerAemClient::CrxApi.new,
-        sling: SwaggerAemClient::SlingApi.new
+        sling: SwaggerAemClient::SlingApi.new,
+        granite: SwaggerAemClient::GraniteApi.new
       }
 
       spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
@@ -252,6 +254,13 @@ module RubyAem
     # @return new RubyAem::Resources::Saml instance
     def saml
       RubyAem::Resources::Saml.new(@client)
+    end
+
+    # Create a SSL instance.
+    #
+    # @return new RubyAem::Resources::Saml instance
+    def ssl
+      RubyAem::Resources::Ssl.new(@client)
     end
 
     # Create a Truststore instance.

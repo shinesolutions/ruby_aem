@@ -417,7 +417,7 @@ group:
           authorizable_id: '%{name}'
           intermediate_path: '%{path}'
         optional:
-          create_group: ''
+          create_group: 'true'
           profilegiven_name: '%{name}'
       responses:
         201:
@@ -447,7 +447,7 @@ group:
           path: '%{path}'
           name: '%{authorizable_id}'
         optional:
-          delete_authorizable: ''
+          delete_authorizable: '%{name}'
       responses:
         200:
           handler: simple
@@ -1341,7 +1341,7 @@ user:
           authorizable_id: '%{name}'
           intermediate_path: '%{path}'
         optional:
-          create_user: ''
+          create_user: 'true'
           reppassword: '%{password}'
       responses:
         201:
@@ -1371,7 +1371,7 @@ user:
           path: '%{path}'
           name: '%{authorizable_id}'
         optional:
-          delete_authorizable: ''
+          delete_authorizable: '%{name}'
       responses:
         200:
           handler: simple

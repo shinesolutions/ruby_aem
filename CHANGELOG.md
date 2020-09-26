@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade swagger_aem to 3.4.0
 
 ### Fixed
+- Fixed AEM Truststore deletion [#41]
 - Fixed integration tests
 
 ## 3.8.0 - 2020-07-06

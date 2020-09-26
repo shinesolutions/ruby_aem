@@ -5,7 +5,7 @@ describe 'AuthorizableKeystore' do
     @aem = init_client
 
     # ensure authorizable_keystore doesn't exist prior to testing
-    @authorizable_keystore = @aem.authorizable_keystore('/home/users/system', 'authentication-service')
+    @authorizable_keystore = @aem.authorizable_keystore('home/users/system', 'authentication-service')
     @authorizable_keystore.delete unless @authorizable_keystore.exists.data == false
     result = @authorizable_keystore.exists
     expect(result.data).to eq(false)
@@ -72,6 +72,9 @@ describe 'AuthorizableKeystore' do
     it 'should return true on existence check' do
       result = @authorizable_keystore.change_password('s0m3p4ssw0rd', 's0m3n3wp4ssw0rd')
       expect(result.message).to eq('Authorizable keystore password successfully changed')
+
+      result = @authorizable_keystore.delete
+      expect(result.message).to eq('Authorizable keystore deleted')
     end
   end
 end

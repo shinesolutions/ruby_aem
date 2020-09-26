@@ -33,6 +33,8 @@ module RubyAem
           intermediate_path: intermediate_path,
           authorizable_id: authorizable_id
         }
+
+        @call_params[:intermediate_path] = RubyAem::Swagger.path(@call_params[:intermediate_path])
       end
 
       # Create AEM Authorizable Keystore.

@@ -5,7 +5,7 @@ describe 'CertificateChain' do
     @aem = init_client
 
     # ensure authorizable keystore doesn't exist prior to testing
-    @authorizable_keystore = @aem.authorizable_keystore('/home/users/system', 'authentication-service')
+    @authorizable_keystore = @aem.authorizable_keystore('home/users/system', 'authentication-service')
     @authorizable_keystore.delete unless @authorizable_keystore.exists.data == false
     result = @authorizable_keystore.exists
     expect(result.data).to eq(false)
@@ -15,22 +15,27 @@ describe 'CertificateChain' do
     expect(result.message).to eq('Authorizable keystore created')
 
     # ensure certificate chain doesn't exist prior to testing
-    @certificate_chain = @aem.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
+    @certificate_chain = @aem.certificate_chain('someprivatekeyalias', 'home/users/system', 'authentication-service')
     @certificate_chain.delete unless @certificate_chain.exists.data == false
     result = @certificate_chain.exists
     expect(result.data).to eq(false)
 
     # create certificate chain
-    result = @certificate_chain.create('./test/integration/fixtures/cert_chain.crt', './test/integration/fixtures/private_key.der')
+    result = @certificate_chain.create('./test/integration/fixtures/cert_chain_authorizable_keystore.crt', './test/integration/fixtures/privae_key_authorizable_keystore.der')
     expect(result.message).to eq('Certificate chain and private key successfully imported')
   end
 
   after do
+    # ensure authorizable keystore is deleted
+    @authorizable_keystore = @aem.authorizable_keystore('home/users/system', 'authentication-service')
+    @authorizable_keystore.delete unless @authorizable_keystore.exists.data == false
+    result = @authorizable_keystore.exists
+    expect(result.data).to eq(false)
   end
 
   describe 'test import' do
     it 'should return true on existence check' do
-      result = @certificate_chain.import('./test/integration/fixtures/cert_chain.crt', './test/integration/fixtures/private_key.der')
+      result = @certificate_chain.import('./test/integration/fixtures/cert_chain_authorizable_keystore.crt', './test/integration/fixtures/privae_key_authorizable_keystore.der')
       expect(result.message).to eq('Certificate chain and private key successfully imported')
 
       result = @certificate_chain.exists
@@ -41,7 +46,7 @@ describe 'CertificateChain' do
 
   describe 'test import wait until ready' do
     it 'should return true on existence check' do
-      result = @certificate_chain.import_wait_until_ready('./test/integration/fixtures/cert_chain.crt', './test/integration/fixtures/private_key.der')
+      result = @certificate_chain.import_wait_until_ready('./test/integration/fixtures/cert_chain_authorizable_keystore.crt', './test/integration/fixtures/privae_key_authorizable_keystore.der')
       expect(result.message).to eq('Certificate chain and private key successfully imported')
 
       result = @certificate_chain.exists
@@ -80,7 +85,7 @@ describe 'CertificateChain' do
   #
   # describe 'test import wait until ready' do
   #   it 'should return true on existence check' do
-  #     result = @certificate.import_wait_until_ready('./test/integration/fixtures/cert_chain.crt')
+  #     result = @certificate.import_wait_until_ready('./test/integration/fixtures/cert_chain_authorizable_keystore.crt')
   #     expect(result.message).to eq('Certificate imported')
   #
   #     result = @certificate.exists
@@ -91,7 +96,7 @@ describe 'CertificateChain' do
   #
   # describe 'test import export' do
   #   it 'should be able to export the cert which was imported' do
-  #     result = @certificate.import('./test/integration/fixtures/cert_chain.crt')
+  #     result = @certificate.import('./test/integration/fixtures/cert_chain_authorizable_keystore.crt')
   #     expect(result.message).to eq('Certificate imported')
   #
   #     result = @certificate.exists

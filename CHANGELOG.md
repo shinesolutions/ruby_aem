@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed AEM Truststore deletion [#41]
+- Fix bug of passing empty parameters to swagger-aem [#38]
 - Fixed integration tests
 
 ## 3.8.0 - 2020-07-06

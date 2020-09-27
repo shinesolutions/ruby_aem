@@ -38,6 +38,8 @@ module RubyAem
           keystore_intermediate_path: keystore_intermediate_path,
           keystore_authorizable_id: keystore_authorizable_id
         }
+
+        @call_params[:keystore_intermediate_path] = RubyAem::Swagger.path(@call_params[:keystore_intermediate_path])
       end
 
       # Create is an alias to import.

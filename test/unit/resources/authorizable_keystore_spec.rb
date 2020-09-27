@@ -15,7 +15,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'create',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid',
         password: 's0m3p4ssw0rd'
       )
@@ -28,7 +28,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'change_password',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid',
         old_password: 's0m30ldp4ssw0rd',
         new_password: 's0m3n3wp4ssw0rd'
@@ -42,7 +42,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'delete',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid'
       )
       @authorizable_keystore.delete
@@ -54,7 +54,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'exists',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid'
       )
       @authorizable_keystore.exists
@@ -66,7 +66,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'info',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid'
       )
       @authorizable_keystore.info
@@ -78,7 +78,7 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'download',
-        intermediate_path: '/home/users/s',
+        intermediate_path: 'home/users/s',
         authorizable_id: 'someauthorizableid',
         file_path: '/somepath'
       )

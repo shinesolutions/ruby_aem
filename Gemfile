@@ -9,4 +9,4 @@ gem 'rspec', '3.8.0', require: false
 gem 'rubocop', '0.69.0', require: false
 gem 'simplecov', '0.16.1', require: false, group: :test
 gem 'yaml-lint', '0.0.10', require: false
-gem 'yard', '0.9.19', require: false
+gem 'yard', '0.9.20', require: false

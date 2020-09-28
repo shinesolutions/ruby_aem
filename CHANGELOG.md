@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade yard to 0.9.20
+
 ## 3.10.0 - 2020-09-27
 ### Fixed
 - Fixed path update for `authorizable_keystore` & `certificate_chain` resources

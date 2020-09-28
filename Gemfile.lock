@@ -51,7 +51,7 @@ GEM
       ethon (>= 0.9.0)
     unicode-display_width (1.6.1)
     yaml-lint (0.0.10)
-    yard (0.9.19)
+    yard (0.9.20)
 
 PLATFORMS
   ruby
@@ -65,7 +65,7 @@ DEPENDENCIES
   swagger_aem (= 3.4.0)
   swagger_aem_osgi (= 1.0.0)
   yaml-lint (= 0.0.10)
-  yard (= 0.9.19)
+  yard (= 0.9.20)
 
 BUNDLED WITH
    1.17.3

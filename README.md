@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/shinesolutions/ruby_aem.svg)](http://travis-ci.org/shinesolutions/ruby_aem)
+[![Build Status](https://github.com/shinesolutions/ruby_aem/workflows/CI/badge.svg)](https://github.com/shinesolutions/ruby_aem/actions?query=workflow%3ACI)
 [![Published Version](https://badge.fury.io/rb/ruby_aem.svg)](https://rubygems.org/gems/ruby_aem)
 [![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/ruby_aem/badge.svg)](https://snyk.io/test/github/shinesolutions/ruby_aem)
 

@@ -228,6 +228,16 @@ bundle:
         200:
           handler: simple
           message: 'Bundle %{name} stopped'
+    info:
+      api: console
+      operation: getBundleInfo
+      params:
+        required:
+          name: '%{name}'
+      responses:
+        200:
+          handler: simple_body
+          message: 'Retrieved bundle %{name} info'
 aemconfigmgr:
   actions:
     get:

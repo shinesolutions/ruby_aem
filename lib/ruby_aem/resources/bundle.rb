@@ -41,6 +41,13 @@ module RubyAem
       def stop
         @client.call(self.class, __callee__.to_s, @call_params)
       end
+
+      # Retrieve bundle info.
+      #
+      # @return RubyAem::Result
+      def info
+        @client.call(self.class, __callee__.to_s, @call_params)
+      end
     end
   end
 end

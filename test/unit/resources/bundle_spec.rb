@@ -24,4 +24,12 @@ describe 'Bundle' do
       bundle.stop
     end
   end
+
+  describe 'test info' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'somebundle')
+      bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
+      bundle.info
+    end
+  end
 end

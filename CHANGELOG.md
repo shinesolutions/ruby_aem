@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add bundle info method
+
 ### Changed
 - Upgrade yard to 0.9.26
+- Upgrade swagger_aem to 3.6.2
 
 ## 3.10.1 - 2020-12-01
 ### Changed

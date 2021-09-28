@@ -42,4 +42,23 @@ describe 'Bundle' do
       end
     end
   end
+
+  describe 'test bundle info' do
+    it 'should return the bundle info when bundle is stopped' do
+      bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
+      result = bundle.stop
+      expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum stopped')
+      result = bundle.info
+      expect(result.message).to eq('Retrieved bundle com.adobe.cq.social.cq-social-forum info')
+      expect(result.data.data[0].state).to eq('Resolved')
+    end
+    it 'should return the bundle info when bundle is started' do
+      bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
+      result = bundle.start
+      expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum started')
+      result = bundle.info
+      expect(result.message).to eq('Retrieved bundle com.adobe.cq.social.cq-social-forum info')
+      expect(result.data.data[0].state).to eq('Active')
+    end
+  end
 end

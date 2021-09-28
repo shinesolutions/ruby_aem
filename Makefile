@@ -34,8 +34,16 @@ doc-publish:
 publish:
 	gem push `ls ruby_aem-*.gem`
 
-release:
-	rtk release
+release-major:
+	rtk release --release-increment-type major
+
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
 
 tools:
 	npm install -g gh-pages@2.0.1
@@ -49,4 +57,4 @@ fixtures:
 	openssl x509 -req -days 365 -in test/integration/fixtures/cert_sign_request.csr -signkey test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_chain.crt
 	openssl pkcs8 -topk8 -inform PEM -outform DER -in test/integration/fixtures/private_key.key -out test/integration/fixtures/private_key.der -nocrypt
 
-.PHONY: all ci deps clean lint build install test-unit test-integration doc doc-publish publish release tools fixtures release
+.PHONY: all ci deps clean lint build install test-unit test-integration doc doc-publish publish release tools fixtures release release-major release-minor release-patch

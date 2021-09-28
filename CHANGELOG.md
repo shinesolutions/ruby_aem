@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add bundle info method
+- Add publish and release-* GH Actions
 
 ### Changed
 - Upgrade yard to 0.9.26

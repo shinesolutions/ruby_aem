@@ -31,7 +31,7 @@ doc:
 doc-publish:
 	gh-pages --dist doc/
 
-publish:
+publish: install
 	gem push `ls ruby_aem-*.gem`
 
 release-major:

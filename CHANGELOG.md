@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade yard to 0.9.26
 - Upgrade swagger_aem to 3.6.2
 
+### Removed
+- Remove Travis CI config, replaced with GH Actions
+
 ## 3.10.1 - 2020-12-01
 ### Changed
 - Upgrade yard to 0.9.20

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix ruby_aem.gemspec's swagger_aem version to 3.6.2
+
 ## 3.13.0 - 2021-09-29
 ### Added
 - Add aem get_development_bundles_status method

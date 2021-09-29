@@ -48,6 +48,25 @@ module RubyAem
       def info
         @client.call(self.class, __callee__.to_s, @call_params)
       end
+
+      # Check if this bundle state is active.
+      # True result data indicates that the bundle is active, false otherwise.
+      #
+      # @return RubyAem::Result
+      def is_active
+        result = info
+
+        state = result.data.data[0].state
+        if state == 'Active'
+          result.message = "Bundle #{@call_params[:name]} is active"
+          result.data = true
+        else
+          result.message = "Bundle #{@call_params[:name]} is not active. Bundle state is #{state}"
+          result.data = false
+        end
+
+        result
+      end
     end
   end
 end

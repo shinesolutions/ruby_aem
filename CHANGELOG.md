@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add bundle is_active method
+
 ## 3.11.1 - 2021-09-28
 ### Fixed
 - Fix publish GH Action to trigger build install prior to publishing the gem

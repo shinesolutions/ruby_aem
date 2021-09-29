@@ -159,4 +159,48 @@ describe 'Aem' do
       expect(result.data).eql? true
     end
   end
+
+  describe 'test aem get_development_bundles_status' do
+    it 'should return false result data when all development bundles are stopped' do
+      crx_explorer_bundle = @aem.bundle('com.adobe.granite.crx-explorer')
+      crx_explorer_result = crx_explorer_bundle.stop
+      expect(crx_explorer_result.message).to eq('Bundle com.adobe.granite.crx-explorer stopped')
+      crxde_lite_bundle = @aem.bundle('com.adobe.granite.crxde-lite')
+      crxde_lite_result = crxde_lite_bundle.stop
+      expect(crxde_lite_result.message).to eq('Bundle com.adobe.granite.crxde-lite stopped')
+
+      aem = @aem.aem
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are all inactive')
+      expect(result.data).eql? false
+    end
+
+    it 'should return false result data when development bundles are partially stopped' do
+      crx_explorer_bundle = @aem.bundle('com.adobe.granite.crx-explorer')
+      crx_explorer_result = crx_explorer_bundle.start
+      expect(crx_explorer_result.message).to eq('Bundle com.adobe.granite.crx-explorer started')
+      crxde_lite_bundle = @aem.bundle('com.adobe.granite.crxde-lite')
+      crxde_lite_result = crxde_lite_bundle.stop
+      expect(crxde_lite_result.message).to eq('Bundle com.adobe.granite.crxde-lite stopped')
+
+      aem = @aem.aem
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are partially active. crx_explorer_bundle is active: true,  crxde_lite_bundle is active: false')
+      expect(result.data).eql? false
+    end
+
+    it 'should return true result data when all development bundles are started' do
+      crx_explorer_bundle = @aem.bundle('com.adobe.granite.crx-explorer')
+      crx_explorer_result = crx_explorer_bundle.start
+      expect(crx_explorer_result.message).to eq('Bundle com.adobe.granite.crx-explorer started')
+      crxde_lite_bundle = @aem.bundle('com.adobe.granite.crxde-lite')
+      crxde_lite_result = crxde_lite_bundle.start
+      expect(crxde_lite_result.message).to eq('Bundle com.adobe.granite.crxde-lite started')
+
+      aem = @aem.aem
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are all active')
+      expect(result.data).eql? true
+    end
+  end
 end

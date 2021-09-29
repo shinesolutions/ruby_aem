@@ -63,7 +63,7 @@ describe 'Bundle' do
   end
 
   describe 'test bundle is_active' do
-    it 'should return false when bundle is stopped' do
+    it 'should return false result data when bundle is stopped' do
       bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
       result = bundle.stop
       expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum stopped')
@@ -71,7 +71,7 @@ describe 'Bundle' do
       expect(result.data).to eq(false)
       expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum is not active. Bundle state is Resolved')
     end
-    it 'should return true when bundle is started' do
+    it 'should return true result data when bundle is started' do
       bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')
       result = bundle.start
       expect(result.message).to eq('Bundle com.adobe.cq.social.cq-social-forum started')

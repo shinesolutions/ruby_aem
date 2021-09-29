@@ -262,4 +262,81 @@ describe 'Aem' do
       end
     end
   end
+
+  describe 'test get_development_bundles_status' do
+    it 'should return false result data when all development bundles are not active' do
+      mock_crx_explorer_bundle_data = double('mock_crx_explorer_bundle_data')
+      expect(mock_crx_explorer_bundle_data).to receive(:state).once.and_return('Resolved')
+      mock_crx_explorer_bundle_info = double('mock_crx_explorer_bundle_info')
+      expect(mock_crx_explorer_bundle_info).to receive(:data).once.and_return([mock_crx_explorer_bundle_data])
+      mock_crx_explorer_response = double('mock_crx_explorer_response')
+      mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
+      mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+
+      mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
+      expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Resolved')
+      mock_crxde_lite_bundle_info = double('mock_crxde_lite_bundle_info')
+      expect(mock_crxde_lite_bundle_info).to receive(:data).once.and_return([mock_crxde_lite_bundle_data])
+      mock_crxde_lite_response = double('mock_crxde_lite_response')
+      mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
+      mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are all inactive')
+      expect(result.data).eql? false
+    end
+
+    it 'should return false result data when development bundles are partially active' do
+      mock_crx_explorer_bundle_data = double('mock_crx_explorer_bundle_data')
+      expect(mock_crx_explorer_bundle_data).to receive(:state).once.and_return('Resolved')
+      mock_crx_explorer_bundle_info = double('mock_crx_explorer_bundle_info')
+      expect(mock_crx_explorer_bundle_info).to receive(:data).once.and_return([mock_crx_explorer_bundle_data])
+      mock_crx_explorer_response = double('mock_crx_explorer_response')
+      mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
+      mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+
+      mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
+      expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Active')
+      mock_crxde_lite_bundle_info = double('mock_crxde_lite_bundle_info')
+      expect(mock_crxde_lite_bundle_info).to receive(:data).once.and_return([mock_crxde_lite_bundle_data])
+      mock_crxde_lite_response = double('mock_crxde_lite_response')
+      mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
+      mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are partially active. crx_explorer_bundle is active: false,  crxde_lite_bundle is active: true')
+      expect(result.data).eql? false
+    end
+
+    it 'should return true result data when all development bundles are active' do
+      mock_crx_explorer_bundle_data = double('mock_crx_explorer_bundle_data')
+      expect(mock_crx_explorer_bundle_data).to receive(:state).once.and_return('Active')
+      mock_crx_explorer_bundle_info = double('mock_crx_explorer_bundle_info')
+      expect(mock_crx_explorer_bundle_info).to receive(:data).once.and_return([mock_crx_explorer_bundle_data])
+      mock_crx_explorer_response = double('mock_crx_explorer_response')
+      mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
+      mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+
+      mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
+      expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Active')
+      mock_crxde_lite_bundle_info = double('mock_crxde_lite_bundle_info')
+      expect(mock_crxde_lite_bundle_info).to receive(:data).once.and_return([mock_crxde_lite_bundle_data])
+      mock_crxde_lite_response = double('mock_crxde_lite_response')
+      mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
+      mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      result = aem.get_development_bundles_status
+      expect(result.message).to eq('Development bundles are all active')
+      expect(result.data).eql? true
+    end
+  end
 end

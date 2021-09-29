@@ -15,6 +15,7 @@
 require 'retries'
 require 'ruby_aem/error'
 require 'rexml/document'
+require 'ruby_aem/resources/bundle'
 
 module RubyAem
   #  AEM resources
@@ -281,6 +282,35 @@ module RubyAem
       # @return RubyAem::Result
       def get_product_info
         @client.call(self.class, __callee__.to_s, @call_params)
+      end
+
+      # Check whether development bundles are active as per AEM Security Checklist
+      # https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/security-checklist.html
+      # The checklist documentation also includes 'com.adobe.granite.crxde-support',
+      # however this bundle does not exist on AEM 6.5 so it has been excluded from this implementation.
+      # True result data indicates that the development bundles are active, false otherwise.
+      #
+      # @return RubyAem::Result
+      def get_development_bundles_status
+        crx_explorer_bundle = RubyAem::Resources::Bundle.new(@client, 'com.adobe.granite.crx-explorer')
+        crxde_lite_bundle = RubyAem::Resources::Bundle.new(@client, 'com.adobe.granite.crxde-lite')
+
+        result = RubyAem::Result.new(nil, nil)
+
+        crx_explorer_bundle_is_active = crx_explorer_bundle.is_active.data
+        crxde_lite_bundle_is_active = crxde_lite_bundle.is_active.data
+        if crx_explorer_bundle_is_active && crxde_lite_bundle_is_active
+          result.message = 'Development bundles are all active'
+          result.data = true
+        elsif !crx_explorer_bundle_is_active && !crxde_lite_bundle_is_active
+          result.message = 'Development bundles are all inactive'
+          result.data = false
+        else
+          result.message = "Development bundles are partially active. crx_explorer_bundle is active: #{crx_explorer_bundle_is_active},  crxde_lite_bundle is active: #{crxde_lite_bundle_is_active}"
+          result.data = false
+        end
+
+        result
       end
     end
   end

@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths     = ['lib']
 
   s.add_runtime_dependency 'retries', '0.0.5'
-  s.add_runtime_dependency 'swagger_aem', '3.6.2'
+  s.add_runtime_dependency 'swagger_aem', '3.7.0'
   s.add_runtime_dependency 'swagger_aem_osgi', '1.0.0'
 
   s.add_development_dependency 'rspec', '3.8.0'

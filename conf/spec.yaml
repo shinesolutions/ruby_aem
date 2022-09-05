@@ -706,6 +706,7 @@ path:
           ignoredeactivated: '%{ignoredeactivated}'
           onlymodified: '%{onlymodified}'
           path: '%{name}'
+          cmd: 'activate'
       responses:
         200:
           handler: simple

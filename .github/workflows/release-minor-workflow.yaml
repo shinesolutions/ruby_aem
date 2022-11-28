@@ -15,5 +15,5 @@ jobs:
       - uses: ad-m/github-push-action@master
         with:
           tags: true
-          github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
+          github_token: ${{ secrets.SHINEWORKS_GITHUB_TOKEN }}
           branch: ${{ github.ref }}

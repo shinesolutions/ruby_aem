@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'openssl', '2.1.2'
 gem 'retries', '0.0.5'
-gem 'swagger_aem', '3.7.0'
+gem 'swagger_aem', '3.8.0'
 gem 'swagger_aem_osgi', '1.0.0'
 
 gem 'rspec', '3.8.0', require: false

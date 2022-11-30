@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 3.16.1
+          ref: main
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io

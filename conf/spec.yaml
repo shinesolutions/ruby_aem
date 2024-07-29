@@ -983,6 +983,7 @@ replicationagent:
           jcrcontent_retry_delay: '%{retry_delay}'
           jcrcontent_cqtemplate: /libs/cq/replication/templates/agent
           jcrcontent_enabled: true
+          jcrcontent_ssl: '%{ssl}'
       responses:
         200:
           handler: simple

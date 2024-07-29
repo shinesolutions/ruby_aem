@@ -22,6 +22,7 @@ describe 'ReplicationAgent' do
         dest_base_url: 'http://somehost:8080',
         transport_user: 'admin',
         transport_password: 'admin',
+        ssl: '',
         log_level: 'error',
         retry_delay: 30_000
       )
@@ -36,13 +37,14 @@ describe 'ReplicationAgent' do
         name: 'some-replication-agent',
         title: 'Some replication Agent Title',
         description: 'Some replication agent description',
-        dest_base_url: 'http://somehost:8080',
+        dest_base_url: 'https://somehost:8080',
         transport_user: 'someuser',
         transport_password: 'somepassword',
+        ssl: 'relaxed',
         log_level: 'info',
         retry_delay: 60_000
       )
-      @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'http://somehost:8080', transport_user: 'someuser', transport_password: 'somepassword', log_level: 'info', retry_delay: 60_000)
+      @replication_agent.create_update('Some replication Agent Title', 'Some replication agent description', 'https://somehost:8080', transport_user: 'someuser', transport_password: 'somepassword', log_level: 'info', retry_delay: 60_000)
     end
   end
 

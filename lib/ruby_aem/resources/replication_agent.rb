@@ -55,6 +55,10 @@ module RubyAem
         @call_params[:title] = title
         @call_params[:description] = description
         @call_params[:dest_base_url] = dest_base_url
+
+        uri = URI.parse(dest_base_url)
+        @call_params[:ssl] = uri.scheme == 'https' ? 'relaxed' : ''
+
         @call_params = @call_params.merge(opts)
         @client.call(self.class, __callee__.to_s, @call_params)
       end

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add relaxed SSL setting to replication agent when destination is HTTPS #RS-194
+
 ## 3.16.1 - 2022-11-30
 ### Fixed
 - Fix inconsistent swagger_aem runtime dependency in gemspec

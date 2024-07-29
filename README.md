@@ -219,7 +219,8 @@ Replication agent:
       transport_user: 'admin',
       transport_password: 'admin',
       log_level: 'info',
-      retry_delay: 60_000
+      retry_delay: 60_000,
+      ssl: 'relaxed'
     }
     result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 

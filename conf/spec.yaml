@@ -354,6 +354,7 @@ flushagent:
           jcrcontent_jcrdescription: '%{description}'
           jcrcontent_slingresource_type: cq/replication/components/agent
           jcrcontent_transport_uri: '%{dest_base_url}/dispatcher/invalidate.cache'
+          jcrcontent_alias_update: '%{alias_update}'
           jcrcontent_log_level: '%{log_level}'
           jcrcontent_no_versioning: true
           jcrcontent_protocol_http_headers:

@@ -37,6 +37,7 @@ module RubyAem
       # @param description flush agent description
       # @param dest_base_url base URL of the agent target destination, e.g. http://somedispatcher:8080
       # @param opts optional parameters:
+      # - alias_update: true, false, default is false
       # - log_level: error, info, debug, default is error
       # - retry_delay: in milliseconds, default is 30_000
       # @return RubyAem::Result
@@ -45,6 +46,7 @@ module RubyAem
         description,
         dest_base_url,
         opts = {
+          alias_update: false,
           log_level: 'error',
           retry_delay: 30_000
         }

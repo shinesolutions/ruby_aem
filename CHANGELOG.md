@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent.
 
+### Changed
+- Simplify GitHub Actions release workflows to not use custom action
+
 ## 3.17.0 - 2024-07-29
 ### Added
 - Add relaxed SSL setting to replication agent when destination is HTTPS #RS-194

@@ -14,7 +14,7 @@ describe 'HTML Handler' do
         '</html>'
       status_code = nil
       headers = nil
-      response_spec = { 'message' => 'Group %{name} created at %{path}/%<authorizable_id>s' }
+      response_spec = { 'message' => 'Group %{name} created at %{path}/%<authorizable_id>s' } # rubocop:disable Style/FormatStringToken
       call_params = { name: 'somegroup', path: '/home/groups/s' }
 
       response = RubyAem::Response.new(status_code, data, headers)

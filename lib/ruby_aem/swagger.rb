@@ -54,7 +54,7 @@ module RubyAem
     # @param config_node_name the name of the node for a given config
     # @return config name
     def self.config_node_name_to_config_name(config_node_name)
-      case config_node_name
+      case config_node_name # rubocop:disable Style/HashLikeCase
       when 'org.apache.felix.http'
         'Apache Felix Jetty Based HTTP Service'
       when 'org.apache.sling.servlets.get.DefaultGetServlet'

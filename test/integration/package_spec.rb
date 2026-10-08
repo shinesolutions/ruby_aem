@@ -14,9 +14,6 @@ describe 'Package' do
     end
   end
 
-  after do
-  end
-
   describe 'test package build install replicate download' do
     it 'should succeed' do
       # create package

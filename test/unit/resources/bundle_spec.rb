@@ -7,9 +7,6 @@ describe 'Bundle' do
     @mock_client = double('mock_client')
   end
 
-  after do
-  end
-
   describe 'test start' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'start', name: 'somebundle')

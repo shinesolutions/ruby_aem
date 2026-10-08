@@ -24,8 +24,7 @@ module RubyAem
       # @return new RubyAem::Resources::Ssl instance
       def initialize(client)
         @client = client
-        @call_params = {
-        }
+        @call_params = {}
       end
 
       # Disable SSL

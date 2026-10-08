@@ -6,9 +6,6 @@ describe 'Aem' do
     @mock_client = double('mock_client')
   end
 
-  after do
-  end
-
   describe 'test configmgr get' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::AemConfigMgr, 'get', {})

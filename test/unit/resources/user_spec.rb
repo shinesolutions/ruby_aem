@@ -8,9 +8,6 @@ describe 'User' do
     @user = RubyAem::Resources::User.new(@mock_client, '/home/users/s/', 'someuser')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

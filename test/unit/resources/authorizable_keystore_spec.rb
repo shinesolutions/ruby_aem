@@ -7,9 +7,6 @@ describe 'AuthorizableKeystore' do
     @authorizable_keystore = RubyAem::Resources::AuthorizableKeystore.new(@mock_client, '/home/users/s', 'someauthorizableid')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

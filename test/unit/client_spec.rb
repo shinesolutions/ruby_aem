@@ -29,9 +29,6 @@ describe 'Client' do
     }
   end
 
-  after do
-  end
-
   describe 'test call' do
     it 'should call api send and handle the response' do
       mock_class = double('mock_class')

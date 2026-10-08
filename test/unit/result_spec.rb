@@ -2,12 +2,6 @@ require_relative 'spec_helper'
 require_relative '../../lib/ruby_aem/result'
 
 describe 'Result' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test initialize' do
     it 'should have message data and response' do
       mock_response = double('mock_response')

@@ -7,9 +7,6 @@ describe 'Node' do
     @node = RubyAem::Resources::Node.new(@mock_client, '/apps/system/', 'somefolder')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

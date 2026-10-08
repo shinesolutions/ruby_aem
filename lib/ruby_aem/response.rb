@@ -15,9 +15,7 @@
 module RubyAem
   # Response wraps HTTP response data returned by swagger_aem.
   class Response
-    attr_accessor :status_code
-    attr_accessor :body
-    attr_accessor :headers
+    attr_accessor :status_code, :body, :headers
 
     # Initialise a result.
     #

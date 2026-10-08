@@ -2,12 +2,6 @@ require_relative '../spec_helper'
 require_relative '../../../lib/ruby_aem/handlers/file'
 
 describe 'File Handler' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test package_file_download' do
     it 'should move file and return success result' do
       mock_data = double('mock_data')

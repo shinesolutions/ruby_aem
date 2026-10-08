@@ -28,8 +28,7 @@ module RubyAem
       # @return new RubyAem::Resources::Aem instance
       def initialize(client)
         @client = client
-        @call_params = {
-        }
+        @call_params = {}
       end
 
       # Retrieve AEM login page.
@@ -96,11 +95,11 @@ module RubyAem
         with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
           begin
             result = get_login_page
-            if result.response.body !~ /QUICKSTART_HOMEPAGE/
+            if result.response.body =~ /QUICKSTART_HOMEPAGE/
+              puts format('Retrieve login page attempt #%<retries_count>d: %<message>s and ready', retries_count: retries_count, message: result.message)
+            else
               puts format('Retrieve login page attempt #%<retries_count>d: %<message>s but not ready yet', retries_count: retries_count, message: result.message)
               raise StandardError.new(result.message)
-            else
-              puts format('Retrieve login page attempt #%<retries_count>d: %<message>s and ready', retries_count: retries_count, message: result.message)
             end
           rescue RubyAem::Error => e
             puts format('Retrieve login page attempt #%<retries_count>d: %<message>s', retries_count: retries_count, message: e.message)

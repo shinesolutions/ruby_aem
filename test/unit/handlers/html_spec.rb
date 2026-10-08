@@ -2,18 +2,12 @@ require_relative '../spec_helper'
 require_relative '../../../lib/ruby_aem/handlers/html'
 
 describe 'HTML Handler' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test html_authorizable_id' do
     it 'should return result with status from data payload' do
       data =
         '<html>' \
-        '<head>' \
-        '  <title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
+        '<head>  ' \
+        '<title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
         '</head>' \
         '<body>' \
         '</body>' \
@@ -35,8 +29,8 @@ describe 'HTML Handler' do
       data =
         '<html>' \
         '<head>' \
-        '<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>' \
-        '  <title>Error 500 </title>' \
+        '<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>  ' \
+        '<title>Error 500 </title>' \
         '</head>' \
         '<body>' \
         '<h2>HTTP ERROR: 500</h2>' \
@@ -61,21 +55,21 @@ describe 'HTML Handler' do
     it 'should identify success response body and display username in message' do
       data =
         '<html>' \
-        '<head>' \
-        '  <title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
+        '<head>  ' \
+        '<title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
         '</head>' \
         '<body style="background-color:white" frameborder="no">' \
-        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">' \
-        '  <table>' \
-        '    <tr>' \
-        '      <td>User Name:</td>' \
-        '      <td><b>someuser</b></td>' \
-        '    </tr>' \
-        '    <tr>' \
-        '      <td></td>' \
-        '      <td><font color="green">Password successfully changed.</font></td>' \
-        '    </tr>' \
-        '  </table>' \
+        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">  ' \
+        '<table>    ' \
+        '<tr>      ' \
+        '<td>User Name:</td>      ' \
+        '<td><b>someuser</b></td>    ' \
+        '</tr>    ' \
+        '<tr>      ' \
+        '<td></td>      ' \
+        '<td><font color="green">Password successfully changed.</font></td>    ' \
+        '</tr>  ' \
+        '</table>' \
         '</div>' \
         '</body>' \
         '</html>'
@@ -93,21 +87,21 @@ describe 'HTML Handler' do
     it 'should identify error response body and pass error message' do
       data =
         '<html>' \
-        '<head>' \
-        '  <title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
+        '<head>  ' \
+        '<title>Content created /home/groups/s/GDKHvEk6jG4lRaPUsAty</title>' \
         '</head>' \
         '<body style="background-color:white" frameborder="no">' \
-        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">' \
-        '  <table>' \
-        '    <tr>' \
-        '      <td>User Name:</td>' \
-        '      <td><b>someuser</b></td>' \
-        '    </tr>' \
-        '    <tr>' \
-        '      <td></td>' \
-        '      <td><font color="red">Failed to change password for user \'someuser\': Failed to change password: Old password does not match.</font></td>' \
-        '    </tr>' \
-        '  </table>' \
+        '<div class="listNamelistName" style="margin-left:7px;margin-top:15px;">  ' \
+        '<table>    ' \
+        '<tr>      ' \
+        '<td>User Name:</td>      ' \
+        '<td><b>someuser</b></td>    ' \
+        '</tr>    ' \
+        '<tr>      ' \
+        '<td></td>      ' \
+        '<td><font color="red">Failed to change password for user \'someuser\': Failed to change password: Old password does not match.</font></td>    ' \
+        '</tr>  ' \
+        '</table>' \
         '</div>' \
         '</body>' \
         '</html>'

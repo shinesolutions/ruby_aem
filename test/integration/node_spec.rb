@@ -11,9 +11,6 @@ describe 'Node' do
     expect(result.data).to eq(false)
   end
 
-  after do
-  end
-
   describe 'test node create' do
     it 'should succeed when node does not yet exist' do
       result = @node.create('sling:Folder')

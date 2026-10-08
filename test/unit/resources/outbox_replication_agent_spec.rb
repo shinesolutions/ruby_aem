@@ -7,9 +7,6 @@ describe 'OutboxReplicationAgent' do
     @outbox_replication_agent = RubyAem::Resources::OutboxReplicationAgent.new(@mock_client, 'author', 'some-outbox-replication-agent')
   end
 
-  after do
-  end
-
   describe 'test create_update' do
     it 'should call client with expected parameters having default optional parameters' do
       expect(@mock_client).to receive(:call).once.with(

@@ -15,9 +15,6 @@ describe 'FlushAgent' do
     expect(result.message).to eq('Flush agent some-flush-agent created on author')
   end
 
-  after do
-  end
-
   describe 'test flush agent create update' do
     it 'should return true on existence check' do
       result = @flush_agent.exists

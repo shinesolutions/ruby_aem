@@ -2,12 +2,6 @@ require_relative 'spec_helper'
 require_relative '../../lib/ruby_aem'
 
 describe 'RubyAem' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test initialize' do
     it 'should return client with resource methods' do
       aem = RubyAem::Aem.new

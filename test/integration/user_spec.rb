@@ -15,9 +15,6 @@ describe 'User' do
     expect(result.message).to match(%r{^User someuser created at /home/users/s/.+})
   end
 
-  after do
-  end
-
   describe 'test user create' do
     it 'should succeed existence check' do
       result = @user.exists

@@ -7,9 +7,6 @@ describe 'Ssl' do
     @ssl = RubyAem::Resources::Ssl.new(@mock_client)
   end
 
-  after do
-  end
-
   describe 'test enable' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

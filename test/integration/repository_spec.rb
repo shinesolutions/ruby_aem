@@ -5,9 +5,6 @@ describe 'Repository' do
     @aem = init_client
   end
 
-  after do
-  end
-
   describe 'test block repository writes' do
     it 'should succeed' do
       repository = @aem.repository

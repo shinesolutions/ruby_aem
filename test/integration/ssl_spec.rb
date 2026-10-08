@@ -5,9 +5,6 @@ describe 'Ssl' do
     @aem = init_client
   end
 
-  after do
-  end
-
   describe 'test if SSL via granite is disabled' do
     it 'should verify HTTPS is disabled' do
       ssl = @aem.ssl

@@ -5,9 +5,6 @@ describe 'Aem' do
     @client = init_client
   end
 
-  after do
-  end
-
   describe 'test configmgr resource get' do
     it 'should contain configData indicator' do
       configmgr = @client.aem_configmgr

@@ -3,12 +3,6 @@ require_relative '../../../lib/ruby_aem/error'
 require_relative '../../../lib/ruby_aem/handlers/simple'
 
 describe 'Simple Handler' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test simple' do
     it 'should construct result message based on spec message format and call_params parameters' do
       data = nil

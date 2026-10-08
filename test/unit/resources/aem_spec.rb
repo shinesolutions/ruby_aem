@@ -8,9 +8,6 @@ describe 'Aem' do
     @mock_client = double('mock_client')
   end
 
-  after do
-  end
-
   describe 'test get_login_page' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_login_page', {})
@@ -70,9 +67,9 @@ describe 'Aem' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_login_page', {}).and_return(mock_result_ok)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
-      expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #1: Login page has some error')
-      expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #2: Login page retrieved but not ready yet')
-      expect(STDOUT).to receive(:puts).with('Retrieve login page attempt #3: Login page retrieved and ready')
+      expect($stdout).to receive(:puts).with('Retrieve login page attempt #1: Login page has some error')
+      expect($stdout).to receive(:puts).with('Retrieve login page attempt #2: Login page retrieved but not ready yet')
+      expect($stdout).to receive(:puts).with('Retrieve login page attempt #3: Login page retrieved and ready')
       aem.get_login_page_wait_until_ready(
         _retries: {
           max_tries: '60',
@@ -104,7 +101,7 @@ describe 'Aem' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_package_manager_servlet_status', {}).and_return(mock_result_ok)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
-      expect(STDOUT).to receive(:puts).with('Check CRX Package Manager service attempt #1: Package Manager active')
+      expect($stdout).to receive(:puts).with('Check CRX Package Manager service attempt #1: Package Manager active')
       aem.get_package_manager_servlet_status_wait_until_ready(
         _retries: {
           max_tries: '60',
@@ -123,19 +120,19 @@ describe 'Aem' do
 
       mock_message_not_ok = 'AEM Health Check retrieved'
       mock_body_not_ok =
-        '{' \
-        '  "results": [' \
-        '    {' \
-        '      "name": "name1",' \
-        '      "status": "OK",' \
-        '      "timeMs": 11' \
-        '    },' \
-        '    {' \
-        '      "name": "name2",' \
-        '      "status": "CRITICAL",' \
-        '      "timeMs": 22' \
-        '    }' \
-        '  ]' \
+        '{  ' \
+        '"results": [    ' \
+        '{      ' \
+        '"name": "name1",      ' \
+        '"status": "OK",      ' \
+        '"timeMs": 11    ' \
+        '},    ' \
+        '{      ' \
+        '"name": "name2",      ' \
+        '"status": "CRITICAL",      ' \
+        '"timeMs": 22    ' \
+        '}  ' \
+        ']' \
         '}'
       mock_result_not_ok = double('mock_result_not_ok')
       expect(mock_result_not_ok).to receive(:data).and_return(JSON.parse(mock_body_not_ok)['results'])
@@ -143,19 +140,19 @@ describe 'Aem' do
 
       mock_message_ok = 'AEM Health Check retrieved'
       mock_body_ok =
-        '{' \
-        '  "results": [' \
-        '    {' \
-        '      "name": "name1",' \
-        '      "status": "OK",' \
-        '      "timeMs": 11' \
-        '    },' \
-        '    {' \
-        '      "name": "name2",' \
-        '      "status": "OK",' \
-        '      "timeMs": 22' \
-        '    }' \
-        '  ]' \
+        '{  ' \
+        '"results": [    ' \
+        '{      ' \
+        '"name": "name1",      ' \
+        '"status": "OK",      ' \
+        '"timeMs": 11    ' \
+        '},    ' \
+        '{      ' \
+        '"name": "name2",      ' \
+        '"status": "OK",      ' \
+        '"timeMs": 22    ' \
+        '}  ' \
+        ']' \
         '}'
       mock_result_ok = double('mock_result_ok')
       expect(mock_result_ok).to receive(:data).and_return(JSON.parse(mock_body_ok)['results'])
@@ -166,9 +163,9 @@ describe 'Aem' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false).and_return(mock_result_ok)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #1: AEM Health Check has some error')
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #2: AEM Health Check retrieved but not ok yet')
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM Health Check attempt #3: AEM Health Check retrieved and ok')
+      expect($stdout).to receive(:puts).with('Retrieve AEM Health Check attempt #1: AEM Health Check has some error')
+      expect($stdout).to receive(:puts).with('Retrieve AEM Health Check attempt #2: AEM Health Check retrieved but not ok yet')
+      expect($stdout).to receive(:puts).with('Retrieve AEM Health Check attempt #3: AEM Health Check retrieved and ok')
       aem.get_aem_health_check_wait_until_ok(
         tags: 'shallow',
         combine_tags_or: false,
@@ -226,29 +223,29 @@ describe 'Aem' do
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_install_status', {}).and_return(mock_result_finished)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #1: Install status has some error')
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #2: Install status retrieved but not finished yet, still installing 123 package(s)')
-      expect(STDOUT).to receive(:puts).with('Retrieve AEM install status attempt #3: Install status retrieved and finished')
+      expect($stdout).to receive(:puts).with('Retrieve AEM install status attempt #1: Install status has some error')
+      expect($stdout).to receive(:puts).with('Retrieve AEM install status attempt #2: Install status retrieved but not finished yet, still installing 123 package(s)')
+      expect($stdout).to receive(:puts).with('Retrieve AEM install status attempt #3: Install status retrieved and finished')
       aem.get_install_status_wait_until_finished
     end
 
     describe 'test get_packages' do
       it 'should have result data of packages list' do
         mock_packages_xml =
-          '<packages>' \
-          '  <package>' \
-          '    <group>shinesolutions</group>' \
-          '    <name>aem-password-reset-content</name>' \
-          '    <version>1.0.1</version>' \
-          '    <downloadName>aem-password-reset-content-1.0.1.zip</downloadName>' \
-          '    <size>23579</size>' \
-          '    <created>Tue, 4 Apr 2017 13:38:35 +1000</created>' \
-          '    <createdBy>root</createdBy>' \
-          '    <lastModified/>' \
-          '    <lastModifiedBy>null</lastModifiedBy>' \
-          '    <lastUnpacked>Wed, 18 Apr 2018 22:57:01 +1000</lastUnpacked>' \
-          '    <lastUnpackedBy>admin</lastUnpackedBy>' \
-          '  </package>' \
+          '<packages>  ' \
+          '<package>    ' \
+          '<group>shinesolutions</group>    ' \
+          '<name>aem-password-reset-content</name>    ' \
+          '<version>1.0.1</version>    ' \
+          '<downloadName>aem-password-reset-content-1.0.1.zip</downloadName>    ' \
+          '<size>23579</size>    ' \
+          '<created>Tue, 4 Apr 2017 13:38:35 +1000</created>    ' \
+          '<createdBy>root</createdBy>    ' \
+          '<lastModified/>    ' \
+          '<lastModifiedBy>null</lastModifiedBy>    ' \
+          '<lastUnpacked>Wed, 18 Apr 2018 22:57:01 +1000</lastUnpacked>    ' \
+          '<lastUnpackedBy>admin</lastUnpackedBy>  ' \
+          '</package>' \
           '</packages>'
         mock_message = double('mock_message')
         mock_response = double('mock_response')

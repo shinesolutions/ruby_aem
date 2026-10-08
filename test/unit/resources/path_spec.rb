@@ -7,9 +7,6 @@ describe 'Path' do
     @path = RubyAem::Resources::Path.new(@mock_client, '/etc/designs/cloudservices')
   end
 
-  after do
-  end
-
   describe 'test activate' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

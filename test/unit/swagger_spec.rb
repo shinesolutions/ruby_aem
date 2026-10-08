@@ -2,12 +2,6 @@ require_relative 'spec_helper'
 require_relative '../../lib/ruby_aem/swagger'
 
 describe 'Swagger' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test operation_to_method' do
     it 'should replace all uppercases with lowercases letters, each prefixed with an underscore' do
       method = RubyAem::Swagger.operation_to_method('postBundle')

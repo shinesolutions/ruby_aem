@@ -5,9 +5,6 @@ describe 'Bundle' do
     @aem = init_client
   end
 
-  after do
-  end
-
   describe 'test bundle stop' do
     it 'should succeed when bundle exists' do
       bundle = @aem.bundle('com.adobe.cq.social.cq-social-forum')

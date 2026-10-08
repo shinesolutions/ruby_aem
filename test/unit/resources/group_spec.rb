@@ -8,9 +8,6 @@ describe 'Group' do
     @group = RubyAem::Resources::Group.new(@mock_client, '/home/groups/s/', 'somegroup')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

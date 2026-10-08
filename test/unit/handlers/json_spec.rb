@@ -2,12 +2,6 @@ require_relative '../spec_helper'
 require_relative '../../../lib/ruby_aem/handlers/json'
 
 describe 'JSON Handler' do
-  before do
-  end
-
-  after do
-  end
-
   describe 'test json_authorizable_id' do
     it 'should return success result when authorizable ID is found' do
       data = '{"success":true,"results":1,"total":1,"more":false,"offset":0,"hits":[{"path":"/home/groups/s/cnf6J9EF5WtGm9X6CZT4","excerpt":"","name":"cnf6J9EF5WtGm9X6CZT4","title":"cnf6J9EF5WtGm9X6CZT4","lastModified":"2016-09-12 21:13:07","created":"2016-09-12 21:13:07"}]}'
@@ -73,20 +67,20 @@ describe 'JSON Handler' do
   describe 'test json_package_filter' do
     it 'should return success result with filter data payload' do
       data =
-        '{' \
-        '  "jcr:primaryType": "nt:unstructured",' \
-        '  "f0": {' \
-        '    "jcr:primaryType": "nt:unstructured",' \
-        '    "mode": "replace",' \
-        '    "root": "/apps/geometrixx",' \
-        '    "rules": []' \
-        '  },' \
-        '  "f1": {' \
-        '    "jcr:primaryType": "nt:unstructured",' \
-        '    "mode": "replace",' \
-        '    "root": "/apps/geometrixx-common",' \
-        '    "rules": []' \
-        '  }' \
+        '{  ' \
+        '"jcr:primaryType": "nt:unstructured",  ' \
+        '"f0": {    ' \
+        '"jcr:primaryType": "nt:unstructured",    ' \
+        '"mode": "replace",    ' \
+        '"root": "/apps/geometrixx",    ' \
+        '"rules": []  ' \
+        '},  ' \
+        '"f1": {    ' \
+        '"jcr:primaryType": "nt:unstructured",    ' \
+        '"mode": "replace",    ' \
+        '"root": "/apps/geometrixx-common",    ' \
+        '"rules": []  ' \
+        '}' \
         '}'
       status_code = nil
       headers = nil
@@ -106,19 +100,19 @@ describe 'JSON Handler' do
   describe 'test json_aem_health_check' do
     it 'should return success result with filter data payload' do
       data =
-        '{' \
-        '  "results": [' \
-        '    {' \
-        '      "name": "name1",' \
-        '      "status": "OK",' \
-        '      "timeMs": 11' \
-        '    },' \
-        '    {' \
-        '      "name": "name2",' \
-        '      "status": "CRITICAL",' \
-        '      "timeMs": 22' \
-        '    }' \
-        '  ]' \
+        '{  ' \
+        '"results": [    ' \
+        '{      ' \
+        '"name": "name1",      ' \
+        '"status": "OK",      ' \
+        '"timeMs": 11    ' \
+        '},    ' \
+        '{      ' \
+        '"name": "name2",      ' \
+        '"status": "CRITICAL",      ' \
+        '"timeMs": 22    ' \
+        '}  ' \
+        ']' \
         '}'
       status_code = nil
       headers = nil
@@ -140,11 +134,11 @@ describe 'JSON Handler' do
   describe 'test json_agents' do
     it 'should return agent names' do
       data =
-        '{' \
-        '  "jcr:primaryType": "cq:Page",' \
-        '  "rep:policy": "",' \
-        '  "agent1": {},' \
-        '  "agent2": {}' \
+        '{  ' \
+        '"jcr:primaryType": "cq:Page",  ' \
+        '"rep:policy": "",  ' \
+        '"agent1": {},  ' \
+        '"agent2": {}' \
         '}'
       status_code = nil
       headers = nil

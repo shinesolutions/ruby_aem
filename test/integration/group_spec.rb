@@ -15,9 +15,6 @@ describe 'Group' do
     expect(result.message).to match(%r{^Group somegroup created at /home/groups/s/.+})
   end
 
-  after do
-  end
-
   describe 'test group create' do
     it 'should succeed existence check' do
       result = @group.exists

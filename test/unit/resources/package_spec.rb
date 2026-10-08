@@ -9,9 +9,6 @@ describe 'Package' do
     @package = RubyAem::Resources::Package.new(@mock_client, 'somepackagegroup', 'somepackage', '1.2.3')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(
@@ -196,17 +193,17 @@ describe 'Package' do
   describe 'test get_versions' do
     it 'should retrieve all versions when the package has multiple versions' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.4</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.4</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -229,12 +226,12 @@ describe 'Package' do
 
     it 'should retrieve the version when the package only has one version' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -256,12 +253,12 @@ describe 'Package' do
 
     it 'should retrieve empty array when the package does not exist at all' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>otherpackagegroup</group>' \
-        '    <name>otherpackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>otherpackagegroup</group>    ' \
+        '<name>otherpackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -284,12 +281,12 @@ describe 'Package' do
   describe 'test exists' do
     it 'should return true result data when package exists on the list' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -330,12 +327,12 @@ describe 'Package' do
   describe 'test is_uploaded' do
     it 'should return true result data when package exists on the list' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -376,13 +373,13 @@ describe 'Package' do
   describe 'test is_installed' do
     it 'should return true result data when package has lastUnpackedBy attribute value' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <lastUnpackedBy>admin</lastUnpackedBy>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<lastUnpackedBy>admin</lastUnpackedBy>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -403,13 +400,13 @@ describe 'Package' do
 
     it 'should return false result  data when package has null lastUnpackedBy attribute value' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <lastUnpackedBy>null</lastUnpackedBy>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<lastUnpackedBy>null</lastUnpackedBy>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -430,13 +427,13 @@ describe 'Package' do
 
     it 'should return false result  data when package has null lastUnpackedBy attribute value' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <lastUnpackedBy/>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<lastUnpackedBy/>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -457,13 +454,13 @@ describe 'Package' do
 
     it 'should return false result  data when checked package segment does not exist at all' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>otherpackagegroup</group>' \
-        '    <name>otherpackage</name>' \
-        '    <version>4.5.6</version>' \
-        '    <lastUnpackedBy>admin</lastUnpackedBy>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>otherpackagegroup</group>    ' \
+        '<name>otherpackage</name>    ' \
+        '<version>4.5.6</version>    ' \
+        '<lastUnpackedBy>admin</lastUnpackedBy>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -486,13 +483,13 @@ describe 'Package' do
   describe 'test is_empty' do
     it 'should return true result data when package has size attribute value zero' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <size>0</size>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<size>0</size>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -513,13 +510,13 @@ describe 'Package' do
 
     it 'should return false result  data when package has size attribute value non-zero' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <size>2394</size>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<size>2394</size>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -542,13 +539,13 @@ describe 'Package' do
   describe 'test is_built' do
     it 'should return true result data when package exists and not empty' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <size>30948209423</size>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<size>30948209423</size>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -570,13 +567,13 @@ describe 'Package' do
 
     it 'should return false result data when package exists and empty' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <size>0</size>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<size>0</size>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -598,13 +595,13 @@ describe 'Package' do
 
     it 'should return false result data when package does not exist' do
       mock_data_list_all = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>otherpackagegroup</group>' \
-        '    <name>otherpackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <size>23422342</size>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>otherpackagegroup</group>    ' \
+        '<name>otherpackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<size>23422342</size>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all = double('mock_result_list_all')
@@ -661,12 +658,12 @@ describe 'Package' do
       ).and_return(mock_result_list_all_not_installed)
 
       mock_data_list_all_uploaded = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all_uploaded = double('mock_result_list_all_uploaded')
@@ -687,8 +684,8 @@ describe 'Package' do
         }
       ).and_return(mock_result_list_all_uploaded)
 
-      expect(STDOUT).to receive(:puts).with('Upload check #1: false - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
-      expect(STDOUT).to receive(:puts).with('Upload check #2: true - Package somepackagegroup/somepackage-1.2.3 is uploaded')
+      expect($stdout).to receive(:puts).with('Upload check #1: false - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+      expect($stdout).to receive(:puts).with('Upload check #2: true - Package somepackagegroup/somepackage-1.2.3 is uploaded')
 
       @package.upload_wait_until_ready(
         '/tmp',
@@ -714,13 +711,13 @@ describe 'Package' do
       )
 
       mock_data_list_all_not_installed = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <lastUnpackedBy>null</lastUnpackedBy>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<lastUnpackedBy>null</lastUnpackedBy>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all_not_installed = double('mock_result_list_all_not_installed')
@@ -736,13 +733,13 @@ describe 'Package' do
       ).and_return(mock_result_list_all_not_installed)
 
       mock_data_list_all_installed = REXML::Document.new(
-        '<packages>' \
-        '  <package>' \
-        '    <group>somepackagegroup</group>' \
-        '    <name>somepackage</name>' \
-        '    <version>1.2.3</version>' \
-        '    <lastUnpackedBy>admin</lastUnpackedBy>' \
-        '  </package>' \
+        '<packages>  ' \
+        '<package>    ' \
+        '<group>somepackagegroup</group>    ' \
+        '<name>somepackage</name>    ' \
+        '<version>1.2.3</version>    ' \
+        '<lastUnpackedBy>admin</lastUnpackedBy>  ' \
+        '</package>' \
         '</packages>'
       )
       mock_result_list_all_installed = double('mock_result_list_all')
@@ -757,8 +754,8 @@ describe 'Package' do
         recursive: true
       ).and_return(mock_result_list_all_installed)
 
-      expect(STDOUT).to receive(:puts).with('Install check #1: false - Package somepackagegroup/somepackage-1.2.3 is not installed')
-      expect(STDOUT).to receive(:puts).with('Install check #2: true - Package somepackagegroup/somepackage-1.2.3 is installed')
+      expect($stdout).to receive(:puts).with('Install check #1: false - Package somepackagegroup/somepackage-1.2.3 is not installed')
+      expect($stdout).to receive(:puts).with('Install check #2: true - Package somepackagegroup/somepackage-1.2.3 is installed')
 
       @package.install_wait_until_ready
     end
@@ -774,12 +771,12 @@ describe 'Package' do
         )
 
         mock_data_list_all_uploaded = REXML::Document.new(
-          '<packages>' \
-          '  <package>' \
-          '    <group>somepackagegroup</group>' \
-          '    <name>somepackage</name>' \
-          '    <version>1.2.3</version>' \
-          '  </package>' \
+          '<packages>  ' \
+          '<package>    ' \
+          '<group>somepackagegroup</group>    ' \
+          '<name>somepackage</name>    ' \
+          '<version>1.2.3</version>  ' \
+          '</package>' \
           '</packages>'
         )
         mock_result_list_all_uploaded = double('mock_result_list_all_uploaded')
@@ -808,8 +805,8 @@ describe 'Package' do
           package_version: '1.2.3'
         ).and_return(mock_result_list_all_not_uploaded)
 
-        expect(STDOUT).to receive(:puts).with('Delete check #1: false - Package somepackagegroup/somepackage-1.2.3 is uploaded')
-        expect(STDOUT).to receive(:puts).with('Delete check #2: true - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
+        expect($stdout).to receive(:puts).with('Delete check #1: false - Package somepackagegroup/somepackage-1.2.3 is uploaded')
+        expect($stdout).to receive(:puts).with('Delete check #2: true - Package somepackagegroup/somepackage-1.2.3 is not uploaded')
 
         @package.delete_wait_until_ready
       end
@@ -826,13 +823,13 @@ describe 'Package' do
         )
 
         mock_data_list_all_exists_but_empty = REXML::Document.new(
-          '<packages>' \
-          '  <package>' \
-          '    <group>somepackagegroup</group>' \
-          '    <name>somepackage</name>' \
-          '    <version>1.2.3</version>' \
-          '    <size>0</size>' \
-          '  </package>' \
+          '<packages>  ' \
+          '<package>    ' \
+          '<group>somepackagegroup</group>    ' \
+          '<name>somepackage</name>    ' \
+          '<version>1.2.3</version>    ' \
+          '<size>0</size>  ' \
+          '</package>' \
           '</packages>'
         )
         mock_result_list_all_exists_but_empty = double('mock_result_list_all_exists_but_empty')
@@ -848,13 +845,13 @@ describe 'Package' do
         ).and_return(mock_result_list_all_exists_but_empty)
 
         mock_data_list_all_exists_but_not_empty = REXML::Document.new(
-          '<packages>' \
-          '  <package>' \
-          '    <group>somepackagegroup</group>' \
-          '    <name>somepackage</name>' \
-          '    <version>1.2.3</version>' \
-          '    <size>9384729437</size>' \
-          '  </package>' \
+          '<packages>  ' \
+          '<package>    ' \
+          '<group>somepackagegroup</group>    ' \
+          '<name>somepackage</name>    ' \
+          '<version>1.2.3</version>    ' \
+          '<size>9384729437</size>  ' \
+          '</package>' \
           '</packages>'
         )
         mock_result_list_all_exists_but_not_empty = double('mock_result_list_all_exists_but_not_empty')
@@ -869,8 +866,8 @@ describe 'Package' do
           package_version: '1.2.3'
         ).and_return(mock_result_list_all_exists_but_not_empty)
 
-        expect(STDOUT).to receive(:puts).with('Build check #1: false - Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')
-        expect(STDOUT).to receive(:puts).with('Build check #2: true - Package somepackagegroup/somepackage-1.2.3 is built')
+        expect($stdout).to receive(:puts).with('Build check #1: false - Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')
+        expect($stdout).to receive(:puts).with('Build check #2: true - Package somepackagegroup/somepackage-1.2.3 is built')
 
         @package.build_wait_until_ready
       end

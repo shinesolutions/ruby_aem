@@ -15,9 +15,6 @@ describe 'OutboxReplicationAgent' do
     expect(result.message).to eq('Outbox replication agent some-outbox-replication-agent created on author')
   end
 
-  after do
-  end
-
   describe 'test replication agent create update' do
     it 'should return true on existence check' do
       result = @outbox_replication_agent.exists

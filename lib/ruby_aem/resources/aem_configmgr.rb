@@ -26,8 +26,7 @@ module RubyAem
       # @return new RubyAem::Resources::Aem instance
       def initialize(client)
         @client = client
-        @call_params = {
-        }
+        @call_params = {}
       end
 
       # Connect to AEM /system/console/configMgr to collect

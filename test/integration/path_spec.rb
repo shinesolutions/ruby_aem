@@ -5,9 +5,6 @@ describe 'Path' do
     @aem = init_client
   end
 
-  after do
-  end
-
   describe 'test path activation' do
     it 'should succeed when path exists' do
       path = @aem.path('/etc/designs/cloudservices')

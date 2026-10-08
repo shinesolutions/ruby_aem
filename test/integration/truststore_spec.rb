@@ -15,9 +15,6 @@ describe 'Truststore' do
     expect(result.message).to eq('Truststore created')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should return true on existence check' do
       result = @truststore.exists

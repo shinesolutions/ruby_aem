@@ -7,9 +7,6 @@ describe 'FlushAgent' do
     @flush_agent = RubyAem::Resources::FlushAgent.new(@mock_client, 'author', 'some-flush-agent')
   end
 
-  after do
-  end
-
   describe 'test create_update' do
     it 'should call client with expected parameters having default optional parameters' do
       expect(@mock_client).to receive(:call).once.with(

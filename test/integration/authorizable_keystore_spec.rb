@@ -15,9 +15,6 @@ describe 'AuthorizableKeystore' do
     expect(result.message).to eq('Authorizable keystore created')
   end
 
-  after do
-  end
-
   describe 'test create' do
     it 'should return true on existence check' do
       result = @authorizable_keystore.exists

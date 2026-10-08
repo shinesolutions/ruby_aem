@@ -20,6 +20,7 @@ module RubyAem
     # Package class contains API calls related to managing an AEM package.
     class Package
       include REXML
+
       # Initialise a package.
       # Package name and version will then be used to construct the package file in the filesystem.
       # E.g. package name 'somepackage' with version '1.2.3' will translate to somepackage-1.2.3.zip in the filesystem.
@@ -185,12 +186,12 @@ module RubyAem
         packages = list_all.data
         package = XPath.first(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
 
-        if package.to_s != ''
-          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} exists"
-          exists = true
-        else
+        if package.to_s == ''
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} does not exist"
           exists = false
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} exists"
+          exists = true
         end
         result = RubyAem::Result.new(message, nil)
         result.data = exists
@@ -224,12 +225,12 @@ module RubyAem
         package = XPath.first(packages, "//packages/package[group=\"#{@call_params[:group_name]}\" and name=\"#{@call_params[:package_name]}\" and version=\"#{@call_params[:package_version]}\"]")
         last_unpacked_by = XPath.first(package, 'lastUnpackedBy') if package
 
-        if !['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
-          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
-          is_installed = true
-        else
+        if ['', '<lastUnpackedBy/>', '<lastUnpackedBy>null</lastUnpackedBy>'].include? last_unpacked_by.to_s
           message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is not installed"
           is_installed = false
+        else
+          message = "Package #{@call_params[:group_name]}/#{@call_params[:package_name]}-#{@call_params[:package_version]} is installed"
+          is_installed = true
         end
         result = RubyAem::Result.new(message, nil)
         result.data = is_installed

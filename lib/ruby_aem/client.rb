@@ -94,7 +94,7 @@ module RubyAem
         params[-1][key.to_sym] = call_params[key.to_sym] if call_params.key? key.to_sym
       # if value is provided in optional param spec,
       # then apply variable interpolation the same way as required param
-      elsif value.class == String
+      elsif value.instance_of?(String)
         case value
         when '__FILE_PACKAGE__'
           file_path = "#{call_params[:file_path]}/#{call_params[:package_name]}-#{call_params[:package_version]}.zip"
@@ -106,12 +106,12 @@ module RubyAem
           file_path = call_params[:file_path_private_key]
         end
 
-        if !file_path.nil?
+        if file_path.nil?
+          params[-1][key.to_sym] = value % call_params
+        else
           File.open(file_path.to_s, 'r') { |file|
             params[-1][key.to_sym] = file
           }
-        else
-          params[-1][key.to_sym] = value % call_params
         end
       else
         params[-1][key.to_sym] = value

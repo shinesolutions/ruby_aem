@@ -7,9 +7,6 @@ describe 'ReplicationAgent' do
     @replication_agent = RubyAem::Resources::ReplicationAgent.new(@mock_client, 'author', 'some-replication-agent')
   end
 
-  after do
-  end
-
   describe 'test create_update' do
     it 'should call client with expected parameters having default optional parameters' do
       expect(@mock_client).to receive(:call).once.with(

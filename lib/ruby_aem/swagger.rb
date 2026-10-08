@@ -22,7 +22,7 @@ module RubyAem
     # @return swagger_aem method name
     def self.operation_to_method(operation)
       operation.gsub(/[A-Z]/) { |char|
-        '_' + char.downcase
+        "_#{char.downcase}"
       }
     end
 

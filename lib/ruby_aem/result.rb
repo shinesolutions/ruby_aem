@@ -21,9 +21,8 @@ module RubyAem
   # e.g. is_* and exists method provide result with boolean data.
   # Some API calls result doesn't contain any data.
   class Result
-    attr_accessor :message
+    attr_accessor :message, :data
     attr_reader :response
-    attr_accessor :data
 
     # Initialise a result.
     #

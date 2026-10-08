@@ -7,9 +7,6 @@ describe 'Repository' do
     @repository = RubyAem::Resources::Repository.new(@mock_client)
   end
 
-  after do
-  end
-
   describe 'test block_writes' do
     it 'should call client with expected parameters' do
       expect(@mock_client).to receive(:call).once.with(

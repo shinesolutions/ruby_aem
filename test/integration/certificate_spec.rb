@@ -26,9 +26,6 @@ describe 'Certificate' do
     expect(result.message).to eq('Certificate imported')
   end
 
-  after do
-  end
-
   describe 'test import' do
     it 'should return true on existence check' do
       result = @certificate.import('./test/integration/fixtures/cert_chain.crt')

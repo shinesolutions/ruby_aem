@@ -12,7 +12,7 @@ describe 'Truststore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Truststore,
         'create',
-        password: 's0m3p4ssw0rd'
+        { password: 's0m3p4ssw0rd' }
       )
       @truststore.create('s0m3p4ssw0rd')
     end
@@ -56,7 +56,7 @@ describe 'Truststore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Truststore,
         'download',
-        file_path: '/somepath'
+        { file_path: '/somepath' }
       )
       @truststore.download('/somepath')
     end
@@ -67,8 +67,10 @@ describe 'Truststore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Truststore,
         'upload',
-        file_path: '/somepath',
-        force: true
+        {
+          file_path: '/somepath',
+          force: true
+        }
       )
       @truststore.upload('/somepath')
     end

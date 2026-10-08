@@ -12,9 +12,11 @@ describe 'Path' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Path,
         'activate',
-        name: '/etc/designs/cloudservices',
-        ignoredeactivated: true,
-        onlymodified: false
+        {
+          name: '/etc/designs/cloudservices',
+          ignoredeactivated: true,
+          onlymodified: false
+        }
       )
       @path.activate(true, false)
     end
@@ -25,8 +27,10 @@ describe 'Path' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Path,
         'delete',
-        name: '/etc/designs/cloudservices',
-        path: '/etc/designs/cloudservices'
+        {
+          name: '/etc/designs/cloudservices',
+          path: '/etc/designs/cloudservices'
+        }
       )
       @path.delete
     end

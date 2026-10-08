@@ -85,7 +85,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once.and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once.with(optional1: 'value1', optional2: 'value2').and_return(['some data', 200, {}])
+      expect(mock_api).to receive(:post_bundle_with_http_info).once.with({ optional1: 'value1', optional2: 'value2' }).and_return(['some data', 200, {}])
       apis = { console: mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -121,7 +121,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once.and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once.with(optional1: true, optional2: false).and_return(['some data', 200, {}])
+      expect(mock_api).to receive(:post_bundle_with_http_info).once.with({ optional1: true, optional2: false }).and_return(['some data', 200, {}])
       apis = { console: mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -157,7 +157,7 @@ describe 'Client' do
       expect(mock_class).to receive(:name).once.and_return('RubyAem::Resources::Bundle')
 
       mock_api = double('mock_api')
-      expect(mock_api).to receive(:post_bundle_with_http_info).once.with(optional1: 'value1', optional2: 'value2').and_return(['some data', 200, {}])
+      expect(mock_api).to receive(:post_bundle_with_http_info).once.with({ optional1: 'value1', optional2: 'value2' }).and_return(['some data', 200, {}])
       apis = { console: mock_api }
 
       client = RubyAem::Client.new(apis, spec)
@@ -205,7 +205,7 @@ describe 'Client' do
 
       mock_api = double('mock_api')
       expect(mock_api).to receive(:post_bundle_with_http_info)
-        .once.with(optional1: mock_file_package, optional2: mock_file_plain, optional3: mock_file_certificate, optional4: mock_file_private_key)
+        .once.with({ optional1: mock_file_package, optional2: mock_file_plain, optional3: mock_file_certificate, optional4: mock_file_private_key })
         .and_return(['some data', 200, {}])
       apis = { console: mock_api }
 

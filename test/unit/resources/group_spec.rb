@@ -13,7 +13,7 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'create',
-        path: '/home/groups/s/', name: 'somegroup'
+        { path: '/home/groups/s/', name: 'somegroup' }
       )
       @group.create
     end
@@ -22,7 +22,7 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'create',
-        path: '/home/groups/s/', name: 'somegroup'
+        { path: '/home/groups/s/', name: 'somegroup' }
       )
       group = RubyAem::Resources::Group.new(@mock_client, 'home/groups/s/', 'somegroup')
       group.create
@@ -35,13 +35,15 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       ).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'delete',
-        path: 'home/groups/s', name: 'somegroup', authorizable_id: 'someauthorizableid'
+        { path: 'home/groups/s', name: 'somegroup', authorizable_id: 'someauthorizableid' }
       )
       @group.delete
     end
@@ -51,13 +53,15 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       ).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'delete',
-        path: 'home/groups/s', name: 'somegroup', authorizable_id: nil
+        { path: 'home/groups/s', name: 'somegroup', authorizable_id: nil }
       )
       @group.delete
     end
@@ -69,13 +73,15 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       ).and_return(mock_result)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'exists',
-        path: 'home/groups/s', name: 'somegroup', authorizable_id: 'someauthorizableid'
+        { path: 'home/groups/s', name: 'somegroup', authorizable_id: 'someauthorizableid' }
       )
       @group.exists
     end
@@ -86,10 +92,12 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'set_permission',
-        path: '/home/groups/s/',
-        name: 'somegroup',
-        permission_path: '/etc/replication',
-        permission_csv: 'read:true,modify:true'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup',
+          permission_path: '/etc/replication',
+          permission_csv: 'read:true,modify:true'
+        }
       )
       @group.set_permission('/etc/replication', 'read:true,modify:true')
     end
@@ -101,13 +109,15 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       ).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'add_member',
-        path: 'home/groups/s', name: 'somegroup', member: 'somemembergroup', authorizable_id: 'someauthorizableid'
+        { path: 'home/groups/s', name: 'somegroup', member: 'somemembergroup', authorizable_id: 'someauthorizableid' }
       )
       @group.add_member('somemembergroup')
     end
@@ -117,13 +127,15 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       ).and_return(@mock_result)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'add_member',
-        path: 'home/groups/s', name: 'somegroup', member: 'somemembergroup', authorizable_id: nil
+        { path: 'home/groups/s', name: 'somegroup', member: 'somemembergroup', authorizable_id: nil }
       )
       @group.add_member('somemembergroup')
     end
@@ -134,8 +146,10 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       )
       @group.find_authorizable_id
     end
@@ -145,8 +159,10 @@ describe 'Group' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Group,
         'find_authorizable_id',
-        path: '/home/groups/s/',
-        name: 'somegroup'
+        {
+          path: '/home/groups/s/',
+          name: 'somegroup'
+        }
       )
       group.find_authorizable_id
     end

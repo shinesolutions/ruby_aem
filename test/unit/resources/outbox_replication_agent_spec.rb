@@ -12,14 +12,16 @@ describe 'OutboxReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::OutboxReplicationAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-outbox-replication-agent',
-        title: 'Some Outbox Replication Agent Title',
-        description: 'Some outbox replication agent description',
-        dest_base_url: 'http://somehost:8080',
-        user_id: 'admin',
-        log_level: 'error',
-        retry_delay: 30_000
+        {
+          run_mode: 'author',
+          name: 'some-outbox-replication-agent',
+          title: 'Some Outbox Replication Agent Title',
+          description: 'Some outbox replication agent description',
+          dest_base_url: 'http://somehost:8080',
+          user_id: 'admin',
+          log_level: 'error',
+          retry_delay: 30_000
+        }
       )
       @outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080')
     end
@@ -28,14 +30,16 @@ describe 'OutboxReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::OutboxReplicationAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-outbox-replication-agent',
-        title: 'Some Outbox Replication Agent Title',
-        description: 'Some outbox replication agent description',
-        dest_base_url: 'http://somehost:8080',
-        user_id: 'someuser',
-        log_level: 'info',
-        retry_delay: 60_000
+        {
+          run_mode: 'author',
+          name: 'some-outbox-replication-agent',
+          title: 'Some Outbox Replication Agent Title',
+          description: 'Some outbox replication agent description',
+          dest_base_url: 'http://somehost:8080',
+          user_id: 'someuser',
+          log_level: 'info',
+          retry_delay: 60_000
+        }
       )
       @outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', user_id: 'someuser', log_level: 'info', retry_delay: 60_000)
     end
@@ -46,8 +50,10 @@ describe 'OutboxReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::OutboxReplicationAgent,
         'delete',
-        run_mode: 'author',
-        name: 'some-outbox-replication-agent'
+        {
+          run_mode: 'author',
+          name: 'some-outbox-replication-agent'
+        }
       )
       @outbox_replication_agent.delete
     end
@@ -58,8 +64,10 @@ describe 'OutboxReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::OutboxReplicationAgent,
         'exists',
-        run_mode: 'author',
-        name: 'some-outbox-replication-agent'
+        {
+          run_mode: 'author',
+          name: 'some-outbox-replication-agent'
+        }
       )
       @outbox_replication_agent.exists
     end

@@ -9,7 +9,7 @@ describe 'Bundle' do
 
   describe 'test start' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'start', name: 'somebundle')
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'start', { name: 'somebundle' })
       bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
       bundle.start
     end
@@ -17,7 +17,7 @@ describe 'Bundle' do
 
   describe 'test stop' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'stop', name: 'somebundle')
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'stop', { name: 'somebundle' })
       bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
       bundle.stop
     end
@@ -25,7 +25,7 @@ describe 'Bundle' do
 
   describe 'test info' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'somebundle')
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'somebundle' })
       bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
       bundle.info
     end
@@ -40,7 +40,7 @@ describe 'Bundle' do
       mock_response = double('mock_response')
       mock_result = RubyAem::Result.new('somemessage', mock_response)
       mock_result.data = mock_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'somebundle').and_return(mock_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'somebundle' }).and_return(mock_result)
       bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
       result = bundle.is_active
       expect(result.data).to eq(true)
@@ -55,7 +55,7 @@ describe 'Bundle' do
       mock_response = double('mock_response')
       mock_result = RubyAem::Result.new('somemessage', mock_response)
       mock_result.data = mock_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'somebundle').and_return(mock_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'somebundle' }).and_return(mock_result)
       bundle = RubyAem::Resources::Bundle.new(@mock_client, 'somebundle')
       result = bundle.is_active
       expect(result.data).to eq(false)

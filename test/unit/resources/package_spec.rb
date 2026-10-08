@@ -14,9 +14,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'create',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.create
     end
@@ -27,10 +29,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'update',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        filter: '[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          filter: '[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]'
+        }
       )
       @package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
     end
@@ -41,9 +45,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'delete',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.delete
     end
@@ -54,10 +60,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'install',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        recursive: false
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          recursive: false
+        }
       )
       @package.install(recursive: false)
     end
@@ -68,9 +76,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'uninstall',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.uninstall
     end
@@ -81,9 +91,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'replicate',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.replicate
     end
@@ -94,9 +106,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'build',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.build
     end
@@ -107,10 +121,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'download',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        file_path: '/tmp'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          file_path: '/tmp'
+        }
       )
       @package.download('/tmp')
     end
@@ -121,11 +137,13 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'upload',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        file_path: '/tmp',
-        force: true
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          file_path: '/tmp',
+          force: true
+        }
       )
       @package.upload('/tmp', force: true)
     end
@@ -136,9 +154,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'get_filter',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.get_filter
     end
@@ -154,23 +174,29 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'get_filter',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_get_filter)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Path,
         'activate',
-        name: '/some/path/1',
-        ignoredeactivated: true,
-        onlymodified: false
+        {
+          name: '/some/path/1',
+          ignoredeactivated: true,
+          onlymodified: false
+        }
       ).and_return(mock_result_activate1)
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Path,
         'activate',
-        name: '/some/path/2',
-        ignoredeactivated: true,
-        onlymodified: false
+        {
+          name: '/some/path/2',
+          ignoredeactivated: true,
+          onlymodified: false
+        }
       ).and_return(mock_result_activate2)
 
       @package.activate_filter(true, false)
@@ -182,9 +208,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       )
       @package.list_all
     end
@@ -212,9 +240,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.get_versions
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 has 2 version(s)')
@@ -240,9 +270,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.get_versions
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 has 1 version(s)')
@@ -267,9 +299,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.get_versions
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 has 0 version(s)')
@@ -295,9 +329,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.exists
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 exists')
@@ -313,9 +349,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.exists
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 does not exist')
@@ -341,9 +379,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_uploaded
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is uploaded')
@@ -359,9 +399,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_uploaded
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not uploaded')
@@ -388,9 +430,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is installed')
@@ -415,9 +459,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
@@ -442,9 +488,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
@@ -469,9 +517,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_installed
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not installed')
@@ -498,9 +548,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_empty
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is empty')
@@ -525,9 +577,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_empty
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not empty')
@@ -555,9 +609,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).twice.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_built
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is built')
@@ -583,9 +639,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).twice.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_built
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')
@@ -610,9 +668,11 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3'
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3'
+        }
       ).and_return(mock_result_list_all)
       result = @package.is_built
       expect(result.message).to eq('Package somepackagegroup/somepackage-1.2.3 is not built because it does not exist')
@@ -626,15 +686,17 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'upload',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        file_path: '/tmp',
-        force: true,
-        _retries: {
-          max_tries: 60,
-          base_sleep_seconds: 2,
-          max_sleep_seconds: 2
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          file_path: '/tmp',
+          force: true,
+          _retries: {
+            max_tries: 60,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
         }
       )
 
@@ -645,15 +707,17 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        file_path: '/tmp',
-        force: true,
-        _retries: {
-          max_tries: 60,
-          base_sleep_seconds: 2,
-          max_sleep_seconds: 2
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          file_path: '/tmp',
+          force: true,
+          _retries: {
+            max_tries: 60,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
         }
       ).and_return(mock_result_list_all_not_installed)
 
@@ -672,15 +736,17 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        file_path: '/tmp',
-        force: true,
-        _retries: {
-          max_tries: 60,
-          base_sleep_seconds: 2,
-          max_sleep_seconds: 2
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          file_path: '/tmp',
+          force: true,
+          _retries: {
+            max_tries: 60,
+            base_sleep_seconds: 2,
+            max_sleep_seconds: 2
+          }
         }
       ).and_return(mock_result_list_all_uploaded)
 
@@ -704,10 +770,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'install',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        recursive: true
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          recursive: true
+        }
       )
 
       mock_data_list_all_not_installed = REXML::Document.new(
@@ -726,10 +794,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        recursive: true
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          recursive: true
+        }
       ).and_return(mock_result_list_all_not_installed)
 
       mock_data_list_all_installed = REXML::Document.new(
@@ -748,10 +818,12 @@ describe 'Package' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Package,
         'list_all',
-        group_name: 'somepackagegroup',
-        package_name: 'somepackage',
-        package_version: '1.2.3',
-        recursive: true
+        {
+          group_name: 'somepackagegroup',
+          package_name: 'somepackage',
+          package_version: '1.2.3',
+          recursive: true
+        }
       ).and_return(mock_result_list_all_installed)
 
       expect($stdout).to receive(:puts).with('Install check #1: false - Package somepackagegroup/somepackage-1.2.3 is not installed')
@@ -765,9 +837,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).once.with(
           RubyAem::Resources::Package,
           'delete',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         )
 
         mock_data_list_all_uploaded = REXML::Document.new(
@@ -785,9 +859,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).once.with(
           RubyAem::Resources::Package,
           'list_all',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         ).and_return(mock_result_list_all_uploaded)
 
         mock_data_list_all_not_uploaded = REXML::Document.new(
@@ -800,9 +876,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).once.with(
           RubyAem::Resources::Package,
           'list_all',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         ).and_return(mock_result_list_all_not_uploaded)
 
         expect($stdout).to receive(:puts).with('Delete check #1: false - Package somepackagegroup/somepackage-1.2.3 is uploaded')
@@ -817,9 +895,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).once.with(
           RubyAem::Resources::Package,
           'build',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         )
 
         mock_data_list_all_exists_but_empty = REXML::Document.new(
@@ -839,9 +919,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).twice.with(
           RubyAem::Resources::Package,
           'list_all',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         ).and_return(mock_result_list_all_exists_but_empty)
 
         mock_data_list_all_exists_but_not_empty = REXML::Document.new(
@@ -861,9 +943,11 @@ describe 'Package' do
         expect(@mock_client).to receive(:call).twice.with(
           RubyAem::Resources::Package,
           'list_all',
-          group_name: 'somepackagegroup',
-          package_name: 'somepackage',
-          package_version: '1.2.3'
+          {
+            group_name: 'somepackagegroup',
+            package_name: 'somepackage',
+            package_version: '1.2.3'
+          }
         ).and_return(mock_result_list_all_exists_but_not_empty)
 
         expect($stdout).to receive(:puts).with('Build check #1: false - Package somepackagegroup/somepackage-1.2.3 is not built because it is empty')

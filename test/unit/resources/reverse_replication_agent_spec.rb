@@ -12,15 +12,17 @@ describe 'ReverseReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::ReverseReplicationAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-reverse-replication-agent',
-        title: 'Some Reverse Replication Agent Title',
-        description: 'Some reverse replication agent description',
-        dest_base_url: 'http://somehost:8080',
-        transport_user: 'admin',
-        transport_password: 'admin',
-        log_level: 'error',
-        retry_delay: 30_000
+        {
+          run_mode: 'author',
+          name: 'some-reverse-replication-agent',
+          title: 'Some Reverse Replication Agent Title',
+          description: 'Some reverse replication agent description',
+          dest_base_url: 'http://somehost:8080',
+          transport_user: 'admin',
+          transport_password: 'admin',
+          log_level: 'error',
+          retry_delay: 30_000
+        }
       )
       @reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080')
     end
@@ -29,15 +31,17 @@ describe 'ReverseReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::ReverseReplicationAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-reverse-replication-agent',
-        title: 'Some Reverse Replication Agent Title',
-        description: 'Some reverse replication agent description',
-        dest_base_url: 'http://somehost:8080',
-        transport_user: 'someuser',
-        transport_password: 'somepassword',
-        log_level: 'info',
-        retry_delay: 60_000
+        {
+          run_mode: 'author',
+          name: 'some-reverse-replication-agent',
+          title: 'Some Reverse Replication Agent Title',
+          description: 'Some reverse replication agent description',
+          dest_base_url: 'http://somehost:8080',
+          transport_user: 'someuser',
+          transport_password: 'somepassword',
+          log_level: 'info',
+          retry_delay: 60_000
+        }
       )
       @reverse_replication_agent.create_update(
         'Some Reverse Replication Agent Title',
@@ -56,8 +60,10 @@ describe 'ReverseReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::ReverseReplicationAgent,
         'delete',
-        run_mode: 'author',
-        name: 'some-reverse-replication-agent'
+        {
+          run_mode: 'author',
+          name: 'some-reverse-replication-agent'
+        }
       )
       @reverse_replication_agent.delete
     end
@@ -68,8 +74,10 @@ describe 'ReverseReplicationAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::ReverseReplicationAgent,
         'exists',
-        run_mode: 'author',
-        name: 'some-reverse-replication-agent'
+        {
+          run_mode: 'author',
+          name: 'some-reverse-replication-agent'
+        }
       )
       @reverse_replication_agent.exists
     end

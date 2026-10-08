@@ -12,14 +12,17 @@ describe 'FlushAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::FlushAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-flush-agent',
-        title: 'Some Flush Agent Title',
-        description: 'Some flush agent description',
-        dest_base_url: 'http://somehost:8080',
-        ssl: '',
-        log_level: 'error',
-        retry_delay: 30_000
+        {
+          run_mode: 'author',
+          name: 'some-flush-agent',
+          title: 'Some Flush Agent Title',
+          description: 'Some flush agent description',
+          dest_base_url: 'http://somehost:8080',
+          ssl: '',
+          alias_update: false,
+          log_level: 'error',
+          retry_delay: 30_000
+        }
       )
       @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080')
     end
@@ -28,14 +31,16 @@ describe 'FlushAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::FlushAgent,
         'create_update',
-        run_mode: 'author',
-        name: 'some-flush-agent',
-        title: 'Some Flush Agent Title',
-        description: 'Some flush agent description',
-        dest_base_url: 'https://somehost:8080',
-        ssl: 'relaxed',
-        log_level: 'info',
-        retry_delay: 60_000
+        {
+          run_mode: 'author',
+          name: 'some-flush-agent',
+          title: 'Some Flush Agent Title',
+          description: 'Some flush agent description',
+          dest_base_url: 'https://somehost:8080',
+          ssl: 'relaxed',
+          log_level: 'info',
+          retry_delay: 60_000
+        }
       )
       @flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'https://somehost:8080', log_level: 'info', retry_delay: 60_000)
     end
@@ -46,8 +51,10 @@ describe 'FlushAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::FlushAgent,
         'delete',
-        run_mode: 'author',
-        name: 'some-flush-agent'
+        {
+          run_mode: 'author',
+          name: 'some-flush-agent'
+        }
       )
       @flush_agent.delete
     end
@@ -58,8 +65,10 @@ describe 'FlushAgent' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::FlushAgent,
         'exists',
-        run_mode: 'author',
-        name: 'some-flush-agent'
+        {
+          run_mode: 'author',
+          name: 'some-flush-agent'
+        }
       )
       @flush_agent.exists
     end

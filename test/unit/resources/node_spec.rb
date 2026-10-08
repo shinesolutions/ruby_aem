@@ -12,9 +12,11 @@ describe 'Node' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Node,
         'create',
-        path: 'apps/system',
-        name: 'somefolder',
-        type: 'sling:Folder'
+        {
+          path: 'apps/system',
+          name: 'somefolder',
+          type: 'sling:Folder'
+        }
       )
       @node.create('sling:Folder')
     end
@@ -25,8 +27,10 @@ describe 'Node' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Node,
         'delete',
-        path: 'apps/system',
-        name: 'somefolder'
+        {
+          path: 'apps/system',
+          name: 'somefolder'
+        }
       )
       @node.delete
     end
@@ -37,8 +41,10 @@ describe 'Node' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::Node,
         'exists',
-        path: 'apps/system',
-        name: 'somefolder'
+        {
+          path: 'apps/system',
+          name: 'somefolder'
+        }
       )
       @node.exists
     end

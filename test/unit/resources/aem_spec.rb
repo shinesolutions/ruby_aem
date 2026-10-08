@@ -34,7 +34,7 @@ describe 'Aem' do
 
   describe 'test get_aem_health_check' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', { tags: 'shallow', combine_tags_or: false })
       aem = RubyAem::Resources::Aem.new(@mock_client)
       aem.get_aem_health_check(tags: 'shallow', combine_tags_or: false)
     end
@@ -158,9 +158,9 @@ describe 'Aem' do
       expect(mock_result_ok).to receive(:data).and_return(JSON.parse(mock_body_ok)['results'])
       expect(mock_result_ok).to receive(:message).and_return(mock_message_ok)
 
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false).and_raise(mock_error)
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false).and_return(mock_result_not_ok)
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', tags: 'shallow', combine_tags_or: false).and_return(mock_result_ok)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', { tags: 'shallow', combine_tags_or: false }).and_raise(mock_error)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', { tags: 'shallow', combine_tags_or: false }).and_return(mock_result_not_ok)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_aem_health_check', { tags: 'shallow', combine_tags_or: false }).and_return(mock_result_ok)
       aem = RubyAem::Resources::Aem.new(@mock_client)
 
       expect($stdout).to receive(:puts).with('Retrieve AEM Health Check attempt #1: AEM Health Check has some error')
@@ -180,7 +180,7 @@ describe 'Aem' do
 
   describe 'test get_agents' do
     it 'should call client with expected parameters' do
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_agents', run_mode: 'author')
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_agents', { run_mode: 'author' })
       aem = RubyAem::Resources::Aem.new(@mock_client)
       aem.get_agents('author')
     end
@@ -269,7 +269,7 @@ describe 'Aem' do
       mock_crx_explorer_response = double('mock_crx_explorer_response')
       mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
       mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crx-explorer' }).and_return(mock_crx_explorer_result)
 
       mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
       expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Resolved')
@@ -278,7 +278,7 @@ describe 'Aem' do
       mock_crxde_lite_response = double('mock_crxde_lite_response')
       mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
       mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crxde-lite' }).and_return(mock_crxde_lite_result)
 
       aem = RubyAem::Resources::Aem.new(@mock_client)
       result = aem.get_development_bundles_status
@@ -294,7 +294,7 @@ describe 'Aem' do
       mock_crx_explorer_response = double('mock_crx_explorer_response')
       mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
       mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crx-explorer' }).and_return(mock_crx_explorer_result)
 
       mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
       expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Active')
@@ -303,7 +303,7 @@ describe 'Aem' do
       mock_crxde_lite_response = double('mock_crxde_lite_response')
       mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
       mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crxde-lite' }).and_return(mock_crxde_lite_result)
 
       aem = RubyAem::Resources::Aem.new(@mock_client)
       result = aem.get_development_bundles_status
@@ -319,7 +319,7 @@ describe 'Aem' do
       mock_crx_explorer_response = double('mock_crx_explorer_response')
       mock_crx_explorer_result = RubyAem::Result.new('somemessage', mock_crx_explorer_response)
       mock_crx_explorer_result.data = mock_crx_explorer_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crx-explorer').and_return(mock_crx_explorer_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crx-explorer' }).and_return(mock_crx_explorer_result)
 
       mock_crxde_lite_bundle_data = double('mock_crxde_lite_bundle_data')
       expect(mock_crxde_lite_bundle_data).to receive(:state).once.and_return('Active')
@@ -328,7 +328,7 @@ describe 'Aem' do
       mock_crxde_lite_response = double('mock_crxde_lite_response')
       mock_crxde_lite_result = RubyAem::Result.new('somemessage', mock_crxde_lite_response)
       mock_crxde_lite_result.data = mock_crxde_lite_bundle_info
-      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', name: 'com.adobe.granite.crxde-lite').and_return(mock_crxde_lite_result)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Bundle, 'info', { name: 'com.adobe.granite.crxde-lite' }).and_return(mock_crxde_lite_result)
 
       aem = RubyAem::Resources::Aem.new(@mock_client)
       result = aem.get_development_bundles_status

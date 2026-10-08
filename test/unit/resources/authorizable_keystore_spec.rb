@@ -12,9 +12,11 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'create',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid',
-        password: 's0m3p4ssw0rd'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid',
+          password: 's0m3p4ssw0rd'
+        }
       )
       @authorizable_keystore.create('s0m3p4ssw0rd')
     end
@@ -25,10 +27,12 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'change_password',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid',
-        old_password: 's0m30ldp4ssw0rd',
-        new_password: 's0m3n3wp4ssw0rd'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid',
+          old_password: 's0m30ldp4ssw0rd',
+          new_password: 's0m3n3wp4ssw0rd'
+        }
       )
       @authorizable_keystore.change_password('s0m30ldp4ssw0rd', 's0m3n3wp4ssw0rd')
     end
@@ -39,8 +43,10 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'delete',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid'
+        }
       )
       @authorizable_keystore.delete
     end
@@ -51,8 +57,10 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'exists',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid'
+        }
       )
       @authorizable_keystore.exists
     end
@@ -63,8 +71,10 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'info',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid'
+        }
       )
       @authorizable_keystore.info
     end
@@ -75,9 +85,11 @@ describe 'AuthorizableKeystore' do
       expect(@mock_client).to receive(:call).once.with(
         RubyAem::Resources::AuthorizableKeystore,
         'download',
-        intermediate_path: 'home/users/s',
-        authorizable_id: 'someauthorizableid',
-        file_path: '/somepath'
+        {
+          intermediate_path: 'home/users/s',
+          authorizable_id: 'someauthorizableid',
+          file_path: '/somepath'
+        }
       )
       @authorizable_keystore.download('/somepath')
     end

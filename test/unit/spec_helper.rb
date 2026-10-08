@@ -1,4 +1,4 @@
 require 'simplecov'
-require 'ruby_aem'
-
 SimpleCov.start
+
+require 'ruby_aem'

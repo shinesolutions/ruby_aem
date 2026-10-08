@@ -3,7 +3,13 @@ name: CI
 on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/ci-action
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
+      - uses: cliffano/command-docker-action@v2.0.0
+        with:
+          command: 'make ci'
+          image: shinesolutions/aem-platform-buildenv
+          shell: bash

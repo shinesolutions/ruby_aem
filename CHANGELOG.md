@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade dependencies to latest
 - Increase min Ruby support to 3.2
 - Disable inline Style/HashLikeCase and Style/FormatStringToken
+- Enforce MFA during publishing, stop using token
 
 ### Removed
 - Remove dev dependencies from gemspec

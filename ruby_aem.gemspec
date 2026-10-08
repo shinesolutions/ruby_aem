@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.2'
   s.files             = Dir.glob('{conf,lib}/**/*')
   s.require_paths     = ['lib']
+  s.metadata['rubygems_mfa_required'] = 'true'
 
   s.add_dependency 'retries', '0.0.5'
   s.add_dependency 'swagger_aem', '4.0.0'

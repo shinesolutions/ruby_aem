@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Increase min Ruby support to 3.2
 - Disable inline Style/HashLikeCase and Style/FormatStringToken
 
+### Removed
+- Remove dev dependencies from gemspec
+
 ### Fixed
 - Fix release workflows to use SHINEOPENSOURCE_GITHUB_TOKEN instead of SHINEWORKS_GITHUB_TOKEN, matching this repo's original token
 

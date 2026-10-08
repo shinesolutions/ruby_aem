@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.metadata['rubygems_mfa_required'] = 'true'
 
   s.add_dependency 'retries', '0.0.5'
+  s.add_dependency 'rexml', '3.4.4'
   s.add_dependency 'swagger_aem', '4.0.0'
   s.add_dependency 'swagger_aem_osgi', '2.0.0'
 end

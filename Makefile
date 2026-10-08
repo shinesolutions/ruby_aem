@@ -5,9 +5,10 @@ clean:
 	rm -f ruby_aem-*.gem Gemfile.lock
 
 deps:
-	gem install bundler --version=1.17.3
+	gem install bundler --version=4.0.22
 	rm -rf .bundle
-	bundle install --binstubs
+	bundle install
+	bundle binstubs --all
 
 lint:
 	bundle exec rubocop

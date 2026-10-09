@@ -109,6 +109,7 @@ module RubyAem
     # @param html HTML response body string
     # @param regex Ruby regular expression, all regex matches will be replaced
     # @param replacement all existence of the regex will be replaced with this string
+    # @return sanitised HTML string
     def self._sanitise_html(html, regex, replacement)
       if regex.match?(html)
         html.gsub!(regex, replacement)

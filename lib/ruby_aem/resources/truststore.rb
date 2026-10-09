@@ -43,6 +43,8 @@ module RubyAem
       # and convert it to PKCS12 Truststore object.
       #
       # @param file_path path to Truststore file
+      # @param password Password for AEM Truststore
+      # @return OpenSSL::PKCS12 Truststore object
       def read(file_path, password)
         truststore_raw = File.read file_path
         OpenSSL::PKCS12.new(truststore_raw, password)

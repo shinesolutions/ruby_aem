@@ -98,6 +98,8 @@ module RubyAem
     end
 
     # Set default configuration values and handle numeric/boolean String values
+    #
+    # @param conf configuration hash, the hash will be modified with the sanitised values
     def sanitise_conf(conf)
       conf[:username] ||= 'admin'
       conf[:password] ||= 'admin'
@@ -122,7 +124,7 @@ module RubyAem
 
     # Create an AEM ConfigMgr instance.
     #
-    # @return new RubyAem::Resources::Aem instance
+    # @return new RubyAem::Resources::AemConfigMgr instance
     def aem_configmgr
       RubyAem::Resources::AemConfigMgr.new(@client)
     end
@@ -143,12 +145,12 @@ module RubyAem
       RubyAem::Resources::Certificate.new(@client, serial_number)
     end
 
-    # # Create a certificate chain instance.
-    # #
+    # Create a certificate chain instance.
+    #
     # @param private_key_alias Alias of the private key associated to this certificate chain
     # @param keystore_intermediate_path AEM User home path
     # @param keystore_authorizable_id AEM User id
-    # # @return new RubyAem::Resources::CertificateChain instance
+    # @return new RubyAem::Resources::CertificateChain instance
     def certificate_chain(private_key_alias, keystore_intermediate_path, keystore_authorizable_id)
       RubyAem::Resources::CertificateChain.new(@client, private_key_alias, keystore_intermediate_path, keystore_authorizable_id)
     end
@@ -183,7 +185,9 @@ module RubyAem
 
     # Create a Keystore instance for given authorizable id.
     #
-    # @return new RubyAem::Resources::AuhtorizableKeystore instance
+    # @param intermediate_path AEM User home path
+    # @param authorizable_id AEM User id
+    # @return new RubyAem::Resources::AuthorizableKeystore instance
     def authorizable_keystore(intermediate_path, authorizable_id)
       RubyAem::Resources::AuthorizableKeystore.new(@client, intermediate_path, authorizable_id)
     end
@@ -258,7 +262,7 @@ module RubyAem
 
     # Create a SSL instance.
     #
-    # @return new RubyAem::Resources::Saml instance
+    # @return new RubyAem::Resources::Ssl instance
     def ssl
       RubyAem::Resources::Ssl.new(@client)
     end

@@ -105,6 +105,10 @@ module RubyAem
         @client.call(self.class, __callee__.to_s, @call_params)
       end
 
+      # Retrieve the alias of the certificate from AEM Truststore info,
+      # the certificate is identified by its serial number.
+      #
+      # @return the certificate's alias, nil if the certificate does not exist in AEM Truststore
       def _get_alias
         truststore_info = @truststore.info.data
         cert_alias = nil

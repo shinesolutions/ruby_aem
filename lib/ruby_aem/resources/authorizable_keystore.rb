@@ -26,7 +26,7 @@ module RubyAem
       # @param client RubyAem::Client
       # @param intermediate_path AEM User home path
       # @param authorizable_id AEM User id
-      # @return new RubyAem::Resources::AuhtorizableKeystore instance
+      # @return new RubyAem::Resources::AuthorizableKeystore instance
       def initialize(client, intermediate_path, authorizable_id)
         @client = client
         @call_params = {
@@ -50,7 +50,6 @@ module RubyAem
       #
       # @param old_password Current password for the authorizable keystore
       # @param new_password New password for the authorizable keystore
-
       # @return RubyAem::Result
       def change_password(old_password, new_password)
         @call_params[:old_password] = old_password

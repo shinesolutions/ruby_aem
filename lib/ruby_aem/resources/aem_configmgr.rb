@@ -23,7 +23,7 @@ module RubyAem
       # Initialise an AEM instance.
       #
       # @param client RubyAem::Client
-      # @return new RubyAem::Resources::Aem instance
+      # @return new RubyAem::Resources::AemConfigMgr instance
       def initialize(client)
         @client = client
         @call_params = {}

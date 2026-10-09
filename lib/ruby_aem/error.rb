@@ -18,6 +18,11 @@ module RubyAem
   class Error < StandardError
     attr_accessor :result
 
+    # Initialise an error.
+    #
+    # @param message error message
+    # @param result RubyAem::Result
+    # @return new RubyAem::Error instance
     def initialize(message, result)
       super(message)
       self.result = result

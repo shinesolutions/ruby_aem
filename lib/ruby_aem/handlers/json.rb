@@ -144,8 +144,8 @@ module RubyAem
       result
     end
 
-    # Authorizable keystore payload handler, checks for the existence of certificate within
-    # AEM Truststore, identified by cert_alias call parameter.
+    # Authorizable keystore payload handler, checks for the existence of certificate chain within
+    # AEM Authorizable Keystore, identified by private_key_alias call parameter.
     #
     # @param response HTTP response containing status_code, body, and headers
     # @param response_spec response specification as configured in conf/spec.yaml

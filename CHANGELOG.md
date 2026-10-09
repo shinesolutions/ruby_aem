@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 
+### Changed
+- Increase min unit test coverage to 100
+
 ## 4.0.2 - 2026-10-09
 ### Fixed
 - Fix missing Rubygems.org trusted publisher short-lived key passing

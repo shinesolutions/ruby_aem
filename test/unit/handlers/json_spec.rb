@@ -196,7 +196,7 @@ describe 'JSON Handler' do
       call_params = {}
 
       response = RubyAem::Response.new(status_code, data, headers)
-      result = RubyAem::Handlers.json_truststore_exists(response, response_spec, call_params)
+      result = RubyAem::Handlers.json_authorizable_keystore_exists(response, response_spec, call_params)
       expect(result.data).to be(true)
       expect(result.message).to eq('Authorizable keystore exists')
       expect(result.response).to be(response)
@@ -213,6 +213,98 @@ describe 'JSON Handler' do
       result = RubyAem::Handlers.json_authorizable_keystore_exists(response, response_spec, call_params)
       expect(result.data).to be(false)
       expect(result.message).to eq('Authorizable keystore not found')
+      expect(result.response).to be(response)
+    end
+  end
+
+  describe 'test json_certificate_exists' do
+    it 'should construct result message with true data when the payload contains certificate with the serial number' do
+      other_certificate = SwaggerAemClient::TruststoreItems.new
+      other_certificate.serial_number = 1234
+      certificate = SwaggerAemClient::TruststoreItems.new
+      certificate.serial_number = 15_863_505_968_020_663_268
+      data = SwaggerAemClient::TruststoreInfo.new
+      data.aliases = [other_certificate, certificate]
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Truststore info retrieved' }
+      call_params = { serial_number: '15863505968020663268' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_certificate_exists(response, response_spec, call_params)
+      expect(result.data).to be(true)
+      expect(result.message).to eq('Certificate exists')
+      expect(result.response).to be(response)
+    end
+
+    it 'should construct result message with false data when the payload does not contain certificate with the serial number' do
+      other_certificate = SwaggerAemClient::TruststoreItems.new
+      other_certificate.serial_number = 1234
+      data = SwaggerAemClient::TruststoreInfo.new
+      data.aliases = [other_certificate]
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Truststore info retrieved' }
+      call_params = { serial_number: '15863505968020663268' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_certificate_exists(response, response_spec, call_params)
+      expect(result.data).to be(false)
+      expect(result.message).to eq('Certificate not found')
+      expect(result.response).to be(response)
+    end
+  end
+
+  describe 'test json_certificate_chain_exists' do
+    it 'should construct result message with true data when the payload contains certificate chain with the private key alias' do
+      other_certificate_chain = SwaggerAemClient::KeystoreItems.new
+      other_certificate_chain._alias = 'someotherprivatekeyalias'
+      certificate_chain = SwaggerAemClient::KeystoreItems.new
+      certificate_chain._alias = 'someprivatekeyalias'
+      data = SwaggerAemClient::KeystoreInfo.new
+      data.aliases = [other_certificate_chain, certificate_chain]
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Authorizable keystore info retrieved' }
+      call_params = { private_key_alias: 'someprivatekeyalias' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_certificate_chain_exists(response, response_spec, call_params)
+      expect(result.data).to be(true)
+      expect(result.message).to eq('Certificate chain exists')
+      expect(result.response).to be(response)
+    end
+
+    it 'should construct result message with false data when the payload does not contain certificate chain with the private key alias' do
+      other_certificate_chain = SwaggerAemClient::KeystoreItems.new
+      other_certificate_chain._alias = 'someotherprivatekeyalias'
+      data = SwaggerAemClient::KeystoreInfo.new
+      data.aliases = [other_certificate_chain]
+      status_code = nil
+      headers = nil
+      response_spec = { 'message' => 'Authorizable keystore info retrieved' }
+      call_params = { private_key_alias: 'someprivatekeyalias' }
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_certificate_chain_exists(response, response_spec, call_params)
+      expect(result.data).to be(false)
+      expect(result.message).to eq('Certificate chain not found')
+      expect(result.response).to be(response)
+    end
+  end
+
+  describe 'test json_product_info' do
+    it 'should return success result with product info data payload' do
+      data = ['AEM (6.5.0)']
+      status_code = nil
+      headers = nil
+      response_spec = {}
+      call_params = {}
+
+      response = RubyAem::Response.new(status_code, data, headers)
+      result = RubyAem::Handlers.json_product_info(response, response_spec, call_params)
+      expect(result.data).to eq(['AEM (6.5.0)'])
+      expect(result.message).to eq('AEM Product informations found')
       expect(result.response).to be(response)
     end
   end

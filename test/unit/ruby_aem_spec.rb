@@ -53,19 +53,44 @@ describe 'RubyAem' do
     end
   end
 
-  # describe 'test certificate' do
-  #   it 'should return certificate instance' do
-  #     certificate = RubyAem::Aem.new.certificate('15863505968020663268')
-  #     expect(certificate).to_not be(nil)
-  #   end
-  # end
+  describe 'test aem configmgr' do
+    it 'should return aem configmgr instance' do
+      aem_configmgr = RubyAem::Aem.new.aem_configmgr
+      expect(aem_configmgr).to be_a(RubyAem::Resources::AemConfigMgr)
+    end
+  end
 
-  # describe 'test certificate chain' do
-  #   it 'should return certificate  chaininstance' do
-  #     certificate_chain = RubyAem::Aem.new.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
-  #     expect(certificate_chain).to_not be(nil)
-  #   end
-  # end
+  describe 'test certificate' do
+    it 'should return certificate instance' do
+      # certificate initialisation retrieves truststore info from AEM,
+      # hence the resource is mocked in order to avoid any network call
+      mock_certificate = double('mock_certificate')
+      expect(RubyAem::Resources::Certificate).to receive(:new).once.with(anything, '15863505968020663268').and_return(mock_certificate)
+      certificate = RubyAem::Aem.new.certificate('15863505968020663268')
+      expect(certificate).to be(mock_certificate)
+    end
+  end
+
+  describe 'test certificate chain' do
+    it 'should return certificate chain instance' do
+      certificate_chain = RubyAem::Aem.new.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
+      expect(certificate_chain).to be_a(RubyAem::Resources::CertificateChain)
+    end
+  end
+
+  describe 'test saml' do
+    it 'should return saml instance' do
+      saml = RubyAem::Aem.new.saml
+      expect(saml).to be_a(RubyAem::Resources::Saml)
+    end
+  end
+
+  describe 'test ssl' do
+    it 'should return ssl instance' do
+      ssl = RubyAem::Aem.new.ssl
+      expect(ssl).to be_a(RubyAem::Resources::Ssl)
+    end
+  end
 
   describe 'test flush agent' do
     it 'should return flush agent instance' do

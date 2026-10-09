@@ -51,6 +51,20 @@ describe 'HTML Handler' do
     end
   end
 
+  describe 'test _sanitise_html' do
+    it 'should replace all regex matches when the regex exists in the HTML' do
+      html = '<html><head><meta charset="utf-8"><meta name="x"></head><body></body></html>'
+      result = RubyAem::Handlers._sanitise_html(html, /<meta[^>]*>/, '')
+      expect(result).to eq('<html><head></head><body></body></html>')
+    end
+
+    it 'should return the HTML as-is when the regex does not exist in the HTML' do
+      html = '<html><head></head><body></body></html>'
+      result = RubyAem::Handlers._sanitise_html(html, /<meta[^>]*>/, '')
+      expect(result).to eq('<html><head></head><body></body></html>')
+    end
+  end
+
   describe 'test html_change_password' do
     it 'should identify success response body and display username in message' do
       data =

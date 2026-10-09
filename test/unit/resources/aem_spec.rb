@@ -260,6 +260,14 @@ describe 'Aem' do
     end
   end
 
+  describe 'test get_product_info' do
+    it 'should call client with expected parameters' do
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Aem, 'get_product_info', {})
+      aem = RubyAem::Resources::Aem.new(@mock_client)
+      aem.get_product_info
+    end
+  end
+
   describe 'test get_development_bundles_status' do
     it 'should return false result data when all development bundles are not active' do
       mock_crx_explorer_bundle_data = double('mock_crx_explorer_bundle_data')

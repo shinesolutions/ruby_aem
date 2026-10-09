@@ -8,11 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent.
+- Add rexml dep declaration since it's no longer bundled within Ruby
 
 ### Changed
 - Simplify GitHub Actions release workflows to not use custom action
 - Upgrade dependencies to latest
-- Increase min Ruby support to 3.2
+- Increase min Ruby support to 4.0
 - Disable inline Style/HashLikeCase and Style/FormatStringToken
 - Enforce MFA during publishing, stop using token
 

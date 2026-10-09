@@ -8,8 +8,8 @@ jobs:
       - uses: actions/checkout@v7
         with:
           token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
-      - uses: cliffano/command-docker-action@v2.0.0
+      - uses: cliffano/command-docker-action@v2.1.0
         with:
           command: 'make ci'
-          image: shinesolutions/aem-platform-buildenv
+          image: shinesolutions/aem-platform-buildenv:4.1.0
           shell: bash

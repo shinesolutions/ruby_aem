@@ -11,5 +11,5 @@ jobs:
       - uses: cliffano/command-docker-action@v2.1.0
         with:
           command: 'make ci'
-          image: shinesolutions/aem-platform-buildenv:4.1.0
+          image: shinesolutions/aem-platform-buildenv:6.2.1
           shell: bash

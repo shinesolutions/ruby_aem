@@ -17,7 +17,7 @@ jobs:
       - uses: rubygems/configure-rubygems-credentials@v2.1.0
       - uses: cliffano/command-docker-action@v2.1.0
         with:
-          image: shinesolutions/aem-platform-buildenv:4.1.0
+          image: shinesolutions/aem-platform-buildenv:6.2.1
           shell: bash
           command: |
             make clean deps lint package publish

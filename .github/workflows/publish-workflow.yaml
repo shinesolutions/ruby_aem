@@ -20,5 +20,6 @@ jobs:
         with:
           image: shinesolutions/aem-platform-buildenv:6.2.1
           shell: bash
+          extra_args: '-e GEM_HOST_API_KEY'
           command: |
             make clean deps build lint install publish

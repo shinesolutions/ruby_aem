@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix missing Rubygems.org trusted publisher short-lived key passing
+
 ## 4.0.1 - 2026-10-09
 ### Fixed
 - Fix missing build for publishing workflow

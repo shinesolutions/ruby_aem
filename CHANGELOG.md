@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix missing build for publishing workflow
+
 ## 4.0.0 - 2026-10-09
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent.

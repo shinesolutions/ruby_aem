@@ -21,4 +21,4 @@ jobs:
           image: shinesolutions/aem-platform-buildenv:6.2.1
           shell: bash
           command: |
-            make clean deps lint package publish
+            make clean deps build lint install publish

@@ -2,8 +2,7 @@
 [![Published Version](https://badge.fury.io/rb/ruby_aem.svg)](https://rubygems.org/gems/ruby_aem)
 [![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/ruby_aem/badge.svg)](https://snyk.io/test/github/shinesolutions/ruby_aem)
 
-ruby_aem
---------
+# ruby_aem
 
 ruby_aem is a Ruby client for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 It is written on top of [swagger_aem](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) and provides resource-oriented API and convenient response handling.
@@ -19,519 +18,562 @@ Learn more about ruby_aem:
 
 ruby_aem is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
 
-Installation
-------------
+## Installation
+
+```shell
+gem install ruby_aem
+```
+
+## Usage
+
+### Initialise client
+
+```ruby
+require 'ruby_aem'
+
+aem = RubyAem::Aem.new({
+  username: 'admin',
+  password: 'admin',
+  protocol: 'http',
+  host: 'localhost',
+  port: 4502,
+  timeout: 300,
+  verify_ssl: true,
+  debug: false
+})
+```
+
+### Aem
+
+```ruby
+# wait until AEM login page is ready
+aem = aem.aem
+result = aem.get_login_page_wait_until_ready({
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }})
 
-    gem install ruby_aem
+# wait until AEM Health Check has OK status
+# this requires aem-healthcheck package to be installed
+# https://github.com/shinesolutions/aem-healthcheck
+aem = aem.aem
+result = aem.get_aem_health_check_wait_until_ok({
+  tags: 'shallow',
+  combine_tags_or: false,
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }})
 
-Usage
------
+# get an array of all agent names within AEM author or publish instance
+aem = aem.aem
+result = aem.get_agents('author')
 
-Initialise client:
+# get an array of AEM product informations
+aem = aem.aem
+result = aem.get_product_info
+```
 
-    require 'ruby_aem'
+### AEM Config Manager
 
-    aem = RubyAem::Aem.new({
-      username: 'admin',
-      password: 'admin',
-      protocol: 'http',
-      host: 'localhost',
-      port: 4502,
-      timeout: 300,
-      verify_ssl: true,
-      debug: false
-    })
+```ruby
+# Create OpenAPI Spec of all configuration nodes
+configmgr = aem.aem_configmgr('./source_api.yaml', 'api_dest.yaml')
+result = configmgr.get_all_configuration_nodes
+```
 
-Aem:
+### Bundle
 
-    # wait until AEM login page is ready
-    aem = aem.aem
-    result = aem.get_login_page_wait_until_ready({
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }})
+```ruby
+# stop bundle
+bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+result = bundle.stop
 
-    # wait until AEM Health Check has OK status
-    # this requires aem-healthcheck package to be installed
-    # https://github.com/shinesolutions/aem-healthcheck
-    aem = aem.aem
-    result = aem.get_aem_health_check_wait_until_ok({
-      tags: 'shallow',
-      combine_tags_or: false,
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }})
+# start bundle
+bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+result = bundle.start
+```
 
-    # get an array of all agent names within AEM author or publish instance
-    aem = aem.aem
-    result = aem.get_agents('author')
+### Configuration property
 
-    # get an array of AEM product informations
-    aem = aem.aem
-    result = aem.get_product_info
+```ruby
+config_property = aem.config_property('someproperty', 'Boolean', true)
 
-AEM Config Manager:
+# set config property on /apps/system/config/somenode
+result = config_property.create('somenode')
+```
 
-    # Create OpenAPI Spec of all configuration nodes
-    configmgr = aem.aem_configmgr('./source_api.yaml', 'api_dest.yaml')
-    result = configmgr.get_all_configuration_nodes
+### Flush agent
 
-Bundle:
+```ruby
+flush_agent = aem.flush_agent('author', 'some-flush-agent')
 
-    # stop bundle
-    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.stop
+# create or update flush agent
+opts = { log_level: 'info', retry_delay: 60_000 }
+result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', opts)
 
-    # start bundle
-    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.start
+# check flush agent's existence
+result = flush_agent.exists
 
-Configuration property:
+# delete flush agent
+result = flush_agent.delete
+```
 
-    config_property = aem.config_property('someproperty', 'Boolean', true)
+### Group
 
-    # set config property on /apps/system/config/somenode
-    result = config_property.create('somenode')
+```ruby
+# create group
+group = aem.group('/home/groups/s/', 'somegroup')
 
-Flush agent:
+# check group's existence
+result = group.exists
 
-    flush_agent = aem.flush_agent('author', 'some-flush-agent')
+# set group permission
+result = group.set_permission('/etc/replication', 'read:true,modify:true')
 
-    # create or update flush agent
-    opts = { log_level: 'info', retry_delay: 60_000 }
-    result = flush_agent.create_update('Some Flush Agent Title', 'Some flush agent description', 'http://somehost:8080', opts)
+# add another group as a member
+member_group = aem.group('/home/groups/s/', 'somemembergroup')
+result = member_group.create
+result = group.add_member('somemembergroup')
 
-    # check flush agent's existence
-    result = flush_agent.exists
+# delete group
+result = group.delete
+```
 
-    # delete flush agent
-    result = flush_agent.delete
+### Node
 
-Group:
+```ruby
+node = aem.node('/apps/system/', 'somefolder')
 
-    # create group
-    group = aem.group('/home/groups/s/', 'somegroup')
+# create node
+result = node.create('sling:Folder')
 
-    # check group's existence
-    result = group.exists
+# check node's existence
+result = node.exists
 
-    # set group permission
-    result = group.set_permission('/etc/replication', 'read:true,modify:true')
+# delete node
+result = node.delete
+```
 
-    # add another group as a member
-    member_group = aem.group('/home/groups/s/', 'somemembergroup')
-    result = member_group.create
-    result = group.add_member('somemembergroup')
+### Package
 
-    # delete group
-    result = group.delete
+```ruby
+package = aem.package('somepackagegroup', 'somepackage', '1.2.3')
 
-Node:
+# upload package located at /tmp/somepackage-1.2.3.zip
+opts = { force: true }
+result = package.upload('/tmp', opts)
 
-    node = aem.node('/apps/system/', 'somefolder')
+# check whether package is uploaded
+result = package.is_uploaded
 
-    # create node
-    result = node.create('sling:Folder')
+# install package
+opts = { recursive: true }
+result = package.install(opts)
 
-    # check node's existence
-    result = node.exists
+# uninstall package
+result = package.uninstall(opts)
 
-    # delete node
-    result = node.delete
+# check whether package is installed
+result = package.is_installed
 
-Package:
+# replicate package
+result = package.replicate
 
-    package = aem.package('somepackagegroup', 'somepackage', '1.2.3')
+# download package to /tmp directory
+result = package.download('/tmp')
 
-    # upload package located at /tmp/somepackage-1.2.3.zip
-    opts = { force: true }
-    result = package.upload('/tmp', opts)
+# create package
+result = package.create
 
-    # check whether package is uploaded
-    result = package.is_uploaded
+# build package
+result = package.build
 
-    # install package
-    opts = { recursive: true }
-    result = package.install(opts)
+# build package and wait until package is built (package exists and size is not empty)
+result = package.build_wait_until_ready
 
-    # uninstall package
-    result = package.uninstall(opts)
+# check whether package is built
+result = package.is_built
 
-    # check whether package is installed
-    result = package.is_installed
+# update package filter
+result = package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
 
-    # replicate package
-    result = package.replicate
+# get package filter
+result = package.get_filter
 
-    # download package to /tmp directory
-    result = package.download('/tmp')
+# activate filter
+results = package.activate_filter(true, false)
 
-    # create package
-    result = package.create
+# list all packages
+result = package.list_all
 
-    # build package
-    result = package.build
+# check whether package is empty
+result = package.is_empty
 
-    # build package and wait until package is built (package exists and size is not empty)
-    result = package.build_wait_until_ready
+# get all versions of the package
+result = package.get_versions
+```
 
-    # check whether package is built
-    result = package.is_built
+### Path
 
-    # update package filter
-    result = package.update('[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]')
+```ruby
+# check path's existence
+path = aem.path('/etc/designs/cloudservices')
+result = path.activate(true, false)
 
-    # get package filter
-    result = package.get_filter
+# tree activate the path
+path = aem.path('/etc/designs')
+result = path.activate(true, false)
+```
 
-    # activate filter
-    results = package.activate_filter(true, false)
+### Replication agent
 
-    # list all packages
-    result = package.list_all
+```ruby
+replication_agent = aem.replication_agent('author', 'some-replication-agent')
 
-    # check whether package is empty
-    result = package.is_empty
+# create or update replication agent
+opts = {
+  transport_user: 'admin',
+  transport_password: 'admin',
+  log_level: 'info',
+  retry_delay: 60_000,
+  ssl: 'relaxed'
+}
+result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
 
-    # get all versions of the package
-    result = package.get_versions
+# check replication agent's existence
+result = replication_agent.exists
 
-Path:
+# delete replication agent
+result = replication_agent.delete
+```
 
-    # check path's existence
-    path = aem.path('/etc/designs/cloudservices')
-    result = path.activate(true, false)
+### Outbox replication agent
 
-    # tree activate the path
-    path = aem.path('/etc/designs')
-    result = path.activate(true, false)
+```ruby
+outbox_replication_agent = aem.outbox_replication_agent('publish', 'some-outbox-replication-agent')
 
-Replication agent:
+# create or update outbox replication agent
+opts = {
+  user_id: 'admin',
+  log_level: 'info'
+}
+result = outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', opts)
+
+# check outbox replication agent's existence
+result = outbox_replication_agent.exists
+
+# delete outbox replication agent
+result = outbox_replication_agent.delete
+```
+
+### Reverse replication agent
+
+```ruby
+reverse_replication_agent = aem.reverse_replication_agent('author', 'some-reverse-replication-agent')
+
+# create or update reverse replication agent
+opts = {
+  transport_user: 'admin',
+  transport_password: 'admin',
+  log_level: 'info',
+  retry_delay: 60_000
+}
+result = reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080', opts)
+
+# check reverse replication agent's existence
+result = reverse_replication_agent.exists
+
+# delete reverse replication agent
+result = reverse_replication_agent.delete
+```
+
+### Repository
+
+```ruby
+repository = aem.repository
+
+# block repository writes
+result = repository.block_writes
+
+# unblock repository writes
+result = repository.unblock_writes
+```
+
+### Saml
+
+```ruby
+saml = aem.saml
+
+# Configure SAML for AEM
+opts = {
+  key_store_password: 'someKeystorePassword',
+  service_ranking: 5002,
+  idp_http_redirect: true,
+  create_user: true,
+  default_redirect_url: '/some_sites.html',
+  user_id_attribute: 'someUserID',
+  default_groups: ['some-groups'],
+  idp_cert_alias: 'some_alias_name_1234'.
+  add_group_memberships: true,
+  path: ['/'],
+  synchronize_attributes: [
+  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+  ],
+  clock_tolerance: 60,
+  group_membership_attribute: 'http://temp/variable/aem-groups',
+  idp_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+  logout_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+  service_provider_entity_id: 'https://prod-aemauthor.com/saml_login',
+  handle_logout: true,
+  sp_private_key_alias: '',
+  use_encryption: false,
+  name_id_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+  digest_method: 'http://www.w3.org/2001/04/xmlenc#sha256',
+  signature_method: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+}
+result = saml.create(opts)
 
-    replication_agent = aem.replication_agent('author', 'some-replication-agent')
+# Delete  the SAML Configuration
+result = saml.delete
 
-    # create or update replication agent
-    opts = {
-      transport_user: 'admin',
-      transport_password: 'admin',
-      log_level: 'info',
-      retry_delay: 60_000,
-      ssl: 'relaxed'
-    }
-    result = replication_agent.create_update('Some Replication Agent Title', 'Some replication agent description', 'http://somehost:8080', opts)
+# Get the current SAML Configuration
+result = saml.get
+```
 
-    # check replication agent's existence
-    result = replication_agent.exists
+### SSL
+
+```ruby
+ssl = aem.ssl
+
+# enable SSL
+# authorizable keystore and truststore will be created if they don't exist
+opts = {
+  keystore_password: 'somekeystorepassword',
+  truststore_password: 'sometruststorepassword',
+  https_hostname: 'localhost',
+  https_port: 5432,
+  certificate_file_path: '/tmp/cert_ssl.crt',
+  privatekey_file_path: '/tmp/cert_ssl.der'
+}
+result = ssl.enable(opts)
 
-    # delete replication agent
-    result = replication_agent.delete
+# enable SSL and wait until SSL is enabled
+opts = {
+  keystore_password: 'somekeystorepassword',
+  truststore_password: 'sometruststorepassword',
+  https_hostname: 'localhost',
+  https_port: 5432,
+  certificate_file_path: '/tmp/cert_ssl.crt',
+  privatekey_file_path: '/tmp/cert_ssl.der',
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }
+}
+result = ssl.enable_wait_until_ready(opts)
+
+# retrieve SSL configuration
+result = ssl.get
+
+# check whether SSL is enabled
+result = ssl.is_enabled
+
+# disable SSL
+result = ssl.disable
+```
+
+### Authorizable Keystore
 
-Outbox replication agent:
+```ruby
+keystore = aem.authorizable_keystore('/home/users/system', 'authentication-service')
+
+# create keystore
+result = keystore.create('somekeystorepassword')
+
+# check keystore's existence
+result = keystore.exists
+
+# retrieve keystore info
+result = keystore.info
 
-    outbox_replication_agent = aem.outbox_replication_agent('publish', 'some-outbox-replication-agent')
+# change keystore password
+result = keystore.change_password('somekeystorepassword', 'somenewkeystorepassword')
+
+# download keystore to a file
+result = keystore.download('/tmp/keystore.p12')
+
+# delete keystore
+result = keystore.delete
+```
+
+### Truststore
+
+```ruby
+truststore = aem.truststore
+
+# create truststore
+result = truststore.create('sometruststorepassword')
+
+# check truststore's existence
+result = truststore.exists
+
+# retrieve truststore info
+result = truststore.info
 
-    # create or update outbox replication agent
-    opts = {
-      user_id: 'admin',
-      log_level: 'info'
-    }
-    result = outbox_replication_agent.create_update('Some Outbox Replication Agent Title', 'Some outbox replication agent description', 'http://somehost:8080', opts)
+# download truststore to a file
+result = truststore.download('/tmp/truststore.p12')
 
-    # check outbox replication agent's existence
-    result = outbox_replication_agent.exists
+# read a truststore file on the filesystem as an OpenSSL::PKCS12 object
+# this method does not call AEM and does not return a RubyAem::Result
+pkcs12 = truststore.read('/tmp/truststore.p12', 'sometruststorepassword')
 
-    # delete outbox replication agent
-    result = outbox_replication_agent.delete
+# upload a truststore file, existing truststore will be overwritten by default
+result = truststore.upload('/tmp/truststore.p12')
 
-Reverse replication agent:
-
-    reverse_replication_agent = aem.reverse_replication_agent('author', 'some-reverse-replication-agent')
+# upload a truststore file without overwriting existing truststore
+result = truststore.upload('/tmp/truststore.p12', force: false)
 
-    # create or update reverse replication agent
-    opts = {
-      transport_user: 'admin',
-      transport_password: 'admin',
-      log_level: 'info',
-      retry_delay: 60_000
-    }
-    result = reverse_replication_agent.create_update('Some Reverse Replication Agent Title', 'Some reverse replication agent description', 'http://somehost:8080', opts)
+# upload a truststore file and wait until the truststore exists
+opts = {
+  force: true,
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }
+}
+result = truststore.upload_wait_until_ready('/tmp/truststore.p12', opts)
 
-    # check reverse replication agent's existence
-    result = reverse_replication_agent.exists
+# delete truststore
+result = truststore.delete
+```
 
-    # delete reverse replication agent
-    result = reverse_replication_agent.delete
+### Certificate
 
-Repository:
+```ruby
+# a certificate within AEM Truststore is identified by its serial number
+certificate = aem.certificate('15863505968020663268')
 
-    repository = aem.repository
+# import a certificate file into AEM Truststore
+result = certificate.import('/tmp/cert.crt')
 
-    # block repository writes
-    result = repository.block_writes
+# create is an alias to import
+result = certificate.create('/tmp/cert.crt')
 
-    # unblock repository writes
-    result = repository.unblock_writes
+# import a certificate file and wait until the certificate exists
+opts = {
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }
+}
+result = certificate.import_wait_until_ready('/tmp/cert.crt', opts)
 
-Saml:
+# check certificate's existence
+result = certificate.exists
 
-    saml = aem.saml
+# export the certificate from AEM Truststore
+# result data contains the certificate as an OpenSSL::X509::Certificate object
+result = certificate.export('sometruststorepassword')
 
-    # Configure SAML for AEM
-    opts = {
-      key_store_password: 'someKeystorePassword',
-      service_ranking: 5002,
-      idp_http_redirect: true,
-      create_user: true,
-      default_redirect_url: '/some_sites.html',
-      user_id_attribute: 'someUserID',
-      default_groups: ['some-groups'],
-      idp_cert_alias: 'some_alias_name_1234'.
-      add_group_memberships: true,
-      path: ['/'],
-      synchronize_attributes: [
-      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
-      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
-      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
-      ],
-      clock_tolerance: 60,
-      group_membership_attribute: 'http://temp/variable/aem-groups',
-      idp_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
-      logout_url: 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
-      service_provider_entity_id: 'https://prod-aemauthor.com/saml_login',
-      handle_logout: true,
-      sp_private_key_alias: '',
-      use_encryption: false,
-      name_id_format: 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method	: 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
-    }
-    result = saml.create(opts)
+# delete certificate
+result = certificate.delete
+```
 
-    # Delete  the SAML Configuration
-    result = saml.delete
+### Certificate chain
 
-    # Get the current SAML Configuration
-    result = saml.get
+```ruby
+# a certificate chain is identified by its private key alias
+# within the authorizable keystore of an AEM user
+certificate_chain = aem.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
 
-SSL:
+# import a certificate chain file and its private key file into the authorizable keystore
+result = certificate_chain.import('/tmp/cert_chain.crt', '/tmp/private_key.der')
 
-    ssl = aem.ssl
+# create is an alias to import
+result = certificate_chain.create('/tmp/cert_chain.crt', '/tmp/private_key.der')
 
-    # enable SSL
-    # authorizable keystore and truststore will be created if they don't exist
-    opts = {
-      keystore_password: 'somekeystorepassword',
-      truststore_password: 'sometruststorepassword',
-      https_hostname: 'localhost',
-      https_port: 5432,
-      certificate_file_path: '/tmp/cert_ssl.crt',
-      privatekey_file_path: '/tmp/cert_ssl.der'
-    }
-    result = ssl.enable(opts)
+# import a certificate chain and wait until the certificate chain exists
+opts = {
+  _retries: {
+    max_tries: 60,
+    base_sleep_seconds: 2,
+    max_sleep_seconds: 2
+  }
+}
+result = certificate_chain.import_wait_until_ready('/tmp/cert_chain.crt', '/tmp/private_key.der', opts)
 
-    # enable SSL and wait until SSL is enabled
-    opts = {
-      keystore_password: 'somekeystorepassword',
-      truststore_password: 'sometruststorepassword',
-      https_hostname: 'localhost',
-      https_port: 5432,
-      certificate_file_path: '/tmp/cert_ssl.crt',
-      privatekey_file_path: '/tmp/cert_ssl.der',
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = ssl.enable_wait_until_ready(opts)
+# check certificate chain's existence
+result = certificate_chain.exists
 
-    # retrieve SSL configuration
-    result = ssl.get
+# delete certificate chain
+result = certificate_chain.delete
+```
 
-    # check whether SSL is enabled
-    result = ssl.is_enabled
+### User
 
-    # disable SSL
-    result = ssl.disable
+```ruby
+user = aem.user('/home/users/s/', 'someuser')
 
-Authorizable Keystore:
+# create user
+result = user.create('somepassword')
 
-    keystore = aem.authorizable_keystore('/home/users/system', 'authentication-service')
+# check user's existence
+result = user.exists
 
-    # create keystore
-    result = keystore.create('somekeystorepassword')
+# set user permission
+result = user.set_permission('/etc/replication', 'read:true,modify:true')
 
-    # check keystore's existence
-    result = keystore.exists
+# change user password
+result = user.change_password('somepassword', 'somenewpassword')
 
-    # retrieve keystore info
-    result = keystore.info
+# add user to group
+result = user.add_to_group('/home/groups/s/', 'somegroup')
 
-    # change keystore password
-    result = keystore.change_password('somekeystorepassword', 'somenewkeystorepassword')
+# delete user
+result = user.delete
+```
 
-    # download keystore to a file
-    result = keystore.download('/tmp/keystore.p12')
-
-    # delete keystore
-    result = keystore.delete
-
-Truststore:
-
-    truststore = aem.truststore
-
-    # create truststore
-    result = truststore.create('sometruststorepassword')
-
-    # check truststore's existence
-    result = truststore.exists
-
-    # retrieve truststore info
-    result = truststore.info
-
-    # download truststore to a file
-    result = truststore.download('/tmp/truststore.p12')
-
-    # read a truststore file on the filesystem as an OpenSSL::PKCS12 object
-    # this method does not call AEM and does not return a RubyAem::Result
-    pkcs12 = truststore.read('/tmp/truststore.p12', 'sometruststorepassword')
-
-    # upload a truststore file, existing truststore will be overwritten by default
-    result = truststore.upload('/tmp/truststore.p12')
-
-    # upload a truststore file without overwriting existing truststore
-    result = truststore.upload('/tmp/truststore.p12', force: false)
-
-    # upload a truststore file and wait until the truststore exists
-    opts = {
-      force: true,
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = truststore.upload_wait_until_ready('/tmp/truststore.p12', opts)
-
-    # delete truststore
-    result = truststore.delete
-
-Certificate:
-
-    # a certificate within AEM Truststore is identified by its serial number
-    certificate = aem.certificate('15863505968020663268')
-
-    # import a certificate file into AEM Truststore
-    result = certificate.import('/tmp/cert.crt')
-
-    # create is an alias to import
-    result = certificate.create('/tmp/cert.crt')
-
-    # import a certificate file and wait until the certificate exists
-    opts = {
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = certificate.import_wait_until_ready('/tmp/cert.crt', opts)
-
-    # check certificate's existence
-    result = certificate.exists
-
-    # export the certificate from AEM Truststore
-    # result data contains the certificate as an OpenSSL::X509::Certificate object
-    result = certificate.export('sometruststorepassword')
-
-    # delete certificate
-    result = certificate.delete
-
-Certificate chain:
-
-    # a certificate chain is identified by its private key alias
-    # within the authorizable keystore of an AEM user
-    certificate_chain = aem.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
-
-    # import a certificate chain file and its private key file into the authorizable keystore
-    result = certificate_chain.import('/tmp/cert_chain.crt', '/tmp/private_key.der')
-
-    # create is an alias to import
-    result = certificate_chain.create('/tmp/cert_chain.crt', '/tmp/private_key.der')
-
-    # import a certificate chain and wait until the certificate chain exists
-    opts = {
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = certificate_chain.import_wait_until_ready('/tmp/cert_chain.crt', '/tmp/private_key.der', opts)
-
-    # check certificate chain's existence
-    result = certificate_chain.exists
-
-    # delete certificate chain
-    result = certificate_chain.delete
-
-User:
-
-    user = aem.user('/home/users/s/', 'someuser')
-
-    # create user
-    result = user.create('somepassword')
-
-    # check user's existence
-    result = user.exists
-
-    # set user permission
-    result = user.set_permission('/etc/replication', 'read:true,modify:true')
-
-    # change user password
-    result = user.change_password('somepassword', 'somenewpassword')
-
-    # add user to group
-    result = user.add_to_group('/home/groups/s/', 'somegroup')
-
-    # delete user
-    result = user.delete
-
-Result
-------
+## Result
 
 Each of the above method calls returns a [RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html), which contains message, [RubyAem::Response](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Response.html), and data payload. For example:
 
-    bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-    result = bundle.stop
-    puts result.message
-    puts result.response.status_code
-    puts result.response.body
-    puts result.response.headers
-    puts result.data
+```ruby
+bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+result = bundle.stop
+puts result.message
+puts result.response.status_code
+puts result.response.body
+puts result.response.headers
+puts result.data
+```
 
-Error Handling
---------------
+## Error Handling
 
 Any API error will be thrown as [RubyAem::Error](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html) .
 
-    begin
-      bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
-      result = bundle.stop
-    rescue RubyAem::Error => e
-      puts e.message
-      puts e.result.response.status_code
-      puts e.result.response.body
-      puts e.result.response.headers
-      puts e.result.data
-    end
+```ruby
+begin
+  bundle = aem.bundle('com.adobe.cq.social.cq-social-forum')
+  result = bundle.stop
+rescue RubyAem::Error => e
+  puts e.message
+  puts e.result.response.status_code
+  puts e.result.response.body
+  puts e.result.response.headers
+  puts e.result.data
+end
+```
 
-Testing
--------
+## Testing
 
 Integration tests require an AEM instance with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed.
 

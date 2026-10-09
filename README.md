@@ -317,199 +317,97 @@ Saml:
     # Get the current SAML Configuration
     result = saml.get
 
+SSL:
+
+    ssl = aem.ssl
+
+    # enable SSL
+    # authorizable keystore and truststore will be created if they don't exist
+    opts = {
+      keystore_password: 'somekeystorepassword',
+      truststore_password: 'sometruststorepassword',
+      https_hostname: 'localhost',
+      https_port: 5432,
+      certificate_file_path: '/tmp/cert_ssl.crt',
+      privatekey_file_path: '/tmp/cert_ssl.der'
+    }
+    result = ssl.enable(opts)
+
+    # enable SSL and wait until SSL is enabled
+    opts = {
+      keystore_password: 'somekeystorepassword',
+      truststore_password: 'sometruststorepassword',
+      https_hostname: 'localhost',
+      https_port: 5432,
+      certificate_file_path: '/tmp/cert_ssl.crt',
+      privatekey_file_path: '/tmp/cert_ssl.der',
+      _retries: {
+        max_tries: 60,
+        base_sleep_seconds: 2,
+        max_sleep_seconds: 2
+      }
+    }
+    result = ssl.enable_wait_until_ready(opts)
+
+    # retrieve SSL configuration
+    result = ssl.get
+
+    # check whether SSL is enabled
+    result = ssl.is_enabled
+
+    # disable SSL
+    result = ssl.disable
+
 Authorizable Keystore:
 
     keystore = aem.authorizable_keystore('/home/users/system', 'authentication-service')
 
-    # Create Keystore
-    keystore_password = 'password'
-    result = keystore.create(keystore_password)
+    # create keystore
+    result = keystore.create('somekeystorepassword')
 
-    # Change Keystore Password
-    old_keystore_password = 'old_password'
-    new_keystore_password = 'new_password'
-    change_password(old_keystore_password, new_keystore_password)
-
-    # Delete keystore
-    result = keystore.delete
-
-    # Delete Certificate Chain from Keystore
-    private_key_alias = 'alias_123'
-    delete_certificate_chain(private_key_alias)
-
-    # Download keystore to a specific F=file
-    opts = { file: '/root/saved_keystore.p12' }
-    result = keystore.download(**opts)
-
-    # Download keystore to a specific directory
-    opts = { path: '/root' }
-    result = keystore.download_keystore(**opts)
-
-    # Check if keystore exists
+    # check keystore's existence
     result = keystore.exists
 
-    # Check if Alias exists
-    private_key_alias = 'alias_123'
-    exists_certificate_chain(private_key_alias)
+    # retrieve keystore info
+    result = keystore.info
 
-    # Get info about an existing keystore
-    result = keystore.get
+    # change keystore password
+    result = keystore.change_password('somekeystorepassword', 'somenewkeystorepassword')
 
-    # Get info about an Certificate Chain in the Keystore
-    private_key_alias = 'alias_123'
-    get_certificate_chain(private_key_alias)
+    # download keystore to a file
+    result = keystore.download('/tmp/keystore.p12')
 
-    # Get info about an keystore provided as a file
-    file_path = '/root/store.p12'
-    keystore_password = 'admin'
-    result = keystore.read_keystore(file_path, keystore_password)
-
-    # Read certificate info from file
-    file_path = '/root/store.p12'
-    read_cert_from_file(file_path)
-
-    # Read certificate info provided as string
-    certificate_raw = '-----BEGIN CERTIFICATE-----
-    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-    -----END CERTIFICATE-----'
-    def read_certificate_raw(certificate_raw)
-
-    # Upload a keystore backup
-    file_path = '/root/store.p12'
-    new_alias = alias_123
-    key_store_file_password = 'admin'
-    private_key_alias = 'alias_456'
-    private_key_password = 'private_password'
-
-    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password)
-
-    # Force upload a keystore backup
-    file_path = '/root/store.p12'
-    new_alias = alias_123
-    key_store_file_password = 'admin'
-    private_key_alias = 'alias_456'
-    private_key_password = 'private_password'
-    force = true
-
-    result = keystore.upload(file_path, new_alias, key_store_file_password, private_key_alias, private_key_password, force)
-
-    # Upload Certificate Chain into the Keystore
-    private_key_alias = 'alias_456'
-    certificate = '/tmp/cert.crt'
-    private_key = '/tmp/private_key.der'
-    upload_certificate_chain(private_key_alias, certificate, private_key)
-
-    # Upload Certificate Chain into the Keystore with certificate provided as string
-    certificate_raw = '-----BEGIN CERTIFICATE-----
-    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-    -----END CERTIFICATE-----'
-    private_key_alias = 'alias_456'
-    private_key = '/tmp/private_key.der'
-    upload_certificate_chain_raw(private_key_alias, certificate_raw, private_key)
-
-    # Wait till keystore backup is uploaded
-    opts = {
-      file_path: '/root/saved_keystore.p12',
-      new_alias: alias_123,
-      key_store_file_password: 'admin',
-      private_key_alias: 'alias_456',
-      private_key_password: 'private_password',
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = keystore.upload_keystore_from_file_wait_until_ready(opts)
-
-    # Wait until Certificate Chain is uploaded into the keystore
-    opts = {
-      private_key_alias: 'alias_456',
-      certificate: '/tmp/cert.crt',
-      private_key: '/tmp/private_key.der',
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-
-    upload_certificate_chain_from_file_wait_until_ready(opts)
-
-    # Wait until Certificate Chain is uploaded into the keystore with certificate provided as string
-    opts = {
-      private_key_alias: 'alias_456',
-      certificate_raw : '-----BEGIN CERTIFICATE-----
-      MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-      -----END CERTIFICATE-----',
-      private_key: '/tmp/private_key.der',
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-
-    upload_certificate_chain_from_file_wait_until_ready(opts)
+    # delete keystore
+    result = keystore.delete
 
 Truststore:
 
     truststore = aem.truststore
 
-    # Create Truststore
-    truststore_password = 'admin'
-    result = truststore.create_truststore(truststore_password)
+    # create truststore
+    result = truststore.create('sometruststorepassword')
 
-    # Delete Truststore
-    truststore_password = 'admin'
-    result = truststore.delete_truststore
+    # check truststore's existence
+    result = truststore.exists
 
-    # Download Truststore to a specific F=file
-    file = '/root/saved_truststore.p12'
-    result = truststore.download_truststore(file: file)
+    # retrieve truststore info
+    result = truststore.info
 
-    # Download Truststore to a specific directory
-    path = '/root'
-    result = truststore.download_truststore(path: path)
+    # download truststore to a file
+    result = truststore.download('/tmp/truststore.p12')
 
-    # Check if Truststore exists
-    result = truststore.exists_truststore
+    # read a truststore file on the filesystem as an OpenSSL::PKCS12 object
+    # this method does not call AEM and does not return a RubyAem::Result
+    pkcs12 = truststore.read('/tmp/truststore.p12', 'sometruststorepassword')
 
-    # Get info about an existing Truststore
-    result = truststore.get_truststore_info
+    # upload a truststore file, existing truststore will be overwritten by default
+    result = truststore.upload('/tmp/truststore.p12')
 
-    # Get info about an Truststore provided as a file
+    # upload a truststore file without overwriting existing truststore
+    result = truststore.upload('/tmp/truststore.p12', force: false)
+
+    # upload a truststore file and wait until the truststore exists
     opts = {
-      file_path: '/root/saved_truststore.p12'
-      truststore_password: 'admin',
-    }
-    result = truststore.read_truststore(opts)
-
-    # Upload a Truststore backup
-    file_path = '/root/saved_truststore.p12'
-    result = truststore.upload_truststore_from_file(file_path: file_path)
-
-    # Force upload a Truststore backup
-    opts = {
-      file_path: '/root/saved_truststore.p12'
-      force: true,
-    }
-    result = truststore.upload_truststore_from_file(opts)
-
-    # Wait till Truststore backup is uploaded
-    opts = {
-      file_path: '/root/saved_truststore.p12',
-      _retries: {
-        max_tries: 60,
-        base_sleep_seconds: 2,
-        max_sleep_seconds: 2
-      }
-    }
-    result = truststore.upload_truststore_from_file(opts)
-
-    # Force upload of a Truststore backup and wait till it is uploaded
-    opts = {
-      file_path: '/root/saved_truststore.p12',
       force: true,
       _retries: {
         max_tries: 60,
@@ -517,87 +415,69 @@ Truststore:
         max_sleep_seconds: 2
       }
     }
-    result = truststore.upload_truststore_from_file(opts)
+    result = truststore.upload_wait_until_ready('/tmp/truststore.p12', opts)
 
+    # delete truststore
+    result = truststore.delete
 
 Certificate:
 
-    certificate = aem.truststore
+    # a certificate within AEM Truststore is identified by its serial number
+    certificate = aem.certificate('15863505968020663268')
 
-    # Delete Certificate via Truststore alias name
-    certalias = 'alias_1234'
-    result = certificate.delete_cert(certalias: certalias)
+    # import a certificate file into AEM Truststore
+    result = certificate.import('/tmp/cert.crt')
 
-    # Delete Certificate via serial number
-    serial = 1234567890
-    result = certificate.delete_cert(certalias: serial)
+    # create is an alias to import
+    result = certificate.create('/tmp/cert.crt')
 
-    # Check if a Certificate exists via Truststore alias name
-    certalias = 'alias_1234'
-    result = certificate.exists_certs(certalias: certalias)
-
-    # Check if a Certificate exists via serial number
-    serial = 1234567890
-    result = certificate.exists_certs(certalias: serial)
-
-    # Export a certificate via serial number
+    # import a certificate file and wait until the certificate exists
     opts = {
-      serial: 1234567890,
-      truststore_password: 'admin',
-    }
-    result = certificate.export_certificate(opts)
-
-    # Get a Certificate via Truststore alias name
-    certalias = 'alias_1234'
-    result = certificate.get_certificate(certalias: certalias)
-
-    # Get a Certificate via serial number
-    serial = 1234567890
-    result = certificate.get_certificate(certalias: serial)
-
-    # Read certificate info provided via string
-    certificate_raw = '-----BEGIN CERTIFICATE-----
-    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-    -----END CERTIFICATE-----'
-    result = certificate.read_cert_raw(certificate_raw)
-
-    # Read certificate info provided via file
-    file_path = '/root/cert.crt'
-    result = certificate.read_cert_from_file(file_path)
-
-    # Upload a certificate provided via string
-    certificate_raw = '-----BEGIN CERTIFICATE-----
-    MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-    -----END CERTIFICATE-----'
-    result = certificate.upload_cert_raw(certificate_raw)
-
-    # Upload a certificate provided via file
-    file_path = '/root/cert.crt'
-    result = certificate.upload_cert_from_file(file_path)
-
-    # Upload a certificate via file and wait till it is uploaded
-    opts = {
-      file_path:'/root/cert.crt'
       _retries: {
         max_tries: 60,
         base_sleep_seconds: 2,
         max_sleep_seconds: 2
       }
     }
-    result = certificate.upload_cert_from_file_wait_until_ready(opts)
+    result = certificate.import_wait_until_ready('/tmp/cert.crt', opts)
 
-    # Read certificate info provided via string and wait till it is uploaded
+    # check certificate's existence
+    result = certificate.exists
+
+    # export the certificate from AEM Truststore
+    # result data contains the certificate as an OpenSSL::X509::Certificate object
+    result = certificate.export('sometruststorepassword')
+
+    # delete certificate
+    result = certificate.delete
+
+Certificate chain:
+
+    # a certificate chain is identified by its private key alias
+    # within the authorizable keystore of an AEM user
+    certificate_chain = aem.certificate_chain('someprivatekeyalias', '/home/users/system', 'authentication-service')
+
+    # import a certificate chain file and its private key file into the authorizable keystore
+    result = certificate_chain.import('/tmp/cert_chain.crt', '/tmp/private_key.der')
+
+    # create is an alias to import
+    result = certificate_chain.create('/tmp/cert_chain.crt', '/tmp/private_key.der')
+
+    # import a certificate chain and wait until the certificate chain exists
     opts = {
-      certificate_raw = '-----BEGIN CERTIFICATE-----
-      MIIEpDCABCDEFGHIJKLMNOPQRSTUVWXYZ
-      -----END CERTIFICATE-----'
       _retries: {
         max_tries: 60,
         base_sleep_seconds: 2,
         max_sleep_seconds: 2
       }
     }
-    result = certificate.upload_cert_raw_wait_until_ready(opts)
+    result = certificate_chain.import_wait_until_ready('/tmp/cert_chain.crt', '/tmp/private_key.der', opts)
+
+    # check certificate chain's existence
+    result = certificate_chain.exists
+
+    # delete certificate chain
+    result = certificate_chain.delete
 
 User:
 

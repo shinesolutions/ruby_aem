@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 - Add usage documentation for SSL
+- Add unit tests checking conf/spec.yaml param names against swagger_aem and swagger_aem_osgi
 
 ### Changed
 - Increase min unit test coverage to 100
+
+### Fixed
+- Fix request parameter names renamed in swagger_aem 4.0.0 (jcr_content_*, jcr_primary_type, _operation, rep_password) which were silently dropped
 
 ## 4.0.2 - 2026-10-09
 ### Fixed

@@ -12,13 +12,11 @@ deps:
 	gem install bundler --version=4.0.22
 	rm -rf .bundle
 	bundle install
-	bundle binstubs --all
 
 # yamllint runs with its default rules, exceptions are marked inline in each YAML file.
 # markdownlint-cli2 reads its rules from .markdownlint.yaml
 lint:
 	bundle exec rubocop
-	bundle exec yaml-lint .*.yml conf/*.yaml
 	yamllint .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml conf/*.yaml
 	markdownlint-cli2 README.md
 
@@ -40,10 +38,6 @@ test-integration: install
 doc:
 	bundle exec yard doc --output-dir doc/api/master/
 
-# Push doc/ to the gh-pages branch, needs the gh-pages CLI from make tools
-doc-publish:
-	gh-pages --dist doc/
-
 publish: install
 	gem push `ls ruby_aem-*.gem`
 
@@ -58,10 +52,6 @@ release-patch:
 
 release: release-minor
 
-# Install the gh-pages CLI used by doc-publish
-tools:
-	npm install -g gh-pages@2.0.1
-
 # Regenerate the SSL key and certificate fixtures used by the integration tests.
 # Based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
 # You will be prompted for the private key password, the integration tests expect 'someprivatekeypassword'
@@ -72,4 +62,4 @@ fixtures:
 	openssl x509 -req -days 365 -in test/integration/fixtures/cert_sign_request.csr -signkey test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_chain.crt
 	openssl pkcs8 -topk8 -inform PEM -outform DER -in test/integration/fixtures/private_key.key -out test/integration/fixtures/private_key.der -nocrypt
 
-.PHONY: all ci clean deps lint build install test-unit test-integration doc doc-publish publish release-major release-minor release-patch release tools fixtures
+.PHONY: all ci clean deps lint build install test-unit test-integration doc publish release-major release-minor release-patch release fixtures

@@ -28,6 +28,7 @@ The directive is indented one space so rtk's parser keeps it as text. -->
 
 ### Fixed
 - Fix request parameter names renamed in swagger_aem 4.0.0 (jcr_content_\*, jcr_primary_type, \_operation, rep_password) which were silently dropped
+- Fix param names swagger_aem never read, also before 4.0.0: combine_tags_or (now works), \_charset\_ (utf-8 now sent by package create/update), felix truststore and SAML digestMethod type hints; drop Felix Jetty json_maximumresults
 
 ## 4.0.2 - 2026-10-09
 ### Fixed

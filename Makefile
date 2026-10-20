@@ -13,6 +13,7 @@ deps:
 lint:
 	bundle exec rubocop
 	bundle exec yaml-lint .*.yml conf/*.yaml
+	markdownlint-cli2 README.md
 
 build: clean
 	gem build ruby_aem.gemspec

@@ -18,15 +18,6 @@ describe 'conf/spec.yaml' do
       'sling' => SwaggerAemClient::SlingApi,
       'granite' => SwaggerAemClient::GraniteApi
     }
-    # Mismatches which pre-date swagger_aem 4.0.0 (already ignored with swagger_aem 3.8.0),
-    # kept as-is to preserve existing behaviour until a decision is made on fixing them.
-    @known_mismatches = {
-      'aem.get_aem_health_check' => %w[combinetagsor],
-      'package.create' => %w[charset],
-      'package.update' => %w[charset],
-      'configproperty.createapachefelixjettybasedhttpservice' => %w[org_apache_felix_https_truststore_key_type_hint json_maximumresults json_maximumresults_type_hint],
-      'configproperty.createadobegranitesamlauthenticationhandler' => %w[digestMethod_type_hint]
-    }
   end
 
   # Collect the opts keys read by a generated swagger client method, e.g. opts[:'jcr_content_cq_name'] .
@@ -49,7 +40,7 @@ describe 'conf/spec.yaml' do
 
           optional_params = action['params']['optional'] || {}
           optional_keys = optional_params.is_a?(Hash) ? optional_params.keys : optional_params
-          unsupported = optional_keys - swagger_opts_keys(method) - (@known_mismatches["#{resource_name}.#{action_name}"] || [])
+          unsupported = optional_keys - swagger_opts_keys(method)
           expect(unsupported).to eq([]), "#{resource_name}.#{action_name} optional params not supported by #{api_class}##{method.name}"
         }
       }
@@ -59,7 +50,7 @@ describe 'conf/spec.yaml' do
   describe 'test swagger client opts' do
     before do
       @mock_api = double('mock_api')
-      @client = RubyAem::Client.new({ sling: @mock_api }, @spec)
+      @client = RubyAem::Client.new({ sling: @mock_api, custom: @mock_api, crx: @mock_api }, @spec)
     end
 
     it 'should pass jcr_content_* params when creating flush agent' do
@@ -113,6 +104,24 @@ describe 'conf/spec.yaml' do
       expect(RubyAem::Handlers).to receive(:html_authorizable_id).once
       user = RubyAem::Resources::User.new(@client, '/home/users/s/', 'someuser')
       user.create('somepassword')
+    end
+
+    it 'should pass combine_tags_or param when retrieving AEM health check' do
+      expect(@mock_api).to receive(:get_aem_health_check_with_http_info).once.with({ tags: 'shallow', combine_tags_or: 'false' }).and_return(['{}', 200, {}])
+      expect(RubyAem::Handlers).to receive(:json_aem_health_check).once
+      aem = RubyAem::Resources::Aem.new(@client)
+      aem.get_aem_health_check(tags: 'shallow', combine_tags_or: false)
+    end
+
+    it 'should pass _charset_ param when creating package' do
+      expect(@mock_api).to receive(:post_package_service_json_with_http_info).once.with(
+        'etc/packages/somepackagegroup',
+        'create',
+        { group_name: 'somepackagegroup', package_name: 'somepackage', package_version: '1.2.3', _charset_: 'utf-8' }
+      ).and_return(['{}', 200, {}])
+      expect(RubyAem::Handlers).to receive(:json_package_service).once
+      package = RubyAem::Resources::Package.new(@client, 'somepackagegroup', 'somepackage', '1.2.3')
+      package.create
     end
   end
 end

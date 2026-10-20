@@ -758,6 +758,8 @@ configproperty:
         201:
           handler: simple
           message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+    # TODO: remove the create<config> actions below, unused since a170df6 (2020, #31) when
+    # ConfigProperty#create switched to the generic create action (postConfigProperty)
     createapachefelixjettybasedhttpservice:
       api: sling
       operation: postConfigApacheFelixJettyBasedHttpService

@@ -775,6 +775,9 @@ configproperty:
           - org_apache_felix_https_keystore_key_password
           - org_apache_felix_https_keystore_key_password_type_hint
           - org_apache_felix_https_truststore
+          # org.apache.felix.https.truststore@TypeHint, read as org_apache_felix_https_truststore_type_hint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L257
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1457
           - org_apache_felix_https_truststore_type_hint
           - org_apache_felix_https_truststore_password
           - org_apache_felix_https_truststore_password_type_hint
@@ -784,6 +787,11 @@ configproperty:
           - org_apache_felix_https_enable_type_hint
           - org_osgi_service_http_port_secure
           - org_osgi_service_http_port_secure_type_hint
+          # json_maximumresults and json_maximumresults_type_hint were removed from this action:
+          # postConfigApacheFelixJettyBasedHttpService has no json.maximumresults parameter in any
+          # swagger_aem release (1.0.0 to 4.0.0), so they were never sent. They were copied from the
+          # Sling GET servlet action in ruby_aem a626c5d (2017) and stay on createapacheslinggetservlet.
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L198-L306
       responses:
         200:
           handler: simple
@@ -797,6 +805,9 @@ configproperty:
       params:
         required:
         optional:
+          # json.maximumresults and json.maximumresults@TypeHint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L311-L320
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1683-L1684
           - json_maximumresults
           - json_maximumresults_type_hint
           - enable_html
@@ -928,6 +939,9 @@ configproperty:
           - name_id_format
           - name_id_format_type_hint
           - digest_method
+          # digestMethod@TypeHint, read as digest_method_type_hint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L1517
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1350
           - digest_method_type_hint
           - signature_method
           - signature_method_type_hint

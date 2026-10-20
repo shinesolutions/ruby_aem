@@ -1,3 +1,8 @@
+---
+# Message, path and URI templates are kept on one line, wrapping them risks
+# changing their parsed values.
+# yamllint disable rule:line-length
+
 # Optional param names must match the opts keys of the swagger_aem / swagger_aem_osgi
 # generated *_api.rb methods exactly, unknown keys are silently ignored by the client.
 # e.g. swagger_aem 4.0.0 renamed jcrcontent_* to jcr_content_*, reppassword to rep_password,

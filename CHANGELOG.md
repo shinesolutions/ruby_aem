@@ -10,9 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 - Add usage documentation for SSL
 - Add unit tests checking conf/spec.yaml param names against swagger_aem and swagger_aem_osgi
+- Add markdownlint (README.md) and yamllint (default rules, inline exceptions) to lint
 
 ### Changed
 - Increase min unit test coverage to 100
+- Upgrade build container to aem-platform-buildenv 6.4.1 and release-action to 2.1.0
+- CI runs every check that needs no running AEM (build, all linters, install, unit tests, doc)
 
 ### Fixed
 - Fix request parameter names renamed in swagger_aem 4.0.0 (jcr_content_*, jcr_primary_type, _operation, rep_password) which were silently dropped

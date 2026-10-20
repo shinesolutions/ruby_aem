@@ -56,7 +56,6 @@ release: release-minor
 # Regenerate the SSL key and certificate fixtures used by the integration tests.
 # Based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
 # You will be prompted for the private key password, the integration tests expect 'someprivatekeypassword'
-# TODO: only regenerates 4 of the 8 files in test/integration/fixtures
 fixtures:
 	mkdir -p test/integration/fixtures/
 	openssl genrsa -aes256 -out test/integration/fixtures/private_key.key 4096

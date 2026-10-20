@@ -26,8 +26,7 @@ aem:
         required:
         optional:
           tags: '%{tags}'
-          # TODO: never sent, swagger_aem reads combine_tags_or
-          combinetagsor: '%{combine_tags_or}'
+          combine_tags_or: '%{combine_tags_or}'
       responses:
         200:
           handler: json_aem_health_check
@@ -585,8 +584,7 @@ package:
           group_name: '%{group_name}'
           package_name: '%{package_name}'
           package_version: '%{package_version}'
-          # TODO: never sent, swagger_aem reads _charset_
-          charset: utf-8
+          _charset_: utf-8
       responses:
         200:
           handler: json_package_service
@@ -603,8 +601,7 @@ package:
           path: '/etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
         optional:
           filter: '%{filter}'
-          # TODO: never sent, swagger_aem reads _charset_
-          charset: utf-8
+          _charset_: utf-8
       responses:
         200:
           handler: json_package_service
@@ -778,8 +775,7 @@ configproperty:
           - org_apache_felix_https_keystore_key_password
           - org_apache_felix_https_keystore_key_password_type_hint
           - org_apache_felix_https_truststore
-          # TODO: probably org_apache_felix_https_truststore_type_hint
-          - org_apache_felix_https_truststore_key_type_hint
+          - org_apache_felix_https_truststore_type_hint
           - org_apache_felix_https_truststore_password
           - org_apache_felix_https_truststore_password_type_hint
           - org_apache_felix_https_clientcertificate
@@ -788,9 +784,6 @@ configproperty:
           - org_apache_felix_https_enable_type_hint
           - org_osgi_service_http_port_secure
           - org_osgi_service_http_port_secure_type_hint
-          # TODO: json_maximumresults belongs to the Sling GET servlet, not this config
-          - json_maximumresults
-          - json_maximumresults_type_hint
       responses:
         200:
           handler: simple
@@ -804,7 +797,6 @@ configproperty:
       params:
         required:
         optional:
-          # TODO: json_maximumresults belongs to the Sling GET servlet, not this config
           - json_maximumresults
           - json_maximumresults_type_hint
           - enable_html
@@ -936,8 +928,7 @@ configproperty:
           - name_id_format
           - name_id_format_type_hint
           - digest_method
-          # TODO: swagger_aem_osgi reads digest_method_type_hint
-          - digestMethod_type_hint
+          - digest_method_type_hint
           - signature_method
           - signature_method_type_hint
           - user_intermediate_path

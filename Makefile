@@ -4,9 +4,9 @@ all: clean deps build lint install test-unit test-integration doc
 # test-integration is left out because it needs a running AEM instance (see README Testing)
 ci: clean deps build lint install test-unit doc
 
-# Gemfile.lock is removed too, so deps resolves the dependencies afresh
+# Gemfile.lock is kept so deps and CI install the committed, known-good dependency versions
 clean:
-	rm -f ruby_aem-*.gem Gemfile.lock
+	rm -f ruby_aem-*.gem
 
 deps:
 	gem install bundler --version=4.0.22

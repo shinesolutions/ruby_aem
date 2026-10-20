@@ -15,12 +15,16 @@ The directive is indented one space so rtk's parser keeps it as text. -->
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 - Add usage documentation for SSL
 - Add unit tests checking conf/spec.yaml param names against swagger_aem and swagger_aem_osgi
-- Add markdownlint (README.md) and yamllint (default rules, inline exceptions) to lint
+- Add markdownlint and yamllint to lint, covering all hand-written Markdown and YAML files
 
 ### Changed
 - Increase min unit test coverage to 100
 - Upgrade build container to aem-platform-buildenv 6.4.1 and release-action to 2.1.0
 - CI runs every check that needs no running AEM (build, all linters, install, unit tests, doc)
+- make clean keeps the committed Gemfile.lock so builds use the locked dependency versions
+
+### Removed
+- Remove yaml-lint (replaced by yamllint), unused binstubs, and the obsolete gh-pages doc-publish and tools Makefile targets
 
 ### Fixed
 - Fix request parameter names renamed in swagger_aem 4.0.0 (jcr_content_\*, jcr_primary_type, \_operation, rep_password) which were silently dropped

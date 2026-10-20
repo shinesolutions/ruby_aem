@@ -1,6 +1,7 @@
 ---
 name: Release Patch
-on: [workflow_dispatch]
+# 'on' is the GitHub Actions trigger key, not a YAML 1.1 boolean
+on: [workflow_dispatch]  # yamllint disable-line rule:truthy
 jobs:
   build:
     runs-on: ubuntu-26.04

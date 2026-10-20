@@ -1,3 +1,7 @@
+---
+# Message, path and URI templates are kept on one line, wrapping them risks
+# changing their parsed values.
+# yamllint disable rule:line-length
 aem:
   actions:
     get_login_page:

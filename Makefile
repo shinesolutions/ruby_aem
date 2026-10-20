@@ -13,6 +13,7 @@ deps:
 lint:
 	bundle exec rubocop
 	bundle exec yaml-lint .*.yml conf/*.yaml
+	yamllint .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml conf/*.yaml
 	markdownlint-cli2 README.md
 
 build: clean

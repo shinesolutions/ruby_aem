@@ -1,0 +1,10 @@
+---
+# yamllint's default rules, plus the exceptions that apply to the whole repo.
+# File-specific exceptions stay as inline yamllint comments in those files.
+extends: default
+
+rules:
+  # GitHub Actions' `on:` trigger key reads as a YAML 1.1 boolean, so check
+  # truthy values only, not keys
+  truthy:
+    check-keys: false

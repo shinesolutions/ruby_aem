@@ -1,6 +1,6 @@
 ---
 name: CI
-on: [push, pull_request, workflow_dispatch]  # yamllint disable-line rule:truthy
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-26.04

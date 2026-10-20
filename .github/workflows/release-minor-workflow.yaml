@@ -1,6 +1,6 @@
 ---
 name: Release Minor
-on: [workflow_dispatch]  # yamllint disable-line rule:truthy
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-26.04

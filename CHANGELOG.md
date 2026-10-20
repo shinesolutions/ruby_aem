@@ -4,18 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-<!-- rtk release rewrites this file in keep-a-changelog's own layout (no blank lines
-around headings and lists, Added/Changed/Fixed headings repeated per release).
-The directive is indented one space so rtk's parser keeps it as text. -->
- <!-- markdownlint-disable-file MD022 MD024 MD032 -->
-
 ## Unreleased
 
 ### Added
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 - Add usage documentation for SSL
 - Add unit tests checking conf/spec.yaml param names against swagger_aem and swagger_aem_osgi
-- Add markdownlint and yamllint to lint, covering all hand-written Markdown and YAML files
+- Add markdownlint and yamllint to lint, covering all hand-written YAML files and all Markdown files except CHANGELOG.md, which rtk release rewrites
 
 ### Changed
 - Increase min unit test coverage to 100

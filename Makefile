@@ -15,11 +15,12 @@ deps:
 
 # Lint every hand-written Ruby, YAML and Markdown file (not the generated doc/ output).
 # yamllint runs with its default rules, exceptions are marked inline in each YAML file.
-# markdownlint-cli2 reads its rules from .markdownlint.yaml, exceptions are marked inline
+# markdownlint-cli2 reads its rules from .markdownlint.yaml, exceptions are marked inline.
+# CHANGELOG.md isn't linted, as rtk release rewrites it in its own layout.
 lint:
 	bundle exec rubocop
 	yamllint .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml conf/*.yaml
-	markdownlint-cli2 README.md CHANGELOG.md docs/versions.md .github/ISSUE_TEMPLATE/*.md
+	markdownlint-cli2 README.md docs/versions.md .github/ISSUE_TEMPLATE/*.md
 
 build: clean
 	gem build ruby_aem.gemspec

@@ -56,6 +56,9 @@ release: release-minor
 # Regenerate the SSL key and certificate fixtures used by the integration tests.
 # Based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
 # You will be prompted for the private key password, the integration tests expect 'someprivatekeypassword'
+# The committed fixtures work, so this is only needed to replace them. Validity:
+# cert_chain.crt expired 2019-11-14 (still accepted by the integration tests),
+# cert_ssl.crt and cert_chain_authorizable_keystore.crt are valid until 2028-07-29
 fixtures:
 	mkdir -p test/integration/fixtures/
 	openssl genrsa -aes256 -out test/integration/fixtures/private_key.key 4096

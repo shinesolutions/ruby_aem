@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add unit tests for certificate, certificate chain, saml, ssl, and truststore
 - Add usage documentation for SSL
+- Add markdownlint (README.md) and yamllint (default rules, inline exceptions) to lint
 
 ### Changed
 - Increase min unit test coverage to 100
+- Upgrade build container to aem-platform-buildenv 6.4.1 and release-action to 2.1.0
+- CI runs every check that needs no running AEM (build, all linters, install, unit tests, doc)
 
 ## 4.0.2 - 2026-10-09
 ### Fixed

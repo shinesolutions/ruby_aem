@@ -1,18 +1,27 @@
 all: clean deps build lint install test-unit test-integration doc
+
+# Everything that runs without a live AEM, as run by the CI workflow.
+# test-integration is left out because it needs a running AEM instance (see README Testing)
 ci: clean deps build lint install test-unit doc
 
+# Gemfile.lock is kept so deps and CI install the committed, known-good dependency versions
 clean:
-	rm -f ruby_aem-*.gem Gemfile.lock
+	rm -f ruby_aem-*.gem
 
 deps:
 	gem install bundler --version=4.0.22
 	rm -rf .bundle
 	bundle install
-	bundle binstubs --all
 
+# Lint every hand-written Ruby, YAML and Markdown file (not the generated doc/ output).
+# yamllint runs with its default rules plus the repo-wide exceptions in .yamllint.yaml; file-specific
+# exceptions are marked inline in each YAML file.
+# markdownlint-cli2 reads its rules from .markdownlint.yaml, exceptions are marked inline.
+# CHANGELOG.md isn't linted, as rtk release rewrites it in its own layout.
 lint:
 	bundle exec rubocop
-	bundle exec yaml-lint .*.yml conf/*.yaml
+	yamllint .yamllint.yaml .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml conf/*.yaml
+	markdownlint-cli2 README.md docs/versions.md .github/ISSUE_TEMPLATE/*.md
 
 build: clean
 	gem build ruby_aem.gemspec
@@ -20,17 +29,17 @@ build: clean
 install: build
 	gem install `ls ruby_aem-*.gem`
 
+# Unit tests, fails when line coverage is below the .simplecov minimum
 test-unit:
 	bundle exec rspec test/unit
 
+# Needs a running AEM instance, configured with the aem_* environment variables (see README Testing)
 test-integration: install
 	bundle exec rspec test/integration
 
+# Generate the API reference (YARD) for the current branch into doc/api/master/
 doc:
 	bundle exec yard doc --output-dir doc/api/master/
-
-doc-publish:
-	gh-pages --dist doc/
 
 publish: install
 	gem push `ls ruby_aem-*.gem`
@@ -46,16 +55,17 @@ release-patch:
 
 release: release-minor
 
-tools:
-	npm install -g gh-pages@2.0.1
-
+# Regenerate the SSL key and certificate fixtures used by the integration tests.
+# Based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
+# You will be prompted for the private key password, the integration tests expect 'someprivatekeypassword'
+# The committed fixtures work, so this is only needed to replace them. Validity:
+# cert_chain.crt expired 2019-11-14 (still accepted by the integration tests),
+# cert_ssl.crt and cert_chain_authorizable_keystore.crt are valid until 2028-07-29
 fixtures:
-	# based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
-	# you will be prompted for private key password, the integration tests are expecting 'someprivatekeypassword' as the password for the fixtures data
 	mkdir -p test/integration/fixtures/
 	openssl genrsa -aes256 -out test/integration/fixtures/private_key.key 4096
 	openssl req -sha256 -new -key test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_sign_request.csr -subj '/CN=localhost'
 	openssl x509 -req -days 365 -in test/integration/fixtures/cert_sign_request.csr -signkey test/integration/fixtures/private_key.key -out test/integration/fixtures/cert_chain.crt
 	openssl pkcs8 -topk8 -inform PEM -outform DER -in test/integration/fixtures/private_key.key -out test/integration/fixtures/private_key.der -nocrypt
 
-.PHONY: all ci deps clean lint build install test-unit test-integration doc doc-publish publish release tools fixtures release release-major release-minor release-patch
+.PHONY: all ci clean deps lint build install test-unit test-integration doc publish release-major release-minor release-patch release fixtures

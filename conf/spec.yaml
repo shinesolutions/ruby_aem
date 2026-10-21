@@ -1,3 +1,13 @@
+---
+# Message, path and URI templates are kept on one line, wrapping them risks
+# changing their parsed values.
+# yamllint disable rule:line-length
+
+# Optional param names must match the opts keys of the swagger_aem / swagger_aem_osgi
+# generated *_api.rb methods exactly, unknown keys are silently ignored by the client.
+# e.g. swagger_aem 4.0.0 renamed jcrcontent_* to jcr_content_*, reppassword to rep_password,
+# and operation to _operation (plain :operation is overwritten by the generated client).
+# test/unit/spec_yaml_spec.rb checks these names against the installed gems.
 aem:
   actions:
     get_login_page:
@@ -16,7 +26,7 @@ aem:
         required:
         optional:
           tags: '%{tags}'
-          combinetagsor: '%{combine_tags_or}'
+          combine_tags_or: '%{combine_tags_or}'
       responses:
         200:
           handler: json_aem_health_check
@@ -102,7 +112,7 @@ authorizablekeystore:
         optional:
           new_password: '%{password}'
           re_password: '%{password}'
-          operation: createStore
+          _operation: createStore
       responses:
         200:
           handler: simple
@@ -164,7 +174,7 @@ authorizablekeystore:
           path: '%{intermediate_path}/%{authorizable_id}/keystore'
           name: store.p12
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -348,29 +358,29 @@ flushagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          jcrprimary_type: cq:Page
-          jcrcontent_cqname: '%{name}'
-          jcrcontent_jcrtitle: '%{title}'
-          jcrcontent_jcrdescription: '%{description}'
-          jcrcontent_slingresource_type: cq/replication/components/agent
-          jcrcontent_transport_uri: '%{dest_base_url}/dispatcher/invalidate.cache'
-          jcrcontent_alias_update: '%{alias_update}'
-          jcrcontent_log_level: '%{log_level}'
-          jcrcontent_no_versioning: true
-          jcrcontent_protocol_http_headers:
+          jcr_primary_type: cq:Page
+          jcr_content_cq_name: '%{name}'
+          jcr_content_jcr_title: '%{title}'
+          jcr_content_jcr_description: '%{description}'
+          jcr_content_sling_resource_type: cq/replication/components/agent
+          jcr_content_transport_uri: '%{dest_base_url}/dispatcher/invalidate.cache'
+          jcr_content_alias_update: '%{alias_update}'
+          jcr_content_log_level: '%{log_level}'
+          jcr_content_no_versioning: true
+          jcr_content_protocol_http_headers:
             - 'CQ-Action:{action}'
             - 'CQ-Handle:{path}'
             - 'CQ-Path:{path}'
-          jcrcontent_protocol_http_headers_type_hint: String[]
-          jcrcontent_protocol_http_method: GET
-          jcrcontent_retry_delay: '%{retry_delay}'
-          jcrcontent_serialization_type: flush
-          jcrcontent_jcrmixin_types: cq:ReplicationStatus
-          jcrcontent_trigger_receive: true
-          jcrcontent_trigger_specific: true
-          jcrcontent_cqtemplate: /libs/cq/replication/templates/agent
-          jcrcontent_enabled: true
-          jcrcontent_ssl: '%{ssl}'
+          jcr_content_protocol_http_headers_type_hint: String[]
+          jcr_content_protocol_http_method: GET
+          jcr_content_retry_delay: '%{retry_delay}'
+          jcr_content_serialization_type: flush
+          jcr_content_jcr_mixin_types: cq:ReplicationStatus
+          jcr_content_trigger_receive: true
+          jcr_content_trigger_specific: true
+          jcr_content_cq_template: /libs/cq/replication/templates/agent
+          jcr_content_enabled: true
+          jcr_content_ssl: '%{ssl}'
       responses:
         200:
           handler: simple
@@ -386,7 +396,7 @@ flushagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -522,7 +532,7 @@ node:
       params:
         required:
           path: '%{path}'
-          jcrprimary_type: '%{type}'
+          jcr_primary_type: '%{type}'
           name: '%{name}'
       responses:
         201:
@@ -536,7 +546,7 @@ node:
           path: '%{path}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -574,7 +584,7 @@ package:
           group_name: '%{group_name}'
           package_name: '%{package_name}'
           package_version: '%{package_version}'
-          charset: utf-8
+          _charset_: utf-8
       responses:
         200:
           handler: json_package_service
@@ -591,7 +601,7 @@ package:
           path: '/etc/packages/%{group_name}/%{package_name}-%{package_version}.zip'
         optional:
           filter: '%{filter}'
-          charset: utf-8
+          _charset_: utf-8
       responses:
         200:
           handler: json_package_service
@@ -720,7 +730,7 @@ path:
           path: '%{path}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -748,6 +758,8 @@ configproperty:
         201:
           handler: simple
           message: 'Set %{config_node_name} config %{type} property %{name}=%{value}'
+    # TODO: remove the create<config> actions below, unused since a170df6 (2020, #31) when
+    # ConfigProperty#create switched to the generic create action (postConfigProperty)
     createapachefelixjettybasedhttpservice:
       api: sling
       operation: postConfigApacheFelixJettyBasedHttpService
@@ -765,7 +777,10 @@ configproperty:
           - org_apache_felix_https_keystore_key_password
           - org_apache_felix_https_keystore_key_password_type_hint
           - org_apache_felix_https_truststore
-          - org_apache_felix_https_truststore_key_type_hint
+          # org.apache.felix.https.truststore@TypeHint, read as org_apache_felix_https_truststore_type_hint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L257
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1457
+          - org_apache_felix_https_truststore_type_hint
           - org_apache_felix_https_truststore_password
           - org_apache_felix_https_truststore_password_type_hint
           - org_apache_felix_https_clientcertificate
@@ -774,8 +789,11 @@ configproperty:
           - org_apache_felix_https_enable_type_hint
           - org_osgi_service_http_port_secure
           - org_osgi_service_http_port_secure_type_hint
-          - json_maximumresults
-          - json_maximumresults_type_hint
+          # json_maximumresults and json_maximumresults_type_hint were removed from this action:
+          # postConfigApacheFelixJettyBasedHttpService has no json.maximumresults parameter in any
+          # swagger_aem release (1.0.0 to 4.0.0), so they were never sent. They were copied from the
+          # Sling GET servlet action in ruby_aem a626c5d (2017) and stay on createapacheslinggetservlet.
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L198-L306
       responses:
         200:
           handler: simple
@@ -789,6 +807,9 @@ configproperty:
       params:
         required:
         optional:
+          # json.maximumresults and json.maximumresults@TypeHint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L311-L320
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1683-L1684
           - json_maximumresults
           - json_maximumresults_type_hint
           - enable_html
@@ -920,7 +941,10 @@ configproperty:
           - name_id_format
           - name_id_format_type_hint
           - digest_method
-          - digestMethod_type_hint
+          # digestMethod@TypeHint, read as digest_method_type_hint:
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/specification/swagger-aem.yml#L1517
+          # https://github.com/shinesolutions/swagger-aem/blob/4.0.0/clients/ruby/generated/lib/swagger_aem/api/sling_api.rb#L1350
+          - digest_method_type_hint
           - signature_method
           - signature_method_type_hint
           - user_intermediate_path
@@ -971,20 +995,20 @@ replicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          jcrprimary_type: cq:Page
-          jcrcontent_cqname: '%{name}'
-          jcrcontent_jcrtitle: '%{title}'
-          jcrcontent_jcrdescription: '%{description}'
-          jcrcontent_slingresource_type: cq/replication/components/agent
-          jcrcontent_serialization_type: durbo
-          jcrcontent_transport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
-          jcrcontent_transport_user: '%{transport_user}'
-          jcrcontent_transport_password: '%{transport_password}'
-          jcrcontent_log_level: '%{log_level}'
-          jcrcontent_retry_delay: '%{retry_delay}'
-          jcrcontent_cqtemplate: /libs/cq/replication/templates/agent
-          jcrcontent_enabled: true
-          jcrcontent_ssl: '%{ssl}'
+          jcr_primary_type: cq:Page
+          jcr_content_cq_name: '%{name}'
+          jcr_content_jcr_title: '%{title}'
+          jcr_content_jcr_description: '%{description}'
+          jcr_content_sling_resource_type: cq/replication/components/agent
+          jcr_content_serialization_type: durbo
+          jcr_content_transport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+          jcr_content_transport_user: '%{transport_user}'
+          jcr_content_transport_password: '%{transport_password}'
+          jcr_content_log_level: '%{log_level}'
+          jcr_content_retry_delay: '%{retry_delay}'
+          jcr_content_cq_template: /libs/cq/replication/templates/agent
+          jcr_content_enabled: true
+          jcr_content_ssl: '%{ssl}'
       responses:
         200:
           handler: simple
@@ -1000,7 +1024,7 @@ replicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -1042,20 +1066,20 @@ outboxreplicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          jcrprimary_type: cq:Page
-          jcrcontent_cqname: '%{name}'
-          jcrcontent_jcrtitle: '%{title}'
-          jcrcontent_jcrdescription: '%{description}'
-          jcrcontent_slingresource_type: cq/replication/components/agent
-          jcrcontent_transport_uri: repo://var/replication/outbox
-          jcrcontent_no_versioning: true
-          jcrcontent_log_level: '%{log_level}'
-          jcrcontent_cqtemplate: /libs/cq/replication/templates/agent
-          jcrcontent_enabled: true
-          jcrcontent_trigger_distribute: true
-          jcrcontent_trigger_modified: false
-          jcrcontent_trigger_specific: true
-          jcrcontent_user_id: '%{user_id}'
+          jcr_primary_type: cq:Page
+          jcr_content_cq_name: '%{name}'
+          jcr_content_jcr_title: '%{title}'
+          jcr_content_jcr_description: '%{description}'
+          jcr_content_sling_resource_type: cq/replication/components/agent
+          jcr_content_transport_uri: repo://var/replication/outbox
+          jcr_content_no_versioning: true
+          jcr_content_log_level: '%{log_level}'
+          jcr_content_cq_template: /libs/cq/replication/templates/agent
+          jcr_content_enabled: true
+          jcr_content_trigger_distribute: true
+          jcr_content_trigger_modified: false
+          jcr_content_trigger_specific: true
+          jcr_content_user_id: '%{user_id}'
       responses:
         200:
           handler: simple
@@ -1071,7 +1095,7 @@ outboxreplicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -1113,20 +1137,20 @@ reversereplicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          jcrprimary_type: cq:Page
-          jcrcontent_cqname: '%{name}'
-          jcrcontent_jcrtitle: '%{title}'
-          jcrcontent_jcrdescription: '%{description}'
-          jcrcontent_slingresource_type: cq/replication/components/agent
-          jcrcontent_serialization_type: durbo
-          jcrcontent_transport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
-          jcrcontent_transport_user: '%{transport_user}'
-          jcrcontent_transport_password: '%{transport_password}'
-          jcrcontent_log_level: '%{log_level}'
-          jcrcontent_retry_delay: '%{retry_delay}'
-          jcrcontent_cqtemplate: /libs/cq/replication/templates/agent
-          jcrcontent_enabled: true
-          jcrcontent_reverse_replication: true
+          jcr_primary_type: cq:Page
+          jcr_content_cq_name: '%{name}'
+          jcr_content_jcr_title: '%{title}'
+          jcr_content_jcr_description: '%{description}'
+          jcr_content_sling_resource_type: cq/replication/components/agent
+          jcr_content_serialization_type: durbo
+          jcr_content_transport_uri: '%{dest_base_url}/bin/receive?sling:authRequestLogin=1'
+          jcr_content_transport_user: '%{transport_user}'
+          jcr_content_transport_password: '%{transport_password}'
+          jcr_content_log_level: '%{log_level}'
+          jcr_content_retry_delay: '%{retry_delay}'
+          jcr_content_cq_template: /libs/cq/replication/templates/agent
+          jcr_content_enabled: true
+          jcr_content_reverse_replication: true
       responses:
         200:
           handler: simple
@@ -1142,7 +1166,7 @@ reversereplicationagent:
           runmode: '%{run_mode}'
           name: '%{name}'
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -1270,7 +1294,7 @@ truststore:
         optional:
           new_password: '%{password}'
           re_password: '%{password}'
-          operation: createStore
+          _operation: createStore
       responses:
         200:
           handler: simple
@@ -1308,7 +1332,7 @@ truststore:
           path: etc/truststore
           name: truststore.p12
         optional:
-          operation: delete
+          _operation: delete
       responses:
         200:
           handler: simple
@@ -1355,7 +1379,7 @@ user:
           intermediate_path: '%{path}'
         optional:
           create_user: 'true'
-          reppassword: '%{password}'
+          rep_password: '%{password}'
       responses:
         201:
           handler: html_authorizable_id

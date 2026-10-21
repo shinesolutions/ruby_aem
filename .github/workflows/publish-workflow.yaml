@@ -18,7 +18,7 @@ jobs:
       - uses: rubygems/configure-rubygems-credentials@v2.1.0
       - uses: cliffano/command-docker-action@v2.1.0
         with:
-          image: shinesolutions/aem-platform-buildenv:6.2.1
+          image: shinesolutions/aem-platform-buildenv:6.4.1
           shell: bash
           extra_args: '-e GEM_HOST_API_KEY'
           command: |

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Upgrade swagger_aem to 4.0.1 and swagger_aem_osgi to 2.0.1, which no longer follow HTTP redirects by default, so the 302 responses that exists and SAML create expect are returned
 
 ## 4.1.0 - 2026-10-21
 ### Added

@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'openssl', '4.0.2'
 gem 'retries', '0.0.5'
 gem 'rexml', '3.4.4'
-gem 'swagger_aem', '4.0.0'
-gem 'swagger_aem_osgi', '2.0.0'
+gem 'swagger_aem', '4.0.1'
+gem 'swagger_aem_osgi', '2.0.1'
 
 gem 'rspec', '3.13.2', require: false
 gem 'rubocop', '1.91.0', require: false

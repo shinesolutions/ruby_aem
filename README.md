@@ -39,7 +39,8 @@ aem = RubyAem::Aem.new({
   port: 4502,
   timeout: 300,
   verify_ssl: true,
-  debug: false
+  debug: false,
+  follow_location: false
 })
 ```
 

@@ -168,4 +168,42 @@ describe 'RubyAem' do
       expect(user).to_not be(nil)
     end
   end
+
+  # Make real Swagger AEM and Swagger AEM OSGI API calls, with stubbed HTTP responses,
+  # to confirm that they pass follow_location through to the HTTP request
+  describe 'test follow_location' do
+    before do
+      Typhoeus.stub(/.*/).and_return(Typhoeus::Response.new(code: 200, body: '', headers: {}))
+      @followlocations = []
+      allow(Typhoeus::Request).to(receive(:new).and_wrap_original { |original, url, opts|
+        @followlocations.push(opts[:followlocation])
+        original.call(url, opts)
+      })
+    end
+
+    after do
+      Typhoeus::Expectation.clear
+    end
+
+    it 'should not follow redirects by default' do
+      aem = RubyAem::Aem.new
+      aem.bundle('somebundle').start
+      aem.saml.get
+      expect(@followlocations).to eq([false, false])
+    end
+
+    it 'should follow redirects when follow_location is true' do
+      aem = RubyAem::Aem.new(follow_location: true)
+      aem.bundle('somebundle').start
+      aem.saml.get
+      expect(@followlocations).to eq([true, true])
+    end
+
+    it 'should follow redirects when follow_location is a true String' do
+      aem = RubyAem::Aem.new(follow_location: 'true')
+      aem.bundle('somebundle').start
+      aem.saml.get
+      expect(@followlocations).to eq([true, true])
+    end
+  end
 end

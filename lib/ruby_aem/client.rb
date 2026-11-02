@@ -30,10 +30,12 @@ module RubyAem
     #
     # @param apis a hash of Swagger AEM client's API instances
     # @param spec ruby_aem specification
+    # @param follow_location if true, then HTTP redirects will be followed, default: false
     # @return new RubyAem::Client instance
-    def initialize(apis, spec)
+    def initialize(apis, spec, follow_location: false)
       @apis = apis
       @spec = spec
+      @follow_location = follow_location
     end
 
     # Make an API call using the relevant Swagger AEM API client.
@@ -59,7 +61,8 @@ module RubyAem
       required_params.each_value { |value|
         params.push(value % call_params)
       }
-      params.push({})
+      # Swagger AEM API clients take follow_location as a per-call option, not a configuration value
+      params.push({ follow_location: @follow_location })
       optional_params = action_spec['params']['optional'] || {}
       optional_params.each { |key, value|
         add_optional_param(key, value, params, call_params)

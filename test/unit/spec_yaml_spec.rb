@@ -58,6 +58,7 @@ describe 'conf/spec.yaml' do
         'author',
         'some-flush-agent',
         {
+          follow_location: false,
           jcr_primary_type: 'cq:Page',
           jcr_content_cq_name: 'some-flush-agent',
           jcr_content_jcr_title: 'Some Flush Agent Title',
@@ -86,28 +87,28 @@ describe 'conf/spec.yaml' do
     end
 
     it 'should pass _operation param when deleting replication agent' do
-      expect(@mock_api).to receive(:post_agent_with_http_info).once.with('author', 'some-replication-agent', { _operation: 'delete' }).and_return([nil, 204, {}])
+      expect(@mock_api).to receive(:post_agent_with_http_info).once.with('author', 'some-replication-agent', { follow_location: false, _operation: 'delete' }).and_return([nil, 204, {}])
       replication_agent = RubyAem::Resources::ReplicationAgent.new(@client, 'author', 'some-replication-agent')
       result = replication_agent.delete
       expect(result.message).to eq('Replication agent some-replication-agent deleted on author')
     end
 
     it 'should pass _operation param when creating truststore' do
-      expect(@mock_api).to receive(:post_truststore_with_http_info).once.with({ new_password: 'somepassword', re_password: 'somepassword', _operation: 'createStore' }).and_return([nil, 200, {}])
+      expect(@mock_api).to receive(:post_truststore_with_http_info).once.with({ follow_location: false, new_password: 'somepassword', re_password: 'somepassword', _operation: 'createStore' }).and_return([nil, 200, {}])
       truststore = RubyAem::Resources::Truststore.new(@client)
       result = truststore.create('somepassword')
       expect(result.message).to eq('Truststore created')
     end
 
     it 'should pass rep_password param when creating user' do
-      expect(@mock_api).to receive(:post_authorizables_with_http_info).once.with('someuser', '/home/users/s/', { create_user: 'true', rep_password: 'somepassword' }).and_return([nil, 201, {}])
+      expect(@mock_api).to receive(:post_authorizables_with_http_info).once.with('someuser', '/home/users/s/', { follow_location: false, create_user: 'true', rep_password: 'somepassword' }).and_return([nil, 201, {}])
       expect(RubyAem::Handlers).to receive(:html_authorizable_id).once
       user = RubyAem::Resources::User.new(@client, '/home/users/s/', 'someuser')
       user.create('somepassword')
     end
 
     it 'should pass combine_tags_or param when retrieving AEM health check' do
-      expect(@mock_api).to receive(:get_aem_health_check_with_http_info).once.with({ tags: 'shallow', combine_tags_or: 'false' }).and_return(['{}', 200, {}])
+      expect(@mock_api).to receive(:get_aem_health_check_with_http_info).once.with({ follow_location: false, tags: 'shallow', combine_tags_or: 'false' }).and_return(['{}', 200, {}])
       expect(RubyAem::Handlers).to receive(:json_aem_health_check).once
       aem = RubyAem::Resources::Aem.new(@client)
       aem.get_aem_health_check(tags: 'shallow', combine_tags_or: false)
@@ -117,7 +118,7 @@ describe 'conf/spec.yaml' do
       expect(@mock_api).to receive(:post_package_service_json_with_http_info).once.with(
         'etc/packages/somepackagegroup',
         'create',
-        { group_name: 'somepackagegroup', package_name: 'somepackage', package_version: '1.2.3', _charset_: 'utf-8' }
+        { follow_location: false, group_name: 'somepackagegroup', package_name: 'somepackage', package_version: '1.2.3', _charset_: 'utf-8' }
       ).and_return(['{}', 200, {}])
       expect(RubyAem::Handlers).to receive(:json_package_service).once
       package = RubyAem::Resources::Package.new(@client, 'somepackagegroup', 'somepackage', '1.2.3')

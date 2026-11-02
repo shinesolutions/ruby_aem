@@ -50,6 +50,7 @@ module RubyAem
     # - port: AEM instance port, default: 4502
     # - timeout: connection timeout in seconds, default: 300 seconds
     # - debug: if true, then additional debug messages will be included, default: false
+    # - follow_location: if true, then HTTP redirects will be followed, default: false
     # @return new RubyAem::Aem instance
     def initialize(conf = {})
       sanitise_conf(conf)
@@ -94,7 +95,7 @@ module RubyAem
 
       spec = YAML.load_file(File.expand_path('../../conf/spec.yaml', __FILE__))
 
-      @client = RubyAem::Client.new(apis, spec)
+      @client = RubyAem::Client.new(apis, spec, follow_location: conf[:follow_location])
     end
 
     # Set default configuration values and handle numeric/boolean String values
@@ -107,12 +108,15 @@ module RubyAem
       conf[:host] ||= 'localhost'
       conf[:port] ||= 4502
       conf[:timeout] ||= 300
+      # don't follow redirects by default, ruby_aem relies on getting 302 responses back
+      conf[:follow_location] ||= false
       # handle custom configuration value being passed as a String
       # e.g. when the values are passed via environment variables
       conf[:port] = conf[:port].to_i
       conf[:timeout] = conf[:timeout].to_i
       conf[:verify_ssl] = conf[:verify_ssl] == 'true' if conf[:verify_ssl].is_a? String
       conf[:debug] = conf[:debug] == 'true' if conf[:debug].is_a? String
+      conf[:follow_location] = conf[:follow_location] == 'true' if conf[:follow_location].is_a? String
     end
 
     # Create an AEM instance.

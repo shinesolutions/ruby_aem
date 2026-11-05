@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Changed
+- Upgrade swagger_aem to 4.1.0 and swagger_aem_osgi to 2.1.0
 - Upgrade aem-platform-buildenv to 6.5.0, which has RTK 4.4.0
 - Upgrade release-action to 2.2.0
 

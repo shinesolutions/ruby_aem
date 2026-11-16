@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - Skip CI for release tags, same-repo pull requests and the release's version bump commit, cancel superseded branch runs, and add a CI job timeout
+- Make the GitHub Actions workflows' GITHUB_TOKEN read-only
 
 ### Fixed
 - Fix SSL enable_wait_until_ready raising a bare StandardError without AEM's response details when the Granite SSL setup fails

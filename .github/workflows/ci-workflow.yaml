@@ -7,6 +7,8 @@ on:
     branches: ['**']
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 # Cancel a branch's in-progress run when a newer commit is pushed, main
 # excepted so that every main commit keeps a complete CI result
 concurrency:

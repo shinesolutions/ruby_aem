@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Skip CI for release tags, same-repo pull requests and the release's version bump commit, cancel superseded branch runs, and add a CI job timeout
+- Make the GitHub Actions workflows' GITHUB_TOKEN read-only
+
+### Fixed
+- Fix SSL enable_wait_until_ready raising a bare StandardError without AEM's response details when the Granite SSL setup fails
+- Fix SSL enable_wait_until_ready failing when AEM's SSL setup can't yet connect to the starting HTTPS connector, which happens intermittently since AEM 6.5 SP26
 
 ## 4.2.0 - 2026-11-05
 ### Added

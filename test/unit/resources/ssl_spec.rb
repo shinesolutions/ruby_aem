@@ -130,15 +130,35 @@ describe 'Ssl' do
       expect(result.data).to eq(true)
     end
 
-    it 'should raise error when enabling SSL has response status code other than 0' do
+    it 'should check until SSL is enabled when enabling SSL fails connecting to the starting HTTPS connector' do
       mock_response_error = double('mock_response_error')
-      expect(mock_response_error).to receive(:status_code).and_return(500)
+      allow(mock_response_error).to receive(:status_code).and_return(500)
+      allow(mock_response_error).to receive(:body).and_return('<dd>Connect to localhost:5432 [localhost/127.0.0.1] failed: Connection refused (Connection refused)</dd>')
       mock_result_error = double('mock_result_error')
       expect(mock_result_error).to receive(:response).and_return(mock_response_error)
       mock_error = RubyAem::Error.new('Unexpected response', mock_result_error)
       expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Ssl, 'enable', anything).and_raise(mock_error)
 
-      expect { @ssl.enable_wait_until_ready(@opts) }.to raise_error(StandardError)
+      mock_result_enabled = double('mock_result_enabled')
+      expect(mock_result_enabled).to receive(:response).and_return(mock_ssl_response(true, 5432))
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Ssl, 'get', anything).and_return(mock_result_enabled)
+
+      expect($stdout).to receive(:puts).with('SSL Enable check #1: true - HTTPS has been configured on port 5432')
+      result = @ssl.enable_wait_until_ready(@opts)
+      expect(result.message).to eq('HTTPS has been configured on port 5432')
+      expect(result.data).to eq(true)
+    end
+
+    it 'should raise error when enabling SSL has response status code other than 0' do
+      mock_response_error = double('mock_response_error')
+      allow(mock_response_error).to receive(:status_code).and_return(500)
+      allow(mock_response_error).to receive(:body).and_return('Error while configuring SSL')
+      mock_result_error = double('mock_result_error')
+      expect(mock_result_error).to receive(:response).and_return(mock_response_error)
+      mock_error = RubyAem::Error.new('Unexpected response', mock_result_error)
+      expect(@mock_client).to receive(:call).once.with(RubyAem::Resources::Ssl, 'enable', anything).and_raise(mock_error)
+
+      expect { @ssl.enable_wait_until_ready(@opts) }.to raise_error(RubyAem::Error, 'Unexpected response')
     end
 
     it 'should use default retries settings when they are not specified' do

@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.require_paths     = ['lib']
   s.metadata['rubygems_mfa_required'] = 'true'
 
-  s.add_dependency 'retries', '0.0.5'
-  s.add_dependency 'rexml', '3.4.4'
-  s.add_dependency 'swagger_aem', '4.1.0'
-  s.add_dependency 'swagger_aem_osgi', '2.1.0'
+  s.add_dependency 'retries', '~> 0.0.5'
+  s.add_dependency 'rexml', '~> 3.4', '>= 3.4.4'
+  s.add_dependency 'swagger_aem', '~> 4.1'
+  s.add_dependency 'swagger_aem_osgi', '~> 2.1'
 end

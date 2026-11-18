@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Add self-hosted Renovate (renovate-workflow.yaml, renovate.json), which opens dependency update PRs before 9am on Mondays (Melbourne time) for the Gemfile, the GitHub Actions, the AEM Platform BuildEnv image, the bundler version and Renovate itself, plus security PRs at any time. PRs aren't merged automatically
+
 ### Changed
+- Loosen the gemspec's runtime dependencies to ranges (retries `~> 0.0.5`, rexml `~> 3.4` and at least 3.4.4, swagger_aem `~> 4.1`, swagger_aem_osgi `~> 2.1`), so projects using ruby_aem can get their patch and minor updates without a new ruby_aem release. The Gemfile and Gemfile.lock keep the exact versions CI tests with
 - Upgrade AEM Platform BuildEnv to 6.6.0
 
 ## 4.2.1 - 2026-11-16

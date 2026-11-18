@@ -1,0 +1,53 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Dependency updates for ruby_aem, run by .github/workflows/renovate-workflow.yaml. PRs aren't merged automatically, and merging one doesn't release: releases are made with the Release workflows.",
+  "extends": ["config:recommended", "customManagers:githubActionsVersions"],
+  "timezone": "Australia/Melbourne",
+  "schedule": ["before 9am on monday"],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 10,
+  "minimumReleaseAge": "3 days",
+  "automerge": false,
+  "labels": ["dependencies"],
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": ["dependencies", "security"]
+  },
+  "gitAuthor": "Renovate Bot <85319423+shineworks@users.noreply.github.com>",
+  "enabledManagers": ["bundler", "github-actions", "custom.regex"],
+  "customManagers": [
+    {
+      "description": "The AEM Platform BuildEnv image the workflows run make in",
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.yaml$/"],
+      "matchStrings": ["image: (?<depName>shinesolutions/aem-platform-buildenv):(?<currentValue>\\S+)"],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "description": "The bundler version make deps installs",
+      "customType": "regex",
+      "managerFilePatterns": ["/^Makefile$/"],
+      "matchStrings": ["gem install bundler --version=(?<currentValue>\\S+)"],
+      "depNameTemplate": "bundler",
+      "datasourceTemplate": "rubygems"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Workflow actions, the BuildEnv image and Renovate itself",
+      "matchFileNames": [".github/workflows/**"],
+      "addLabels": ["ci"]
+    },
+    {
+      "description": "One PR for the non-major action updates",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "One PR for the Renovate action and image",
+      "matchPackageNames": ["renovatebot/github-action", "ghcr.io/renovatebot/renovate"],
+      "groupName": "Renovate"
+    }
+  ]
+}

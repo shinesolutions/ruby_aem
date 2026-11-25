@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Dependency updates for ruby_aem, run by .github/workflows/renovate-workflow.yaml. PRs aren't merged automatically, and merging one doesn't release: releases are made with the Release workflows.",
+  "description": "Dependency updates for ruby_aem, run by .github/workflows/renovate-workflow.yaml. PRs aren't merged automatically, and merging one doesn't release: releases are made with the Release workflows. Security updates are left to Dependabot.",
   "extends": ["config:recommended", "customManagers:githubActionsVersions"],
   "timezone": "Australia/Melbourne",
   "schedule": ["before 9am on monday"],
@@ -9,9 +9,8 @@
   "minimumReleaseAge": "3 days",
   "automerge": false,
   "labels": ["dependencies"],
-  "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
-    "labels": ["dependencies", "security"]
+    "enabled": false
   },
   "gitAuthor": "Renovate Bot <85319423+shineworks@users.noreply.github.com>",
   "enabledManagers": ["bundler", "github-actions", "custom.regex"],

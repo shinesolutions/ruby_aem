@@ -1,5 +1,5 @@
 ---
-name: Renovate
+name: Upgrade Dependencies
 
 # Runs self-hosted Renovate against this repo, with the settings in
 # renovate.json. Renovate only opens new PRs before 9am on Mondays (Melbourne

@@ -1,0 +1,58 @@
+---
+name: Renovate
+
+# Runs self-hosted Renovate against this repo, with the settings in
+# renovate.json. Renovate only opens new PRs before 9am on Mondays (Melbourne
+# time). The other runs keep its PRs rebased and act on the dependency
+# dashboard, so an update approved there is opened by the next run, or
+# straight away by running this workflow by hand.
+#
+# RENOVATE_TOKEN is a token with read and write access to contents, pull
+# requests, issues and workflows. It can't be the workflow's GITHUB_TOKEN:
+# PRs opened with that don't run CI.
+on:
+  schedule:
+    # Mondays 7am or 8am in Melbourne, inside renovate.json's schedule
+    - cron: '0 21 * * 0'
+    # Weekdays, 10am or 11am to 4pm or 5pm in Melbourne
+    - cron: '0 0,3,6 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: >-
+          Log what Renovate would do, without changing any branch, PR or issue
+        type: boolean
+        default: false
+      log-level:
+        description: Log level
+        type: choice
+        options: [info, debug]
+        default: info
+
+permissions: {}
+
+concurrency:
+  group: renovate
+  cancel-in-progress: false
+
+env:
+  # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+  RENOVATEBOT_VERSION: 44.192.2
+
+jobs:
+  renovate:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    steps:
+      # yamllint disable-line rule:line-length
+      - uses: renovatebot/github-action@2804199d260ad00c1fae0e9e842888369391c776  # v46.3.10
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          renovate-version: ${{ env.RENOVATEBOT_VERSION }}
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          # Use renovate.json, and do nothing if it's removed
+          RENOVATE_ONBOARDING: 'false'
+          RENOVATE_REQUIRE_CONFIG: required
+          RENOVATE_DRY_RUN: ${{ inputs.dry-run && 'full' || '' }}
+          LOG_LEVEL: ${{ inputs.log-level || 'info' }}

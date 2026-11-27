@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Added
+- Add CodeQL code scanning workflow and README badge
 - Add self-hosted Renovate (renovate-workflow.yaml, renovate.json), which opens dependency update PRs before 9am on Mondays (Melbourne time) for the Gemfile, the GitHub Actions, the AEM Platform BuildEnv image, the bundler version and Renovate itself. Security updates stay with Dependabot. PRs aren't merged automatically
 
 ### Changed

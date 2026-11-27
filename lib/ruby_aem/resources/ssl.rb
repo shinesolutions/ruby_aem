@@ -131,7 +131,15 @@ module RubyAem
         begin
           result = enable(**opts)
         rescue RubyAem::Error => e
-          raise StandardError.new(result) unless e.result.response.status_code.zero?
+          response = e.result.response
+          status_code = response.status_code
+          # AEM's sslSetup checks the new HTTPS connector only 250ms after configuring it, and responds with
+          # 500 "Connection refused" when the connector is still starting, although SSL has been configured.
+          # The connector starts slower since AEM 6.5 SP26, so treat it like response code 0 and verify below.
+          connector_starting = status_code == 500 && response.body.to_s.include?('Connection refused')
+          # Re-raise the original error, which carries AEM's status code, headers and body.
+          # result is still nil here, so wrapping it lost the details and raised a bare StandardError.
+          raise e unless status_code.zero? || connector_starting
 
           with_retries(max_tries: opts[:_retries][:max_tries], base_sleep_seconds: opts[:_retries][:base_sleep_seconds], max_sleep_seconds: opts[:_retries][:max_sleep_seconds]) { |retries_count|
             result = is_enabled

@@ -8,6 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add CodeQL code scanning workflow and README badge
 
+### Fixed
+- Fix CI for Dependabot pull requests, which get no Actions secrets: check out with the workflow's read-only GITHUB_TOKEN instead of a secret token
+
+### Changed
+- Upgrade AEM Platform BuildEnv to 6.7.0
+
+## 4.2.1 - 2026-11-16
+### Changed
+- Skip CI for release tags, same-repo pull requests and the release's version bump commit, cancel superseded branch runs, and add a CI job timeout
+- Make the GitHub Actions workflows' GITHUB_TOKEN read-only
+
+### Fixed
+- Fix SSL enable_wait_until_ready raising a bare StandardError without AEM's response details when the Granite SSL setup fails
+- Fix SSL enable_wait_until_ready failing when AEM's SSL setup can't yet connect to the starting HTTPS connector, which happens intermittently since AEM 6.5 SP26
+
 ## 4.2.0 - 2026-11-05
 ### Added
 - Add follow_location configuration to not follow HTTP redirects by default, passed on every API call
